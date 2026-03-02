@@ -93,6 +93,7 @@ Innhold fra externe repoer monteres via `[module.imports]` i `hugo.toml`.
 | `github.com/SAMT-BU/team-governance` | `content/teams/team-governance/` |
 | `github.com/SAMT-BU/team-semantics` | `content/teams/team-semantics/` |
 | `github.com/SAMT-BU/samt-bu-drafts` | `content/utkast/` |
+| `github.com/SAMT-BU/solution-samt-bu-docs` | `content/loesninger/cms-loesninger/samt-bu-docs/` |
 
 **Oppdatere en modul:**
 ```bash
