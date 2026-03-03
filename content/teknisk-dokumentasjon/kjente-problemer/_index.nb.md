@@ -9,7 +9,7 @@ Kronologisk logg over feil og problemer oppdaget og løst under utvikling av SAM
 
 ---
 
-## 🔴 ÅPEN 2026-03-03: Ytelsesproblem – søk-defer henter indeks ved sidelasting
+## ✅ LØST 2026-03-03: Ytelsesproblem – søk-defer henter indeks ved sidelasting
 
 **Symptom:** Merkbar latency/forsinkelse ved sidelasting. Oppleves som «varierende responstid på deler av skjermbildet».
 
@@ -17,15 +17,13 @@ Kronologisk logg over feil og problemer oppdaget og løst under utvikling av SAM
 
 **To separate ytelsesårsaker som ikke må blandes:**
 1. **jQuery synkron lasting** blokkerer HTML-rendering → treg første sidevisning. Løst ved å gi jQuery `defer` (2026-02-28).
-2. **Søk-defer** trigger `$.getJSON()`-kall ved sidelasting → treg etter lasting. Dette er det nåværende problemet.
+2. **Søk-defer** trigger `$.getJSON()`-kall ved sidelasting → treg etter lasting. **Løst 2026-03-03.**
 
-**Nåværende tilstand:**
-- Online (`main`): har ytelsesproblem – search-scripts har `defer`, jQuery har `defer`
-- Lokalt (`local-fixes`-branch i temaet): god ytelse – search-defer revertert, søk virker ikke
+**Fix:**
+- `search.js`: Fjernet `initLunr()`-kall ved sidelasting. La til flagg `searchIndexLoaded`/`searchIndexLoading`. `initLunr()` kalles nå kun én gang, ved første `focus`-event på søkefeltet (`$.one("focus", ...)`).
+- `search.html`: Lagt `defer` tilbake på `lunr.min.js`, `horsey.js` og `search.js` – garanterer korrekt rekkefølge etter jQuery (som også har `defer`).
 
-**Anbefalt løsning:** Lazy-load søkeindeksen – endre `search.js` til å ikke hente JSON-indeksen ved sidelasting, men først når brukeren fokuserer/klikker søkefeltet. Da unngås både render-blokkering og indeks-lasting ved sidelast.
-
-**Filer å endre:** `themes/hugo-theme-samt-bu/static/js/search.js`, muligens `search.html`
+**Lærdom:** Lazy-load løser problemet uten å ofre søkefunksjonalitet. Bruk `$.one("focus", initFn)` for å trigge tung initialisering kun ved faktisk bruk. Flagg (`loading`/`loaded`) forhindrer dobbelthenting.
 
 ---
 
