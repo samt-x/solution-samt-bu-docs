@@ -1,3 +1,3 @@
-module github.com/SAMT-BU/solution-samt-bu-docs
+module github.com/SAMT-X/solution-samt-bu-docs
 
 go 1.25.6
