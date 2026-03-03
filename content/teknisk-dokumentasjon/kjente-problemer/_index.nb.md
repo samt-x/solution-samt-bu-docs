@@ -9,22 +9,67 @@ Kronologisk logg over feil og problemer oppdaget og løst under utvikling av SAM
 
 ---
 
-## ✅ LØST 2026-03-03: Scrollbarer synlige + scroll-fade borte + ytelsesforsinkelse
+## 🔴 ÅPEN 2026-03-03: Ytelsesproblem – søk-defer henter indeks ved sidelasting
 
-**Symptomer:**
-- Venstre kolonne (#sidebar): synlig scrollbar, scroll-fade (gradient) virket ikke
-- Midtpanel (#body): uventet scrollbar synlig, stor tom sone under innhold
-- Ytelse: merkbar forsinkelse
+**Symptom:** Merkbar latency/forsinkelse ved sidelasting. Oppleves som «varierende responstid på deler av skjermbildet».
 
-**Rotårsak:** `altinninfoportal.js`, `altinndocs.js` og `altinndocs-learn.js` bruker alle jQuery (`$()`) direkte – uten `$(document).ready()`. De ble lastet synkront (uten `defer`), men jQuery hadde `defer`. Resultatet: `$` er undefined → alle tre scripts feiler. Spesielt kritisk: `altinndocs.js` linje 2 kjørte `$('.js-moveChildrenFrom').insertAfter('.js-moveChildrenTo')` øyeblikkelig – DOM-manipulasjon mislyktes → stor tom sone under innhold.
+**Rotårsak bekreftet:** `search.js` lastet med `defer` kaller `$.getJSON()` som henter hele søkeindeksen (JSON-fil, kan være stor) umiddelbart etter sidelasting. Dette skjer på hvert sidebytte og gir tydelig forsinkelse. Bekreftet ved lokal testing: uten `defer` på search-scripts → perfekt ytelse. Med `defer` → treg.
 
-`custom-footer.html` brukte `$(document).ready(...)` for dropdown-togglerne (språk, Innhold, Endre). Inline scripts kan ikke ha `defer` → `$` undefined → dropdowns virket ikke.
+**To separate ytelsesårsaker som ikke må blandes:**
+1. **jQuery synkron lasting** blokkerer HTML-rendering → treg første sidevisning. Løst ved å gi jQuery `defer` (2026-02-28).
+2. **Søk-defer** trigger `$.getJSON()`-kall ved sidelasting → treg etter lasting. Dette er det nåværende problemet.
+
+**Nåværende tilstand:**
+- Online (`main`): har ytelsesproblem – search-scripts har `defer`, jQuery har `defer`
+- Lokalt (`local-fixes`-branch i temaet): god ytelse – search-defer revertert, søk virker ikke
+
+**Anbefalt løsning:** Lazy-load søkeindeksen – endre `search.js` til å ikke hente JSON-indeksen ved sidelasting, men først når brukeren fokuserer/klikker søkefeltet. Da unngås både render-blokkering og indeks-lasting ved sidelast.
+
+**Filer å endre:** `themes/hugo-theme-samt-bu/static/js/search.js`, muligens `search.html`
+
+---
+
+## ✅ DELVIS LØST 2026-03-03: Altinn-scripts + dropdown-feil (jQuery defer-kaskade)
+
+**Symptomer (nå løst):**
+- Stor tom sone under innholdet i midtpanel
+- Dropdowns (språk, Innhold, Endre) virket ikke
+- Scroll-fade og sidebar-toggle mislyktes
+
+**Rotårsak:** `altinninfoportal.js`, `altinndocs.js` og `altinndocs-learn.js` bruker alle jQuery (`$()`) direkte uten `$(document).ready()`. Lastet synkront mens jQuery var `defer` → `$` undefined → alle tre scripts feilet. Spesielt kritisk: `altinndocs.js` linje 2 kjørte `$('.js-moveChildrenFrom').insertAfter('.js-moveChildrenTo')` øyeblikkelig → DOM-manipulasjon mislyktes → stor tom sone.
+
+`custom-footer.html` brukte `$(document).ready(...)` – inline scripts kan ikke ha `defer` → dropdowns virket ikke.
 
 **Fix:**
 1. `footer.html`: Lagt til `defer` på `altinninfoportal.js`, `altinndocs.js`, `altinndocs-learn.js`
 2. `custom-footer.html`: Konvertert fra jQuery til vanilla JS (IIFE med direkte DOM-tilgang)
 
-**Lærdom:** Når jQuery er `defer`, MÅ alle jQuery-avhengige scripts enten ha `defer` (externe filer) eller bruke vanilla JS (inline scripts). Sjekk ALLTID altinn-scripts og custom-footer.html ved jQuery-relaterte endringer.
+**Gjenstår:** Sidebar-scrollbar (se neste oppføring). Scroll-fade er ikke verifisert etter fix.
+
+**Lærdom:** Når jQuery er `defer`, MÅ alle jQuery-avhengige externe scripts ha `defer`. Inline scripts må skrives om til vanilla JS.
+
+---
+
+## 🔴 ÅPEN 2026-03-03: Sidebar-scrollbar (venstre panel)
+
+**Symptom:** Synlig scrollbar i venstre kolonne (`#sidebar`). Dukker opp selv om innholdet ikke fyller skjermen vertikalt («for tidlig»).
+
+**Bekreftet:** Problemet eksisterer i alle testede tilstander – predaterer alle endringer gjort 2026-03-03. Verifisert ved lokal test på commit `74f2c31`.
+
+**Forsøkte CSS-fixes (ingen virket):**
+- `scrollbar-width: none !important` på `#sidebar`
+- `display: none !important; width: 0 !important` på `#sidebar::-webkit-scrollbar`
+- `overflow: visible !important` + `height: auto !important` på `#sidebar .highlightable`
+- Samme regler på `#sidebar .highlightable::-webkit-scrollbar`
+
+**Mistanke:** `altinndocs-learn.js`, når det nå kjøres korrekt (med jQuery tilgjengelig via defer), resetter `overflow`-property via JavaScript etter at CSS er satt. Inline style overstyrer stylesheet-regler.
+
+**Neste steg:**
+1. Åpne DevTools → Inspect `#sidebar` og `.highlightable` → sjekk hvilken regel som faktisk vinner
+2. Sjekk om `altinndocs-learn.js` setter `style="overflow: auto"` direkte på elementet
+3. Hvis JS-årsak: overstyr med `el.style.overflow = ''` etter at altinn-script kjører, eller patch altinn-script
+
+**Filer:** `themes/hugo-theme-samt-bu/layouts/partials/custom-head.html`, muligens `altinndocs-learn.js`
 
 ---
 

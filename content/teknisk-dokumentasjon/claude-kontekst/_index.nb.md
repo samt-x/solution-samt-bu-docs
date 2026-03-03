@@ -150,7 +150,18 @@ Basert på `path.Dir .File.Path` (normalisert, unngår Windows-backslash-problem
 - **JS:** `themes/hugo-theme-samt-bu/static/js/search.js`
 - **`baseurl`-variabel:** Settes som inline script i `search.html` fra `{{.Site.BaseURL}}`
 
-**Viktig:** `lunr.min.js`, `horsey.js` og `search.js` må alle ha `defer` – se [Kjente problemer](../kjente-problemer/).
+**⚠️ Kjent spenning – to motstridende krav:**
+
+| Krav | Konsekvens |
+|------|-----------|
+| `defer` på search-scripts → søk virker (jQuery tilgjengelig) | `$.getJSON()` henter søkeindeks ved sidelasting → **ytelsesproblem** |
+| Ingen `defer` på search-scripts → god ytelse | `$` ikke tilgjengelig → søk virker ikke |
+
+**Anbefalt løsning (ikke implementert):** Lazy-load søkeindeksen i `search.js` – hent JSON kun når brukeren fokuserer søkefeltet. Da kan scripts ha `defer` uten at indeksen lastes ved sidelasting.
+
+**Nåværende tilstand (2026-03-03):**
+- Online: search-scripts har `defer` → søk virker, men ytelsesproblem
+- Lokalt (`local-fixes`-branch): search-defer revertert → god ytelse, søk virker ikke
 
 ---
 
