@@ -44,11 +44,12 @@ Når brukeren ber om oppdatering av memory/kontekst, eller signaliserer at sesjo
 
 | Repo | Formål | Lokal sti |
 |------|--------|-----------|
-| `samt-bu-docs` | Hoved-repo – konfigurasjon, innhold, CI/CD | `S:/app-data/github/samt-bu-repos/samt-bu-docs/` |
+| `samt-bu-docs` | Hoved-repo – konfigurasjon, innhold, CI/CD | `S:/app-data/github/samt-x-repos/samt-bu-docs/` |
 | `hugo-theme-samt-bu` | Tema – all presentasjonslogikk (submodule) | `themes/hugo-theme-samt-bu/` |
-| `team-architecture` | Hugo-modul, innhold for arkitektur-teamet | `S:/app-data/github/samt-bu-repos/team-architecture/` |
-| `team-semantics` | Hugo-modul, innhold for semantikk-teamet | `S:/app-data/github/samt-bu-repos/team-semantics/` |
-| `samt-bu-drafts` | Hugo-modul, utkast og innspill | `S:/app-data/github/samt-bu-repos/samt-bu-drafts/` |
+| `team-architecture` | Hugo-modul, innhold for arkitektur-teamet | `S:/app-data/github/samt-x-repos/team-architecture/` |
+| `team-semantics` | Hugo-modul, innhold for semantikk-teamet | `S:/app-data/github/samt-x-repos/team-semantics/` |
+| `samt-bu-drafts` | Hugo-modul, utkast og innspill | `S:/app-data/github/samt-x-repos/samt-bu-drafts/` |
+| `solution-samt-bu-docs` | Hugo-modul, teknisk dok. for SAMT-BU Docs | `S:/app-data/github/samt-x-repos/solution-samt-bu-docs/` |
 
 ### Viktigste filer å kjenne
 
@@ -169,6 +170,22 @@ hugo mod get github.com/SAMT-X/<navn>@latest
 | `static/edit/utkast-nb/` | `samt-bu-drafts` | nb |
 | `static/edit/utkast-en/` | `samt-bu-drafts` | en |
 
+### Tilbake-lenke i portaler (document.referrer)
+
+Alle 6 portaler har en fast `«← Tilbake til nettstedet»`-lenke (bottom-right). Den bruker `document.referrer` for å returnere brukeren til den **spesifikke siden** de kom fra (ikke rotsiden). Fallback til `/samt-bu-docs/` (NB) / `/samt-bu-docs/en/` (EN) hvis referrer ikke er fra nettstedet eller er tom.
+
+Implementert som inline `<script>` etter ankeret i `index.html` i hver portal:
+```html
+<script>
+  (function() {
+    var ref = document.referrer;
+    if (ref && ref.indexOf('samt-bu-docs') !== -1 && ref.indexOf('/edit/') === -1) {
+      document.getElementById('back-to-portal').href = ref;
+    }
+  })();
+</script>
+```
+
 ### Rutinglogikk i edit-switcher (tre grener)
 
 Basert på `path.Dir .File.Path` (normalisert, unngår Windows-backslash-problem):
@@ -199,6 +216,21 @@ Basert på `path.Dir .File.Path` (normalisert, unngår Windows-backslash-problem
 **Lazy-loading (implementert og deployet 2026-03-03):**
 
 `initLunr()` kalles ikke ved sidelasting. Søkeindeksen hentes (via `$.getJSON()`) kun første gang brukeren fokuserer søkefeltet (`$.one("focus", initLunr)`). Flaggene `searchIndexLoading`/`searchIndexLoaded` forhindrer dobbelthenting. Alle search-scripts har `defer` → rekkefølgegaranti mot jQuery (som også har `defer`) er ivaretatt.
+
+---
+
+## Lokale hjelpeverktøy
+
+### pull-all – oppdater alle repoer på én gang
+
+`S:\app-data\github\samt-x-repos\pull-all.bat` (Windows-launcher) → kaller `pull-all.sh`.
+
+Kjører `git pull` for hvert repo under `samt-x-repos/`, pluss `git submodule update --recursive` for repos med `.gitmodules` (p.t. kun `samt-bu-docs`).
+
+**Bruk:** Dobbeltklikk `pull-all.bat` i Utforsker, eller kjør fra bash:
+```bash
+bash "S:/app-data/github/samt-x-repos/pull-all.sh"
+```
 
 ---
 
