@@ -1,0 +1,17 @@
+name: Trigger rebuild av samt-bu-docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository_dispatch til samt-bu-docs
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.DOCS_REBUILD_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/SAMT-X/samt-bu-docs/dispatches \
+            -d '{"event_type":"module-updated","client_payload":{"source":"solution-samt-bu-docs"}}'
