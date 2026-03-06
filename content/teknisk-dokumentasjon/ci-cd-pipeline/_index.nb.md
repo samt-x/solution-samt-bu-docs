@@ -18,6 +18,7 @@ Nettstedet er bygget med Hugo og publisert til GitHub Pages via GitHub Actions. 
 | `samt-bu-docs` | Hoved-repo – konfigurasjon, lokalt innhold, CI/CD | ✅ Ja – direkte push |
 | `samt-bu-drafts` | Hugo-modul – utkast og innspill | ✅ Ja – via `repository_dispatch` |
 | `team-architecture` | Hugo-modul – arkitektur-teamets innhold | ✅ Ja – via `repository_dispatch` |
+| `solution-samt-bu-docs` | Hugo-modul – teknisk dokumentasjon for SAMT-BU Docs | ✅ Ja – via `repository_dispatch` |
 | `hugo-theme-samt-bu` | Git submodule – tema og layout | Nei – oppdateres manuelt via submodule-peker |
 
 ---
@@ -89,6 +90,7 @@ Workflowen bruker et GitHub Personal Access Token (Classic) med **`workflow`-sco
 |------|------------|-------|
 | `samt-bu-drafts` | `DOCS_REBUILD_TOKEN` | PAT med `workflow`-scope |
 | `team-architecture` | `DOCS_REBUILD_TOKEN` | Samme PAT |
+| `solution-samt-bu-docs` | `DOCS_REBUILD_TOKEN` | Samme PAT |
 
 **Administrere tokenet:**
 - Opprett/forny på: `https://github.com/settings/tokens`
