@@ -161,14 +161,18 @@ hugo mod get github.com/SAMT-X/<navn>@latest
 
 ### Aktive portaler
 
-| Mappe | Repo | Språk |
-|-------|------|-------|
-| `static/edit/docs-nb/` | `samt-bu-docs` | nb |
-| `static/edit/docs-en/` | `samt-bu-docs` | en |
-| `static/edit/arkitektur-nb/` | `team-architecture` | nb |
-| `static/edit/arkitektur-en/` | `team-architecture` | en |
-| `static/edit/utkast-nb/` | `samt-bu-drafts` | nb |
-| `static/edit/utkast-en/` | `samt-bu-drafts` | en |
+| Mappe | Repo | Språk | Dekker |
+|-------|------|-------|--------|
+| `static/edit/docs-nb/` | `samt-bu-docs` | nb | Lokalt innhold i samt-bu-docs |
+| `static/edit/docs-en/` | `samt-bu-docs` | en | Lokalt innhold i samt-bu-docs |
+| `static/edit/arkitektur-nb/` | `team-architecture` | nb | `content/teams/team-architecture/` |
+| `static/edit/arkitektur-en/` | `team-architecture` | en | `content/teams/team-architecture/` |
+| `static/edit/utkast-nb/` | `samt-bu-drafts` | nb | `content/utkast/` |
+| `static/edit/utkast-en/` | `samt-bu-drafts` | en | `content/utkast/` |
+| `static/edit/loesninger-nb/` | `solution-samt-bu-docs` | nb | `content/loesninger/cms-loesninger/samt-bu-docs/` |
+| `static/edit/loesninger-en/` | `solution-samt-bu-docs` | en | `content/loesninger/cms-loesninger/samt-bu-docs/` |
+
+> **Kritisk mønster:** Hvert Hugo-modulrepo som monterer innhold **må ha sin egen CMS-portal** som peker på det repoet. Hvis modulinnhold feilaktig rutes til `docs`-portalen (som peker på `samt-bu-docs`), finnes ikke filen der → CMS viser tomme felter uten feilmelding. Symptomet er: alle skjemafelter er tomme, men «CHANGES SAVED» vises.
 
 ### Tilbake-lenke i portaler (document.referrer)
 
@@ -186,15 +190,18 @@ Implementert som inline `<script>` etter ankeret i `index.html` i hver portal:
 </script>
 ```
 
-### Rutinglogikk i edit-switcher (tre grener)
+### Rutinglogikk i edit-switcher (fire grener)
 
 Basert på `path.Dir .File.Path` (normalisert, unngår Windows-backslash-problem):
 
 - `hasPrefix "teams/"` → arkitektur-portal
 - `eq/hasPrefix "utkast"` → utkast-portal
+- `eq/hasPrefix "loesninger/cms-loesninger/samt-bu-docs"` → loesninger-portal
 - Alt annet → docs-portal
 
-**Entry-slug:** Full relativ sti inkl. `/_index`. Rot-sider i moduler bruker `_index` alene.
+**Entry-slug:** Full relativ sti inkl. `/_index`, relativt til modulens eget `content/`-rot. F.eks. gir `loesninger/cms-loesninger/samt-bu-docs/brukerveiledning` → slug `brukerveiledning/_index`.
+
+**Når en ny modul legges til:** Legg til nytt grein i `edit-switcher.html` *før* `{{ else }}`-blokken. Se eksisterende grener for mønster.
 
 ### UUID (id-felt i frontmatter)
 
@@ -221,16 +228,24 @@ Basert på `path.Dir .File.Path` (normalisert, unngår Windows-backslash-problem
 
 ## Lokale hjelpeverktøy
 
-### pull-all – oppdater alle repoer på én gang
+### Synkroniseringsskript – oppdater alle repoer på én gang
 
-`S:\app-data\github\samt-x-repos\pull-all.bat` (Windows-launcher) → kaller `pull-all.sh`.
+Tre skript under `S:\app-data\github\samt-x-repos\`:
 
-Kjører `git pull` for hvert repo under `samt-x-repos/`, pluss `git submodule update --recursive` for repos med `.gitmodules` (p.t. kun `samt-bu-docs`).
+| Skript | Funksjon |
+|--------|----------|
+| `pull-all.bat` / `.sh` | `git pull` for alle repoer (henter fra remote) |
+| `push-all.bat` / `.sh` | `git push` for alle repoer med upushede commits |
+| `sync-all.bat` / `.sh` | Bidireksjonell synk: fetch → rebase → push per repo |
 
-**Bruk:** Dobbeltklikk `pull-all.bat` i Utforsker, eller kjør fra bash:
-```bash
-bash "S:/app-data/github/samt-x-repos/pull-all.sh"
+**`sync-all` anbefalt arbeidsflyt:**
 ```
+Før du begynner:  sync-all
+Underveis:        commit + push-all
+Når du er ferdig: sync-all
+```
+
+`sync-all` bruker `git pull --rebase` (ikke merge) for å unngå unødvendige merge-commits. Stopper og rapporterer ved ekte konflikter – løser aldri konflikter automatisk på vegne av deg. Spesialtilfelle `go.mod`/`go.sum`: `git checkout --theirs go.mod go.sum && hugo mod tidy`.
 
 ---
 
