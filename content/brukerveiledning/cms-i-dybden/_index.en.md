@@ -81,7 +81,9 @@ Pages in the CMS list can be sorted by the `weight` field (which corresponds to 
 
 ### New page vs. new folder
 
-In Hugo, each page is a **folder** containing an `_index.en.md` file. The CMS handles this automatically – you do not need to create folders yourself. Note, however, that a page with no sub-chapters and no visible content will appear blank on the website.
+In Hugo, each page is a **folder** containing an `_index.en.md` file. The CMS does **not** create folders automatically – you must create the folder structure manually (e.g. via GitHub or locally) and then edit the content in the CMS.
+
+A folder containing only `_index` file(s) but no body text will be displayed as a normal page with a title, "Last modified" date, and UUID – but with an empty content area. This is not an error, simply a page that has not yet received any content.
 
 ### Local test environment
 

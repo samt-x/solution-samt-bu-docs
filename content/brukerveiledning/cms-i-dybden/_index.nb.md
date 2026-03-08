@@ -81,7 +81,9 @@ Sidene i CMS-listen kan sorteres på `weight`-feltet (som samsvarer med rekkefø
 
 ### Ny side vs. ny mappe
 
-I Hugo er hver side en **mappe** med en `_index.nb.md`-fil inni. CMS-en håndterer dette automatisk – du trenger ikke opprette mapper selv. Men husk at en side uten underkapitler og uten synlig innhold vil vises som tom i nettstedet.
+I Hugo er hver side en **mappe** med en `_index.nb.md`-fil inni. CMS-en oppretter **ikke** mapper automatisk – du må opprette mappestrukturen manuelt (f.eks. via GitHub eller lokalt) og deretter redigere innholdet i CMS-en.
+
+En mappe med bare `_index`-fil(er) og uten innholdstekst vises som en vanlig side med tittel, «Sist endret»-dato og UUID – men med tomt innholdsområde. Det er ikke en feil, bare en side som ennå ikke har fått innhold.
 
 ### Lokalt testmiljø
 
