@@ -10,6 +10,8 @@ Denne siden dokumenterer hva som er «under panseret» i SAMT-BU-plattformen. M�
 ## Innhold
 
 - **Kjente problemer og løsninger** – buglogg med symptom, rotårsak og fix
+- **CI/CD-pipeline** – GitHub Actions-workflow, inject-lastmod, kryssrepo-triggering
+- **GitHub-struktur** – konsept for organisering av GitHub-orger og repoer (`samt-x` som plattformorg, prosjektorger for innhold)
 - **Utviklernotater og Claude-kontekst** – arkitekturbeslutninger, konvensjoner, theme.css-feller og kontekst for nye utviklere og AI-assistenter
 
 Emner som er dekket i Utviklernotater: Hugo-arkitektur, tema (submodule), 3-kolonne layout, Decap CMS, Hugo Modules, CI/CD-pipeline, Cloudflare Worker OAuth-proxy, søkesystem.
