@@ -1,9 +1,9 @@
 ---
 id: e0e03dc4-b617-44cb-b829-a47ac7313a9d
-title: "Konsept for GitHub-organisasjoner og repoer"
-linkTitle: "GitHub-struktur"
+title: Konsept for GitHub-organisasjoner og repoer
+linkTitle: GitHub-struktur
 weight: 30
-status: "Tidlig utkast"
+status: null
 ---
 
 Denne siden dokumenterer prinsippene for hvordan vi organiserer GitHub-organisasjoner (orgs) og repoer i SAMT-BU-plattformen – og legger grunnlaget for at strukturen skal skalere til flere prosjekter under SAMT-paraplyen.
