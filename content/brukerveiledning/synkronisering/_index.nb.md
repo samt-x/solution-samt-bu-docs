@@ -136,7 +136,16 @@ git push
 
 Rebase legger din commit oppå UUID-workflowens commit, og push går igjennom. Ingen data tapes – UUID-workflowens `id`-felt blir automatisk med i din lokale kopi.
 
-**Forebygging:** Vent 10–15 sekunder mellom push og neste lokale commit, eller kjør `git pull --rebase` som en vane før push nummer to.
+**Forebygging – anbefalt arbeidsflyt:** Gjør `git pull --rebase` til en fast del av push-rutinen, ikke bare en redning etterpå:
+
+```bash
+git add <filer>
+git commit -m "..."
+git pull --rebase
+git push
+```
+
+Dette fanger opp alt remote har fått siden sist (UUID-commits, CMS-endringer, andres commits) og minimerer avvisninger. Det eliminerer ikke alle tilfeller – UUID-workflow kan fortsatt rekke å kjøre mellom to pushes i samme sesjon – men reduserer frekvensen betydelig.
 
 ### Decap CMS vs. lokal redigering
 
