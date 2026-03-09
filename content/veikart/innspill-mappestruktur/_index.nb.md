@@ -1,4 +1,5 @@
 ---
+id: b8d34d8b-1d6c-47d8-bbb6-da553b138c56
 title: "Mappestruktur for innspill i samt-bu-files"
 linkTitle: "Innspill – mappestruktur"
 weight: 40
