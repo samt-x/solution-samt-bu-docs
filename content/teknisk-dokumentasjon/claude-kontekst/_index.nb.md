@@ -302,6 +302,31 @@ Når du er ferdig: sync-all
 
 ---
 
+## samt-bu-drafts – innholdsstruktur
+
+Én mappe per aktør/bidragsyter, med tynt foreldresidehode og én undermappe per innspill:
+
+```
+content/
+  kommuneforlaget/          (weight 10, alwaysopen: true)
+    _index.nb.md            ← kort beskrivelse av aktøren
+    brukstilfelle-analyse/
+      _index.nb.md          ← selve innspillet
+  samt-bu-pilot-1/          (weight 20)
+    _index.nb.md
+    erfaringer-fra-pilot/
+      _index.nb.md
+  novari-hk-dir/            (weight 30)
+    _index.nb.md
+    felles-prosjekt-vilbli-utdanning/
+      _index.nb.md
+```
+
+**Legge til nytt innspill fra eksisterende aktør:** Opprett ny undermappe under aktørmappen.
+**Legge til ny aktør:** Opprett ny aktørmappe med `_index.nb.md` + `_index.en.md` (tynt hode, `alwaysopen: true`, neste ledige weight) + undermappe for første innspill.
+
+---
+
 ## samt-bu-files – filstruktur
 
 Brukes til å lagre binærfiler (Word, PDF, bilder) som lenkes til fra `samt-bu-drafts` eller andre moduler.
