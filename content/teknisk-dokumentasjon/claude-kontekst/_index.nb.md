@@ -208,13 +208,14 @@ Implementert som inline `<script>` etter ankeret i `index.html` i hver portal:
 </script>
 ```
 
-### Edit-switcher – nåværende menyvalg (2026-03-10)
+### Edit-switcher – nåværende menyvalg (2026-03-11)
 
 | Valg | Status | Implementasjon |
 |------|--------|----------------|
 | «Denne siden» | ✅ Virker | Decap deep-link til gjeldende side |
 | «Side – samme nivå» | ✅ Virker | Åpner «Ny side»-dialog (se under) |
 | «Underkapittel» | ⏳ Alert-popup (midlertidig) | `$addChildURL` beregnet med `?filename=nytt-kapittel/_index.nb.md`, men knappen viser kun popup. |
+| «Slett denne siden» | ✅ Virker | Bekreftelsesdialog → atomisk slett nb+en i én commit → polling → auto-navigering |
 | «Andre valg» | ✅ Virker | Lenke til CMS-portaloverside |
 
 **Planlagt:** Erstatt popup for «Underkapittel» med ekte dialog. Veikart-oppføring finnes i `solution-samt-bu-docs/content/veikart/legg-til-underkapittel/`.
@@ -468,3 +469,73 @@ jQuery('#sidebar a').on('click', function(e) {
 
 **Tekst-trunkering i sidebar:**
 `<a>` er nå `display: flex` med `<span flex:1; min-width:0; padding-right:6px>`. `text-overflow: ellipsis` (som allerede var i theme.css) virker nå korrekt: lang menytekst kuttes med `...` med litt luft før ikonet/kanten.
+
+---
+
+## Endringslogg – 2026-03-11
+
+### «Slett denne siden» – implementert
+
+Nytt menyvalg i Endre-dropdown. Endringer i `hugo-theme-samt-bu/layouts/partials/edit-switcher.html` og `custom-footer.html`.
+
+**Synlighet:** Vises kun når `.File` finnes (ikke på autogenererte listesider) og `$entrySlug != ""` og `$dirPath != "content"`. Rødt med søppelkasse-ikon (`fa-trash-o`).
+
+**Bekreftelsesdialog:** Sentrert overlay-modal (ikke float), som «Ny side»-dialogen. To seksjoner i samme `#del-overlay`:
+- `#del-confirm-section` – viser tittel, «Er du sikker?», Slett- og Avbryt-knapper
+- `#del-build-section` – vises etter vellykket sletting, med bygg-status og Lukk/OK-knapper
+
+**Atomisk sletting (Git Data API):**
+`deleteFilesInOneCommit(token, repo, paths, commitMsg)` sletter begge språkfiler i én commit:
+1. `GET /git/ref/heads/main` → current commit SHA
+2. `GET /git/commits/{sha}` → tree SHA
+3. `POST /git/trees` med `{ path, mode, type, sha: null }` per fil som skal slettes
+4. `POST /git/commits` → ny commit
+5. `PATCH /git/refs/heads/main` → oppdater ref
+
+**Navigering etter sletting:** `.Parent.Pages`-loop i Hugo-template beregner `$afterDeleteUrl`:
+- Forrige søsken (url for siden rett over gjeldende i seksjonsrekkefølge) – foretrekkes
+- Neste søsken – om gjeldende er første
+- Foreldresiden (`$parentUrl`) – fallback
+**Viktig:** `.PrevInSection`/`.NextInSection` virker IKKE for seksjonsider (`_index.md` branch bundles) – disse er alltid nil. Manuell loop er eneste løsning.
+
+**Bygg-polling (GitHub Actions API):**
+`pollBuild(startTime)` kaller `GET /repos/SAMT-X/samt-bu-docs/actions/workflows/hugo.yml/runs?per_page=5` hvert 5. sekund. Filtrerer på `run.created_at >= startTime - 30000` (30s klokke-buffer). Status-tekst:
+- `queued` eller `in_progress` → «Bygging av nettstedet pågår – forventet ~1 min – X sek så langt»
+- `completed/success` → 3 sekunders nedtelling («Navigerer om 3 sek… / 2 sek… / 1 sek…») → `navAfterDelete()`
+- `completed/failure` → feilmelding
+
+**Bakgrunnspolling (dialog kan lukkes):**
+`activePollTimer` er modul-variabel. `closeDialog()` fjerner IKKE timeren – polling fortsetter i bakgrunnen. `navAfterDelete()` kaller `window.location.href = afterDeleteUrl + '?_=Date.now()'` (cache-bust) selv om dialog er lukket.
+
+**Jobbindikator i footer (`#del-job-indicator`):**
+Vises (`display:flex`) i det svarte footerfeltet (nede til venstre) så lenge polling kjører. Viser `fa-spinner fa-spin` + tekst «Oppdateringsjobb pågår». Skjules (`display:none`) i `navAfterDelete()`.
+
+**Fontarv – mønster:**
+Nettlesere arver IKKE `font-size` inn i `<button>`-elementer. Eksplisitt `font-size:16px; font-family:inherit` nødvendig på alle knapper i dialogen.
+
+**`getDecapToken` – global scope:**
+Funksjonen ble løftet ut av np-dialog IIFE til global `<script>`-blokk øverst i `custom-footer.html`, slik at både «Ny side»-dialogen og «Slett»-dialogen kan dele den.
+
+### Hugo-template-variabel scope (lært mønster)
+
+`:=` deklarerer i **gjeldende scope** – ikke tilgjengelig i ytre blokker.
+`=` tilordner til en allerede deklarert variabel (ytre scope).
+
+**Mønster for å løfte en variabel ut av en `{{ if }}`-blokk:**
+```hugo
+{{ $dirPath := "" }}         ← deklarér i ytre scope
+{{ if .File }}
+  {{ $dirPath = ... }}       ← tilordne (ikke :=)
+{{ end }}
+{{ $dirPath }}               ← tilgjengelig her
+```
+
+Galt: `{{ $dirPath := ... }}` inne i `{{ if .File }}` → variabelen eksisterer ikke utenfor blokken.
+
+### Bash-kommandokjeder – aldri bruk `cd ..`
+
+Bash-verktøyet resetter arbeidskatalog mellom kall. `cd ..` i en kjede av kommandoer (med `&&`) fungerer IKKE forutsigbart og kan føre til at `git add` leter i feil mappe. Bruk alltid absolutte stier.
+
+### Ny veikart-oppføring: GitHub-auth uavhengig av CMS
+
+Opprettet `solution-samt-bu-docs/content/veikart/github-auth-uavhengig-av-cms/`. Dokumenterer at `getDecapToken()` leser Decap-spesifikke localStorage-nøkler (`netlify-cms-user`, `decap-cms-user`) og at dette er en risiko ved CMS-bytte. Tre alternativer: A (PAT-input), B (selvstendig OAuth-flyt), C (utvid getDecapToken med nøytral nøkkel som overgangsløsning).
