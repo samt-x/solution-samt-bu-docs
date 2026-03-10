@@ -438,3 +438,33 @@ Dette gir **nøyaktig 1 push per ny side** uansett antall søsken, og eliminerer
 **Commit-meldingsformat:** `Ny side: <tittel>`
 
 **UUID:** Legges til av `ensure-uuids.yml` etter push (kjører én gang, alltid grønn).
+
+### Sidebar-menyendringer (2026-03-10 kveld)
+
+**alwaysopen fjernet fra samt-bu-drafts:**
+`alwaysopen: true` var satt på aktørmapper (kommuneforlaget, samt-bu-pilot-1, novari-hk-dir) i `samt-bu-drafts`. Dette ga klassen `parent` i `menu.html`, som trigget `font-family: 'DIN-bold'` fra theme.css og forstyrret den bold-baserte brødsmuleindikasjonen. Løst i to steg:
+1. `menu.html`: `alwaysopen`-noder bruker nå klassen `alwaysopen` (ikke `parent`)
+2. `custom-head.html`: `#sidebar ul.topics li.alwaysopen > ul { display: block; }` beholder åpen-effekten uten bold
+3. Deretter fjernet `alwaysopen: true` helt fra alle 6 filene i samt-bu-drafts – standard menyoppførsel er ønsket
+
+**Pilikon-klikk uten navigasjon:**
+Tidligere: `<i class="category-icon">` lå inne i `<a>`. `stopPropagation()` på ikonet virket ikke pålitelig fordi klikk i `<a>`-padding ble registrert som klikk på `<a>`, ikke `<i>`.
+
+Løsning: Flytte hendelsen til `<a>`-handler som sjekker `e.target`:
+```javascript
+jQuery('#sidebar a').on('click', function(e) {
+    var icon = $(e.target).hasClass('category-icon') ? $(e.target) : null;
+    if (icon) {
+        e.preventDefault();
+        icon.toggleClass('fa-sort-down fa-caret-right');
+        icon.closest('li').children('ul').toggle();
+    }
+});
+```
+- Klikk på ikonet: `preventDefault()` stopper navigasjon, toggle submenyen
+- Klikk på tekst: navigerer normalt
+- Flere submenyer kan være åpne samtidig (JS lukker ikke andre ved toggle)
+- Merk: ved navigasjon (tekst-klikk) re-rendrer Hugo sidebar og viser kun gjeldende sti
+
+**Tekst-trunkering i sidebar:**
+`<a>` er nå `display: flex` med `<span flex:1; min-width:0; padding-right:6px>`. `text-overflow: ellipsis` (som allerede var i theme.css) virker nå korrekt: lang menytekst kuttes med `...` med litt luft før ikonet/kanten.
