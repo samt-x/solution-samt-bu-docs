@@ -399,3 +399,23 @@ Bekreftet fungerende mønster for å lenke til Word-filer i `samt-bu-files`:
 Seksjonstittel endret: «Case» → «Case-beskrivelser» / «Case descriptions».
 
 Seksjon «Innspill til løsningsvalg» lagt til i case 21 og 22. Øvrige 20 caser mangler denne seksjonen – se `veikart/oppdater-use-case-mal/`.
+
+---
+
+## Endringslogg – 2026-03-10 (kveld)
+
+### ensure-uuids løkke-fiks
+`ensure-uuids.yml` fikk `if: github.actor != 'github-actions[bot]'` på jobbnivå. Tidligere kjørte workflowen på seg selv: bruker pusher → auto-UUID-commit → trigger ny ensure-uuids → ny UUID-commit forsøker push → avvist pga. race. Nå stopper løkken ved kilden.
+
+### «Ny side – samme nivå»-dialog: tre forbedringer
+Alle endringer i `hugo-theme-samt-bu/layouts/partials/` (`edit-switcher.html` + `custom-footer.html`):
+
+1. **Blank status-valg:** `<option value="">–</option>` øverst i status-dropdown. Hvis blank velges utelates `status:`-feltet helt fra frontmatter (begge nb og en).
+2. **Defaultvekt = gjeldende side + 1:** Hugo sender `.Weight` til `openNewSiblingDialog(repo, parentPath, lang, currentWeight)`. Vekt-feltet forhåndsutfylles ved åpning.
+3. **Auto-shift av nabosider:** Etter at de to nye filene er opprettet via GitHub API, kjøres `shiftSiblings(token, repo, parentPath, minWeight, excludeSlug)` som:
+   - Henter directory listing av `parentPath` fra GitHub Contents API
+   - Leser `_index.nb.md` + `_index.en.md` for alle undermapper parallelt (`Promise.all`)
+   - Øker `weight` med 1 for alle filer med `weight >= minWeight` (unntatt den nye siden)
+   - Bruker `atob`/`btoa` + regex for å parse og oppdatere YAML frontmatter in-memory
+   - Committer én fil av gangen med melding «Auto: juster vekt etter ny side»
+   - Ignorer feil for enkeltfiler (`.catch(() => {})`) – siden dette er et best-effort-steg
