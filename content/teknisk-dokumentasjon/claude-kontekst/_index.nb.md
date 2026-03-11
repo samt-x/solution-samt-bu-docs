@@ -689,3 +689,57 @@ Paste av bilder er implementert i qe-dialog (paste-handler på `qeEditor.root`),
 **Problem:** `#qe-body-quill` hadde `display:flex; flex-direction:column` inline. Quill v1 inserter toolbar som DOM-sibling *før* container-elementet, i *foreldreelementet*. Dette ga to toolbars (en i `#qe-editor-area`, en i foreldren).
 
 **Fix:** Fjerne flex-stilene fra `#qe-body-quill` direkte. Gi i stedet `#qe-editor-area` flex-column-rollen. `#qe-body-quill` er da et vanlig blokk-element – Quill inserter toolbar som forventet sibling i `#qe-editor-area`.
+
+---
+
+## Endringslogg – 2026-03-11 (kveld)
+
+### TipTap erstatter Quill – begge editordialoger
+
+Quill v1 (+ Turndown + marked) er fjernet. TipTap v2 er ny editor i både `qe-dialog` («Rediger innhold») og `np-dialog` («Ny side»/«Underkapittel»).
+
+#### Arkitektur
+
+**Lasting:** Dynamic `import()` fra `esm.sh` – ingen bundler nødvendig. Delt `loadTiptap()` funksjon i global `<script>`-blokk (etter `getDecapToken`). Pakker som lastes:
+- `@tiptap/core@2` – Editor-klassen
+- `@tiptap/starter-kit@2` – bold, italic, headings, lists, code, blockquote
+- `@tiptap/extension-table@2` + TableRow, TableCell, TableHeader – visuell ProseMirror-tabell
+- `@tiptap/extension-link@2` – lenker
+- `@tiptap/extension-image@2` – bildeinnsetting (bildelim)
+- `tiptap-markdown` – Markdown roundtrip via `editor.storage.markdown`
+
+**Tilstand:** `window._Tiptap` caches alle extensions etter første lasting. `window._tiptapLoading` forhindrer dobbelt-import. `'tiptap-ready'`-event synkroniserer ventende callbacks.
+
+**Markdown roundtrip:**
+- Inn: `editor.commands.setContent(markdownString)` – `tiptap-markdown` parser direkte
+- Ut: `editor.storage.markdown.getMarkdown()` – serialiserer til Markdown
+- Erstatter Turndown + marked (som begge krevde HTML-mellomsteg)
+
+#### Editor-containere
+
+| | Quill (gammel) | TipTap (ny) |
+|---|---|---|
+| qe-dialog editor | `#qe-body-quill` | `#qe-body-pm` |
+| np-dialog editor | `#np-body-quill` | `#np-body-pm` |
+| Toolbar | Quill Snow (innebygd) | Custom HTML `#qe-toolbar` / `#np-toolbar` |
+| CSS-klasser | `.ql-*` | `.ProseMirror`, `.tiptap-toolbar` |
+
+**Toolbar-mønster:** HTML-knapper med `data-qe`/`data-np`-attributter. Klikk-handler på toolbar-containeren. `is-active`-klasse oppdateres via `editor.on('selectionUpdate')` og `editor.on('transaction')`.
+
+**qe-toolbar** inkluderer i tillegg: addRowBefore, addRowAfter, deleteRow, addColBefore, addColAfter, deleteCol – tabelloperasjoner fra toolbar.
+
+#### Bildepaste
+
+Paste-handler på `editor.view.dom` (ProseMirror-roten). Lagrer base64 i `qeImages`/`npImages`, viser data-URL i editor. Ved lagring: string-replace i markdown-output → commit som blob via Git Data API.
+
+#### Hva ble IKKE endret
+
+- `openQuillEditDialog`-funksjonsnavnet beholdes for bakoverkompatibilitet med `edit-switcher.html`-kall
+- All GitHub API-flyt (commit, poll, navigation) er uendret
+- Frontmatter-feltene (title, linkTitle, weight, status) er uendret
+- `parseFmField`, `setFmField`, `removeFmField`, `qeYamlStr` er uendret
+
+#### Mulig fremtidig problem: tiptap-markdown eksport
+
+`tiptap-markdown` er importert som `mods[8].Markdown || (mods[8].default && mods[8].default.Markdown) || mods[8].default` – defensiv fallback i tilfelle esm.sh wrapper gir default-eksport i stedet for named export. Verifiser i DevTools at `window._Tiptap.Markdown` er en funksjon (TipTap extension) etter første lasting.
+
