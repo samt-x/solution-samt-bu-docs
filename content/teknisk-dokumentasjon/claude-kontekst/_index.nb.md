@@ -804,3 +804,46 @@ Flere runder med feilsøking. Endelig løsning:
 
 Ikon for «Nytt underkapittel» endret fra `fa-plus` til `fa-folder-o`.
 
+---
+
+## Endringslogg – 2026-03-12
+
+### «Ny side»-dialog og «Nytt underkapittel»-dialog: full-skjerm layout
+
+Begge dialogene (menyvalg 2 og 3) bruker nå samme full-skjerm layout som qe-dialog (menyvalg 1).
+
+**Endringer i `hugo-theme-samt-bu`:**
+
+- `edit-switcher.html`: Erstattet lite flytende modal (680px, draggbar, `resize:both`) med full-skjerm overlay:
+  - Blå header-bar med `#np-dialog-title`, `#np-status-text`, Avbryt og Opprett-knapp
+  - Grått meta-panel med feltene Tittel, Meny, Vekt, Status (horisontalt, som qe)
+  - TipTap-editor (`#np-body-pm`) fyller resten av skjermen
+  - Feilmelding (`#np-msg`) vises som rød stripe under meta-panel
+  - `Opprett side`-knappen er `type="submit" form="np-form"` (HTML5 form-assosiasjon – knapp utenfor `<form>`)
+  - CSS: `#np-form input/select` får `height:2rem`-normalisering (likt qe-meta-panel); `#np-body-pm` er nå flex:1 full-høyde
+
+- `custom-footer.html`:
+  - Fjernet drag-logikk (~30 linjer)
+  - `openNewSiblingDialog` / `openNewChildDialog`: fjernet posisjon-reset, `overlay.style.display = 'flex'`
+  - Ny `setNpStatus(text)` – oppdaterer `#np-status-text` i header (som `setStatus` i qe)
+  - `showNpBuildPanel`: kun `setNpStatus(...)` – ikke lenger form-hide/build-section-show
+  - `npPollBuild`: bruker `setNpStatus` konsekvent, fjernet `#np-panel-done`-referanser
+  - Fjernet `#np-close-x`- og `#np-panel-close`-lyttere
+
+### Vurdering: Cloudflare Pages som erstatning for GitHub Pages
+
+**Problem:** GitHub Pages CDN-propagering tar 1–3 minutter *etter* at `hugo.yml` viser grønt bygg. Dette er ikke noe vi kan fikse fra nettleser-polling – det er GitHub Pages' interne pull-baserte CDN-arkitektur.
+
+**Cloudflare Pages:** Push-basert CDN. Siden er tilgjengelig 5–15 sekunder etter at bygget er ferdig og filene er lastet opp. Gratis (500 bygg/mnd – reelt tak er ~16 push/dag).
+
+**Anbefalt migrasjonsstrategi (Alternativ B):**
+- GitHub Actions beholder all eksisterende logikk (inject-lastmod, HUGO_MODULE_REPLACEMENTS, etc.)
+- Siste deploy-steg byttes ut: `Deploy to GitHub Pages` → `wrangler pages deploy ./public`
+- Ny URL: `https://samt-bu-docs.pages.dev/` (ingen substi `/samt-bu-docs/`)
+- `baseURL` og `editURL` i `hugo.toml` oppdateres
+- Cloudflare-konto finnes allerede (OAuth-worker)
+- Custom domene (f.eks. `samt-x.no`) er ikke nødvendig, men mulig (~100–200 kr/år)
+- Secrets som trengs i GitHub: `CF_API_TOKEN` + `CF_ACCOUNT_ID`
+
+**Status:** Ikke implementert – notert for neste sesjon.
+
