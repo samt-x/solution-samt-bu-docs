@@ -28,5 +28,9 @@ jobs:
             echo "Ingen endringer – alle UUID-er var på plass"
           else
             git commit -m "Auto: legg til manglende UUID-er i frontmatter"
-            git push
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              echo "Push-forsøk $i feilet, prøver igjen..."
+              sleep 3
+            done
           fi
