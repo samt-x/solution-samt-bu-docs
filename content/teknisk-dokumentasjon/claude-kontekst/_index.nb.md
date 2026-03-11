@@ -539,3 +539,47 @@ Bash-verktøyet resetter arbeidskatalog mellom kall. `cd ..` i en kjede av komma
 ### Ny veikart-oppføring: GitHub-auth uavhengig av CMS
 
 Opprettet `solution-samt-bu-docs/content/veikart/github-auth-uavhengig-av-cms/`. Dokumenterer at `getDecapToken()` leser Decap-spesifikke localStorage-nøkler (`netlify-cms-user`, `decap-cms-user`) og at dette er en risiko ved CMS-bytte. Tre alternativer: A (PAT-input), B (selvstendig OAuth-flyt), C (utvid getDecapToken med nøytral nøkkel som overgangsløsning).
+
+---
+
+## Endringslogg – 2026-03-11 (natt)
+
+### «Ny side» – UUID vises ikke på siden (rotårsak funnet og fikset)
+
+**Symptom:** Nye sider manglet `ID:`-feltet i metadata-linjen på nettstedet, selv om UUID lå i frontmatter på GitHub.
+
+**Rotårsak 1 – Race condition i bygg-polling (`custom-footer.html`):**
+«Ny side»-commit trigger to `hugo.yml`-kjøringer:
+1. Bygg A – fra «Ny side»-commit (uten UUID)
+2. Bygg B – fra `ensure-uuids`-commit (med UUID)
+
+`ID:`-feltet rendres av `header.html` linje 106–108 via `{{ with .Params.id }}` – vises kun når UUID er i frontmatter. Siden `ensure-uuids` alltid committer UUID etter en ny side, gir bygg A et midlertidig deployet nettsted uten UUID.
+
+Polling erklærte «ferdig» for tidlig (etter kun bygg A) → navigering til side deployet av bygg A → ingen UUID synlig.
+
+**Fix:** `lastAllCompleteAt`-variabel (grace-periode). Etter at alle kjente bygg er ferdige, venter polling 15 sekunder før navigering. Hvis bygg B starter i mellomtiden → `anyPending = true` → grace nullstilles → polling venter på bygg B. `per_page` økt fra 5 til 20 for å fange flere bygg.
+
+```javascript
+if (anyPending) {
+    lastAllCompleteAt = 0; // reset grace
+    ...
+}
+if (!lastAllCompleteAt) { lastAllCompleteAt = Date.now(); }
+if (Date.now() - lastAllCompleteAt < 15000) { return; } // vent 15 sek
+// Ferdig
+```
+
+**Rotårsak 2 – `ensure-uuids.yml` push-konflikt (alle 4 repoer):**
+Raske påfølgende sideopprettinger → to `ensure-uuids`-kjøringer overlapper → siste `git push` avvises stille → UUID mistes permanent (ingen retry, ingen feilmelding).
+
+**Fix:** Retry-løkke i alle 4 `ensure-uuids.yml` (samt-bu-docs, team-architecture, samt-bu-drafts, solution-samt-bu-docs):
+```yaml
+for i in 1 2 3; do
+  git pull --rebase origin main && git push && break
+  echo "Push-forsøk $i feilet, prøver igjen..."
+  sleep 3
+done
+```
+
+**Forventet totalvente-tid:** ~50s bygg + 15s grace = ~65 sekunder.
+**Fallback:** Hvis grace-perioden utløper før bygg B starter (ensure-uuids meget sen), navigeres til side uten UUID. En manuell reload etter ~1 min viser UUID (bygg B ferdig). Med retry-fiksen vil ensure-uuids alltid committe UUID, så reload fungerer som forventet.
