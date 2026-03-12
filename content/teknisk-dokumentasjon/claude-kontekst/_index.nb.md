@@ -847,3 +847,59 @@ Begge dialogene (menyvalg 2 og 3) bruker nå samme full-skjerm layout som qe-dia
 
 **Status:** Ikke implementert – notert for neste sesjon.
 
+---
+
+## Endringslogg – 2026-03-12 (sesjon 2)
+
+### ✅ Cloudflare Pages – FERDIG
+
+Migrasjonen fra GitHub Pages til Cloudflare Pages ble gjennomført:
+
+- **`hugo.toml`:** `baseURL` endret til `https://samt-bu-docs.pages.dev/`
+- **`.github/workflows/hugo.yml`:** GitHub Pages-steg (`configure-pages`, `upload-pages-artifact`, separat `deploy`-jobb) erstattet med ett steg: `npx wrangler pages deploy ./public --project-name samt-bu-docs --branch main`
+- Secrets lagt til i GitHub: `CF_API_TOKEN`, `CF_ACCOUNT_ID`
+- Cloudflare Pages-prosjekt opprettet via wrangler CLI
+- **Ny nettstedsadresse:** `https://samt-bu-docs.pages.dev/`
+- **Gammel adresse** (`https://samt-x.github.io/samt-bu-docs/`) er ikke lenger aktiv
+
+**Effekt:** CDN-propagering til norske noder ned fra 1–3 min → 5–20 sek etter grønt bygg.
+
+### ✅ GUI-tilbakemelding for byggestatus – FERDIG
+
+Tre separate polling-mekanismer implementert i `custom-footer.html`:
+
+| Case | Utløser | Metode | Hastighet |
+|------|---------|--------|-----------|
+| 1 – Rediger side | Lagre i qe-dialog | ETag-sammenligning (same-origin HEAD-poll, 1 sek intervall) | ~15–20 sek etter grønt bygg |
+| 2 – Ny side | Opprett i np-dialog (sibling) | URL-poll 404→200 (1 sek intervall) | ~0 sek etter grønt bygg |
+| 3 – Nytt underkapittel | Opprett i np-dialog (child) | URL-poll 404→200 (1 sek intervall) | ~0 sek etter grønt bygg |
+
+**ETag-polling (case 1):** `HEAD`-request med `cache: no-store` + cachebust-param (`?_cf=<timestamp>`) mot samme URL. Sammenligner `etag` / `last-modified`-headere. Endring → side ble deployet. Fallback til GitHub Actions API-polling hvis ETag ikke er tilgjengelig.
+
+**URL-polling (cases 2+3):** `HEAD` mot ny side-URL. HTTP 200 → siden finnes. Krever ingen token.
+
+**CORS-begrensning:** `api.cloudflare.com` blokkerer cross-origin kall fra nettleser (CF Pages `pages.dev`-domene). Cloudflare API er derfor ikke aktuelt fra browser – GitHub Actions API og same-origin polling brukes i stedet.
+
+**UUID generert client-side:** `crypto.randomUUID()` (med fallback) genererer UUID i nettleseren for nye sider. Eliminerer behovet for at `ensure-uuids`-botten lager en ekstra commit → reduserer ventetid for cases 2+3 med ~40 sek.
+
+**Auto-navigasjon (case 1):** Etter ETag-endring vises «✓ Ferdig! Laster inn om 2 sek…» + «Last inn nå ↗»-knapp. Siden lastes automatisk etter 2 sekunder.
+
+### ✅ Statustekst – «Nettsted oppdateres (x sek)»
+
+«Venter på deploy…» / «Waiting for deploy…» erstattet med «Nettsted oppdateres (x sek)…» / «Updating site (xs)…» med live sekund-teller. Fjerner teknisk jargon («deploy») fra brukergrensesnittet.
+
+### ✅ Knapper og feilhåndtering
+
+- **«Lagre»-knapp etter feil:** Vises nå som «Prøv igjen» (ikke «Lagre») etter lagrefeil
+- **Feilmelding oversatt:** «Update is not a fast forward» → «Konflikt: siden ble endret av andre. Prøv igjen.»
+- **Knapp-stil ved feil:** `background` og `cursor` nullstilles riktig (gråstil fra vellykket lagring henger ikke igjen)
+- **np-dialog Opprett-knapp:** Disabled umiddelbart ved klikk (før token-sjekk og validering). Re-enables med riktig tekst (norsk/engelsk, sibling/child) ved feil
+- **Automatisk retry:** `tryCommit()` wrapper kaller `createQeCommit` opptil 2 ganger ved «Update is not a fast forward». Viser «Prøver på nytt…» mellom forsøkene (1,5 sek pause). Håndterer GitHub API-caching og ensure-uuids race condition usynlig for brukeren
+
+### Veikart: Bygg-status-sperre og Lukk-knapp
+
+Ny veikart-oppføring: `veikart/bygg-status-sperre/`. Noterer:
+- «Avbryt»-knappen er misvisende etter at commit er sendt – commit kan ikke angres
+- Forslag: rename til «Lukk dette vinduet» + informasjonstekst om at bygget fortsetter
+- Forslag: sjekk GitHub Actions API ved åpning av redigeringsdialog – vis advarsel hvis bygg allerede kjører (kryssbruker-synlig via GH Actions API, token finnes allerede)
+
