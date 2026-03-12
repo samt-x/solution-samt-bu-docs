@@ -917,3 +917,86 @@ Ny veikart-oppføring: `veikart/bygg-status-sperre/`. Noterer:
 - Forslag: rename til «Lukk dette vinduet» + informasjonstekst om at bygget fortsetter
 - Forslag: sjekk GitHub Actions API ved åpning av redigeringsdialog – vis advarsel hvis bygg allerede kjører (kryssbruker-synlig via GH Actions API, token finnes allerede)
 
+---
+
+## Endringslogg – 2026-03-13
+
+### ✅ UUID-workflow slått sammen (SLÅTT SAMMEN)
+
+`ensure-uuids.yml` slettet i alle 4 repoer. UUID-steget kjører nå som del av:
+- `hugo.yml` (samt-bu-docs) – steget kjøres rett etter checkout, FØR modul-checkout og bygg
+- `trigger-docs-rebuild.yml` (team-architecture, samt-bu-drafts, solution-samt-bu-docs) – steget kjøres FØR `repository_dispatch`-kallet
+
+Viktige detaljer:
+- `[skip ci]`-tag i commit-melding forhindrer at UUID-commiten trigger ny workflow-kjøring
+- `if: github.actor != 'github-actions[bot]'` på jobbnivå i `trigger-docs-rebuild.yml` forhindrer løkke
+- `permissions: contents: write` nødvendig for at workflow-bot kan pushe
+- Retry-løkke (for i in 1 2 3) med `git pull --rebase origin main && git push` håndterer push-konflikter fra parallelle kjøringer
+- `hugo.yml`-bygget kjøres i samme workflow-run etter UUID-steget – arbeidstre har allerede UUIDs → ingen ekstra `workflow_dispatch` nødvendig
+
+### ✅ GUI-forbedringer – conflict-håndtering og dialog-UX
+
+Alle endringer i `hugo-theme-samt-bu/layouts/partials/custom-footer.html`.
+
+**Økt retry-antall:** `tryCommit(blobItems, 5)` (var 2). Re-fetcher HEAD SHA mellom hvert forsøk.
+
+**Bot vs. menneske-distinguering ved konflikt (etter 5 mislykkede forsøk):**
+```javascript
+fetch('/repos/<repo>/commits?path=<fil>&per_page=1', ...)
+  → login === 'github-actions[bot]' → «Lagring feilet. Prøv igjen.»
+  → isHuman → «Konflikt: siden ble endret av @<login>. Prøv igjen.»
+```
+Fjernet uriktig «repo opptatt»-melding (Cloudflare setter push-jobber i kø uansett).
+
+**Bygg-advarsel scopet til gjeldende fil:**
+`checkBuildInProgress(filePath, callback)` tar nå `filePath`-parameter. Sjekker GitHub-commit-filer via `GET /repos/.../commits/<run.head_sha>` → `commit.files[].filename`. Advarselen vises kun hvis pågående bygg inkluderer akkurat den filen brukeren redigerer.
+
+**«Lukk dette vinduet»-knapp i np-dialog:**
+`showNpBuildPanel()` setter `#np-cancel`-knappens tekst til «Lukk dette vinduet» / «Close this window» etter commit. `openNewSiblingDialog` og `openNewChildDialog` resetter til «Avbryt»/«Cancel» ved åpning.
+
+**Auto-reload ved ferdig bygg:**
+- `qe-dialog`: byggjobb ferdig → `doNav()` kaller `window.location.href = <url>?_=<timestamp>` (reload nåværende side). Ingen «klikk for å laste inn»-melding.
+- `np-dialog onDone`: `window.location.href = window.location.href.split('?')[0] + '?_=' + Date.now()` (reload nåværende side, ikke navigasjon til ny side).
+- Ingen navigasjon til ny side – brukeren auto-reloades og kan eventuelt navigere selv.
+
+### ✅ Sidebar – bug-fikser
+
+**Kategori-ikon-posisjonering (1.1-collapse-bug):**
+`category-icon` hadde `position: absolute; top: 8px; right: 6px` uten noen `position: relative` på overordnet `<li>`. Alle ikoner stakk seg opp i forhold til `#sidebar` root → ikon-klikk-områder overlappet feil `<li>`. Fiks: `#sidebar ul li { position: relative; }` i `custom-head.html`. Bekreftet fikset av bruker.
+
+**Inkonsistent bold i sidebar (Chrome):**
+`font-family: 'DIN-bold'` fra `theme.css` på `li.parent > a` / `li.active > a` rendret inkonsistent i Chrome (font-loading race eller Chrome-spesifikk rendering). To-lags løsning:
+
+1. **CSS** (`custom-head.html`): `#sidebar ul li.parent > a, #sidebar ul li.active > a { font-weight: bold; }` – virker uavhengig av webfont-status
+2. **JS** (`footer.html`): `applyActiveParent()` – setter klasser OG `a.style.fontWeight = 'bold'` (inline style) basert på `window.location.pathname` vs `data-nav-id`. Kjøres to ganger: umiddelbart + `setTimeout(fn, 0)` etter at deferred scripts er ferdige.
+
+```javascript
+function applyActiveParent() {
+  var path = window.location.pathname;
+  if (path.slice(-1) !== '/') path += '/';
+  document.querySelectorAll('#sidebar [data-nav-id]').forEach(function(li) {
+    var id = li.getAttribute('data-nav-id');
+    if (!id) return;
+    var isActive = id === path;
+    var isParent = !isActive && id.length > 1 && path.slice(0, id.length) === id;
+    li.classList.toggle('active', isActive);
+    li.classList.toggle('parent', isParent);
+    var a = li.querySelector(':scope > a');
+    if (a) a.style.fontWeight = (isActive || isParent) ? 'bold' : '';
+    var icon = li.querySelector(':scope > a .category-icon');
+    if (icon) {
+      icon.classList.toggle('fa-sort-down', isActive || isParent);
+      icon.classList.toggle('fa-caret-right', !isActive && !isParent);
+    }
+  });
+}
+applyActiveParent();
+setTimeout(applyActiveParent, 0);
+```
+
+**Viktig arkitekturnotat – scriptkjøringsrekkefølge:**
+- `altinndocs-learn.js` er lastet med `defer` → kjører ETTER inline scripts i footer.html
+- Inline script (footer.html) kjøres under HTML-parsing → `applyActiveParent()` kjøres FØR deferred scripts
+- `setTimeout(fn, 0)` sikrer at re-apply også kjøres ETTER deferred scripts og jQuery ready-handlers
+- Ingen av de deferred scripts (`altinndocs-learn.js`, `altinndocs.js`) modifiserer `parent`/`active`-klasser
+
