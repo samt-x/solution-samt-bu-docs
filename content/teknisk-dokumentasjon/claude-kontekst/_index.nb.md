@@ -1000,3 +1000,45 @@ setTimeout(applyActiveParent, 0);
 - `setTimeout(fn, 0)` sikrer at re-apply også kjøres ETTER deferred scripts og jQuery ready-handlers
 - Ingen av de deferred scripts (`altinndocs-learn.js`, `altinndocs.js`) modifiserer `parent`/`active`-klasser
 
+**✅ Sidebar-kollaps for første child i seksjon (2026-03-13):**
+Symptom: Navigering til `01-resultater-vgo` (første use case, weight:1) kollapset hele sidebaren opp til toppnivå – `Behov` og `Case-beskrivelser` ble ikke vist som ekspanderte. Alle andre sider fungerte korrekt.
+
+Rotårsak: Ikke funnet gjennom statisk kode-analyse. CSS-klassene `parent`/`active` ble satt korrekt av `applyActiveParent()`, men `ul`-elementenes `display` ble ikke oppdatert – trolig en CSS-spesifisitets- eller timing-konflikt spesifikk for denne siden.
+
+Fix (`footer.html`): `applyActiveParent()` setter nå `ul.style.display` **direkte** i tillegg til CSS-klasser:
+```javascript
+var ul = li.querySelector(':scope > ul');
+if (ul) ul.style.display = (isActive || isParent) ? 'block' : '';
+```
+Inline `style.display` overstyrer alle CSS-regler og er robust mot spesifisitetsproblemer. Når verken aktiv eller forelder, fjernes inline-stilen og CSS tar over normalt.
+
+---
+
+## Endringslogg – 2026-03-13
+
+### GitHub Pages → Cloudflare Pages redirect
+
+Ny workflow `.github/workflows/gh-pages-redirect.yml` deployer en statisk redirect-side til GitHub Pages. Sender alle besøkende fra `samt-x.github.io/samt-bu-docs/*` til `samt-bu-docs.pages.dev/*` med stipreservering via JS.
+
+**Nøkkelvalg:** Workflowen kjøres kun manuelt (`workflow_dispatch`) – ikke ved push. GitHub Pages beholder siste deploy permanent, så redirect-siden trenger aldri rebuildes. Eliminerer overhead på alle fremtidige push.
+
+**Teknikk:** `index.html` + `404.html` (identiske) – GitHub Pages serverer `404.html` for alle ukjente stier → JS stripper `/samt-bu-docs`-prefix → redirect til ny URL. Meta refresh som no-JS-fallback (sender til rot, uten stipreservering).
+
+### Windows-mappenavn og git tracking
+
+`git` sporer aldri nye filer/mapper automatisk. Ved omdøping i Windows Utforsker: gammel mappe committes som slettet, ny mappe forblir «untracked» og må `git add`-es eksplisitt. Alltid sjekk `git status` etter mappeoperasjoner på Windows.
+
+### CI: core.quotepath=false for UTF-8 i stier
+
+Hugo bruker `git log -- <filsti>` for å hente `lastmod` via `enableGitInfo`. Git på Ubuntu/Linux har `core.quotepath=true` som standard → non-ASCII-tegn i stier (f.eks. `ø` i `22-analysedata-for-hele-løpet`) escapes → Hugo klarer ikke matche filen → `.Lastmod` forblir null → «Sist endret» vises ikke.
+
+Fix i `hugo.yml` (ett steg før Hugo-bygg):
+```yaml
+- name: Konfigurer git for UTF-8-stier
+  run: git config --global core.quotepath false
+```
+Gjelder alle fremtidige filer med `æ`, `ø`, `å` eller andre non-ASCII-tegn i mappenavn.
+
+### DIN-font 404-feil (kosmetisk, ikke fikset)
+
+`designsystem.css` inneholder `@font-face`-deklarasjoner for `DINWeb` og `DINWeb-Bold` som peker på `/fonts/DINWeb.woff...`. Filene finnes ikke → 404 i konsollen på alle sider. Ingen visuell effekt (fallback til Helvetica/Arial). Se veikart: `din-font-404`.
