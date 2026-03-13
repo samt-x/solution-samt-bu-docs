@@ -1042,3 +1042,24 @@ Gjelder alle fremtidige filer med `æ`, `ø`, `å` eller andre non-ASCII-tegn i 
 ### DIN-font 404-feil (kosmetisk, ikke fikset)
 
 `designsystem.css` inneholder `@font-face`-deklarasjoner for `DINWeb` og `DINWeb-Bold` som peker på `/fonts/DINWeb.woff...`. Filene finnes ikke → 404 i konsollen på alle sider. Ingen visuell effekt (fallback til Helvetica/Arial). Se veikart: `din-font-404`.
+
+---
+
+## Endringslogg – 2026-03-13 (sesjon 2)
+
+### ✅ TipTap-versjonspinning – tiptap-markdown@0.8.10
+
+**Problem:** Editoren sluttet å fungere for alle brukere midt i dagen. Feilmelding: «Kunne ikke laste editoren. Prøv å oppdatere siden.» (alert fra catch-blokken i `loadTiptap()`).
+
+**Rotårsak:** `tiptap-markdown` var importert uten versjonsnummer (`https://esm.sh/tiptap-markdown`). esm.sh hadde cachet en eldre, TipTap v2-kompatibel build i måneder. Da cachen ble invalidert (sannsynligvis en CDN-vedlikeholdsoperasjon), ble `latest` resolvet på nytt fra npm → `tiptap-markdown@0.9.0`, som krever `@tiptap/core@^3.0.1`. Inkompatibelt med våre TipTap v2-importer → `Promise.all` feilet → editor utilgjengelig for alle.
+
+**Fix:** Pinnet til `https://esm.sh/tiptap-markdown@0.8.10` (siste versjon kompatibel med TipTap v2) i `custom-footer.html`.
+
+**Beslutning – versjonsstrategi for TipTap-importer:**
+
+| Import | Pin-strategi | Begrunnelse |
+|--------|-------------|-------------|
+| `@tiptap/core`, `@tiptap/starter-kit`, `@tiptap/extension-*` | `@2` (major-pin) | Sikker mot breaking changes; v2 er stabilt og vedlikeholdt |
+| `tiptap-markdown` | `@0.8.10` (eksakt pin) | v0.9.0 krever TipTap v3 – kan ikke følge major-pin |
+
+**Oppdatering ved fremtidig behov:** Gjøres manuelt og samlet. Sjekk at alle TipTap-pakker er gjensidig kompatible (spesielt `tiptap-markdown` mot `@tiptap/core`). Test tabeller og Markdown-roundtrip i DevTools etter endring. Ingen automatisk oppfanging – eksakte pins gjør at ingenting brekker uten aktiv handling.
