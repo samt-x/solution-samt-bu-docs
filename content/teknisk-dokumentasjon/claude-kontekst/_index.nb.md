@@ -1350,3 +1350,70 @@ Test-konfigurasjon oppdatert for neste kjøring:
 - Steg 5 endret: endrer tittelfeltet (`#qe-field-title`) med tidsstempel-suffix i stedet for usynlig zero-width space
 - Steg 3: screenshot med gul highlight på «Rediger dette kapitlet» i menyen
 - Steg 4: venter på `#qe-field-title` populert i stedet for fast `wait_for_timeout`
+
+---
+
+### ✅ Endringslogg 2026-03-14 – Playwright-opprydding og HTML-videoviewer
+
+#### Bakgrunn
+Lang sesjon med iterativ utvikling av Playwright-demo og -testskript. Sesjonen krasjet i VS Code; ny sesjon startet i terminal. Alt var committet ved krasj.
+
+#### Endringer i `tools/playwright/test_pending_indicator.py`
+
+**Fjernet FFmpeg-avhengighet:**
+- `find_ffmpeg()`, `convert_to_mp4()` og `import subprocess` slettet
+- `VIDEO_PAD_TOP = 100` og `VIDEO_PAD_BOT = 200` fjernet – padding var kun for Windows Media Player
+- Videofilen er nå ren 1920×1080 WebM uten svarte soner
+
+**Viewport-fix:**
+- `--start-maximized` fjernet fra Chromium-args
+- På 1920×1200-skjerm utvidet `--start-maximized` viewporten ut over 1080px etter auto-reload → `record_video_size=1920×1080` klippet innhold. Uten flagget holder Playwright viewporten stabilt på 1920×1080 gjennom hele opptaket.
+
+**WebM-håndtering:**
+- `.webm` flyttes fra `SCREENSHOTS/video/<hash>.webm` → `SCREENSHOTS/demo.webm` etter recording
+- `video/`-mappen slettes etter flytting
+
+**Steg 8 – krasj-fix:**
+- `inject_indicator_pulse()` og tilhørende `page.evaluate()`-kall pakket i `try/except`
+- Årsak: siden auto-reloader (triggered av JS når `count=0`) midt i polling-løkken → «Execution context was destroyed» exception
+- Fix: `continue` til neste 15-sekunders intervall etter navigation-feil
+
+**Forklaringsboble deaktivert:**
+- `show_bubble()`-kallet i steg 7 kommentert ut – boblen var for lavt plassert (`bottom: 70px`) og falt delvis utenfor viewport i noen scenarier
+- Skal aktiveres igjen på kontrollert måte med korrekt posisjonering
+
+#### Ny `tools/playwright/viewer.html`
+
+Egenutviklet HTML-videospiller for å vise demo uten spilleroverlay-problemer:
+- `<video>`-element uten native browser-kontroller
+- Kontrollpanel (play/pause, seek, ±10s, tid, fullskjerm) plassert **under** videoen – aldri overlaid
+- Lastes automatisk som `demo.webm` fra samme mappe (drag-and-drop/fil-velger som fallback)
+- Kopieres automatisk inn i screenshot-mappen etter hver kjøring
+- Tastatur: mellomrom = pause/play, piltaster = ±5s
+
+**Fordeler vs. Windows Media Player:**
+- Ingen overlay-kontroller som dekker innholdet ved pause
+- Fungerer for alle brukere med moderne nettleser
+- Mye mindre filstørrelse (WebM vs. H.264 MP4)
+
+#### `.gitignore`-oppdatering
+
+Lagt til:
+```
+tools/playwright/screenshots/**/*.webm
+tools/playwright/screenshots/**/*.mp4
+```
+13 tidligere trackede videofiler fjernet fra git-indeksen. Fremtidige videofiler genereres lokalt ved kjøring av skriptet.
+
+#### Nåværende tilstand
+
+Ren baseline for videre demo- og testutvikling:
+- Kun `screenshots/20260314_210250/` i git (11 PNG-screenshots + viewer.html)
+- Videofil (`demo.webm`) genereres lokalt og ignoreres av git
+- Skriptet kjøres med: `python test_pending_indicator.py` fra `tools/playwright/`
+
+#### Neste steg for Playwright-demo
+
+1. Legg til forklaringstekster (bobler) på kontrollert måte – posisjon og timing defineres eksplisitt
+2. Tale/voiceover – vurderes når visuell demo er ferdigstilt
+3. Vurder om skriptet skal splittes i «test» (automatisert verifisering) og «demo» (visuell presentasjon)
