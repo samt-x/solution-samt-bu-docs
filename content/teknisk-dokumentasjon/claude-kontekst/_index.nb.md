@@ -1063,3 +1063,138 @@ Gjelder alle fremtidige filer med `æ`, `ø`, `å` eller andre non-ASCII-tegn i 
 | `tiptap-markdown` | `@0.8.10` (eksakt pin) | v0.9.0 krever TipTap v3 – kan ikke følge major-pin |
 
 **Oppdatering ved fremtidig behov:** Gjøres manuelt og samlet. Sjekk at alle TipTap-pakker er gjensidig kompatible (spesielt `tiptap-markdown` mot `@tiptap/core`). Test tabeller og Markdown-roundtrip i DevTools etter endring. Ingen automatisk oppfanging – eksakte pins gjør at ingenting brekker uten aktiv handling.
+
+### ✅ Auto-reload etter sidenavigering – fikset
+
+**Problem:** Når et bygg ble oppdaget ferdig via resume-koden (etter navigering til ny side), ble siden ikke lastet inn automatisk – «klikk for å laste inn»-meldingen ble vist i stedet.
+
+**Rotårsak:** Resume-koden kalte `samtuShowDoneIndicator()` (som viser en klikkbar lenke), ikke direkte navigasjon.
+
+**Fix:** Endret til `window.location.href = window.location.href.split('?')[0] + '?_=' + Date.now()` i resume-koden og i bakgrunnspollingens «egne ventende endringer»-gren.
+
+---
+
+## Endringslogg – 2026-03-14
+
+### «not a fast forward» – analyse og fix
+
+**Symptom:** Konsekvent `422 Update is not a fast forward` ved lagring mens et annet bygg var i gang, selv 30+ sekunder etter forrige lagring (ingen reell race condition mot andre brukere).
+
+**Rotårsak:** GitHub REST API cacher `GET /git/ref/heads/main` med `Cache-Control: private, max-age=60`. `tryCommit` re-fetcher ref mellom forsøk, men får 60 sekunder gammel HEAD SHA fra nettleserens HTTP-cache. Dermed ender `PATCH /git/refs/heads/main` med å sende en foreldet SHA som parent – avvist med `not a fast forward`.
+
+**Fix:** `cache: 'no-store'` på begge GET-kall i `createQeCommit()`:
+```javascript
+fetch(apiBase + '/git/ref/heads/main', { headers: h, cache: 'no-store' })
+fetch(apiBase + '/git/commits/' + headSha, { headers: h, cache: 'no-store' })
+```
+
+**Viktig:** `cache: 'no-store'` er nødvendig på *begge* kall. Kun første holder ikke – commit-SHA trenger også fersk data.
+
+### `tryCommit` – 120 sekunders deadline
+
+`tryCommit(blobItems, deadline)` er en retry-wrapper rundt `createQeCommit()`:
+- Fanger `Error('Update is not a fast forward')` og venter 2 sekunder mellom forsøk
+- Deadline: `Date.now() + 120000` (2 min) – gir rom for at mange bygg kan stå i kø
+- Forsøk fortsetter selv om dialogen lukkes (`overlay.style.display !== 'none'`-sjekk endret til å IKKE avbryte)
+- Feiler etter deadline → brukervennlig feilmelding, «Prøv igjen»-knapp
+
+```javascript
+function tryCommit(blobItems, deadline) {
+  return createQeCommit(...)
+    .catch(function(err) {
+      if (err.message === 'Update is not a fast forward' && Date.now() < deadline) {
+        if (overlay.style.display !== 'none') setStatus('Prøver på nytt…');
+        return new Promise(function(res) { setTimeout(res, 2000); })
+          .then(function() { return tryCommit(blobItems, deadline); });
+      }
+      throw err;
+    });
+}
+```
+
+### Pending build-indikator – arkitektur og implementering
+
+**Formål:** Vise brukeren at commits er i bygg-køen mens de navigerer rundt i nettstedet, og gi en live nedtelling som er koblet til faktiske GitHub Actions-kjøringer.
+
+#### localStorage-state
+
+Nøkkel: `samtu-build-pending`. Format:
+```json
+{
+  "count": 2,
+  "firstSaveAt": 1741900000000,
+  "lastSaveAt": 1741900060000,
+  "seenCompleted": 0,
+  "actor": "erikhag1"
+}
+```
+
+| Felt | Beskrivelse |
+|------|-------------|
+| `count` | Antall ventende bygg (egne) |
+| `firstSaveAt` | Tidsstempel for første save i denne økt-serien – brukes som startpunkt for GitHub API-spørring |
+| `lastSaveAt` | Tidsstempel for siste save |
+| `seenCompleted` | Antall ferdige bygg allerede prosessert på tvers av sidelastinger |
+| `actor` | GitHub-brukernavn (fra `localStorage.getItem('samt-bu-gh-user')`) |
+
+#### Funksjoner (`custom-footer.html`)
+
+| Funksjon | Rolle |
+|----------|-------|
+| `samtuIncrementPending()` | Øker count, setter `firstSaveAt` (behold eksisterende), oppdaterer `lastSaveAt` og `actor` |
+| `samtuDecrementPending()` | Decrementerer count, øker `seenCompleted`, kaller `samtuClearPending()` om count = 0 |
+| `samtuClearPending()` | Fjerner localStorage-nøkkel |
+| `samtuShowPendingIndicator(count)` | Viser spinner + «N endringer bygges…» i `#qe-job-indicator` |
+| `samtuShowPendingIndicatorWithTotal(count, totalActive)` | Som over, men legger til «(M totalt)» i parentes hvis andre brukeres bygg pågår |
+| `samtuShowDoneIndicator()` | (beholdes for edge cases) Viser klikk-for-reload-lenke |
+
+#### Flyt ved lagring
+
+1. `onSaveSuccess()` kalles etter vellykket commit
+2. `samtuIncrementPending()` – lagrer state med actor
+3. `pollQeBuild(startTime, qeOldEtag)` starter ETag-polling (1 sek intervall) for aktiv dialog
+4. Bruker kan navigere bort – spinneren vises via resume-koden på neste side
+
+#### Resume-kode (kjøres ved sidelasting via `setTimeout(200ms)`)
+
+1. Leser `samtuGetPending()`
+2. Sjekker at `firstSaveAt` finnes og er < 10 min gammel
+3. Viser spinner med gjeldende count
+4. Starter `setInterval(checkCompletions, 3000)`
+
+`checkCompletions()` gjør:
+1. `GET /repos/SAMT-X/samt-bu-docs/actions/workflows/hugo.yml/runs?per_page=20` med `cache: 'no-store'`
+2. Filtrerer på `run.created_at >= firstSaveAt - 30000`
+3. Teller `myCompleted` (runs der `triggering_actor.login === p.actor` og `status=completed/success`)
+4. Teller `totalActive` (alle runs med `status=queued/in_progress` i vinduet)
+5. Kaller `samtuShowPendingIndicatorWithTotal(count, totalActive)` for live UI-oppdatering
+6. Hvis `myCompleted > seenCompleted`: `samtuDecrementPending()` → reload side
+
+#### `pollQeBuild.onBuildDone()` – ETag-deteksjon
+
+Brukes når dialogen er åpen. Kaller `samtuDecrementPending()` istedenfor `samtuClearPending()`. Navigerer via `doNav()` (reload nåværende side).
+
+#### Bakgrunnspolling (andre brukeres endringer)
+
+Kjøres i eget `<script>`-blokk. Oppdaget ETag-endring mens `qe-job-indicator` er skjult:
+- Hvis `p.count > 0` (egne bygg ventende): `samtuDecrementPending()` + auto-reload
+- Ellers: vis «Andre endringer publisert»-banner
+
+Bakgrunnspolling er **suspendert** mens `#qe-job-indicator` vises (for å unngå dobbelt-firing).
+
+#### Actor-basert filtrering (skalerbarhet)
+
+GitHub API returnerer `triggering_actor.login` for hvert workflow-run. Filtrering på dette sikrer at kun den innloggede brukerens egne bygg decrementerer telleren. Andre brukeres bygg telles i `totalActive` og vises i parentes.
+
+**Forutsetning:** Alle commit/push-operasjoner krever gyldig GitHub-token (OAuth) – anonym commit er umulig via GitHub API. `actor`-feltet er alltid tilgjengelig når `samtuIncrementPending()` kalles.
+
+**Design for skalering:** Løsningen er designet for store samarbeidsprosjekter med mange samtidige brukere (norske og internasjonale). Hver bruker ser sin egen teller; totaltelleren gir kontekst om global aktivitet.
+
+#### Potensielle feilscenarioer
+
+| Scenario | Håndtering |
+|----------|-----------|
+| Bruker er ikke innlogget | `actor` er tom streng → `isMine`-sjekk fallback til `!p.actor` (teller alt) |
+| GitHub API rate limit | `checkCompletions()` feiler stille i `.catch()` – spinner forblir, ingen krasj |
+| Build feilet (`conclusion != 'success'`) | Telles ikke som `myCompleted` → counter decrementeres ikke → bruker må manuelt rydde |
+| > 10 min uten bygg | `firstSaveAt`-sjekken rydder state automatisk |
