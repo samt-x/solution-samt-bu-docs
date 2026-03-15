@@ -1,5 +1,5 @@
 ---
-id: 89fc4bfb-6418-4d21-aa01-b81e43d44da0
+id: f2bf6c73-ed7a-475e-8899-78842955d286
 title: "Oppdater use case-mal med «Innspill til løsningsvalg»"
 linkTitle: "Oppdater use case-mal"
 weight: 50
