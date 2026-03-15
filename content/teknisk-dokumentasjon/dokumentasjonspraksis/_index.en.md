@@ -4,6 +4,8 @@ title: "Documentation practice"
 linkTitle: "Documentation practice"
 weight: 30
 status: "Early draft"
+last_editor: Erik Hagen
+
 ---
 
 We develop best practice for documentation through good examples – not by locking ourselves into a rigid template from the start. This page collects experiences and patterns as they emerge.

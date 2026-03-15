@@ -4,6 +4,8 @@ title: "Adding a new CMS portal"
 linkTitle: "New CMS portal"
 weight: 40
 status: "New"
+last_editor: Erik Hagen
+
 ---
 
 **Need:** When a new module repository is connected to the site, a corresponding CMS portal (nb + en) must be created so that the content can be edited via Decap CMS. No consolidated template or checklist currently exists for this.

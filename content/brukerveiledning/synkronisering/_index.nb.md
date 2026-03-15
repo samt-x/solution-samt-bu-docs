@@ -3,6 +3,8 @@ id: d9520a6b-e499-4554-961d-86a7bacc5550
 title: "Synkronisering og konflikthåndtering"
 linkTitle: "Synkronisering"
 weight: 20
+last_editor: Erik Hagen
+
 ---
 
 Innhold i SAMT-BU Docs lever i Git-repoer. Når flere bidragsytere jobber samtidig – eller når Decap CMS lagrer en endring mens du har en lokal kopi – kan repoene komme ut av synk. Denne siden forklarer hva som skjer, og hvordan du håndterer det.

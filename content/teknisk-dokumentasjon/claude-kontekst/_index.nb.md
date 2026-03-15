@@ -3,6 +3,8 @@ id: a1dec965-c693-4bbd-a231-1162fb4306ef
 title: "Utviklernotater og Claude-kontekst"
 linkTitle: "Utviklernotater"
 weight: 50
+last_editor: Erik Hagen
+
 ---
 
 Denne siden er skrevet for både menneskelige utviklere og for AI-assistenten Claude Code, som brukes aktivt i utvikling og vedlikehold av SAMT-BU Docs. Den samler kontekst, konvensjoner og arkitekturbeslutninger som ellers lett går tapt mellom arbeidsøkter.

@@ -4,6 +4,8 @@ title: Konsept for GitHub-organisasjoner og repoer
 linkTitle: GitHub-struktur
 weight: 20
 status: null
+last_editor: Erik Hagen
+
 ---
 
 Denne siden dokumenterer prinsippene for hvordan vi organiserer GitHub-organisasjoner (orgs) og repoer i SAMT-BU-plattformen – og legger grunnlaget for at strukturen skal skalere til flere prosjekter under SAMT-paraplyen.

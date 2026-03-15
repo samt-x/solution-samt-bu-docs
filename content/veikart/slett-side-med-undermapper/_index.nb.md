@@ -4,6 +4,8 @@ title: "Slett side – håndtering av undermapper"
 linkTitle: "Slett side med undermapper"
 weight: 60
 status: "Ny"
+last_editor: Erik Hagen
+
 ---
 
 «Slett denne siden» sletter kun `_index.nb.md` og `_index.en.md` i gjeldende mappe, men lar undermapper stå igjen i Git. Dette gir to problemer.

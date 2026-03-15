@@ -4,6 +4,8 @@ title: "Concept for GitHub Organizations and Repositories"
 linkTitle: "GitHub structure"
 weight: 20
 status: "Early draft"
+last_editor: Erik Hagen
+
 ---
 
 This page documents the principles for how we organize GitHub organizations (orgs) and repositories in the SAMT-BU platform – and lays the groundwork for the structure to scale to multiple projects under the SAMT umbrella.

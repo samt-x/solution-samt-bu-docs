@@ -4,6 +4,8 @@ title: "TipTap as WYSIWYG editor"
 linkTitle: "TipTap as editor"
 weight: 110
 status: "New"
+last_editor: Erik Hagen
+
 ---
 
 Evaluate TipTap as a replacement for Quill v1 in the «Edit content» dialog (qe-dialog). See Norwegian version for details.

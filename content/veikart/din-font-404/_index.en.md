@@ -4,6 +4,8 @@ title: "Remove 404 errors for DIN web fonts"
 linkTitle: "DIN font 404 errors"
 weight: 80
 status: "New"
+last_editor: Erik Hagen
+
 ---
 
 `designsystem.css` contains `@font-face` declarations that attempt to load DIN web fonts from `/fonts/DINWeb.woff...` and `/fonts/DINWeb-Bold.woff...`. These files do not exist in the repo, causing two 404 errors in the browser console on **every** page.

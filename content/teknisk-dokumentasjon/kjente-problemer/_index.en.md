@@ -3,6 +3,8 @@ id: 44fda0b1-9034-4924-a29b-d1823b800756
 title: "Known issues and solutions"
 linkTitle: "Known issues"
 weight: 40
+last_editor: Erik Hagen
+
 ---
 
 Chronological log of bugs and issues discovered and resolved during development of SAMT-BU Docs. Each entry documents symptom, root cause, and fix — making it easier to diagnose similar problems in the future.

@@ -4,6 +4,8 @@ title: "Fjern 404-feil for DIN-webfonter"
 linkTitle: "DIN-font 404-feil"
 weight: 80
 status: "Ny"
+last_editor: Erik Hagen
+
 ---
 
 `designsystem.css` inneholder `@font-face`-deklarasjoner som prøver å laste DIN-webfonter fra `/fonts/DINWeb.woff...` og `/fonts/DINWeb-Bold.woff...`. Disse filene finnes ikke i repoet, noe som gir to 404-feil i nettleserkonsollen på **alle** sider.

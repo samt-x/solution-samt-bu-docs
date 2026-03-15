@@ -3,6 +3,8 @@ id: a1dec965-c693-4bbd-a231-1162fb4306ef
 title: "Developer notes and Claude context"
 linkTitle: "Developer notes"
 weight: 50
+last_editor: Erik Hagen
+
 ---
 
 This page is written for both human developers and for the AI assistant Claude Code, which is actively used in development and maintenance of SAMT-BU Docs. It collects context, conventions, and architectural decisions that would otherwise be lost between working sessions.

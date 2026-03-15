@@ -4,6 +4,8 @@ title: "Ny side på samme nivå – valg i Endre-menyen"
 linkTitle: "Ny side – samme nivå"
 weight: 20
 status: "Tidlig utkast"
+last_editor: Erik Hagen
+
 ---
 
 Når man leser en side, er det ingen enkel vei til å opprette en ny side på samme nivå (søskenside). Dette roadmap-elementet henger tett sammen med [Legg til underkapittel](../legg-til-underkapittel/) og bør løses i samme iterasjon.

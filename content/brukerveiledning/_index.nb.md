@@ -3,6 +3,8 @@ id: ad913fd8-a039-4bd6-9dca-05d50f457a07
 title: "Brukerveiledning"
 linkTitle: "Brukerveiledning"
 weight: 10
+last_editor: Erik Hagen
+
 ---
 
 Denne seksjonen er en praktisk veiledning for redaktører og bidragsytere som arbeider med innhold i SAMT-BU Docs. Her går vi dypere enn den generelle [Hvordan bidra](/samt-bu-docs/om/hvordan-bidra/)-siden og dekker arbeidsflyt, CMS-funksjonalitet og håndtering av situasjoner der flere redigerer samtidig.

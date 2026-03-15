@@ -4,6 +4,8 @@ title: "Legg til underkapittel – valg i Endre-menyen"
 linkTitle: "Legg til underkapittel"
 weight: 10
 status: "Godkjent"
+last_editor: Erik Hagen
+
 ---
 
 **Implementert 2026-03-11.** «Underkapittel»-valget i Endre-menyen åpner samme dialog som «Ny side – samme nivå», men bruker gjeldende side som forelder.

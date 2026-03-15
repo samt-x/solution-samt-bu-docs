@@ -4,6 +4,8 @@ title: "Bygg-status-sperre og riktig Lukk-knapp"
 linkTitle: "Bygg-status og Lukk-knapp"
 weight: 70
 status: "Godkjent"
+last_editor: Erik Hagen
+
 ---
 
 **Implementert 2026-03-12.** Begge delene er gjennomført i temaet (`custom-footer.html` og `edit-switcher.html`).

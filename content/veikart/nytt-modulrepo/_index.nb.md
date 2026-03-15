@@ -4,6 +4,8 @@ title: "Opprette nytt modulrepo – steg-for-steg"
 linkTitle: "Nytt modulrepo"
 weight: 30
 status: "Ny"
+last_editor: Erik Hagen
+
 ---
 
 **Behov:** Det finnes ingen samlet, trinnvis veiledning for å opprette et nytt Hugo-modulrepo fra bunnen og koble det til nettstedet. Prosessen krever koordinering på tvers av flere repoer og konfigurasjonsfilene.

@@ -4,6 +4,8 @@ title: "Legge til ny CMS-portal"
 linkTitle: "Ny CMS-portal"
 weight: 40
 status: "Ny"
+last_editor: Erik Hagen
+
 ---
 
 **Behov:** Når et nytt modulrepo kobles til nettstedet, må det opprettes en tilhørende CMS-portal (nb + en) slik at innholdet kan redigeres via Decap CMS. Det finnes ingen samlet mal eller sjekkliste for dette.

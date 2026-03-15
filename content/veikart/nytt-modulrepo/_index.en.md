@@ -4,6 +4,8 @@ title: "Creating a new module repository – step by step"
 linkTitle: "New module repo"
 weight: 30
 status: "New"
+last_editor: Erik Hagen
+
 ---
 
 **Need:** There is no consolidated, step-by-step guide for creating a new Hugo module repository from scratch and connecting it to the site. The process requires coordination across multiple repositories and configuration files.

@@ -4,6 +4,8 @@ title: "Dokumentasjonspraksis"
 linkTitle: "Dokumentasjonspraksis"
 weight: 30
 status: "Tidlig utkast"
+last_editor: Erik Hagen
+
 ---
 
 Vi utvikler beste praksis for dokumentasjon gjennom gode eksempler – ikke ved å låse oss til en rigid mal fra start. Denne siden samler erfaringer og mønstre etter hvert som de trer frem.

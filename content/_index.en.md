@@ -3,6 +3,8 @@ id: 07b4e68b-a7d0-40ca-bd54-4e2ab3f92e95
 title: "SAMT-BU Docs"
 linkTitle: "SAMT-BU Docs"
 weight: 10
+last_editor: Erik Hagen
+
 ---
 
 This section documents the technical solutions used to build and operate the SAMT-BU documentation platform. The content is aimed at future developers, architects, and administrators who need to understand, maintain, or further develop the solution.

@@ -4,6 +4,8 @@ title: "Oppdater use case-mal med «Innspill til løsningsvalg»"
 linkTitle: "Oppdater use case-mal"
 weight: 50
 status: "Tidlig utkast"
+last_editor: Erik Hagen
+
 ---
 
 Gjeldende use case-mal skiller ikke tydelig nok mellom brukerbehov og løsningsforslag. I flere caser (særlig de som bygger på konkrete prosjektforslag) blandes brukersentrert ønskesituasjon og løsningshypoteser sammen i samme avsnitt.

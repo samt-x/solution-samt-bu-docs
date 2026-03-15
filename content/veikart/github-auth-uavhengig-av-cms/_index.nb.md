@@ -5,6 +5,8 @@ linkTitle: "GitHub-auth – CMS-uavhengig"
 weight: 120
 status: "Godkjent"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
+last_editor: Erik Hagen
+
 ---
 
 **Implementert 2026-03-11.** Alternativ B (gjenbruk OAuth-proxy) ble valgt og gjennomført, kombinert med fullstendig fjerning av Decap CMS.

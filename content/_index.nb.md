@@ -3,6 +3,8 @@ id: 07b4e68b-a7d0-40ca-bd54-4e2ab3f92e95
 title: "SAMT-BU Docs"
 linkTitle: "SAMT-BU Docs"
 weight: 10
+last_editor: Erik Hagen
+
 ---
 
 Denne seksjonen dokumenterer de tekniske løsningene som er brukt for å bygge og drifte SAMT-BU-dokumentasjonsplattformen. Innholdet er rettet mot fremtidige utviklere, arkitekter og administratorer som skal forstå, vedlikeholde eller videreutvikle løsningen.

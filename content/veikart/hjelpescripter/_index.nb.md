@@ -4,6 +4,8 @@ title: "Hjelpescripter"
 linkTitle: "Hjelpescripter"
 weight: 90
 status: "Ny"
+last_editor: Erik Hagen
+
 ---
 
 **Behov:** Flere vanlige operasjoner (initialisere nytt modulrepo, opprette ny side med korrekt frontmatter-mal, synkronisere modulpekere) gjøres manuelt i dag og er feilutsatte. Hjelpescripter vil redusere friksjon og sikre konsistens.

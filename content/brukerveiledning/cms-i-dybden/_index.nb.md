@@ -3,6 +3,8 @@ id: 9080238f-b1aa-4a19-bc88-f27718fb6222
 title: "CMS i dybden"
 linkTitle: "CMS i dybden"
 weight: 10
+last_editor: Erik Hagen
+
 ---
 
 Decap CMS er det nettleserbaserte redigeringsverktøyet for SAMT-BU Docs. Denne siden dekker funksjonalitet og fallgruver som ikke er åpenbare ved første øyekast.

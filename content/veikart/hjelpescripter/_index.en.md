@@ -4,6 +4,8 @@ title: "Helper scripts"
 linkTitle: "Helper scripts"
 weight: 90
 status: "New"
+last_editor: Erik Hagen
+
 ---
 
 **Need:** Several common operations (initialising a new module repository, creating a new page with the correct frontmatter template, synchronising module pointers) are done manually today and are error-prone. Helper scripts will reduce friction and ensure consistency.

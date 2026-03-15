@@ -3,6 +3,8 @@ id: d9520a6b-e499-4554-961d-86a7bacc5550
 title: "Synchronisation and Conflict Handling"
 linkTitle: "Synchronisation"
 weight: 20
+last_editor: Erik Hagen
+
 ---
 
 Content in SAMT-BU Docs lives in Git repositories. When several contributors work at the same time – or when Decap CMS saves a change while you have a local copy – the repositories can fall out of sync. This page explains what happens and how to handle it.

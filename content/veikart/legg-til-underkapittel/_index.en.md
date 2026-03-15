@@ -4,6 +4,8 @@ title: "Add sub-chapter – option in the Edit menu"
 linkTitle: "Add sub-chapter"
 weight: 10
 status: "Early draft"
+last_editor: Erik Hagen
+
 ---
 
 When reading a page on the site, there is no easy way to create a new sub-chapter under the current page. This roadmap item describes the need, chosen solution, and the rationale behind the choice.

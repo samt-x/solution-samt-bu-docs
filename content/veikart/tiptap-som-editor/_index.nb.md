@@ -4,6 +4,8 @@ title: "TipTap som WYSIWYG-editor"
 linkTitle: "TipTap som editor"
 weight: 110
 status: "Godkjent"
+last_editor: Erik Hagen
+
 ---
 
 **Implementert 2026-03-11 (kveld).** TipTap v2 erstatter Quill v1 i begge editordialoger (qe-dialog og np-dialog).
