@@ -1420,6 +1420,41 @@ Ren baseline for videre demo- og testutvikling:
 
 ---
 
+## Endringslogg – 2026-03-15
+
+### ✅ Playwright E2E-test B: To ventende byggejobber (`test_two_pending_jobs.py`)
+
+**Fil:** `samt-bu-docs/tools/playwright/test_two_pending_jobs.py`
+
+**Scenariet (9 steg):**
+
+| Steg | Handling | Forventet tilstand |
+|------|----------|--------------------|
+| 1 | Last nettsted + injiser credentials | — |
+| 2 | Rediger og lagre **Test 1** | count=1 synlig |
+| 3 | Naviger til **Test 2** (`page.goto`) | count=1 gjenopprettes |
+| 4 | Rediger og lagre **Test 2** | count=2 ← kjernen |
+| 5 | Naviger tilbake til **Test 1** (`page.goto`) | count=2 gjenopprettes |
+| 6 | Vent på første bygg | count: 2→1 |
+| 7 | Vent på andre bygg | count: 1→0 |
+| 8 | Verifiser titler i sidebaren | Begge oppdatert |
+| 9 | Slutt-tilstand | Ingen pending state |
+
+**Ny env-var:** `TEST_PAGE_2` (default `/test-samt-bu-docs/test-2/`) – ingen endring i eksisterende `.env` nødvendig.
+
+**`do_edit_and_save(page, step_prefix, page_label)`:** Ny hjelpefunksjon – wrapper for åpne meny → åpne dialog → endre tittel → lagre. Brukes for begge testsider uten kodeduplisering.
+
+**Viktig lærdom – sidebar-navigering i Playwright:** Bruk alltid `page.goto(URL)` for å navigere mellom testpagene. Sidebar-lenkesøk (`#sidebar a` filter tekst) feiler fordi seksjonen kan kollapse etter auto-reload triggered av pending-state resume-koden. Første kjøring krasjet i steg 3 av denne årsaken.
+
+**Resultat av første vellykkede kjøring (2026-03-15):**
+count=1 etter Test 1 ✅ · count=2 etter Test 2 ✅ · 2→1 etter ~60s ✅ · 1→0 etter ~105s ✅ · PASS slutt-tilstand ✅
+
+### ✅ viewer.html – klikk på video toggler play/pause
+
+`cursor: pointer` på `<video>` + `v.addEventListener('click', togglePlay)` + oppdatert hint-tekst. Tre linjer totalt.
+
+---
+
 ## Endringslogg – 2026-03-14 (sesjon 3 – memory og automatisering)
 
 ### Memory-system etablert og dokumentert
