@@ -1544,3 +1544,31 @@ Modulrepo-rot `_index.nb.md`-filer er singletons i sin egen repo, men vektene st
 
 
 - 4 untrackede screenshot-mapper slettet (`20260314_184838/`, `_191326/`, `_193537/`, `_210104/`)
+
+## Endringslogg – 2026-03-15 (sesjon 5)
+
+### Fullført i denne sesjonen
+
+**Seksjonssider – preamble og seksjonsinnhold-label:**
+- `list.html` (tema): Sider med barn renderes nå slik: eventuell body-tekst pakkes i `<div class="section-preamble">` (bold), deretter `<div class="section-children-label">` med «Seksjonsinnhold:» / «Section contents:», deretter barnelenkelisten. Sider uten barn renderes uendret.
+- `custom-head.html`: CSS for `.section-preamble { font-weight: bold }` og `.section-children-label` (liten bold uppercase, color #555).
+- `i18n/nb.toml` + `en.toml`: nøkkel `sectionChildrenLabel`.
+- **Merk:** «Seksjonsinnhold:»-labelen bruker `<div>`, ikke `<h*>` → dukker ikke opp i Hugo's TOC eller scroll-spy.
+
+**page-meta – uniform font og bunn-justering:**
+- `.page-meta` i `custom-head.html`: `color: #666 → #aaa`, `align-items: flex-end` lagt til.
+- `header.html`: fjernet inline `color`/`font-size`-stiler fra `page-meta-id` og den nestede «av»-span i `page-meta-lastmod`. Alle felter arver nå uniform stil (13px, #aaa) fra containeren.
+- Resultat: «Sist endret: dato», «av bruker», «ID: guid» og «Status» vises med lik skriftstørrelse, lik farge og er bunn-justert.
+
+**TOC – ingen endringer nødvendig:**
+- Ingen sider har `hide_toc: true` i dag – allerede i ønsket tilstand.
+
+**Claude Code-plugins installert (brukernivå, persistent):**
+- `frontend-design@claude-plugins-official` – produksjonsklar CSS/HTML-generering
+- `github@claude-plugins-official` – GitHub MCP-server (issues, PRs, CI)
+- `playwright@claude-plugins-official` – E2E-teststøtte
+- `commit-commands@claude-plugins-official` – `/commit`, `/commit-push-pr`, `clean_gone`
+
+### Nyttig lærdom: `<div>` vs `<h*>` i Hugo-templates
+
+Heading-elementer (`<h2>`, `<h3>` osv.) lagt til i Hugo-templates vil ikke dukke opp i `{{ .TableOfContents }}` (som bygges fra markdown-kilde, ikke template-HTML), men kan plukkes opp av scroll-spy JS som skanner DOM. Bruk `<div>` med styling for visuell heading uten TOC-oppføring.
