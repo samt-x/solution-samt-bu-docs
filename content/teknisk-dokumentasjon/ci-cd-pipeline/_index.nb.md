@@ -197,6 +197,42 @@ Gjelder per nå: `team-architecture` og `samt-bu-drafts`.
 
 ---
 
+## Tilbakerulling – GUI vs. innhold
+
+### Hvorfor temaendringer er trygge å rulle tilbake
+
+Arkitekturen har en skarp separasjon mellom to uavhengige git-repoer:
+
+| Hva | Repo | Inneholder |
+|-----|------|------------|
+| **GUI og logikk** | `hugo-theme-samt-bu` (submodule) | `custom-footer.html` (JS), `edit-switcher.html`, `custom-head.html` (CSS) |
+| **Dokumentasjonsinnhold** | `samt-bu-docs`, `team-architecture`, `samt-bu-drafts`, `solution-samt-bu-docs` | Alle `.md`-filer |
+
+Disse repoene deler ingen git-historikk. En `git revert` i temaet berører aldri innholdsrepoene – og omvendt. Det betyr at feilaktige GUI-endringer kan rulles tilbake på ~2 minutter uten at én linje innhold røres.
+
+### Tilbakerullingsoppskrift (GUI/tema)
+
+```bash
+# 1. Reverter siste commit i temaet
+cd "S:/app-data/github/samt-x-repos/samt-bu-docs/themes/hugo-theme-samt-bu"
+git revert HEAD
+git push
+
+# 2. Oppdater submodule-pekeren i samt-bu-docs
+cd "S:/app-data/github/samt-x-repos/samt-bu-docs"
+git add themes/hugo-theme-samt-bu
+git commit -m "Tema: tilbakestilt til forrige versjon"
+git push
+```
+
+CI bygger og deployer → nettstedet er tilbake til forrige GUI-tilstand innen ~2 minutter.
+
+### Den eneste reelle risikoen
+
+At man ved en feil committer til en innholdsfil (`content/`) i stedet for en temafil. Dette er en menneskelig feil, ikke en arkitektonisk svakhet – og unngås ved å sjekke `git diff` og `git status` før commit.
+
+---
+
 ## Manuelt nybygg
 
 Hvis noe er galt og du vil tvinge et nybygg uten å pushe kode:
