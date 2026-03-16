@@ -85,3 +85,36 @@ Innholdsrepoene ble opprettet i `samt-x` tidlig i prosjektet. De fungerer der de
 - **Navnekonvensjon for delte repoer:** Hvis et team-repo skal tjene flere prosjekter, bør det ikke ha prosjektspesifikt prefiks.
 - **Migrasjon av eksisterende repoer:** Er det verdt å flytte `team-architecture` o.l. til en `samt-bu`-org? Påvirker CI-secrets, CMS-config og Hugo Module-pekere.
 - **Tilgangsstyring på tvers av orger:** GitHub-rettigheter styres per org. Hvordan håndterer vi at bidragsytere fra `samt-bu`-prosjektet trenger skrivetilgang til repoer i `samt-x`?
+
+---
+
+## Plattformvalg: GitHub vs. GitLab
+
+GitHub ble valgt fordi det er mest utbredt i Digdir og blant samarbeidspartnere (Altinn, Felles datakatalog og de fleste synlige open source-prosjekter i norsk offentlig sektor er der). Det er et pragmatisk valg – men ikke nødvendigvis det arkitektonisk sterkeste.
+
+### Hvor GitLab hadde vært sterkere
+
+| Parameter | GitHub | GitLab |
+|-----------|--------|--------|
+| Digital suverenitet | ❌ Microsoft/USA, CLOUD Act | ✅ Irsk selskap, fullt selvhostbart (CE) |
+| Open source | ❌ Proprietært | ✅ Community Edition er open source |
+| Hierarkisk tilgangskontroll | ⚠ Org → Teams (to nivåer, manuelt) | ✅ Groups → Subgroups → Repos med arv |
+| Serverplassering | USA (primært) | Europa – bedre responstider fra Norge |
+
+GitLabs group-hierarki ville passet naturlig til SAMT-BU-strukturen: plattformgroup → prosjektsubgroup → innholdsrepoer, med nedarvede rettigheter på hvert nivå.
+
+### Konsekvens for Cloudflare-avhengigheten
+
+Cloudflare ble introdusert av to grunner:
+
+1. **OAuth-proxy (Cloudflare Worker):** GitHub OAuth krever server-side callback – Workers løser dette uten egen server. Med GitLab hadde dette sannsynligvis vært unødvendig: GitLab har innebygd OAuth-provider med finere token-scoping, og OAuth-flyten er enklere å implementere uten proxy.
+
+2. **Cloudflare Pages (CDN/hosting):** Valgt for bedre responstider enn GitHub Pages. Med GitLab.com (europeiske servere) ville grunnresponstidene vært bedre fra Norge, og GitLab Pages + GitLab CI/CD er et fullgodt alternativ.
+
+### Hva GitLab ikke løser
+
+**Parallell push-problemet** («not a fast-forward» ved samtidige commits) er uavhengig av plattform – det er et fundamentalt git-problem. Løsningen er commit-batching på applikasjonsnivå, ikke et plattformbytte.
+
+### Konklusjon
+
+GitLab hadde gitt bedre suverenitet, bedre tilgangskontroll og trolig eliminert behovet for Cloudflare Worker. For fremtidige, lignende prosjekter i offentlig sektor bør GitLab (gjerne selvhostet) vurderes som førstevalg. For SAMT-BU er migrasjon ikke aktuelt på kort sikt – men lærdommen er notert.
