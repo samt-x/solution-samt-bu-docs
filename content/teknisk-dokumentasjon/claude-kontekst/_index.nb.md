@@ -1574,3 +1574,97 @@ Modulrepo-rot `_index.nb.md`-filer er singletons i sin egen repo, men vektene st
 ### Nyttig lærdom: `<div>` vs `<h*>` i Hugo-templates
 
 Heading-elementer (`<h2>`, `<h3>` osv.) lagt til i Hugo-templates vil ikke dukke opp i `{{ .TableOfContents }}` (som bygges fra markdown-kilde, ikke template-HTML), men kan plukkes opp av scroll-spy JS som skanner DOM. Bruk `<div>` med styling for visuell heading uten TOC-oppføring.
+
+---
+
+## Endringslogg – 2026-03-16
+
+### ✅ Frontmatter-panelredesign – stablet layout
+
+**Filer:** `themes/hugo-theme-samt-bu/layouts/partials/edit-switcher.html`
+
+**Problem:** Alle felt (Tittel, Menytittel, Vekt, Status, Innholdsfortegnelse) lå i én rad med cramped layout. STATUS lå for lavt.
+
+**Fix:** Hvert felt pakket i `<div style="display:flex; flex-direction:column; gap:.2rem;">` med label over felt. Container: `align-items:flex-start; gap:1.4rem; padding:.55rem 1.5rem`. STATUS sank til bunn fordi `align-items` manglet `flex-start` – kortere divs sank til bunn av flex-container.
+
+**Avkrysningsboks-justering:** Usynlig spacer `<span style="color:transparent; user-select:none; pointer-events:none;">–</span>` over checkboxen kompenserer for manglende label-høyde.
+
+### ✅ Select-tekstsentrering
+
+**Problem:** Native `<select>` med `height:2rem` plasserte teksten nederst i Chrome (ikke midtstilt). Selve boksen var også høyere enn inputs pga. default padding.
+
+**Løsning:** CSS-override:
+```css
+#qe-meta-panel select, #np-form select {
+  height: 2rem;
+  line-height: 2rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+```
+`line-height = height` med null vertikal padding er Chrome-idiom for sentrert tekst i `<select>`. Ingen `height:auto` – det gjeninnfører default browser-padding.
+
+### ✅ «Innholdsfortegnelse» – positiv logikk
+
+**Problem:** Feltet het «Skjul innholdsfortegnelse» (negativ logikk, ukrysset som default) – forvirrende for redaktører.
+
+**Fix (tre steder):**
+1. `edit-switcher.html`: Etikett endret til «Innholdsfortegnelse», `checked`-attributt lagt til
+2. `custom-footer.html` lese-side: `parseFmField(qeFrontmatter, 'hide_toc') !== 'true'` (invertert)
+3. `custom-footer.html` skrive-side: `if (!checked) setFmField(hide_toc: true)` / `else removeFmField(hide_toc)`
+
+Semantikk: «avkrysset = vis TOC» (positiv). `hide_toc: true` skrives kun til frontmatter når boksen er ukrysset.
+
+### ✅ Lydsignaler for GUI-brukere (nettleseren)
+
+**Filer:** `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html`
+
+**Problem:** Browser autoplay policy blokkerer `AudioContext` og `speechSynthesis` fra `setInterval`-callbacks. Lyd må initialiseres under brukergestur.
+
+**Løsning:**
+```javascript
+var _samtuAudioCtx = null;
+
+function samtuUnlockAudio() {
+  // Oppretter/gjenopptar AudioContext + sender stille SpeechSynthesisUtterance
+  // Kalles på lagreknapp-klikk og np-form submit (brukergestur)
+}
+
+function samtuPlaySuccess() {
+  // Web Audio API: 880 Hz oscillator med exponential gain falloff (0.4s)
+  // Web Speech API: SpeechSynthesisUtterance('Build job complete', 'en-US')
+}
+```
+
+`samtuUnlockAudio()` kalles i:
+- `#qe-save-btn` click handler
+- `#np-form` submit handler
+
+`samtuPlaySuccess()` kalles i:
+- `startGhPoll` → `if (run.conclusion === 'success')`
+- `startUrlPoll` → `if (r.ok)`
+
+### ✅ Default statusverdi blank ved ny side
+
+**Problem:** Ny side hadde «Ny» som default status, både i HTML og JS.
+
+**HTML-fix:** `<option value="" selected>–</option>` plassert øverst i `<select id="np-status">`.
+
+**JS-fix (to steder):** `document.getElementById('np-status').value = ''` (var `'Ny'` begge steder – ble satt etter `form.reset()`).
+
+### ✅ Trelydssystem for Claude Code CLI
+
+**Dokumentert i:** `C:\Users\Win11_local\.claude\projects\...\memory\feedback_use_skills_proactively.md`
+
+PowerShell `[Console]::Beep()` + `System.Speech.Synthesis.SpeechSynthesizer` pakket rundt `gh run watch --exit-status`. Tre lyder:
+- **Start:** 600Hz+900Hz pip + «Build job started»
+- **Suksess:** C-E-G-C stigende fanfare + «Build job complete»
+- **Feil:** 400Hz→300Hz→220Hz fallende wah-wah + «Build job failed»
+
+### ✅ Memory-fil: feedback_use_skills_proactively.md
+
+Ny fil i `C:\Users\Win11_local\.claude\projects\...\memory\`. Inneholder:
+1. Regel om å alltid vurdere skills proaktivt (frontend-design for CSS/HTML, simplify, commit)
+2. CI-lyd-kommandoen (bash + PowerShell) med de tre lydsignalene
+
+**Why:** Brukeren måtte eksplisitt be om `frontend-design`-skill ved et CSS-layoutproblem – noe den er spesiallaget for.
