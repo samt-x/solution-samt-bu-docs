@@ -154,7 +154,21 @@ Elapsed beregnes fra `pending.lastSaveAt` og oppdateres automatisk hvert 3. sek 
 
 ---
 
-## Steg 3 – Overordnet statusoversikt for alle brukere
+## Steg 4 – «Mine»/«Alle»-faner i byggehistorikk-dialog ✅ FULLFØRT (2026-03-17, sesjon 7)
+
+Undertabs i dialog-headeren lar brukeren veksle mellom egne og alle bygg:
+
+- **«Mine»** (standard): filtrerer på innlogget bruker via `&actor=` – samme som før
+- **«Alle»**: henter alle 15 siste bygg i repoet, viser actor som sublinje per rad
+- **Navnecache:** `/users/{login}` hentes én gang per unik login per sidebesøk, caches i JS-dict. Viser `login (Full Name)` når navn er tilgjengelig – krever at GitHub-profilen har Name-feltet satt
+- **Tab-bytte** nullstiller cache og re-fetcher umiddelbart
+- **Filer endret:** `edit-switcher.html` (HTML), `custom-footer.html` (JS)
+
+> **Merk:** `data.name` fra GitHub API er `null` hvis brukeren ikke har satt navn i sin GitHub-profil (`github.com/settings/profile`). Visningsnavn i Hugo-innhold (`last_editor`-feltet) er manuelt satt og ikke koblet til GitHub-profilen.
+
+---
+
+## Steg 5 – Overordnet statusoversikt for alle brukere
 
 **Status:** Vurderes – settes evt. på roadmap
 
