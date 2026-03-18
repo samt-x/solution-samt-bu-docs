@@ -1,5 +1,5 @@
 ---
-id: 7c51e052-60fb-4a73-8ad2-3dd6e0f2bbb2
+id: 60983682-a3e7-4071-aceb-d40686d50b3c
 title: "Samsvar med Digdirs designsystem"
 linkTitle: "Digdir designsystem-samsvar"
 weight: 140
