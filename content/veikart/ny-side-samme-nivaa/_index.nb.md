@@ -1,5 +1,5 @@
 ---
-id: 2333b3ec-58dc-4175-9482-808c008c0dbe
+id: 0b16712e-2ad1-4262-bffa-1cf3caae016d
 title: "Ny side på samme nivå – valg i Endre-menyen"
 linkTitle: "Ny side – samme nivå"
 weight: 20
