@@ -1,5 +1,5 @@
 ---
-id: 4c785280-65e3-4aba-908e-05d84d831600
+id: b7263754-e33a-48b1-a8d2-959803a548fb
 title: "Branch-strategi for GUI-utvikling"
 linkTitle: "Branch-strategi for GUI-utvikling"
 weight: 120
