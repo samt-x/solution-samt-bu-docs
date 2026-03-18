@@ -1,5 +1,5 @@
 ---
-id: 985a0191-5a23-488f-b1da-83877bd4feaf
+id: 470295af-e043-4bd0-b700-30179c380bdb
 title: "Advarsel ved samtidig redigering av samme side"
 linkTitle: "Konfliktvarsel ved redigering"
 weight: 150
