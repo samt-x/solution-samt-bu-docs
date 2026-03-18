@@ -3,62 +3,84 @@ id: 9d68d1e1-27b6-4adb-a587-642523da4c3f
 title: "Realisering av samtidige bygg gjennom Cloudflare Pages"
 linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
-status: "Ny"
+status: "Pågår"
 lastmod: 2026-03-18T22:07:46+01:00
 last_editor: Erik Hagen
-
 ---
 
 GitHub Pages avløser automatisk eldre bygg i kø når et nyere bygg med høyere prioritet venter («Canceling since a higher priority waiting request for pages exists»). Dette betyr at ved tre eller flere raske lagringer i sekvens vil kun det siste bygget fullføres – de mellomliggende avløses.
 
-Cloudflare Pages har en annen kømodell og kan potensielt bygge og deploye flere versjoner i sekvens uten å avløse hverandre.
+Cloudflare Pages native build med Git-integrasjon støtter opptil 6 samtidige bygg (Workers Paid-plan).
 
-## Spørsmål å avklare
+## Hva som er gjort (sesjon 13, 2026-03-19)
 
-- Støtter Cloudflare Pages (free tier / Pro) parallelle eller sekvensielle bygg uten avløsning?
-- Er det mulig å konfigurere bygg-køen slik at alle commits deployes, ikke bare den siste?
-- Hva er maks byggetid og køgrenser på de ulike CF Pages-planene?
+### Alternativ B implementert ✅
 
-## Mulig gevinst
+`lastmod`-injeksjon er flyttet inn i modulrepoene:
 
-Dersom CF Pages lar alle bygg fullføres i rekkefølge, kan «avløst»-scenariet elimineres helt – i stedet for at brukere opplever at endringer tilsynelatende «forsvinner» fra byggehistorikken og må vente på et nytt bygg.
+- `inject-lastmod.py` opprettet i alle 4 modulrepoer (team-architecture, samt-bu-drafts, solution-samt-bu-docs, team-pilot-1) under `.github/scripts/`
+- `trigger-docs-rebuild.yml` i alle 4 modulrepoer oppdatert: `fetch-depth: 0` + nytt inject-lastmod-steg som committer med `[skip ci]`
+- Bot-commits hoppes over ved bestemmelse av lastmod-timestamp (ny `get_lastmod`-logikk)
+- `hugo.yml` i samt-bu-docs forenklet: fjernet multi-repo-checkout, inject-lastmod og `HUGO_MODULE_REPLACEMENTS`
+- Erstattet med `hugo mod get @latest` + `hugo mod tidy` for alle moduler – henter siste versjon inkl. injisert lastmod direkte fra Go-modulproxy
+- `build.sh` opprettet i samt-bu-docs-rot – klar til bruk av CF Pages native build
 
-## Nåværende status
+### Delvis løst: cancel-in-progress ✅
 
-Nettstedet deployes allerede til Cloudflare Pages (`samt-bu-docs.pages.dev`) via `wrangler pages deploy` i `hugo.yml`. Bygget kjøres i GitHub Actions – CF Pages brukes kun som deploy-target, ikke som byggemiljø.
+`concurrency: cancel-in-progress: false` → `true` i `hugo.yml`. Løser køproblemet i praksis:
+- 4 raske redigeringer → 3 avlyses, 1 bygger (alle endringer er med i det ene bygget)
+- Testet og bekreftet: ~1 minutt byggetid (vesentlig raskere enn før)
+- Gjelder alle brukere – bygg fra ulike GitHub-brukere kombineres på samme måte
 
-Et alternativ er å la CF Pages også **bygge** (ikke bare motta deploy) – da styrer CF Pages sin egen byggekø og GitHub Actions-køen er irrelevant.
+### Blokkert: CF Pages Git-integrasjon ❌
 
-## Blokkerende problem: lastmod-injeksjon for modulinnhold
+CF Pages støtter ikke å legge til Git-integrasjon på et eksisterende Direct Upload-prosjekt:
+- Dashboard-siden `settings/builds-deployments` krasjer med «Refresh the page to try again» for Direct Upload-prosjekter
+- CF API har ikke GitHub OAuth-kobling eksponert (`/pages/git/github/installations` → 404)
+- Build-config og env vars ble satt via API (✅), men Git-kobling krever nytt prosjekt
 
-CF Pages native build støtter kun én enkelt repo. `hugo.yml` gjør i dag tre ting CF Pages ikke kan gjøre på egenhånd:
+### CF Pages-konfigurasjon satt via API ✅
 
-| Steg | Hva | Konsekvens hvis mangler |
-|------|-----|------------------------|
-| Multi-repo checkout | Henter team-architecture, samt-bu-drafts, solution-samt-bu-docs, team-pilot-1 med full git-historikk | Modulinnhold bygges fra Go-modul-cache (zip, ingen git-historikk) |
-| `inject-lastmod.py` | Leser `git log` per `.md`-fil og skriver `lastmod:` inn i frontmatter | «Sist endret»-datoer vises ikke på modul-sider |
-| `HUGO_MODULE_REPLACEMENTS` | Peker Hugo til lokale kloner med injisert lastmod | Hugo bruker uendret modul-cache |
+Følgende er allerede konfigurert på det eksisterende `samt-bu-docs`-prosjektet:
+- Build command: `bash build.sh`
+- Output directory: `public`
+- Env vars (production + preview): `HUGO_VERSION=0.155.3`, `HUGO_ENVIRONMENT=production`, `TZ=Europe/Oslo`, `GONOSUMDB=*`, `GOPROXY=direct`
 
-**Kort sagt: CF Pages native build fungerer, men modul-sider mister «Sist endret»-datoer.**
+## Gjenstående steg for fullt gjennomslag
 
-## Hva som må løses for å bytte uten funksjonstap
+### Steg 1 – Opprett nytt CF Pages-prosjekt med Git-integrasjon
 
-To mulige tilnærminger:
+Kan gjøres parallelt med at eksisterende site fortsetter å virke på `samt-bu-docs.pages.dev`.
 
-### A – Pre-bygg i GitHub Actions, push til CF Pages via Direct Upload (dagens flyt, men robust)
-Behold GitHub Actions-bygget. Løs wrangler-timeouts med retry-logikk (allerede gjort – se `hugo.yml`). CF Pages brukes kun som hosting.
+1. Gå til [CF Pages → Create application → Pages → Connect to Git](https://dash.cloudflare.com/11cfadda66cca20b7736f23e40a070ef/workers-and-pages/create/pages/setup)
+2. Velg **SAMT-X/samt-bu-docs**, branch **main**
+3. Build command: `bash build.sh`, output: `public`
+4. Env vars: `HUGO_VERSION=0.155.3`, `HUGO_ENVIRONMENT=production`, `TZ=Europe/Oslo`, `GONOSUMDB=*`, `GOPROXY=direct`
+5. Aktiver **«Include Git submodules»**
+6. Gi midlertidig navn, f.eks. `samt-bu-docs-git`
 
-### B – Flytt lastmod-logikken inn i modulrepoene
-Endre `trigger-docs-rebuild.yml` i hvert modulrepo til å injisere `lastmod:` direkte i filene og committe det. Da finnes lastmod-feltene i selve repo-filene – CF Pages trenger ikke git-historikk. Krever:
-1. Oppdatere `trigger-docs-rebuild.yml` i team-architecture, samt-bu-drafts, solution-samt-bu-docs, team-pilot-1 til å kjøre `inject-lastmod.py` og committe endringer
-2. Fjerne inject-lastmod-steget fra `hugo.yml`
-3. Fjerne multi-repo-checkout og `HUGO_MODULE_REPLACEMENTS` fra `hugo.yml`
-4. Konfigurere CF Pages til å bygge med `hugo --gc --minify` og riktig Hugo-versjon
+### Steg 2 – Opprett deploy hook og legg til som GitHub secret
 
-**Alternativ B er den anbefalte veien** – gir CF Pages native build uten funksjonstap, og lastmod-datoene blir versjonskontrollerte i modulrepoene (en bonus).
+- CF Pages → samt-bu-docs-git → Settings → Deploy hooks → Create hook (`github-actions`, branch `main`)
+- Legg til URL som secret `CF_PAGES_DEPLOY_HOOK` i SAMT-X/samt-bu-docs
+
+### Steg 3 – Oppdater hugo.yml
+
+Endre `trigger-cf-pages`-jobben (repository_dispatch) til å bruke deploy hook i stedet for wrangler-deploy. Hele wrangler-deploy-steget kan fjernes fra `build`-jobben når CF native build er verifisert.
+
+### Steg 4 – Byt prosjektnavn
+
+- Rename `samt-bu-docs` → `samt-bu-docs-old` (eller slett)
+- Rename `samt-bu-docs-git` → `samt-bu-docs`
+- Subdomainen `samt-bu-docs.pages.dev` følger prosjektnavnet automatisk
+
+## Viktig avklaring: Workers Paid ≠ Direct Upload
+
+Workers Paid-planens «6 concurrent build slots» gjelder **kun CF-side native builds** (Git-integrasjon). Direct Upload (`wrangler pages deploy`) bruker ikke disse slotene – builds skjer i GitHub Actions. Kjøp av Workers Paid har dermed ingen effekt på Direct Upload-flyten.
 
 ## Relatert
 
-- `.github/workflows/hugo.yml` – nåværende bygg- og deploy-flyt
-- Veikart: [Statusrapportering og bygg-køer](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – avløst-håndtering (steg 3c)
+- `samt-bu-docs/.github/workflows/hugo.yml` – nåværende bygg- og deploy-flyt
+- `samt-bu-docs/build.sh` – klar for CF native build
+- Veikart: [Statusrapportering og bygg-køer](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/)
 - Veikart: [Falsk byggefeil ved timeout](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/)
