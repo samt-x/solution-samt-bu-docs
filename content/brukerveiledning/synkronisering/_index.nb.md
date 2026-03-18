@@ -4,6 +4,7 @@ title: "Synkronisering og konflikthåndtering"
 linkTitle: "Synkronisering"
 weight: 20
 last_editor: erikhag1git (Erik Hagen)
+lastmod: 2026-03-15T23:49:44+01:00
 
 ---
 

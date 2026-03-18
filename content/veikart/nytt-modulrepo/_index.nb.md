@@ -5,6 +5,7 @@ linkTitle: "Nytt modulrepo"
 weight: 30
 status: "Godkjent"
 last_editor: erikhag1git (Erik Hagen)
+lastmod: 2026-03-18T13:39:47+01:00
 
 ---
 

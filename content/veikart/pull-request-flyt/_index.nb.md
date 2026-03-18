@@ -4,6 +4,9 @@ title: "Pull request-støtte i Endre-menyen"
 linkTitle: "Pull request-flyt"
 weight: 95
 status: "Ny"
+lastmod: 2026-03-18T20:57:58+01:00
+last_editor: Erik Hagen
+
 ---
 
 I dag krever redigering via Endre-menyen at brukeren har direkte push-tilgang til repoet. Eksterne bidragsytere – fagpersoner, pilotdeltakere og andre uten repo-tilgang – kan ikke bidra via det innebygde grensesnittet.

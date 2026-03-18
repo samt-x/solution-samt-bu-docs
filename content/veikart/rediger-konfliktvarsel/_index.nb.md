@@ -4,6 +4,9 @@ title: "Advarsel ved samtidig redigering av samme side"
 linkTitle: "Konfliktvarsel ved redigering"
 weight: 150
 status: "Ny"
+lastmod: 2026-03-18T20:34:20+01:00
+last_editor: Erik Hagen
+
 ---
 
 Hvis to brukere åpner redigeringsdialogen for samme side samtidig, vil den siste som lagrer overskrive den andres endringer uten advarsel. En enkel «noen redigerer allerede denne siden»-melding ville redusert risikoen for tapte endringer.

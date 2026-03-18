@@ -4,6 +4,9 @@ title: "Samsvar med Digdirs designsystem"
 linkTitle: "Digdir designsystem-samsvar"
 weight: 140
 status: "Ny"
+lastmod: 2026-03-18T20:09:49+01:00
+last_editor: Erik Hagen
+
 ---
 
 SAMT-BU Docs er bygget på et tema basert på Altinn Docdock / eldre Altinn-designsystem. Digdir har et aktivt, oppdatert designsystem som brukes på tvers av offentlige tjenester. Det bør undersøkes i hvilken grad SAMT-BU Docs bør samsvare med dette.

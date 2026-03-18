@@ -5,6 +5,7 @@ linkTitle: "Oppdater use case-mal"
 weight: 50
 status: "Avbrutt"
 last_editor: erikhag1git (Erik Hagen)
+lastmod: 2026-03-18T20:06:40+01:00
 
 ---
 

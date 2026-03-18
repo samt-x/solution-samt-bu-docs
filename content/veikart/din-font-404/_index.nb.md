@@ -5,6 +5,7 @@ linkTitle: "DIN-font 404-feil"
 weight: 80
 status: "Godkjent"
 last_editor: erikhag1git (Erik Hagen)
+lastmod: 2026-03-18T20:09:49+01:00
 
 ---
 

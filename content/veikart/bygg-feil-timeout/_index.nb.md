@@ -4,6 +4,9 @@ title: "Falsk «Build job failed» ved lange byggejobber"
 linkTitle: "Falsk byggefeil ved timeout"
 weight: 85
 status: "Ny"
+lastmod: 2026-03-18T20:37:02+01:00
+last_editor: Erik Hagen
+
 ---
 
 Pending-indikatoren rapporterer «Build job failed» etter at ETag-pollingen har nådd maksimumsantall forsøk – selv om bygget faktisk fortsatt kjører eller har fullført vellykket. Tidsgrensen (180 forsøk × ~1 sek = 3 min) er ikke en pålitelig proxy for byggefeil.

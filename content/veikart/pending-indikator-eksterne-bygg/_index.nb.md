@@ -4,6 +4,9 @@ title: "Pending-indikator fanger ikke opp bygg trigget utenfor nettstedets edito
 linkTitle: "Pending-indikator: eksterne bygg"
 weight: 87
 status: "Ny"
+lastmod: 2026-03-18T20:51:59+01:00
+last_editor: Erik Hagen
+
 ---
 
 Pending-indikatoren nederst til venstre («1 endring bygges») oppdateres kun når brukeren lagrer via nettstedets innebygde editor – fordi den er drevet av `localStorage`-tilstand satt av `samtuIncrementPending()`. Bygg trigget utenfra – direkte commit i GitHub web-UI, lokal push, eller API-kall – vises ikke i indikatoren.
