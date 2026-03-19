@@ -1,5 +1,5 @@
 ---
-id: a7a5dab8-48db-4746-87c5-4ac92cf40132
+id: a714a007-0b8e-4eab-8a87-67aae5f97ce1
 title: "Pending-indikator fanger ikke opp bygg trigget utenfor nettstedets editor"
 linkTitle: "Pending-indikator: eksterne bygg"
 weight: 87

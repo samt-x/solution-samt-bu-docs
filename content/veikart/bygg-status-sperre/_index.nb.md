@@ -1,5 +1,5 @@
 ---
-id: 162eb558-ace8-49ae-a516-30c0029e7a1c
+id: 30764c95-d22d-4bf3-b4ce-98a2b5549d6f
 title: "Bygg-status-sperre og riktig Lukk-knapp"
 linkTitle: "Bygg-status og Lukk-knapp"
 weight: 70
