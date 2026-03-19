@@ -1986,3 +1986,50 @@ Hvis `last_editor` er bare en login (ingen parentes), hentes visningsnavnet fra 
 | `last_editor: 2benmoen` | `2benmoen` |
 | `last_editor: erikhag1git (Erik Hagen)` | `erikhag1git (Erik Hagen)` |
 | Ingen `last_editor`, siste git-committer = Erik Hagen | `Erik Hagen` |
+
+---
+
+## Endringslogg – 2026-03-18 (sesjon 15, natt)
+
+### CF Pages Git-integrasjon – eksperimentert og revertert
+
+Forsøkte å bytte fra wrangler til CF Pages native Git-integrasjon. Endte med full revert. Se sesjon 16 for opprydding.
+
+**Hva ble gjort:**
+- DIN-font-aliaser fikset i `custom-head.html` (`@font-face local('Arial Bold')` + `strong/b` override)
+- `ul margin-bottom` fikset (`.a-text ul { margin-bottom: 1rem !important }`)
+- GUI-forbedringer i byggehistorikk: tidsstempel til venstre, `1m56s`-format, CF-tilstander (kø/pågår/ferdig)
+- SHA-basert CF-deteksjon via GitHub Checks API (`waitForCfCheckRun`)
+- CF Pages Git-integrasjon opprettet som nytt prosjekt `samt-bu-docs-git` (siden `samt-bu-docs` var Direct Upload og ikke kunne konverteres)
+
+**Siste stabile tema-commit FØR eksperimenteringen:** `b309330` (kl. 22:28)
+
+**Commits fra eksperimenteringen (kan plukkes opp igjen):** `9e7721c`–`67567db` i `hugo-theme-samt-bu`
+
+**Filer endret:** `custom-head.html`, `custom-footer.html`
+
+---
+
+## Endringslogg – 2026-03-19 (sesjon 16, tidlig morgen)
+
+### ✅ Tilbake til stabil wrangler-tilstand
+
+**Bakgrunn:** Sesjon 15 endte i ustabil tilstand – `hugo.yml` brukte CF Git-integrasjon, og SHA-basert polling (`waitForCfCheckRun`) timeouter med wrangler siden wrangler ikke lager GitHub check-runs.
+
+**Hva ble gjort:**
+
+1. **`hugo.yml` revertert til wrangler** – hentet innhold fra commit `34ed286`. Ett `build`-jobb, `baseURL "https://samt-bu-docs.pages.dev/"`, `npx wrangler pages deploy`.
+
+2. **Tema fullt revertert til `b309330`** – `git checkout b309330 -- .` i `hugo-theme-samt-bu` → ny commit `7abb6a8`. Fjerner alle CF-spesifikke GUI-endringer, SHA-routing og `waitForCfCheckRun`.
+
+3. **`cancel-in-progress: false`** – endret fra `true` for å unngå at raske endringer avbryter aktive bygg. Kjent bieffekt: ved 3+ samtidige jobber vises den tredje ikke i byggehistorikken før de to første er ferdige (ikke farlig, alt blir riktig til slutt).
+
+**CF Pages Git-integrasjonen (`samt-bu-docs-git.pages.dev`):** Fortsatt aktiv, bygger ved push til `main`. Bør slettes i CF-dashbordet (bruker build-kvote unødvendig). Kan ikke interferere med wrangler-deployen – separate prosjekter.
+
+**CF Pages og parallelle bygg:** CF Pages serialiserer deployments (én aktiv per prosjekt), uavhengig av wrangler eller Git-integrasjon. Ekte parallelle bygg krever annen plattform.
+
+**Nøkkel-commits:**
+- `hugo-theme-samt-bu`: `7abb6a8` (revert til b309330)
+- `samt-bu-docs`: `85a085d` (cancel-in-progress: false)
+
+**Filer endret:** `.github/workflows/hugo.yml`, `themes/hugo-theme-samt-bu` (submodule-peker)
