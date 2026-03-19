@@ -1,5 +1,5 @@
 ---
-id: a7c9e2e6-7420-458a-a365-00915e776878
+id: 518832f7-5cf2-462e-a471-f50a24905c7a
 title: "Pull request-støtte i Endre-menyen"
 linkTitle: "Pull request-flyt"
 weight: 95

@@ -1,5 +1,5 @@
 ---
-id: 5a8f093d-c717-45a7-a557-9722394e45e0
+id: 3ecd0d98-4e24-4517-a776-5c41ce5f5649
 title: "Statusrapportering og GUI for bygg-køer"
 linkTitle: "Statusrapportering og bygg-køer"
 weight: 130
