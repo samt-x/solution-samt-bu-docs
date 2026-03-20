@@ -898,8 +898,10 @@ Tre separate polling-mekanismer implementert i `custom-footer.html`:
 | 3 – Nytt underkapittel | Opprett i np-dialog (child) | URL-poll 404→200 (1 sek intervall) | ~0 sek etter grønt bygg |
 
 **ETag-polling (case 1):** `HEAD`-request med `cache: no-store` + cachebust-param (`?_cf=<timestamp>`) mot samme URL. Sammenligner `etag` / `last-modified`-headere. Endring → side ble deployet. Fallback til GitHub Actions API-polling hvis ETag ikke er tilgjengelig.
+Maks 180 forsøk (1 sek intervall = 3 min). **Ved timeout:** Kaller GitHub Actions API for å sjekke faktisk status – rapporter feil kun hvis API bekrefter det (se `bygg-feil-timeout`-fiks, sesjon 21).
 
 **URL-polling (cases 2+3):** `HEAD` mot ny side-URL. HTTP 200 → siden finnes. Krever ingen token.
+Maks 90 forsøk (90 sek). **Ved timeout:** Samme GitHub API-sjekk som ETag-poll. `startUrlPoll(url, onDone, onError, onStatus, startTime)` – `startTime` er valgfri, `npPollBuild()` sender den alltid.
 
 **CORS-begrensning:** `api.cloudflare.com` blokkerer cross-origin kall fra nettleser (CF Pages `pages.dev`-domene). Cloudflare API er derfor ikke aktuelt fra browser – GitHub Actions API og same-origin polling brukes i stedet.
 
@@ -2215,3 +2217,32 @@ Feilen «Update is not a fast forward» oppstår fordi nettleseren cacher `GET /
 
 **Læring – localStorage for byggetid:**
 Å lagre byggetid i localStorage er unødvendig – GitHub API gir `created_at` og `updated_at` på hvert run. `updated_at − created_at` ≈ byggetid, alltid tilgjengelig, null lokalt state.
+
+---
+
+## Endringslogg – 2026-03-21 (sesjon 21)
+
+### Fiks: falsk «Build job failed» ved lange byggejobber (bygg-feil-timeout)
+
+**Tema-commit:** `414fa54`
+
+**Problem:** ETag-pollingen (redigering) og URL-pollingen (ny side) hadde harde maksimumsgrenser (180s / 90s). Etter grensen ble det umiddelbart spilt feilsignal og vist feilmelding – selv om bygget fortsatt pågikk eller hadde fullført.
+
+**Løsning:** Ved timeout kaller polleren GitHub Actions API og sjekker faktisk byggestatus:
+
+| API-svar | Handling |
+|----------|----------|
+| `in_progress` / `queued` | Nullstill teller, fortsett polling |
+| `completed/success` | Vis ferdig, naviger |
+| `completed/cancelled` | Nullstill, vis «Avbrutt – venter på nytt bygg…» |
+| `completed/failure` | Vis faktisk feil |
+| Ingen run funnet | Vis tidsavbrudd (fallback) |
+
+**`_checkingApi`-flagg** forhindrer parallelle API-kall mellom intervalltikk mens det async-fetches.
+
+**To pollere fikset:**
+
+- **ETag-poll** (`pollQeBuild` i `custom-footer.html`, 180s): Sjekker GH API ved timeout, filterer på `startTime - 30000` (30s klokke-buffer som `startGhPoll`).
+- **URL-poll** (`startUrlPoll`, 90s): Identisk logikk. Funksjonen tar nå valgfri `startTime`-parameter; `npPollBuild()` sender `startTime` ved kall. Fallback: `Date.now() - 120000` (2 min bakover) for kall uten `startTime`.
+
+**Veikart-status:** `bygg-feil-timeout` → Godkjent.
