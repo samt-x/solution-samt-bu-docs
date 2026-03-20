@@ -4,7 +4,7 @@ title: Dokumentasjonspraksis
 linkTitle: Dokumentasjonspraksis
 weight: 30
 last_editor: erikhag1git
-lastmod: 2026-03-15T23:49:44+01:00
+lastmod: 2026-03-21T00:46:14+01:00
 
 ---
 Vi utvikler beste praksis for dokumentasjon gjennom gode eksempler – ikke ved å låse oss til en rigid mal fra start. Denne siden samler erfaringer og mønstre etter hvert som de trer frem.
