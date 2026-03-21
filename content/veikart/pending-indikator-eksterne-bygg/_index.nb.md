@@ -41,6 +41,8 @@ Brukeren må være innlogget (token tilgjengelig) for at bakgrunnspollingen skal
 
 ## Implementert (2026-03-21) – tema-commit `b600033`
 
+> **OBS – ikke testet i praksis.** Funksjonaliteten er implementert og deployet, men ikke verifisert med et faktisk eksternt bygg. Test ved å pushe en endring direkte til GitHub mens en annen nettleserfane er åpen og innlogget på nettstedet.
+
 **Ny funksjon: `checkExternalBuilds()`** kalles fra bakgrunnspollingen hvert 45. sek (når eget bygg ikke pågår og bruker er innlogget):
 
 1. Henter `/actions/workflows/hugo.yml/runs?per_page=3` fra GitHub API

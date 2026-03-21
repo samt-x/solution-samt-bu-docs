@@ -41,6 +41,8 @@ The user must be logged in (token available) for the background polling to call 
 
 ## Implemented (2026-03-21) – theme commit `b600033`
 
+> **Note – not yet tested in practice.** The feature is implemented and deployed, but has not been verified with an actual external build. Test by pushing a change directly to GitHub while another browser tab is open and logged in on the site.
+
 **New function: `checkExternalBuilds()`** called from background polling every 45 seconds (when no own build is in progress and user is logged in):
 
 1. Fetches `/actions/workflows/hugo.yml/runs?per_page=3` from GitHub API
