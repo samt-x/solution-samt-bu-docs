@@ -4,7 +4,7 @@ title: "Pull request support in the Edit menu"
 linkTitle: "Pull request flow"
 weight: 95
 status: "New"
-lastmod: 2026-03-20T09:42:59+01:00
+lastmod: 2026-03-26T16:32:48+01:00
 last_editor: Erik Hagen
 
 ---

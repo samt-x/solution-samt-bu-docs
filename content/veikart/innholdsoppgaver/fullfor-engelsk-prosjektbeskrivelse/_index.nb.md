@@ -5,7 +5,7 @@ linkTitle: "Engelsk prosjektbeskrivelse"
 weight: 170
 status: "Pågår"
 last_editor: erikhag1git (Erik Hagen)
-lastmod: 2026-03-26T15:56:45+01:00
+lastmod: 2026-03-26T16:32:48+01:00
 
 ---
 

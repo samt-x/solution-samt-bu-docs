@@ -6,7 +6,7 @@ weight: 100
 status: Ny
 # Gyldige statusverdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
 last_editor: erikhag1git (Erik Hagen)
-lastmod: 2026-03-15T23:49:44+01:00
+lastmod: 2026-03-26T16:32:48+01:00
 
 ---
 

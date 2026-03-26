@@ -4,7 +4,7 @@ title: "Samsvar med Digdirs designsystem"
 linkTitle: "Digdir designsystem-samsvar"
 weight: 140
 status: "Ny"
-lastmod: 2026-03-18T20:09:49+01:00
+lastmod: 2026-03-26T16:32:48+01:00
 last_editor: Erik Hagen
 
 ---
