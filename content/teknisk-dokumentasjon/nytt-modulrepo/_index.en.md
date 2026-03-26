@@ -4,7 +4,7 @@ title: "Creating a new module repository – step by step"
 linkTitle: "New module repo"
 weight: 25
 last_editor: erikhag1git (Erik Hagen)
-lastmod: 2026-03-15T23:49:44+01:00
+lastmod: 2026-03-26T16:27:46+01:00
 
 ---
 

@@ -4,7 +4,7 @@ title: "Opprette nytt modulrepo – steg-for-steg"
 linkTitle: "Nytt modulrepo"
 weight: 25
 last_editor: erikhag1git (Erik Hagen)
-lastmod: 2026-03-18T13:39:47+01:00
+lastmod: 2026-03-26T16:27:46+01:00
 
 ---
 
