@@ -5,7 +5,7 @@ linkTitle: "Branch-strategi for GUI-utvikling"
 weight: 120
 status: "Ny"
 last_editor: erikhag1git (Erik Hagen)
-lastmod: 2026-03-26T16:32:48+01:00
+lastmod: 2026-03-26T16:44:26+01:00
 
 ---
 
