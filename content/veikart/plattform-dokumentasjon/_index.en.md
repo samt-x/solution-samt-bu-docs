@@ -1,4 +1,5 @@
 ---
+id: 02b7db95-4847-4228-a121-b5973c25cdaa
 title: "Platform – documentation"
 linkTitle: "Documentation"
 weight: 15
