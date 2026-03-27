@@ -4,7 +4,8 @@ title: "Realisering av samtidige bygg gjennom Cloudflare Pages"
 linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
 status: "Pågår"
-lastmod: 2026-03-26T16:44:26+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

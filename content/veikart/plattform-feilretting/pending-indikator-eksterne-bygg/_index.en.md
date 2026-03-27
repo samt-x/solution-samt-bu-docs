@@ -4,7 +4,8 @@ title: "Pending indicator does not detect builds triggered outside the site edit
 linkTitle: "Pending indicator: external builds"
 weight: 87
 status: "Approved"
-lastmod: 2026-03-26T16:32:48+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

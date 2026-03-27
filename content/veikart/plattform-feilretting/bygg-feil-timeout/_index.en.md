@@ -4,7 +4,8 @@ title: "False «Build job failed» on long build jobs"
 linkTitle: "False build failure on timeout"
 weight: 85
 status: "Approved"
-lastmod: 2026-03-26T16:32:48+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

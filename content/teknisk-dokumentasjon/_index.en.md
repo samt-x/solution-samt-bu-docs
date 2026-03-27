@@ -3,7 +3,8 @@ id: 398605d7-71ab-4678-84f7-2b605b181bff
 title: "Technical Documentation"
 linkTitle: "Technical Documentation"
 weight: 20
-lastmod: 2026-03-20T09:42:59+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

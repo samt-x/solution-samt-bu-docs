@@ -4,7 +4,8 @@ title: "Pending-indikator fanger ikke opp bygg trigget utenfor nettstedets edito
 linkTitle: "Pending-indikator: eksterne bygg"
 weight: 87
 status: "Godkjent"
-lastmod: 2026-03-26T16:32:48+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

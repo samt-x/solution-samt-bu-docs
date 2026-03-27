@@ -3,7 +3,8 @@ id: 44fda0b1-9034-4924-a29b-d1823b800756
 title: "Kjente problemer og løsninger"
 linkTitle: "Kjente problemer"
 weight: 40
-lastmod: 2026-03-15T23:49:44+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

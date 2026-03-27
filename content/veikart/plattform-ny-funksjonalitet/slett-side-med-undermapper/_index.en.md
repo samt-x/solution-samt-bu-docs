@@ -4,7 +4,8 @@ title: "Delete page – handling sub-pages"
 linkTitle: "Delete page with sub-pages"
 weight: 60
 status: "New"
-lastmod: 2026-03-26T16:32:48+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

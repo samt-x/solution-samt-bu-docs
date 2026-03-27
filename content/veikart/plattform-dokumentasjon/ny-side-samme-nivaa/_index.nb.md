@@ -4,7 +4,8 @@ title: "Ny side på samme nivå – valg i Endre-menyen"
 linkTitle: "Ny side – samme nivå"
 weight: 20
 status: "Tidlig utkast"
-lastmod: 2026-03-26T16:44:26+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 

@@ -3,7 +3,8 @@ id: b8bf5c67-7a5f-4de5-a3f4-232e7e60e725
 title: Dokumentasjonspraksis
 linkTitle: Dokumentasjonspraksis
 weight: 30
-lastmod: 2026-03-21T00:46:14+01:00
+lastmod: 2026-03-27T23:29:13+01:00
+last_editor: Erik Hagen
 
 ---
 Vi utvikler beste praksis for dokumentasjon gjennom gode eksempler – ikke ved å låse oss til en rigid mal fra start. Denne siden samler erfaringer og mønstre etter hvert som de trer frem.
