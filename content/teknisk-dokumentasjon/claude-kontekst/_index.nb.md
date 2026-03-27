@@ -2273,3 +2273,37 @@ Feilen «Update is not a fast forward» oppstår fordi nettleseren cacher `GET /
 **Ingen endring for ikke-innloggede brukere.**
 
 **Veikart-status:** `pending-indikator-externe-bygg` → Godkjent.
+
+---
+
+## Endringslogg – 2026-03-27 (sesjon 22)
+
+### Veikart-oppsplitting
+
+`solution-samt-bu-docs/content/veikart/` er nå delt i fire underseksjoner:
+
+| Mappe | Weight | Innhold |
+|-------|--------|---------|
+| `plattform-ny-funksjonalitet/` | 10 | 10 oppføringer – nye funksjoner (implementert og planlagt) |
+| `plattform-dokumentasjon/` | 15 | 4 oppføringer – utredninger, strategidok., utdaterte guider |
+| `plattform-feilretting/` | 20 | 5 oppføringer – feilrettinger (implementert og planlagt) |
+| `innholdsoppgaver/` | 30 | 3 oppføringer – innhold, struktur, administrasjon |
+
+`plattform-dokumentasjon/` inneholder: `ny-side-samme-nivaa` (utdatert), `ny-cms-portal` (utdatert, refererer Decap), `samtidige-bygg-cloudflare` (utredning), `branch-strategi-gui-utvikling` (strategidok.).
+
+### nytt-modulrepo flyttet til teknisk-dokumentasjon
+
+`veikart/nytt-modulrepo/` → `teknisk-dokumentasjon/nytt-modulrepo/` (weight 25, mellom github-struktur:20 og dokumentasjonspraksis:30). `status`-felt fjernet.
+
+### Tema-klon reconciliering
+
+`S:/app-data/github/samt-x-repos/hugo-theme-samt-bu/` (separat klon) var bak remote – fast-forwardet til `b600033` med `git pull --rebase`.
+
+### Git-tilstand ved sesjonsavslutning
+
+| Repo | Tilstand |
+|------|----------|
+| `hugo-theme-samt-bu` (submodule) | ✅ `b600033` |
+| `hugo-theme-samt-bu` (separat klon) | ✅ `b600033` |
+| `samt-bu-docs` | ✅ `43281a1` |
+| `solution-samt-bu-docs` | ✅ `e9bb2cd` |
