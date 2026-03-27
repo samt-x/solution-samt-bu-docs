@@ -5,7 +5,6 @@ linkTitle: "AI-skrivehjelp"
 weight: 160
 status: "Ny"
 lastmod: 2026-03-26T16:32:48+01:00
-last_editor: erikhag1git (Erik Hagen)
 
 ---
 

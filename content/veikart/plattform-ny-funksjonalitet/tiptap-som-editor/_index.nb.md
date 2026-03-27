@@ -4,7 +4,6 @@ title: "TipTap som WYSIWYG-editor"
 linkTitle: "TipTap som editor"
 weight: 110
 status: "Godkjent"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---

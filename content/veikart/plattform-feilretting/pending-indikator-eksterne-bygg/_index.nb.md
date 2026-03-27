@@ -5,7 +5,6 @@ linkTitle: "Pending-indikator: eksterne bygg"
 weight: 87
 status: "Godkjent"
 lastmod: 2026-03-26T16:32:48+01:00
-last_editor: erikhag1git (Erik Hagen)
 
 ---
 

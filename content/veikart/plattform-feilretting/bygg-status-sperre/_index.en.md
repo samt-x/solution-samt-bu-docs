@@ -4,7 +4,6 @@ title: "Build status lock and correct Close button"
 linkTitle: "Build status and Close button"
 weight: 70
 status: "Approved"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---

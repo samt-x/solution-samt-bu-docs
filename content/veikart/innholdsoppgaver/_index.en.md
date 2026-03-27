@@ -4,7 +4,6 @@ title: "Content tasks"
 linkTitle: "Content tasks"
 weight: 30
 lastmod: 2026-03-26T16:32:48+01:00
-last_editor: Erik Hagen
 
 ---
 

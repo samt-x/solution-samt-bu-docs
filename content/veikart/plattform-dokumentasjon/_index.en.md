@@ -4,7 +4,6 @@ title: "Platform – documentation"
 linkTitle: "Documentation"
 weight: 15
 lastmod: 2026-03-26T16:44:26+01:00
-last_editor: Erik Hagen
 
 ---
 

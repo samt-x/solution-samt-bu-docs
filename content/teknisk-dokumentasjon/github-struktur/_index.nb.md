@@ -4,7 +4,6 @@ title: Konsept for GitHub-organisasjoner og repoer
 linkTitle: GitHub-struktur
 weight: 20
 status: null
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-17T00:13:41+01:00
 
 ---

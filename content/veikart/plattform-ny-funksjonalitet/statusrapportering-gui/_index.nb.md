@@ -4,7 +4,6 @@ title: "Statusrapportering og GUI for bygg-køer"
 linkTitle: "Statusrapportering og bygg-køer"
 weight: 130
 status: "Godkjent"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---

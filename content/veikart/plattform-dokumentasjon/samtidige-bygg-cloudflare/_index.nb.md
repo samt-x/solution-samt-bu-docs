@@ -5,7 +5,7 @@ linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
 status: "Pågår"
 lastmod: 2026-03-26T16:44:26+01:00
-last_editor: Erik Hagen
+
 ---
 
 GitHub Pages avløser automatisk eldre bygg i kø når et nyere bygg med høyere prioritet venter («Canceling since a higher priority waiting request for pages exists»). Dette betyr at ved tre eller flere raske lagringer i sekvens vil kun det siste bygget fullføres – de mellomliggende avløses.

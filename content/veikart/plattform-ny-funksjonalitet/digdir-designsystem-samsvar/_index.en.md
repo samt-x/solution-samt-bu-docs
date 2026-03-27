@@ -5,7 +5,6 @@ linkTitle: "Digdir design system alignment"
 weight: 140
 status: "New"
 lastmod: 2026-03-26T16:32:48+01:00
-last_editor: Erik Hagen
 
 ---
 

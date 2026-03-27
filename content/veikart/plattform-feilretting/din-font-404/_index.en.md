@@ -4,7 +4,6 @@ title: "Remove 404 errors for DIN web fonts"
 linkTitle: "DIN font 404 errors"
 weight: 80
 status: "New"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---

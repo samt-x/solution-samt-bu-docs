@@ -5,7 +5,6 @@ linkTitle: "Inputs – folder structure"
 weight: 100
 status: New
 # Valid status values: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---

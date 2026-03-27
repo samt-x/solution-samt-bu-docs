@@ -4,7 +4,6 @@ title: "New page at the same level – option in the Edit menu"
 linkTitle: "New page – same level"
 weight: 20
 status: "Early draft"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:44:26+01:00
 
 ---

@@ -5,7 +5,7 @@ linkTitle: "Concurrent builds via Cloudflare"
 weight: 92
 status: "In progress"
 lastmod: 2026-03-26T16:44:26+01:00
-last_editor: Erik Hagen
+
 ---
 
 GitHub Pages automatically cancels older queued builds when a newer, higher-priority build is waiting («Canceling since a higher priority waiting request for pages exists»). This means that with three or more rapid saves in sequence, only the last build will complete – the intermediate ones are cancelled.

@@ -4,7 +4,6 @@ title: "Complete English translation of project description"
 linkTitle: "English project description"
 weight: 170
 status: "In progress"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---

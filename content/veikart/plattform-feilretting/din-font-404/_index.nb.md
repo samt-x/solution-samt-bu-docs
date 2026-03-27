@@ -4,7 +4,6 @@ title: "Fjern 404-feil for DIN-webfonter"
 linkTitle: "DIN-font 404-feil"
 weight: 80
 status: "Godkjent"
-last_editor: erikhag1git (Erik Hagen)
 lastmod: 2026-03-26T16:32:48+01:00
 
 ---
