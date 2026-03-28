@@ -4,7 +4,7 @@ id: d9520a6b-e499-4554-961d-86a7bacc5550
 title: "Synchronisation and Conflict Handling"
 linkTitle: "Synchronisation"
 weight: 20
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
 ---

@@ -5,7 +5,7 @@ title: "CI injection of last_editor for non-CMS edits"
 linkTitle: "CI: last_editor for all edit channels"
 weight: 75
 status: "New"
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
 ---

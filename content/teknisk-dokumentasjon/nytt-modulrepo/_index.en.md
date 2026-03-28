@@ -4,7 +4,7 @@ id: ed2ee794-3c97-4e2d-959d-90b235a4f3d6
 title: "Creating a new module repository – step by step"
 linkTitle: "New module repo"
 weight: 25
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
 ---

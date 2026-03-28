@@ -5,7 +5,7 @@ title: "Add sub-chapter – option in the Edit menu"
 linkTitle: "Add sub-chapter"
 weight: 10
 status: "Early draft"
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
 ---

@@ -4,7 +4,7 @@ id: a1dec965-c693-4bbd-a231-1162fb4306ef
 title: "Developer notes and Claude context"
 linkTitle: "Developer notes"
 weight: 50
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
 ---
