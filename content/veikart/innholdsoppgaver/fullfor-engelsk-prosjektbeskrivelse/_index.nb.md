@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 7ea3ed96-637f-4003-9212-56a886f78f86
 title: "Fullfør engelsk oversettelse av prosjektbeskrivelse"
 linkTitle: "Engelsk prosjektbeskrivelse"

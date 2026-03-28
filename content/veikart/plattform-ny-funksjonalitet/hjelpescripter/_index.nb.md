@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 12f44a07-413c-49f7-b755-895bcdb9d429
 title: "Hjelpescripter"
 linkTitle: "Hjelpescripter"

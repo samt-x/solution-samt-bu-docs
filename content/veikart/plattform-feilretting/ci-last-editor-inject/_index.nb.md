@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 7ee1e5cc-73be-463b-99bd-913dbfc73076
 title: "CI-injeksjon av last_editor for ikke-CMS-redigeringer"
 linkTitle: "CI: last_editor for alle redigeringsveier"

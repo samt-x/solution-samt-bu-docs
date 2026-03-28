@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: a15b43c8-b9a4-46a6-9571-db397f9d9183
 title: "Platform – bug fixes"
 linkTitle: "Bug fixes"

@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: f9cbe239-500e-4760-882e-e3a5dd7c3b71
 title: "Build status lock and correct Close button"
 linkTitle: "Build status and Close button"

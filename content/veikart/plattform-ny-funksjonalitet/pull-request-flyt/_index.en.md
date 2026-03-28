@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 88a7cc4a-b428-488f-b159-1696bbc68594
 title: "Pull request support in the Edit menu"
 linkTitle: "Pull request flow"

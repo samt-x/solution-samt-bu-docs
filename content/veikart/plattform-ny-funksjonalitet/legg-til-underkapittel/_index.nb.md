@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 36ddabdf-4ceb-45bb-b55f-051cd9976078
 title: "Legg til underkapittel – valg i Endre-menyen"
 linkTitle: "Legg til underkapittel"

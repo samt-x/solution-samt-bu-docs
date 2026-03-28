@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: f2ecebba-c800-416c-94fb-6e32d36576b2
 title: "Pending indicator does not detect builds triggered outside the site editor"
 linkTitle: "Pending indicator: external builds"

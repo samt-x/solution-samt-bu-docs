@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 44fda0b1-9034-4924-a29b-d1823b800756
 title: "Known issues and solutions"
 linkTitle: "Known issues"

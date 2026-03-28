@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: d524966f-0d8e-447c-a92b-2bc1723cd944
 title: "Update use case template with «Input on solution choices»"
 linkTitle: "Update use case template"

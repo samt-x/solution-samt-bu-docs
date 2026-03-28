@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: e0e03dc4-b617-44cb-b829-a47ac7313a9d
 title: "Concept for GitHub Organizations and Repositories"
 linkTitle: "GitHub structure"

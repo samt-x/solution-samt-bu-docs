@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 7aa3bf53-2226-4a6b-a3ca-6a80309577aa
 title: "Branch strategy for GUI development"
 linkTitle: "Branch strategy for GUI development"

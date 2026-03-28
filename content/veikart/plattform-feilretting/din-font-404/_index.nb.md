@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 50345854-27d8-4b1c-8f78-a6d036501284
 title: "Fjern 404-feil for DIN-webfonter"
 linkTitle: "DIN-font 404-feil"

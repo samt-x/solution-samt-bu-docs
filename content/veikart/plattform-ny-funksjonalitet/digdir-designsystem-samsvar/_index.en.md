@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: f92085d2-8bf3-4759-8cc6-1c4439938e71
 title: "Alignment with Digdir's design system"
 linkTitle: "Digdir design system alignment"

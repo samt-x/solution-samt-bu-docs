@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: e40c2b29-8643-4556-9860-dc72cde6a1d4
 title: "GitHub-autentisering uavhengig av CMS-valg"
 linkTitle: "GitHub-auth – CMS-uavhengig"

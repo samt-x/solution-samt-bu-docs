@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 661b950a-3938-4e30-a5b4-f5d5d3a603c4
 title: "Slett side – håndtering av undermapper"
 linkTitle: "Slett side med undermapper"

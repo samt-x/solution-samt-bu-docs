@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: ed2ee794-3c97-4e2d-959d-90b235a4f3d6
 title: "Opprette nytt modulrepo – steg-for-steg"
 linkTitle: "Nytt modulrepo"

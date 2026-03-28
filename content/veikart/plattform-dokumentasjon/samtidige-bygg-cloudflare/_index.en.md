@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 7a4bb610-b4ef-416a-855a-ab251a5eff45
 title: "Enabling concurrent builds through Cloudflare Pages"
 linkTitle: "Concurrent builds via Cloudflare"

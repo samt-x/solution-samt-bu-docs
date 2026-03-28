@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: c5e5948f-2ac0-46f7-b27e-43a14f614046
 title: "AI-skrivehjelp i editoren"
 linkTitle: "AI-skrivehjelp"

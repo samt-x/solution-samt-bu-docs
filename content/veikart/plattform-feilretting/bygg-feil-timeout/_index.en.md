@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 2f548bce-3bc1-4603-806b-ff0347a5bdf5
 title: "False «Build job failed» on long build jobs"
 linkTitle: "False build failure on timeout"

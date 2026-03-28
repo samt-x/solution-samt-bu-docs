@@ -1,4 +1,5 @@
 ---
+# id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 6600fd23-52ac-42cd-8a38-0eaa8ef08e51
 title: "Advarsel ved samtidig redigering av samme side"
 linkTitle: "Konfliktvarsel ved redigering"
