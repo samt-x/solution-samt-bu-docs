@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: ed2ee794-3c97-4e2d-959d-90b235a4f3d6
 title: "Creating a new module repository – step by step"
 linkTitle: "New module repo"

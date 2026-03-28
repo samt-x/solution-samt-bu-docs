@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: b8d34d8b-1d6c-47d8-bbb6-da553b138c56
 title: "Folder structure for inputs in samt-bu-files"
 linkTitle: "Inputs – folder structure"

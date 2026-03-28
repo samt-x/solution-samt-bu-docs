@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 6600fd23-52ac-42cd-8a38-0eaa8ef08e51
 title: "Warning on simultaneous editing of the same page"
 linkTitle: "Conflict warning on editing"

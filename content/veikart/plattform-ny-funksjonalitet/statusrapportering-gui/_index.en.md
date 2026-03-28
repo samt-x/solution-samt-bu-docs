@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 1cfce35d-fbef-467a-8853-fff18ae46d28
 title: "Status reporting and GUI for build queues"
 linkTitle: "Status reporting and build queues"

@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 36ddabdf-4ceb-45bb-b55f-051cd9976078
 title: "Add sub-chapter – option in the Edit menu"
 linkTitle: "Add sub-chapter"

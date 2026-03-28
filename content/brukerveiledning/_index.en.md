@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: ad913fd8-a039-4bd6-9dca-05d50f457a07
 title: "User Guide"
 linkTitle: "User Guide"

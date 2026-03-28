@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 7ea3ed96-637f-4003-9212-56a886f78f86
 title: "Complete English translation of project description"
 linkTitle: "English project description"

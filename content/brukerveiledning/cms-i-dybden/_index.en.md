@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 9080238f-b1aa-4a19-bc88-f27718fb6222
 title: "CMS in Depth"
 linkTitle: "CMS in Depth"

@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 3b8fe53a-65b0-46cd-ad31-ef3847775772
 title: "New page at the same level – option in the Edit menu"
 linkTitle: "New page – same level"

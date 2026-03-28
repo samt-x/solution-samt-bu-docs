@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 4b8f4c1b-8472-468d-9cd0-37dca86564e8
 title: "Adding a new CMS portal"
 linkTitle: "New CMS portal"

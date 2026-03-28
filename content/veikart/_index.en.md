@@ -1,5 +1,5 @@
 ---
-# id: auto-generert – kopierte verdier overskrives automatisk ved push
+# id: auto-generated – copied values are overwritten automatically on push
 id: 50be39b6-7d99-4048-bf9e-a8a85a31410c
 title: "Roadmap"
 linkTitle: "Roadmap"
