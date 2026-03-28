@@ -4,7 +4,7 @@ id: b8bf5c67-7a5f-4de5-a3f4-232e7e60e725
 title: Dokumentasjonspraksis
 linkTitle: Dokumentasjonspraksis
 weight: 30
-lastmod: 2026-03-27T23:29:13+01:00
+lastmod: 2026-03-28T10:01:46+01:00
 last_editor: Erik Hagen
 
 ---

@@ -6,7 +6,7 @@ linkTitle: "GitHub auth – CMS-agnostic"
 weight: 120
 status: "Approved"
 # Valid values: New | Early draft | In progress | For QA | Approved | Cancelled
-lastmod: 2026-03-27T23:29:13+01:00
+lastmod: 2026-03-28T10:01:46+01:00
 last_editor: Erik Hagen
 
 ---
