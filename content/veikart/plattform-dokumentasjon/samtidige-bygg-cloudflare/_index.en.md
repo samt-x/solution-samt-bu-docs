@@ -4,11 +4,13 @@ id: 7a4bb610-b4ef-416a-855a-ab251a5eff45
 title: "Enabling concurrent builds through Cloudflare Pages"
 linkTitle: "Concurrent builds via Cloudflare"
 weight: 92
-status: "In progress"
+status: "Cancelled"
 lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
 ---
+
+> **⨂ Cancelled (session 18–21, 2026-03):** After testing, it was decided not to proceed with CF Pages native build. The remaining steps (Steps 1–4 below) are no longer planned. The current setup with wrangler Direct Upload from GitHub Actions works satisfactorily. Reference documentation is retained.
 
 GitHub Pages automatically cancels older queued builds when a newer, higher-priority build is waiting («Canceling since a higher priority waiting request for pages exists»). This means that with three or more rapid saves in sequence, only the last build will complete – the intermediate ones are cancelled.
 

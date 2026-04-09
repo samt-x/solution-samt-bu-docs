@@ -4,11 +4,13 @@ id: 7a4bb610-b4ef-416a-855a-ab251a5eff45
 title: "Realisering av samtidige bygg gjennom Cloudflare Pages"
 linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
-status: "Pågår"
+status: "Avbrutt"
 lastmod: 2026-03-28T10:01:46+01:00
 last_editor: Erik Hagen
 
 ---
+
+> **⨂ Avbrutt (sesjon 18–21, 2026-03):** Etter testing ble det besluttet å ikke gå videre med CF Pages native build. Gjenstående steg (Steg 1–4 under) er ikke lenger planlagt. Nåværende oppsett med wrangler Direct Upload fra GitHub Actions fungerer tilfredsstillende. Referansedokumentasjon beholdes.
 
 GitHub Pages avløser automatisk eldre bygg i kø når et nyere bygg med høyere prioritet venter («Canceling since a higher priority waiting request for pages exists»). Dette betyr at ved tre eller flere raske lagringer i sekvens vil kun det siste bygget fullføres – de mellomliggende avløses.
 
