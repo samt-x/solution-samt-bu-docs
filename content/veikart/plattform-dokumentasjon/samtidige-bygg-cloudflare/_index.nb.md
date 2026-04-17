@@ -4,21 +4,31 @@ id: 7a4bb610-b4ef-416a-855a-ab251a5eff45
 title: "Realisering av samtidige bygg gjennom Cloudflare Pages"
 linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
-status: "Avbrutt"
+status: "Tidlig utkast"
 lastmod: 2026-04-09T17:07:49+03:00
 last_editor: Erik Hagen
 
 ---
 
-> **⨂ Avbrutt (sesjon 18–21, 2026-03):** Etter testing ble det besluttet å ikke gå videre med CF Pages native build. Gjenstående steg (Steg 1–4 under) er ikke lenger planlagt. Nåværende oppsett med wrangler Direct Upload fra GitHub Actions fungerer tilfredsstillende. Referansedokumentasjon beholdes.
+> **⚠️ Status korrigert (sesjon 24, 2026-04-17):** Oppføringen var merket «Avbrutt», men parallelle bygg fungerte faktisk i en periode (se nedenfor). Statusen er endret til «Tidlig utkast» fordi reaktivering fortsatt er aktuelt. Gjenstående steg (Steg 1–4) er uendret.
 
-GitHub Pages avløser automatisk eldre bygg i kø når et nyere bygg med høyere prioritet venter («Canceling since a higher priority waiting request for pages exists»). Dette betyr at ved tre eller flere raske lagringer i sekvens vil kun det siste bygget fullføres – de mellomliggende avløses.
+## Bakgrunn og motivasjon
+
+GitHub Pages avløser automatisk eldre bygg i kø når et nyere bygg med høyere prioritet venter («Canceling since a higher priority waiting request for pages exists»). Dette betyr at ved tre eller flere raske lagringer i sekvens vil kun det siste bygget fullføres – de mellomliggende avløses. **Dette er GitHub Pages-spesifikk atferd**, ikke et iboende problem med statiske nettsteder generelt.
+
+> **GitLab-sammenligning:** GitLab CI/CD har ikke denne avløsningsmekanismen. Med GitLab Pages hadde parallelle pipelines fungert uten ekstra infrastruktur, og Cloudflare Pages hadde sannsynligvis ikke vært nødvendig. Cloudflare Workers (OAuth-proxy) hadde likevel vært nødvendig, ettersom GitHub OAuth krever server-side `client_secret` uansett plattform.
 
 Cloudflare Pages native build med Git-integrasjon støtter opptil 6 samtidige bygg (Workers Paid-plan).
 
+## Hva som faktisk skjedde (sesjon 13, 2026-03-19)
+
+**Parallelle bygg fungerte.** I commiten `0a5073f` ble `cancel-in-progress: false` satt og SHA-basert CF check-run-deteksjon aktivert. Testsekvensen av «Endre side: Test 1/2/3...»-commits bekrefter at dette ble testet. Løsningen ble likevel reversert (`8844517`) tilbake til wrangler Direct Upload – uten at årsaken er dokumentert i commit-meldingen. Sannsynlig årsak: den infrastrukturelle blokkeringen (CF Git-integrasjon krever nytt prosjekt) ble for tidkrevende å fullføre der og da.
+
+**Viktig:** SHA-basert polling (`waitForCfCheckRun`) virker **ikke** med wrangler – CF oppretter ingen check-runs ved Direct Upload. Reaktivering av parallelle bygg krever derfor at CF Pages Git-integrasjon er på plass.
+
 ## Hva som er gjort (sesjon 13, 2026-03-19)
 
-### Alternativ B implementert ✅
+### Alternativ B implementert ✅ (forutsetning for CF native build)
 
 `lastmod`-injeksjon er flyttet inn i modulrepoene:
 
