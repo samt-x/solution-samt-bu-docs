@@ -4,13 +4,13 @@ id: 7a4bb610-b4ef-416a-855a-ab251a5eff45
 title: "Realisering av samtidige bygg gjennom Cloudflare Pages"
 linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
-status: "Tidlig utkast"
+status: "Godkjent"
 lastmod: 2026-04-17T11:57:40+02:00
 last_editor: Erik Hagen
 
 ---
 
-> **⚠️ Status korrigert (sesjon 24, 2026-04-17):** Oppføringen var merket «Avbrutt», men parallelle bygg fungerte faktisk i en periode (se nedenfor). Statusen er endret til «Tidlig utkast» fordi reaktivering fortsatt er aktuelt. Gjenstående steg (Steg 1–4) er uendret.
+> **⏺ Godkjent (sesjon 24, 2026-04-18):** CF Pages Git-integrasjon er nå aktivt. Prosjekt `samt-bu-docs` (subdomain `samt-bu-docs-git.pages.dev`) bygger automatisk ved push. Deploy hook (`CF_PAGES_DEPLOY_HOOK`) håndterer moduloppdateringer. Gammelt prosjekt `samt-bu-docs-old` (`samt-bu-docs.pages.dev`) er fryst. SHA-basert polling i temaet gjenstår som fremtidig forbedring.
 
 ## Bakgrunn og motivasjon
 
