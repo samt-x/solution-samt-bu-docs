@@ -5,7 +5,7 @@ title: "Realisering av samtidige bygg gjennom Cloudflare Pages"
 linkTitle: "Samtidige bygg via Cloudflare"
 weight: 92
 status: "Godkjent"
-lastmod: 2026-04-17T11:57:40+02:00
+lastmod: 2026-04-18T12:39:20+02:00
 last_editor: Erik Hagen
 
 ---
