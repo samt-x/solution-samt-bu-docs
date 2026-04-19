@@ -1,6 +1,6 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
-id: ""
+id: c5145be6-1a5d-42bb-b037-54bfed670ed6
 title: "Navnerydding: infrastruktur og tjenester"
 linkTitle: "Infrastruktur – navnrydding"
 weight: 126

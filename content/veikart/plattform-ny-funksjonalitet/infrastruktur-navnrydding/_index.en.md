@@ -1,6 +1,6 @@
 ---
 # id: auto-generated – copied values are overwritten automatically on push
-id: ""
+id: c5145be6-1a5d-42bb-b037-54bfed670ed6
 title: "Name cleanup: infrastructure and services"
 linkTitle: "Infrastructure – name cleanup"
 weight: 126
