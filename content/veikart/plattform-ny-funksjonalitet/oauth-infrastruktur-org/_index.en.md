@@ -6,7 +6,7 @@ linkTitle: "OAuth infrastructure – org"
 weight: 125
 status: "New"
 # Valid values: New | Early draft | In progress | For QA | Approved | Cancelled
-lastmod: 2026-04-19T14:04:31+02:00
+lastmod: 2026-04-19T14:45:37+02:00
 last_editor: Erik Hagen
 
 ---

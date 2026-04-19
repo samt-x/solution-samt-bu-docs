@@ -6,7 +6,7 @@ linkTitle: "OAuth-infrastruktur – org"
 weight: 125
 status: "Ny"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
-lastmod: 2026-04-19T14:04:31+02:00
+lastmod: 2026-04-19T14:45:37+02:00
 last_editor: Erik Hagen
 
 ---
