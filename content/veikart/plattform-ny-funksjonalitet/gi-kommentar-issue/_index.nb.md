@@ -4,7 +4,7 @@ id: c794131f-0639-4f6f-b87e-4031deea5a65
 title: "«Gi kommentar» i Endre-menyen via GitHub Issues"
 linkTitle: "Gi kommentar (issues)"
 weight: 96
-status: "Ny"
+status: "Pågår"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
 lastmod: 2026-04-19T18:06:04+02:00
 last_editor: Erik Hagen
@@ -27,6 +27,14 @@ Et nytt menyvalg «Gi kommentar» i Endre-menyen lar innloggede brukere sende ti
 - Krever kun at brukeren er innlogget – ikke nødvendigvis skrivetilgang til repoet
 - GitHub Issues er åpne for alle autentiserte brukere å opprette (om repo har issues aktivert)
 - Forhåndsutfylt body: sidetittel + URL + fritekst fra bruker
+
+## Planlagt utvidelse
+
+**Kommentarer-panelet med arkfaner** – samme mønster som Byggehistorikk-panelet («Mine» / «Alle»):
+- Fane «Denne siden» – dagens visning
+- Fane «Alle sider» – søker på tvers av alle repos (samt-bu-docs, samt-bu-drafts, team-architecture osv.) via GitHub Search API
+
+Teknisk: kombinert `repo:A repo:B`-søk eller parallelle kall per repo. Rate limiting OK med token (30 req/min).
 
 ## Relatert
 

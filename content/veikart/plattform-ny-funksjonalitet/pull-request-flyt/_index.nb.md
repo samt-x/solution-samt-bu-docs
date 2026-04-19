@@ -4,7 +4,7 @@ id: 88a7cc4a-b428-488f-b159-1696bbc68594
 title: "Pull request-støtte i Endre-menyen"
 linkTitle: "Pull request-flyt"
 weight: 95
-status: "Ny"
+status: "Pågår"
 lastmod: 2026-03-28T10:01:46+01:00
 last_editor: Erik Hagen
 
