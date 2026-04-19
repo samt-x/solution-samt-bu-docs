@@ -1,6 +1,6 @@
 ---
 # id: auto-generated – copied values are overwritten automatically on push
-id: ""
+id: 32d0f020-7521-4c07-8fba-c84100a5f7cb
 title: "Admin switchers in the header"
 linkTitle: "Admin switchers"
 weight: 97

@@ -1,6 +1,6 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
-id: ""
+id: 32d0f020-7521-4c07-8fba-c84100a5f7cb
 title: "Admin-svitsjer i headeren"
 linkTitle: "Admin-svitsjer"
 weight: 97
