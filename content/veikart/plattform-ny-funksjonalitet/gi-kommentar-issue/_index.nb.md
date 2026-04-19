@@ -1,6 +1,6 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
-id: ""
+id: c794131f-0639-4f6f-b87e-4031deea5a65
 title: "«Gi kommentar» i Endre-menyen via GitHub Issues"
 linkTitle: "Gi kommentar (issues)"
 weight: 96

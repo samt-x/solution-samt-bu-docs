@@ -1,6 +1,6 @@
 ---
 # id: auto-generated – copied values are overwritten automatically on push
-id: ""
+id: c794131f-0639-4f6f-b87e-4031deea5a65
 title: "«Add comment» in the Edit menu via GitHub Issues"
 linkTitle: "Add comment (issues)"
 weight: 96
