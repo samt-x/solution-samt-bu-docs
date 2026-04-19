@@ -1,6 +1,6 @@
 ---
 # id: auto-generated – copied values are overwritten automatically on push
-id: ""
+id: aebdf240-bc40-43a5-a547-50139b0a6400
 title: "Move OAuth infrastructure to organization account"
 linkTitle: "OAuth infrastructure – org"
 weight: 125

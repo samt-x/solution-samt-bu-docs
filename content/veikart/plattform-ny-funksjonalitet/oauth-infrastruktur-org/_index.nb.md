@@ -1,6 +1,6 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
-id: ""
+id: aebdf240-bc40-43a5-a547-50139b0a6400
 title: "Flytt OAuth-infrastruktur til organisasjonskonto"
 linkTitle: "OAuth-infrastruktur – org"
 weight: 125
