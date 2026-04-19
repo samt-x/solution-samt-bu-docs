@@ -6,7 +6,7 @@ linkTitle: "Admin-svitsjer"
 weight: 97
 status: "Ny"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
-lastmod: 2026-04-19T00:00:00+02:00
+lastmod: 2026-04-19T17:46:41+02:00
 last_editor: Erik Hagen
 
 ---
