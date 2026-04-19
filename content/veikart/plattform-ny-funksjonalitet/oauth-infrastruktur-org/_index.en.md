@@ -11,7 +11,7 @@ last_editor: Erik Hagen
 
 ---
 
-The Cloudflare Worker (`samt-bu-cms-auth.erik-hag1.workers.dev`) and GitHub OAuth App («Decap CMS – SAMT-X») currently run on personal accounts belonging to a single developer. If this person leaves the project or changes accounts, login and editing will stop working for all users.
+The Cloudflare Worker (`samt-bu-cms-auth.erik-hag1.workers.dev`) and GitHub OAuth App («SAMT-X Docs») currently run on personal accounts belonging to a single developer. If this person leaves the project or changes accounts, login and editing will stop working for all users.
 
 ## What needs to be done
 
@@ -26,4 +26,4 @@ The Cloudflare Worker (`samt-bu-cms-auth.erik-hag1.workers.dev`) and GitHub OAut
 
 ## Priority
 
-Low in the short term (one person has control), but should be done before the project is opened to wider use.
+**Medium** – `erik-hag1` is explicitly shown as the redirect URL in GitHub's authorization dialog for all users who log in. This appears unprofessional and confusing. Should be resolved before the project is opened to wider use.

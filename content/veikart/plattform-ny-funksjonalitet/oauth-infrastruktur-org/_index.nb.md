@@ -11,7 +11,7 @@ last_editor: Erik Hagen
 
 ---
 
-I dag kjører Cloudflare Worker-en (`samt-bu-cms-auth.erik-hag1.workers.dev`) og GitHub OAuth App-en («Decap CMS – SAMT-X») på personlige kontoer tilknyttet én enkelt utvikler. Hvis denne personen forlater prosjektet eller bytter konto, slutter innlogging og redigering å fungere for alle brukere.
+I dag kjører Cloudflare Worker-en (`samt-bu-cms-auth.erik-hag1.workers.dev`) og GitHub OAuth App-en («SAMT-X Docs») på personlige kontoer tilknyttet én enkelt utvikler. Hvis denne personen forlater prosjektet eller bytter konto, slutter innlogging og redigering å fungere for alle brukere.
 
 ## Hva bør gjøres
 
@@ -26,4 +26,4 @@ I dag kjører Cloudflare Worker-en (`samt-bu-cms-auth.erik-hag1.workers.dev`) og
 
 ## Prioritet
 
-Lav på kort sikt (én person har kontroll), men bør gjøres før prosjektet åpnes for bredere bruk.
+**Medium** – `erik-hag1` vises eksplisitt som redirect-URL i GitHub sin autorisasjonsdialog for alle brukere som logger inn. Dette fremstår uprofesjonelt og forvirrende. Bør løses før prosjektet åpnes for bredere bruk.
