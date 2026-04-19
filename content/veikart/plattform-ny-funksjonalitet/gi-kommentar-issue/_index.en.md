@@ -6,7 +6,7 @@ linkTitle: "Add comment (issues)"
 weight: 96
 status: "New"
 # Valid values: New | Early draft | In progress | For QA | Approved | Cancelled
-lastmod: 2026-04-19T00:00:00+02:00
+lastmod: 2026-04-19T18:06:04+02:00
 last_editor: Erik Hagen
 
 ---
