@@ -6,7 +6,7 @@ linkTitle: "Infrastructure – name cleanup"
 weight: 126
 status: "New"
 # Valid values: New | Early draft | In progress | For QA | Approved | Cancelled
-lastmod: 2026-04-19T00:00:00+02:00
+lastmod: 2026-04-19T14:07:55+02:00
 last_editor: Erik Hagen
 
 ---

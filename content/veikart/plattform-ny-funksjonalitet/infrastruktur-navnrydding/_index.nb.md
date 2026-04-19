@@ -6,7 +6,7 @@ linkTitle: "Infrastruktur – navnrydding"
 weight: 126
 status: "Ny"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
-lastmod: 2026-04-19T00:00:00+02:00
+lastmod: 2026-04-19T14:07:55+02:00
 last_editor: Erik Hagen
 
 ---
