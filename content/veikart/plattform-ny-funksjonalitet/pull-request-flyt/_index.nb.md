@@ -5,7 +5,7 @@ title: "Pull request-støtte i Endre-menyen"
 linkTitle: "Pull request-flyt"
 weight: 95
 status: "Pågår"
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-04-19T23:37:39+02:00
 last_editor: Erik Hagen
 
 ---

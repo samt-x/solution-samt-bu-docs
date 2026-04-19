@@ -6,7 +6,7 @@ linkTitle: "Gi kommentar (issues)"
 weight: 96
 status: "Pågår"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
-lastmod: 2026-04-19T18:06:04+02:00
+lastmod: 2026-04-19T23:37:39+02:00
 last_editor: Erik Hagen
 
 ---
