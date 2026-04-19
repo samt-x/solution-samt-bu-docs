@@ -16,7 +16,7 @@ The Cloudflare Worker (`samt-bu-cms-auth.erik-hag1.workers.dev`) and GitHub OAut
 ## What needs to be done
 
 1. **Cloudflare Worker** – move `samt-bu-cms-auth` to a shared Cloudflare account or organization account owned by the SAMT-X project
-2. **GitHub OAuth App** – the existing «Decap CMS – SAMT-X» app is already owned by the `samt-x` organization ✅ – but the callback URL points to the personal Worker (point 1 resolves this)
+2. **GitHub OAuth App** – the existing «SAMT-X Docs» app is already owned by the `samt-x` organization ✅ – but the callback URL points to the personal Worker (point 1 resolves this)
 3. **Cloudflare API keys** – update GitHub Actions secrets (`CF_ACCOUNT_ID`, `CF_API_TOKEN`) to the new account
 
 ## Risk of not doing it
