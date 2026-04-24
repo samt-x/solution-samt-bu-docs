@@ -16,10 +16,10 @@ The platform is composed of the following components:
 | Component | Role |
 |-----------|------|
 | **Hugo** | Static site generator – builds HTML from Markdown |
-| **Decap CMS** | Browser-based content editing for non-technical users |
+| **Built-in editor (TipTap)** | Browser-based content editing directly in the website – no external CMS |
 | **Hugo Modules** | Content modules from separate repositories are mounted into the site |
 | **GitHub Actions** | CI/CD pipeline – builds and deploys on push to `main` |
-| **Cloudflare Workers** | OAuth proxy for secure CMS authentication against GitHub |
-| **GitHub Pages** | Hosting of the finished website |
+| **Cloudflare Workers** | OAuth proxy for secure authentication against GitHub |
+| **Cloudflare Pages** | Hosting of the finished website |
 
 See the sub-chapters for technical documentation and administration guides.

@@ -16,10 +16,10 @@ Plattformen er satt sammen av følgende komponenter:
 | Komponent | Rolle |
 |-----------|-------|
 | **Hugo** | Statisk nettstedsgenerator – bygger HTML fra Markdown |
-| **Decap CMS** | Nettleserbasert innholdsredigering for ikke-tekniske brukere |
+| **Innebygd editor (TipTap)** | Nettleserbasert innholdsredigering direkte i nettstedet – ingen ekstern CMS |
 | **Hugo Modules** | Innholdsmoduler fra separate repoer monteres inn i nettstedet |
 | **GitHub Actions** | CI/CD-pipeline – bygger og deployer ved push til `main` |
-| **Cloudflare Workers** | OAuth-proxy for sikker CMS-autentisering mot GitHub |
-| **GitHub Pages** | Hosting av det ferdige nettstedet |
+| **Cloudflare Workers** | OAuth-proxy for sikker autentisering mot GitHub |
+| **Cloudflare Pages** | Hosting av det ferdige nettstedet |
 
 Se underkapitlene for teknisk dokumentasjon og administrasjonsveiledninger.
