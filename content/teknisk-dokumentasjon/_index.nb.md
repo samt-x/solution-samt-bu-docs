@@ -18,4 +18,4 @@ Denne siden dokumenterer hva som er «under panseret» i SAMT-BU-plattformen. M�
 - **GitHub-struktur** – konsept for organisering av GitHub-orger og repoer (`samt-x` som plattformorg, prosjektorger for innhold)
 - **Utviklernotater og Claude-kontekst** – arkitekturbeslutninger, konvensjoner, theme.css-feller og kontekst for nye utviklere og AI-assistenter
 
-Emner som er dekket i Utviklernotater: Hugo-arkitektur, tema (submodule), 3-kolonne layout, Decap CMS, Hugo Modules, CI/CD-pipeline, Cloudflare Worker OAuth-proxy, søkesystem.
+Emner som er dekket i Utviklernotater: Hugo-arkitektur, tema (submodule), 3-kolonne layout, innebygd TipTap-editor, Hugo Modules, CI/CD-pipeline, Cloudflare Worker OAuth-proxy, søkesystem.
