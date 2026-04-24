@@ -4,7 +4,8 @@ id: 9080238f-b1aa-4a19-bc88-f27718fb6222
 title: "Innebygd editor – i dybden"
 linkTitle: "Innebygd editor"
 weight: 10
-lastmod: 2026-04-24T13:30:00+02:00
+lastmod: 2026-04-24T15:20:41+02:00
+last_editor: Erik Hagen
 
 ---
 
