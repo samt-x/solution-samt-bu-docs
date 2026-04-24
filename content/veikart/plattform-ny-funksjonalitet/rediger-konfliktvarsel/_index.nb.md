@@ -5,7 +5,7 @@ title: "Advarsel ved samtidig redigering av samme side"
 linkTitle: "Konfliktvarsel ved redigering"
 weight: 150
 status: "Ny"
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-04-24T09:22:50+02:00
 last_editor: Erik Hagen
 
 ---

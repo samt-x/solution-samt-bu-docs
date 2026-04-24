@@ -5,7 +5,7 @@ title: "AI writing assistance in the editor"
 linkTitle: "AI writing assistance"
 weight: 160
 status: "New"
-lastmod: 2026-03-28T10:12:28+01:00
+lastmod: 2026-04-24T09:22:50+02:00
 last_editor: Erik Hagen
 
 ---

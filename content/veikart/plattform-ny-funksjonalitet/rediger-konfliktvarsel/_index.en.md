@@ -5,7 +5,7 @@ title: "Warning on simultaneous editing of the same page"
 linkTitle: "Conflict warning on editing"
 weight: 150
 status: "New"
-lastmod: 2026-03-28T10:12:28+01:00
+lastmod: 2026-04-24T09:22:50+02:00
 last_editor: Erik Hagen
 
 ---

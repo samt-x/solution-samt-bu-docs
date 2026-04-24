@@ -5,7 +5,7 @@ title: "Enabling concurrent builds through Cloudflare Pages"
 linkTitle: "Concurrent builds via Cloudflare"
 weight: 92
 status: "Cancelled"
-lastmod: 2026-04-09T17:07:49+03:00
+lastmod: 2026-04-24T09:22:50+02:00
 last_editor: Erik Hagen
 
 ---
