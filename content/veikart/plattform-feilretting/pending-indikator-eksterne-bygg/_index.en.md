@@ -61,5 +61,5 @@ The user must be logged in (token available) for the background polling to call 
 ## Related
 
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `checkExternalBuilds()`, `startBgFastPoll()`, `stopBgFastPoll()`, `samtuShowExternalBuildIndicator()`
-- Roadmap: [False build failure on timeout](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/) – related GitHub API polling
-- Roadmap: [Status reporting and build queues](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – background
+- Roadmap: [False build failure on timeout](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/) – related GitHub API polling
+- Roadmap: [Status reporting and build queues](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – background

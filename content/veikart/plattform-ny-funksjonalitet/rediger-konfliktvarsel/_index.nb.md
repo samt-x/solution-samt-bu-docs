@@ -49,4 +49,4 @@ En enklere tilnærming: vis advarsel hvis det finnes et aktivt bygg nylig trigge
 
 - `cloudflare-worker/oauth-worker.js` – eksisterende CF Worker som kan utvides
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `openQuillEditDialog()`
-- Veikart: [Bygg-status og Lukk-knapp](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-status-sperre/) – beslektet problem
+- Veikart: [Bygg-status og Lukk-knapp](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-status-sperre/) – beslektet problem

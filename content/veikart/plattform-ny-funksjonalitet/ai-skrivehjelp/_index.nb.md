@@ -71,4 +71,4 @@ Lav – nyttig tilleggsfeature, men ikke kritisk for kjerneflyt.
 ## Relatert
 
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – TipTap-editoren og `openQuillEditDialog()`
-- Veikart: [Konfliktvarsel ved redigering](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/rediger-konfliktvarsel/)
+- Veikart: [Konfliktvarsel ved redigering](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/rediger-konfliktvarsel/)

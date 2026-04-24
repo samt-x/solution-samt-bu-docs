@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 ---
 
-Etter hvert som brukere tar nettstedet i bruk, bør aktiv GUI-utvikling skje i en separat branch slik at feil ikke forstyrrer produksjon. Inntil dette er satt opp, brukes `main` med rask tilbakerulling (se [CI/CD-pipeline](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/teknisk-dokumentasjon/ci-cd-pipeline/)).
+Etter hvert som brukere tar nettstedet i bruk, bør aktiv GUI-utvikling skje i en separat branch slik at feil ikke forstyrrer produksjon. Inntil dette er satt opp, brukes `main` med rask tilbakerulling (se [CI/CD-pipeline](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/teknisk-dokumentasjon/ci-cd-pipeline/)).
 
 ## Foreslått oppsett
 

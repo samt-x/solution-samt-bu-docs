@@ -49,4 +49,4 @@ A simpler approach: show a warning if there is an active build recently triggere
 
 - `cloudflare-worker/oauth-worker.js` – existing CF Worker that can be extended
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `openQuillEditDialog()`
-- Roadmap: [Build status and Close button](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-status-sperre/) – related problem
+- Roadmap: [Build status and Close button](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-status-sperre/) – related problem

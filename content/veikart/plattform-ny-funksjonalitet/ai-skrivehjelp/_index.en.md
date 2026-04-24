@@ -71,4 +71,4 @@ Low — useful additional feature, but not critical to the core workflow.
 ## Related
 
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – TipTap editor and `openQuillEditDialog()`
-- Roadmap: [Conflict warning during editing](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/rediger-konfliktvarsel/)
+- Roadmap: [Conflict warning during editing](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/rediger-konfliktvarsel/)

@@ -96,5 +96,5 @@ Workers Paid-planens «6 concurrent build slots» gjelder **kun CF-side native b
 
 - `samt-bu-docs/.github/workflows/hugo.yml` – nåværende bygg- og deploy-flyt
 - `samt-bu-docs/build.sh` – klar for CF native build
-- Veikart: [Statusrapportering og bygg-køer](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/)
-- Veikart: [Falsk byggefeil ved timeout](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/)
+- Veikart: [Statusrapportering og bygg-køer](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/)
+- Veikart: [Falsk byggefeil ved timeout](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/)

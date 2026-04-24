@@ -61,5 +61,5 @@ Brukeren må være innlogget (token tilgjengelig) for at bakgrunnspollingen skal
 ## Relatert
 
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `checkExternalBuilds()`, `startBgFastPoll()`, `stopBgFastPoll()`, `samtuShowExternalBuildIndicator()`
-- Veikart: [Falsk byggefeil ved timeout](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/) – beslektet GitHub API-polling
-- Veikart: [Statusrapportering og bygg-køer](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – bakgrunn
+- Veikart: [Falsk byggefeil ved timeout](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/bygg-feil-timeout/) – beslektet GitHub API-polling
+- Veikart: [Statusrapportering og bygg-køer](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – bakgrunn

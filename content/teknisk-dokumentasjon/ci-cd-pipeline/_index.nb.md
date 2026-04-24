@@ -143,7 +143,7 @@ Workflowen bruker et GitHub Personal Access Token (Classic) med **`workflow`-sco
 
 ## Legge til et nytt modulrepo i pipelinen
 
-Se den fullstendige veiledningen: [Opprette nytt modulrepo – steg-for-steg](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/nytt-modulrepo/).
+Se den fullstendige veiledningen: [Opprette nytt modulrepo – steg-for-steg](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/nytt-modulrepo/).
 
 Kortversjon – hva som må gjøres i `samt-bu-docs` når modulrepoet er klart:
 

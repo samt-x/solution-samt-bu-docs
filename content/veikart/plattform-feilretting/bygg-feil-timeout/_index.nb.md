@@ -58,4 +58,4 @@ Fjern maksimumsgrensen helt og stol utelukkende på GitHub API-polling (`checkCo
 ## Relatert
 
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `startGhPoll()`, `startUrlPoll()`, ETag-pollingen
-- Veikart: [Statusrapportering og bygg-køer](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – bakgrunn for nåværende polling-arkitektur
+- Veikart: [Statusrapportering og bygg-køer](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – bakgrunn for nåværende polling-arkitektur

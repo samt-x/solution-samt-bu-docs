@@ -58,4 +58,4 @@ A `_checkingApi` flag prevents concurrent API calls while the interval continues
 ## Related
 
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `startGhPoll()`, `startUrlPoll()`, ETag polling
-- Roadmap: [Status reporting and build queues](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – background on current polling architecture
+- Roadmap: [Status reporting and build queues](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/statusrapportering-gui/) – background on current polling architecture

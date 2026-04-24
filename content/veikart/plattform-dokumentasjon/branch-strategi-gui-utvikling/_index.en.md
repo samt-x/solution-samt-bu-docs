@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 ---
 
-As users adopt the site, active GUI development should happen in a separate branch so that errors do not disturb production. Until this is set up, `main` is used with rapid rollback (see [CI/CD pipeline](/samt-bu-docs/loesninger/cms-loesninger/samt-bu-docs/teknisk-dokumentasjon/ci-cd-pipeline/)).
+As users adopt the site, active GUI development should happen in a separate branch so that errors do not disturb production. Until this is set up, `main` is used with rapid rollback (see [CI/CD pipeline](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/teknisk-dokumentasjon/ci-cd-pipeline/)).
 
 ## Proposed setup
 
