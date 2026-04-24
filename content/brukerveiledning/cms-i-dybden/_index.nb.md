@@ -1,46 +1,40 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: 9080238f-b1aa-4a19-bc88-f27718fb6222
-title: "CMS i dybden"
-linkTitle: "CMS i dybden"
+title: "Innebygd editor – i dybden"
+linkTitle: "Innebygd editor"
 weight: 10
-lastmod: 2026-03-28T10:01:46+01:00
-last_editor: Erik Hagen
+lastmod: 2026-04-24T13:30:00+02:00
 
 ---
 
-Decap CMS er det nettleserbaserte redigeringsverktøyet for SAMT-BU Docs. Denne siden dekker funksjonalitet og fallgruver som ikke er åpenbare ved første øyekast.
-
-## De seks CMS-portalene
-
-Innholdet er fordelt på seks portaler – én per repo og språk. Det finnes ingen «superportal» som dekker alt; du må bruke riktig portal for riktig innhold.
-
-| Portal | Språk | Dekker | Åpnes via |
-|--------|-------|--------|-----------|
-| Docs (nb) | Norsk | Hoveddelen av samt-bu-docs-repoet | «Endre» → «Andre valg» |
-| Docs (en) | Engelsk | Hoveddelen av samt-bu-docs-repoet | «Edit» → «Other options» |
-| Arkitektur (nb) | Norsk | team-architecture-repoet | «Endre» → «Andre valg» |
-| Arkitektur (en) | Engelsk | team-architecture-repoet | «Edit» → «Other options» |
-| Utkast (nb) | Norsk | samt-bu-drafts-repoet | «Endre» → «Andre valg» |
-| Utkast (en) | Engelsk | samt-bu-drafts-repoet | «Edit» → «Other options» |
-
-**Snarveien «Denne siden»** i Endre-menyen tar deg direkte til gjeldende side i riktig portal, uansett hvilken portal og seksjon det gjelder. Dette er den raskeste måten å redigere en eksisterende side.
+Denne siden utdyper det innebygde redigeringsverktøyet i SAMT-BU Docs. Den forutsetter at du kjenner grunnprinsippene fra [Innebygd redigering](/samt-bu-docs/om/hvordan-bidra/innebygd-redigering/) og dekker emner du møter etter hvert som du bruker verktøyet mer.
 
 ## Tospråklig redigering
 
-Nettstedet er tospråklig (norsk og engelsk). CMS-portalene er adskilt per språk – det finnes ingen automatisk oversettelse.
+Nettstedet er tospråklig (norsk og engelsk). Hver side finnes i to versjoner – én norsk og én engelsk – og de to versjonene er koblet via et felles UUID-felt.
 
-**Hva dette betyr i praksis:**
+**Praktisk konsekvens:** Når du oppretter eller redigerer en side, endrer du kun én språkversjon om gangen. Den andre forblir uendret.
 
-- Opprett siden i norsk portal (f.eks. Docs nb) og lagre
-- Bytt til engelsk portal (Docs en) og opprett samme side med engelsk innhold
-- UUID-feltet (`id`) kobler de to språkversjonene – det settes automatisk og skal ikke endres
+**Anbefalt arbeidsflyt for ny side:**
 
-Hvis du kun oppretter én språkversjon, vil siden mangle innhold på det andre språket (brukere som bytter språk vil se en tom side eller feilmelding).
+1. Opprett siden på norsk (via «Nytt kapittel» eller «Nytt underkapittel»)
+2. Legg til norsk innhold og lagre
+3. Naviger til den nye norske siden, klikk **«Endre»** og velg **«Rediger denne siden»**
+4. Bruk språkvelgeren i headeren til å bytte til engelsk
+5. Åpne den tilsvarende engelske siden og rediger den på samme måte
 
-## Statusfeltet og statussymboler
+Hvis du bare oppretter én språkversjon, vil den andre vise en tom side (eller standardtekst) for besøkende som bruker det andre språket.
 
-Kun use case-sider (under «Behov») bruker statusfeltet. Gyldige verdier:
+## Tospråklig redigering – flytte og slette
+
+**Flytte:** Flytt-funksjonen opererer på begge språkversjoner samtidig – du trenger bare utføre flyttingen én gang.
+
+**Slette:** Sletting fjerner alltid begge språkversjoner i ett og samme steg. Det er ikke mulig å slette kun én språkversjon via grensesnittet.
+
+## Statusfeltet – kun for use cases
+
+Use case-sider (under «Behov») har et statusfelt som styrer symbolet som vises i menyen. Øvrige sider skal ha tomt statusfelt.
 
 | Symbol | Norsk verdi | Engelsk verdi |
 |--------|-------------|---------------|
@@ -51,74 +45,56 @@ Kun use case-sider (under «Behov») bruker statusfeltet. Gyldige verdier:
 | ⏺ | Godkjent | Approved |
 | ⨂ | Avbrutt | Cancelled |
 
-Symbolet genereres automatisk fra verdien – du trenger kun velge riktig tekst i CMS-en. Øvrige sider skal ha tomt statusfelt.
-
-## Lagring og publisering – tidslinjen
-
-```
-Du klikker «Lagre» i CMS
-    ↓  (noen sekunder)
-Decap CMS oppretter en commit på GitHub
-    ↓  (1–3 minutter)
-GitHub Actions bygger nettstedet
-    ↓
-Ny versjon er live på samt-x.github.io/samt-bu-docs/
-```
-
-Du kan følge med på byggingen under **Actions**-fanen i GitHub-repoet. Hvis bygget feiler (rød X), er ikke endringen publisert – ta kontakt med en administrator.
-
-## Byggindikator og automatisk oppdatering
-
-Nettstedet har en innebygd byggindikator nede til venstre på siden. Den viser status på publiseringen etter at du har lagret en endring.
-
-### Egne endringer
-
-Når du lagrer via Endre-menyen (rediger, ny side, slett), starter indikatoren umiddelbart:
-
-| Tilstand | Hva vises |
-|----------|-----------|
-| Bygg pågår | Spinner + «1 endring bygges…» (eller antall hvis flere) |
-| Bygg ferdig | Hake + «Endringer publisert – klikk for å laste inn» |
-| Bygg feilet | Advarselikon + feilmelding |
-
-Siden lastes automatisk inn noen sekunder etter at bygget er ferdig. Du kan klikke «Last inn nå» for å fremskynde det.
-
-### Andres endringer (ekstern push)
-
-Hvis noen andre pusher en endring direkte til GitHub – via GitHub-nettstedet, lokal klon eller API – mens du er inne på nettstedet, vil indikatoren vise dette diskret (litt mer dempet enn egne endringer):
-
-> *Nettstedet oppdateres…*
-
-Siden lastes automatisk inn når det eksterne bygget er ferdig. Du trenger ikke gjøre noe.
-
-**Merk:** Denne funksjonen krever at du er innlogget (via Endre-menyen). Ikke-innloggede brukere ser ikke indikatoren for eksterne bygg, men vil se et «Siden er oppdatert»-banner ved ETag-endring.
-
-### Byggehistorikk
-
-Klikk på indikatoren (uansett tilstand) for å åpne **Byggehistorikk**-dialogen. Der ser du alle bygg – egne og andres – med tidsstempel, varighet og resultat, fordelt på «Mine» og «Alle»-faner.
+Statusfeltet redigeres i skjemaet som åpnes av «Rediger denne siden». Symbolet genereres automatisk – du trenger kun velge riktig tekstverdi.
 
 ## UUID-feltet – ikke rør det
 
-Alle sider har et skjult `id`-felt (UUID). Det er usynlig i CMS-editoren (`widget: hidden`) og settes automatisk av en GitHub Actions-workflow. UUID-en er permanent – den kobler norsk og engelsk versjon av samme side og brukes eventuelt for kryssreferanser.
+Alle sider har et skjult `id`-felt (UUID). Det er usynlig i redigeringsdialogen og settes automatisk av en GitHub Actions-workflow. UUID-en er permanent – den kobler norsk og engelsk versjon av samme side og brukes for kryssreferanser.
 
-Du vil aldri se dette feltet i CMS-en, og du trenger ikke tenke på det.
+Du vil aldri se dette feltet i editoren, og du trenger ikke tenke på det.
 
-## Fallgruver og kjente begrensninger
+## Sorteringsrekkefølge (`weight`)
 
-### Testinnhold etter CMS-sesjon
+`weight`-feltet bestemmer rekkefølgen i sidebarmenyen. Lavere tall = høyere opp. Feltet er synlig og redigerbart i skjemaet.
 
-Decap CMS lagrer direkte til `main`-branchen. Hvis du har testet funksjoner eller skrevet uferdige utkast uten å slette dem, kan disse havne i nettstedet. **Sjekk alltid `git diff` (eller GitHub commit-historikken) etter en CMS-sesjon** hvis du er usikker på hva som ble lagret.
+**Praktisk tommelfingerregel:**
 
-### Sorteringsrekkefølge (`weight`)
+- Legg nye sider med `weight` i tioer-trinn (10, 20, 30 …) for å gi rom til seinere innskudd
+- Hvis du vil flytte en side i menyen uten å bruke flytt-funksjonen, kan du justere `weight`-feltet direkte
 
-Sidene i CMS-listen kan sorteres på `weight`-feltet (som samsvarer med rekkefølgen i sidebarmenyen). Lavere tall = høyere opp. Hvis du ikke setter `weight`, havner siden bakerst.
+## Bilder
 
-### Ny side vs. ny mappe
+Bilder kan limes direkte inn i tekstfeltet (Ctrl+V eller høyreklikk → Lim inn). De lastes automatisk opp til et dedikert bilderepo og kobles inn i siden.
 
-I Hugo er hver side en **mappe** med en `_index.nb.md`-fil inni. CMS-en oppretter **ikke** mapper automatisk – du må opprette mappestrukturen manuelt (f.eks. via GitHub eller lokalt) og deretter redigere innholdet i CMS-en.
+For best kvalitet: bruk PNG for skjermbilder og diagrammer, JPEG for fotografier.
 
-En mappe med bare `_index`-fil(er) og uten innholdstekst vises som en vanlig side med tittel, «Sist endret»-dato og UUID – men med tomt innholdsområde. Det er ikke en feil, bare en side som ennå ikke har fått innhold.
+## Markdown i tekstfeltet
 
-### Lokalt testmiljø
+Det innebygde tekstverktøyet (TipTap) viser innholdet visuelt, men lagrer det som Markdown. Du kan bruke verktøylinjens knapper, eller skrive Markdown-syntaks direkte:
 
-CMS-en støtter lokal testing: kjør `hugo server` og åpne portalen i nettleseren, klikk «Work with Local Repository». Endringer lagres da direkte til filsystemet ditt (ikke GitHub) og du kan se dem live i forhåndsvisningen uten å committe.
+| Markdown | Resultat |
+|----------|----------|
+| `**tekst**` | **fet tekst** |
+| `*tekst*` | *kursiv tekst* |
+| `# Overskrift` | Overskrift nivå 1 |
+| `## Overskrift` | Overskrift nivå 2 |
+| `` `kode` `` | `kode` |
+| `[lenketekst](url)` | Klikkbar lenke |
+
+## Fallgruver
+
+### Endring publiseres ikke
+
+Hvis du lukker redigeringsdialogen uten å klikke «Lagre», forkastes endringene. Det finnes ingen autosave.
+
+### Bygget feiler
+
+Hvis statusindikatoren viser advarselikon etter lagring, er endringen registrert i Git men ikke publisert. Kontakt en administrator. Endringen er ikke tapt – den ligger i commit-historikken og kan publiseres på nytt.
+
+### Siden ble slettet ved en feil
+
+Sletting via grensesnittet er ikke umiddelbart reverserbart. Ta kontakt med en administrator – siden finnes i Git-historikken og kan gjenopprettes.
+
+### Sortering ser ikke ut til å endre seg
+
+Nettleseren kan cache sidemenyen. Hard-reload (Ctrl+Shift+R) løser det som regel.

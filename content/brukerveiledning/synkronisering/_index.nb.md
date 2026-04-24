@@ -56,7 +56,7 @@ Git er derimot flink til å flette endringer som berører **ulike linjer** i sam
 
 ### Vanlige scenariet der konflikter oppstår
 
-- Du redigerer et avsnitt lokalt. Samtidig lagrer noen den samme siden via Decap CMS.
+- Du redigerer et avsnitt lokalt. Samtidig lagrer noen den samme siden via nettleseren («Endre»-menyen).
 - To bidragsytere endrer vekttallet (`weight`) på samme side uavhengig av hverandre.
 - Du og en kollega jobber med ulike deler av `hugo.toml` samtidig.
 
@@ -151,9 +151,9 @@ git push
 
 Dette fanger opp alt remote har fått siden sist (UUID-commits, CMS-endringer, andres commits) og minimerer avvisninger. Det eliminerer ikke alle tilfeller – UUID-workflow kan fortsatt rekke å kjøre mellom to pushes i samme sesjon – men reduserer frekvensen betydelig.
 
-### Decap CMS vs. lokal redigering
+### Nettleserbasert redigering vs. lokal redigering
 
-CMS-en committer direkte til `main`. Hvis du har gjort lokale endringer på samme fil, er dette det klassiske divergens-scenariet. Løses av `sync-all` via rebase – fungerer automatisk med mindre dere har endret nøyaktig de samme linjene.
+Redigering via «Endre»-menyen i nettleseren committer direkte til `main`. Hvis du har gjort lokale endringer på samme fil, er dette det klassiske divergens-scenariet. Løses av `sync-all` via rebase – fungerer automatisk med mindre dere har endret nøyaktig de samme linjene.
 
 **Forebygging:** Kjør alltid `sync-all` rett før du begynner å redigere lokalt.
 
