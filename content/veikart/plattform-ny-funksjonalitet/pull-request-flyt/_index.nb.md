@@ -4,58 +4,70 @@ id: 88a7cc4a-b428-488f-b159-1696bbc68594
 title: "Pull request-støtte i Endre-menyen"
 linkTitle: "Pull request-flyt"
 weight: 95
-status: "Pågår"
-lastmod: 2026-04-19T23:37:39+02:00
+status: "Til QA"
+lastmod: 2026-04-24T10:01:46+02:00
 last_editor: Erik Hagen
 
 ---
 
-I dag krever redigering via Endre-menyen at brukeren har direkte push-tilgang til repoet. Eksterne bidragsytere – fagpersoner, pilotdeltakere og andre uten repo-tilgang – kan ikke bidra via det innebygde grensesnittet.
+Brukere uten direkte push-tilgang til repoet kan bidra via det innebygde grensesnittet ved å sende forslag som pull requests i stedet for direktecommit til `main`.
 
-Pull request-støtte ville gjort det mulig for alle GitHub-brukere å foreslå endringer med samme enkle brukeropplevelse som dagens direkteflyt.
+## Implementert
 
-## Foreslått flyt
+### Rettighetssjekk og branch-oppretting
 
-1. Bruker åpner redigeringsdialogen og gjør endringer som normalt
-2. Ved lagring: GitHub API oppretter en ny branch (`<login>/patch-<dato>`) og committer dit i stedet for direkte til `main`
-3. GitHub API oppretter deretter en pull request fra denne branchen mot `main`
-4. Bruker ser bekreftelse med lenke til PR-en i stedet for bygg-indikatoren
+| Funksjon | Plassering | Beskrivelse |
+|----------|------------|-------------|
+| `checkCollaboratorPermission(repo, callback)` | `custom-footer.html` | GitHub API `GET /repos/SAMT-X/<repo>/collaborators/<login>` – 204 = write-tilgang, annet = bare-leser. Resultat caches 1 time i localStorage (`samtu-perm-<repo>`). |
+| `makePrBranch()` | `custom-footer.html` | Genererer branch-navn: `<login>/suggest-<åååå><mm><dd>-<hh><mm><ss>`. |
+| `createPr(token, repo, branchName, title, body)` | `custom-footer.html` | `POST /repos/SAMT-X/<repo>/pulls`, returnerer PR-objekt med `html_url`. |
+| `ensureForkReady(token, repo)` | `custom-footer.html` | Sjekker om fork finnes → oppretter om ikke → synkroniserer `main` med upstream. Venter maks 20 × 2 sek = 40 sek på ny fork. |
 
-### Deteksjon av rettigheter
+### Meny-tilpasning
 
-GitHub API-endepunktet `GET /repos/SAMT-X/samt-bu-docs/collaborators/<login>/permission` returnerer brukerens rettighetsnivå (`admin`, `write`, `read`, `none`). Dette kan brukes til å velge flyt automatisk:
+Når Endre-menyen åpnes og brukeren mangler write-tilgang, omdøpes alle menyitems i sanntid (via `checkCollaboratorPermission`):
 
-| Rettighetsnivå | Flyt |
-|----------------|------|
-| `write` / `admin` | Direktecommit til `main` (dagens flyt) |
-| `read` / `none` | Branch + pull request |
+| Original tekst | Foreslå-tekst |
+|----------------|---------------|
+| Rediger dette kapitlet | Foreslå endring av dette kapitlet |
+| Edit this chapter | Suggest change to this chapter |
+| Nytt kapittel etter dette | Foreslå nytt kapittel etter dette |
+| New chapter after this | Suggest new chapter after this |
+| Nytt underkapittel | Foreslå nytt underkapittel |
+| New sub-chapter | Suggest new sub-chapter |
+| Slett denne siden | Foreslå sletting av denne siden |
+| Delete this page | Suggest deletion of this page |
 
-Alternativt: alltid tilby PR-flyt som valg i dialogen, uavhengig av rettigheter.
+### Flyt per dialog
 
-## Teknisk gjennomførbarhet
+**Rediger-dialog (QE):** `canWrite=false` → `ensureForkReady` → commit til fork-branch → `createPr` → viser «✓ Pull request: #N» med klikkbar lenke i statusfeltet. «Lagre»-knapp blir «Sendt» (deaktivert, grønn).
 
-All nødvendig funksjonalitet finnes i GitHub REST API:
+**Ny side/underkapittel-dialog (NP):** `canWrite=false` → `ensureForkReady` → commit til fork-branch → `createPr` → lenke til PR vises i statusfeltet. «Opprett»-knapp blir «Sendt».
 
-| Operasjon | Endepunkt |
-|-----------|-----------|
-| Hent gjeldende SHA for `main` | `GET /repos/.../git/ref/heads/main` |
-| Opprett branch | `POST /repos/.../git/refs` |
-| Commit til branch | `PUT /repos/.../contents/<path>` med `branch`-parameter |
-| Opprett PR | `POST /repos/.../pulls` |
+**Slett-dialog:** `canWrite=false` → `ensureForkReady` → slett-commit til fork-branch → `createPr` → heading endres til «Forslag sendt!» med PR-lenke. Bygg-polling startes ikke.
 
-Eksisterende `createFilesInOneCommit()` i `custom-footer.html` bruker allerede de fleste av disse – branch-støtte er i stor grad en utvidelse av det som finnes.
+### PR-titler og -beskrivelser
 
-## Utfordringer
+| Dialog | PR-tittel (nb) | PR-tittel (en) |
+|--------|---------------|---------------|
+| Rediger | «Foreslår endring: \<sidetittel\>» | «Suggest change: \<title\>» |
+| Ny side | «Foreslår ny side: \<tittel\>» | «Suggest new page: \<title\>» |
+| Slett | «Foreslår sletting: \<sidetittel\>» | «Suggest deletion: \<title\>» |
 
-- **Fork-flyt:** Brukere uten lesetilgang til et privat repo må forke først. Håndteres av `POST /repos/.../forks` + commit mot fork + PR fra fork. Mer kompleks flyt.
-- **Konflikthåndtering:** PR kan ha merge-konflikter som brukeren selv ikke kan løse via grensesnittet.
-- **Byggestatus:** PR-bygg trigges ikke av `hugo.yml` (kun push til `main`) – pending-indikatoren gir ikke mening for PR-flyt. Bygg forekommer først etter merge.
+PR-beskrivelse inkluderer brukerens GitHub-brukernavn og kilden («via SAMT-BU Docs redigeringsgrensesnitt»).
 
-## Prioritet
+## Ikke implementert
 
-Medium – øker tilgjengelighet for bidragsytere betydelig uten å endre opplevelsen for eksisterende brukere med push-tilgang.
+- **Flytt-dialog** – `_mvCommit` brukes direkte uten rettighetssjekk. Lite kritisk da flytt primært er en admin-operasjon.
+
+## Hva gjenstår / mulig videre arbeid
+
+- **Mer testing** av fork-flyt for brukere som aldri har forket repoet – verifisere ventetid og feilhåndtering
+- **Duplikat-PR** – hva skjer hvis brukeren sender to forslag etter hverandre uten at første PR er merget? GitHub avviser per i dag med feil.
+- **PR-flyt i flytt-dialog** – om flytt skal bli tilgjengelig for ikke-redaktører
+- **Notification til repo-eier** – i dag krever merge manuell oppfølging. Slack-varsling eller e-post er mulig fremtidig utvidelse.
 
 ## Relatert
 
-- `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `createFilesInOneCommit()`, `doGitHubLogin()`
-- `themes/hugo-theme-samt-bu/layouts/partials/edit-switcher.html` – Endre-menyen og dialogene
+- `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `checkCollaboratorPermission()`, `makePrBranch()`, `createPr()`, `ensureForkReady()`
+- `themes/hugo-theme-samt-bu/layouts/partials/edit-switcher.html` – Endre-menyen og meny-tilpasnings-JS
