@@ -2308,3 +2308,56 @@ Feilen «Update is not a fast forward» oppstår fordi nettleseren cacher `GET /
 | `hugo-theme-samt-bu` (separat klon) | ✅ `b600033` |
 | `samt-bu-docs` | ✅ `43281a1` |
 | `solution-samt-bu-docs` | ✅ `e9bb2cd` |
+
+---
+
+## Endringslogg – 2026-04-25 (sesjon 34)
+
+### Domeneflytting: samt-bu.no inn i Cloudflare
+
+Nettstedet har fått eget domene. Full oversikt over hva som ble gjort:
+
+**Infrastruktur:**
+- `samt-bu.no` lagt til i Cloudflare (nameservere byttet fra Gigahost til `john.ns.cloudflare.com` / `tina.ns.cloudflare.com`)
+- `docs.samt-bu.no` – custom domain på Cloudflare Pages-prosjektet `samt-bu-docs`
+- `auth.samt-bu.no` – custom domain på Cloudflare Worker `samt-bu-cms-auth`
+- `samt-bu.no` → 301 redirect til `docs.samt-bu.no` (Cloudflare Redirect Rule)
+- `samt-bu-docs.pages.dev` → 301 redirect til `docs.samt-bu.no` (Pages Function `functions/_middleware.js`)
+- GitHub Pages deaktivert for `SAMT-X/samt-bu-docs`
+
+**Kodeendringer:**
+- `hugo.toml` + `hugo.yml`: `baseURL` → `https://docs.samt-bu.no/`
+- `cloudflare-worker/oauth-worker.js`: CORS-origin og build-status proxy URL → `docs.samt-bu.no`
+- `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html`: `workerBase` → `https://auth.samt-bu.no`
+- GitHub OAuth App: callback-URL → `https://auth.samt-bu.no/callback`, navn → «SAMT-X Docs»
+- `CLAUDE.md`: alle URL-referanser oppdatert
+- Cloudflare API-token rotert, GitHub Actions secret `CF_API_TOKEN` oppdatert
+
+**Verifisert fungerende:**
+- OAuth-innlogging via `auth.samt-bu.no`
+- CI-deploy med nytt token
+- PR-forslagsflyt for bruker uten skrivetilgang
+- Redirect-kjeden fra gamle URL-er
+
+### Ny dokumentasjon denne sesjonen
+
+- `veikart/plattform-ny-funksjonalitet/pull-request-flyt/` – status oppdatert til «Til QA», full implementeringsbeskrivelse
+- `om/hvordan-bidra/innebygd-redigering/` – skrivetilgang ikke nødvendig, forslagsflyt forklart
+- `brukerveiledning/cms-i-dybden/` – ny seksjon «Forslagsflyt for brukere uten skrivetilgang»
+
+### Gjeldende URL-er
+
+| Formål | URL |
+|--------|-----|
+| Nettsted | `https://docs.samt-bu.no/` |
+| OAuth-worker | `https://auth.samt-bu.no` |
+| Rotdomene (redirect) | `https://samt-bu.no/` → `docs.samt-bu.no` |
+| Gammel URL (redirect) | `https://samt-bu-docs.pages.dev/` → `docs.samt-bu.no` |
+
+### Git-tilstand ved sesjonsavslutning
+
+| Repo | Tilstand |
+|------|----------|
+| `hugo-theme-samt-bu` (submodule) | ✅ pushet |
+| `samt-bu-docs` | ✅ pushet (HEAD: `474f645`) |
+| `solution-samt-bu-docs` | ✅ pushet |
