@@ -2361,3 +2361,64 @@ Nettstedet har fått eget domene. Full oversikt over hva som ble gjort:
 | `hugo-theme-samt-bu` (submodule) | ✅ pushet |
 | `samt-bu-docs` | ✅ pushet (HEAD: `474f645`) |
 | `solution-samt-bu-docs` | ✅ pushet |
+
+---
+
+## Endringslogg – 2026-04-26
+
+### PR-håndtering: rebase-flyt med fork-push (verifisert)
+
+Etablert og testet arbeidsflyt for å behandle innkommende PR-er fra bidragsytere (fork-baserte PR-er).
+
+#### Bakgrunn
+
+Bidragsytere uten skrivetilgang sender forslag via det innebygde redigeringsgrensesnittet som pull requests fra sin fork. Disse PR-ene havner ofte i konflikt med `main` fordi `main` har beveget seg siden PR-en ble opprettet.
+
+#### Nøkkelfunn: `maintainer_can_modify: true`
+
+GitHub lar repo-maintainere pushe direkte til en bidragsyters fork-gren hvis PR-en er opprettet med «Allow edits from maintainers» (standard). Det innebygde redigeringsgrensesnittet setter alltid dette flagget. Dette er nøkkelen til en ren flyt.
+
+#### Verifisert flyt (gir «Merged», ikke «Closed»)
+
+```bash
+# 1. Sjekk konfliktstatus og maintainer_can_modify
+gh pr view <nr> --repo SAMT-X/samt-bu-docs --json mergeable,mergeStateStatus,maintainerCanModify
+
+# 2. Hent fork-grenen
+git remote add <login> https://github.com/<login>/samt-bu-docs.git
+git fetch <login> <branchname>
+git checkout -b pr-<nr> <login>/<branchname>
+
+# 3. Rebase på main
+git rebase origin/main
+# løs eventuelle konflikter, git add, GIT_EDITOR=true git rebase --continue
+
+# 4. Push rebased commits tilbake til fork-grenen
+git push <login> pr-<nr>:<branchname> --force-with-lease
+
+# 5. Merge via GitHub → gir "Merged" (lilla)
+gh pr merge <nr> --repo SAMT-X/samt-bu-docs --merge
+
+# 6. Rydd opp
+git checkout main && git pull origin main
+git branch -D pr-<nr>
+git remote remove <login>
+git push origin --delete pr-<nr>  # slett eventuelle temp-branches i origin
+```
+
+#### Brukervennlig kommentar – alltid
+
+Legg alltid til to kommentarer via `gh pr comment`:
+1. **Ved merge:** bekreft at forslaget er godkjent, si at nettstedet oppdateres om noen minutter
+2. **Ved etterfølgende admin-endringer** (f.eks. weight-justering): forklar hva som ble endret og hvorfor – bruk `@<login>` for å sende e-post
+
+Bidragsytere er typisk ikke-tekniske og forstår ikke GitHub-statusmeldinger. En kort, vennlig kommentar gjør hele opplevelsen bedre.
+
+#### Fallback: hvis `maintainer_can_modify` er false
+
+Push rebased branch til `origin` som temp-branch, merge lokalt med `--no-ff -m "... Closes #<nr>"`. PR vises som «Closed», ikke «Merged». Kompenser alltid med kommentar.
+
+#### Dokumentert i
+
+- `CLAUDE.md` (samt-bu-docs): «PR-håndtering»-seksjonen – trinn-for-trinn-flyt
+- `memory/feedback_pr_merge_workflow.md`: atferdsregel for Claude
