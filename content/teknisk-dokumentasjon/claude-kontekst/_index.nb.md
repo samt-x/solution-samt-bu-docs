@@ -2422,3 +2422,33 @@ Push rebased branch til `origin` som temp-branch, merge lokalt med `--no-ff -m "
 
 - `CLAUDE.md` (samt-bu-docs): «PR-håndtering»-seksjonen – trinn-for-trinn-flyt
 - `memory/feedback_pr_merge_workflow.md`: atferdsregel for Claude
+
+---
+
+## Endringslogg – 2026-04-26/27 (sesjon 36)
+
+### Bug 1: checkCollaboratorPermission returnerte false for org-eiere
+
+**Symptom:** Brukere med skrivetilgang via org-eierskap (f.eks. `erikhag1git`) fikk fork/PR-flyt i stedet for direkte commit. Skapte 5 stale PRer på `team-pilot-1`.
+
+**Rotårsak:** `checkCollaboratorPermission` brukte `GET /repos/SAMT-X/{repo}/collaborators/{login}` som kun returnerer 204 for *direkte* outside collaborators – ikke for org-eiere/-medlemmer.
+
+**Fix:** Byttet til `GET /repos/SAMT-X/{repo}` og sjekker `data.permissions.push || data.permissions.admin`. Cache-nøkkel bumped fra `samtu-perm-` til `samtu-perm2-` for å ugyldiggjøre stale false-oppføringer.
+
+**Fil:** `hugo-theme-samt-bu/layouts/partials/custom-footer.html` – funksjon `checkCollaboratorPermission`
+
+### Bug 2: Pilot 1 viste ikke statusymbol i menyen
+
+**Symptom:** `status: Pågår` satt i `team-pilot-1/_index.nb.md`, men menyen viste «Pilot 1» uten ◐-symbol.
+
+**Rotårsak:** To sett rotfiler for Pilot 1-siden:
+- Lokal fil i `samt-bu-docs/content/pilotering/pilot-1/_index.nb.md` (ingen `status`) – **Hugo bruker denne**
+- Modulfil i `team-pilot-1/content/_index.nb.md` (har `status`) – **overstyres av lokal fil**
+
+Edit-switcher pekte på modulfilen (`team-pilot-1`) mens Hugo viste den lokale filen. Alle redigeringer via editor havnet i feil fil.
+
+**Fix:**
+1. `status: Pågår` / `status: In progress` lagt i de lokale filene i `samt-bu-docs`
+2. `team-pilot-1`-grenen fjernet fra edit-switcher (begge steder: hovedlogikk + søskendata) – `pilotering/pilot-1/` rutes nå korrekt til `samt-bu-docs`
+
+**Lærdom:** Når en lokal fil og en modulfil finnes på samme sti, vinner alltid den lokale. Edit-switcher-ruting må reflektere dette – ikke moduloppsettet i `hugo.toml`.
