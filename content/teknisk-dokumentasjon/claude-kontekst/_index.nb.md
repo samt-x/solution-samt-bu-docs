@@ -2452,3 +2452,59 @@ Edit-switcher pekte på modulfilen (`team-pilot-1`) mens Hugo viste den lokale f
 2. `team-pilot-1`-grenen fjernet fra edit-switcher (begge steder: hovedlogikk + søskendata) – `pilotering/pilot-1/` rutes nå korrekt til `samt-bu-docs`
 
 **Lærdom:** Når en lokal fil og en modulfil finnes på samme sti, vinner alltid den lokale. Edit-switcher-ruting må reflektere dette – ikke moduloppsettet i `hugo.toml`.
+
+---
+
+## Endringslogg – 2026-04-29 (sesjon 38)
+
+### Pilot 1 fullstendig migrert til Hugo-modul (samt-bu-pilot-1)
+
+**Bakgrunn (sesjon 37 + 38):** Pilot 1-innhold lå feil – i `samt-bu-docs/content/pilotering/pilot-1/` i stedet for i et eget modulrepo. Mønsteret er at blå sidebar-farge markerer repo-grensen.
+
+**Gjennomført:**
+- Innhold kopiert fra `samt-bu-docs/content/pilotering/pilot-1/` til `samt-bu-pilot-1/content/`
+- `juss-test/` og `juss/static/` slettet (tomme testmapper)
+- Lokale filer slettet fra `samt-bu-docs` med `git rm`
+- `edit-switcher.html`: ny routing-grein for `pilotering/pilot-1/*` → `samt-bu-pilot-1`
+- `header.html`: repo-indikator for `pilotering/pilot-1` + alle undersider (bug: brukte bare `eq`, ikke `hasPrefix`)
+- `hugo.toml`, `hugo.yml`, `go.mod`/`go.sum` i `samt-bu-docs` oppdatert
+
+### Rename: team-pilot-1 → samt-bu-pilot-1
+
+**Begrunnelse:** Navnekonvensjon for piloter på tvers av SAMT-prosjekter: `<prosjekt>-pilot-<n>`. Gjør det lett å sortere piloter etter prosjekt.
+
+**Alle steder som ble oppdatert:**
+1. GitHub-repo renamed via `gh repo rename`
+2. Lokal mappe: `mv team-pilot-1 samt-bu-pilot-1`
+3. Remote URL: `git remote set-url origin`
+4. `go.mod` i modulrepoet: `module github.com/SAMT-X/samt-bu-pilot-1`
+5. `hugo.toml` i `samt-bu-docs`: `[[module.imports]] path`
+6. `hugo.yml` i `samt-bu-docs`: `hugo mod get ...@latest`
+7. `go.mod`/`go.sum`: `hugo mod get @latest && hugo mod tidy`
+8. `edit-switcher.html`: `$githubRepo` og `$githubRepoSibling` (to steder)
+9. `header.html`: `$repo`
+
+**Viktig notat:** Etter rename ble `$repo = "team-pilot-1"` i `header.html` ikke oppdatert i første omgang – lenken pekte riktig, men *teksten* viste fremdeles gammelt navn. Årsak: routing-betingelsen (`hasPrefix`) og repo-verdien (`$repo = "..."`) er to separate felt. Begge må oppdateres.
+
+**Sjekkliste lagret** i `critical-notes.md` for fremtidige renavninger (11 punkter).
+
+### Bug: DOCS_REBUILD_TOKEN stale i samt-bu-pilot-1
+
+**Symptom:** Endringer i `samt-bu-pilot-1` trigget ikke rebuild av `docs.samt-bu.no`. Workflow viste «success».
+
+**Rotårsak:** `DOCS_REBUILD_TOKEN` satt 2026-03-18 i `team-pilot-1` – tokenet ble rotert i april men kun oppdatert i de andre repoene. `curl` uten `--fail` → HTTP 401 ignoreres stille.
+
+**Fix:**
+- `--fail` lagt til curl-kall i `trigger-docs-rebuild.yml`
+- Payload source oppdatert: `"team-pilot-1"` → `"samt-bu-pilot-1"`
+- Token satt på nytt av bruker via `gh secret set`
+
+### Bug: linkTitle ikke oppdatert av redigeringsdialogen
+
+**Symptom:** Bruker oppdaterte tittelen «Pilot 1» → «Pilot 1 - Tilgjengeliggjøring av resultater fra opplæring» via Endre-menyen. Sidebar viste fremdeles «Pilot 1».
+
+**Rotårsak:** Hugo bruker `linkTitle` i sidebaren, men redigeringsdialogen oppdaterer kun `title`. Disse er separate felt i frontmatter.
+
+**Manuell fix:** `linkTitle` oppdatert i `samt-bu-pilot-1/content/_index.nb.md`.
+
+**Kjent bug til senere:** Dialogen bør oppdatere `linkTitle` automatisk når den er lik gammel `title` (det vanligste tilfellet). Gjelder også engelsk fil (`_index.en.md`).
