@@ -2551,3 +2551,43 @@ Nytt script for lokal Hugo-server med automatisk modulerstatning. Dokumentert i 
 **Fix:** `$isLocalUnderOverordnet`-variabel (og `$isLocalD2` for flytt-dialog) med eksplisitte negasjoner. Oppdatert i 5 steder i `edit-switcher.html`.
 
 **Generell lærdom:** Lokale sider under et modul-prefix MÅ ekskluderes eksplisitt. Se `$isLocalUnderOverordnet`-mønsteret i `edit-switcher.html`.
+
+---
+
+## Endringslogg – 2026-04-30/05-01 (sesjon 41)
+
+### GitHub App-migrering – aktivert og delvis verifisert
+
+**Mål:** Erstatte OAuth App (`public_repo,read:user`-scope) med GitHub App installert kun på SAMT-X-repos.
+
+**Hva ble gjort:**
+- Aktiverte GitHub App igjen: fjernet `scope`-parameteren fra `handleAuth` i Worker, oppdaterte `CLIENT_ID`/`CLIENT_SECRET` i Cloudflare, deployet Worker
+- Bekreftet at **admin-redigering (direktekommit) fungerer** med GitHub App user-to-server token ✅
+- GitHub viser innebygd **kontobytter** (account picker) automatisk når bruker har flere kontoer innlogget – ingen ekstra konfigurasjon nødvendig
+
+**Gjenstår:** Fork-flyt for eksterne brukere (ikke-redaktører). Plan: Worker-proxy via fine-grained PAT – se `memory/github-app-migration.md`.
+
+### OAuth UX – ny funksjonalitet
+
+**«Logg av» tvinger re-innlogging:**
+- `samtuLogout()` setter `samtu-force-login`-flagg i localStorage
+- `doGitHubLogin()` leser flagget → legger til `&force=true` i auth-URL → Worker redirecter via `github.com/login?return_to=<oauth_url>` → GitHub viser innloggingsskjema
+
+**«Bytt bruker» i avatar-dropdown:**
+- Nytt menyvalg som kaller `samtuLogout()` + umiddelbart `doGitHubLogin()` uten force-flagg
+- GitHub sin innebygde kontobytter håndterer resten naturlig
+- Første implementasjon brukte `window.prompt()` → popup-blokkering. Løst med inline input-felt. Deretter forenklet til å fjerne input-feltet helt og bruke GitHub sin native account picker.
+
+**Cancel i GitHub-autorisasjonsdialog:**
+- Worker `handleCallback` oppdaget `?error=access_denied` → returnerer HTML som sender `authorization:github:cancelled`-melding og lukker popup-en
+- Frontend rydder opp event-lytter ved cancel
+
+**`login`-parameter i Worker:**
+- Worker videresender `?login=<brukernavn>` til GitHub OAuth-URL (for fremtidig bruk; brukes ikke fra UI lenger)
+
+### Avatar-dropdown – UX-forbedringer
+
+- Grå bakgrunn (`#f5f7fa`) + fet skrift på brukernavnraden → tydelig «info, ikke klikkbar»
+- Hover-effekt via `<style>`-blokk: blålig/rødlig bakgrunn + farget tekst på hover; nøytral mørk tekst som standard
+- Større font (14px), mer luft (11–12px padding), bredere meny (200px)
+- `overflow:hidden` + `border-radius:6px` på `<ul>` → rene avrundede hjørner
