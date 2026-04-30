@@ -212,12 +212,16 @@ Decap CMS og alle tilknyttede portaler er fjernet (2026-03-11). Innlogging skjer
 
 Basert på `path.Dir .File.Path` (normalisert):
 
-- `hasPrefix "teams/"` → `githubRepo = "team-architecture"`
+- `eq/hasPrefix "arkitektur/overordnet-arkitektur"` → `githubRepo = "team-architecture"` — **ikke** `hasPrefix "teams/"` (modulen er montert under `arkitektur/`, ikke `teams/`)
 - `eq/hasPrefix "utkast"` → `githubRepo = "samt-bu-drafts"`
-- `eq/hasPrefix "loesninger/cms-loesninger/samt-bu-docs"` → `githubRepo = "solution-samt-bu-docs"`
+- `eq/hasPrefix "prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs"` → `githubRepo = "solution-samt-bu-docs"`
+- `eq/hasPrefix "pilotering/pilot-1..4"` → `githubRepo = "samt-bu-pilot-1..4"`
+- `eq/hasPrefix "arkitektur/informasjonsarkitektur"` → `githubRepo = "team-semantics"`
 - Alt annet → `githubRepo = "samt-bu-docs"` (default)
 
-**Når en ny modul legges til:** Legg til nytt grein i `edit-switcher.html` *før* `{{ else }}`-blokken.
+**⚠️ Negasjoner nødvendig:** Lokale sider som bor *under* et modul-prefix må ekskluderes eksplisitt. Eksempel: `maalbildet/` og `veikart/` er lokale i `samt-bu-docs` men har prefix `arkitektur/overordnet-arkitektur/`. Uten `(not $isLocalUnderOverordnet)` i `else if`-betingelsen rutes de feil til `team-architecture`.
+
+**Når en ny modul legges til:** Legg til nytt grein i `edit-switcher.html` *før* `{{ else }}`-blokken. Sjekk også om det finnes lokale sider under den samme URL-prefixen som MÅ ekskluderes.
 
 ### UUID (id-felt i frontmatter)
 
@@ -2508,3 +2512,42 @@ Edit-switcher pekte på modulfilen (`team-pilot-1`) mens Hugo viste den lokale f
 **Manuell fix:** `linkTitle` oppdatert i `samt-bu-pilot-1/content/_index.nb.md`.
 
 **Kjent bug til senere:** Dialogen bør oppdatere `linkTitle` automatisk når den er lik gammel `title` (det vanligste tilfellet). Gjelder også engelsk fil (`_index.en.md`).
+
+## Endringslogg – 2026-04-29 (sesjon 39)
+
+### Pilot 2, 3, 4 opprettet som Hugo-moduler
+
+- Repoer `samt-bu-pilot-2`, `samt-bu-pilot-3`, `samt-bu-pilot-4` opprettet på GitHub
+- Pilot-2-innhold migrert fra lokal mappe; pilot-3/4 opprettet som tomme moduler
+- `edit-switcher.html`: routing-grener for alle tre lagt til (tre blokker + githubRepoSibling + flytt-dialog)
+- `header.html`: repo-indikator for alle tre piloter
+- `menu.html`: blå sidebar-farge for rot-sidene i pilot-2/3/4 (samme mønster som pilot-1)
+
+### Fikser i redigeringsdialogen
+
+- **linkTitle-sync:** `oninput`-handler i `custom-footer.html` synkroniserer `linkTitle` automatisk når den er lik gammel `title`. Fikser kjent bug fra sesjon 38.
+- **Draft-avkrysningsboks:** Lagt til i redigeringsdialog (`edit-switcher.html` + `custom-footer.html`).
+
+### tools/hugo-local.sh
+
+Nytt script for lokal Hugo-server med automatisk modulerstatning. Dokumentert i lokal-oppsett-siden (tre scenarioer A/B/C).
+
+## Endringslogg – 2026-04-30 (sesjon 40)
+
+### Bug: DOCS_REBUILD_TOKEN stale i team-architecture
+
+**Symptom:** Sletting via «Slett siden» hang i statusfeltet («jobben blir aldri ferdig»).
+
+**Rotårsak:** `DOCS_REBUILD_TOKEN` i `team-architecture` var utgått. `curl` uten `--fail` → HTTP 401 ignorert stille → workflow rapporterte «success» → ingen rebuild → URL polles, forsvinner aldri.
+
+**Fix:** `--fail -s` lagt til curl i `team-architecture/.github/workflows/trigger-docs-rebuild.yml`. Bruker MÅ rotere DOCS_REBUILD_TOKEN i team-architecture GitHub Secrets.
+
+### Bug: Rutingfeil for lokale sider under arkitektur/overordnet-arkitektur/
+
+**Symptom:** «Rediger»-dialog for `Målbilde` og undersider viste «Feil ved innlasting: 404».
+
+**Rotårsak:** `edit-switcher.html` brukte `hasPrefix "arkitektur/overordnet-arkitektur/"` for å identifisere `team-architecture`-innhold. Men `maalbildet/` og `veikart/` er **lokale filer i `samt-bu-docs`** → ble feilaktig rutet til `team-architecture` → 404.
+
+**Fix:** `$isLocalUnderOverordnet`-variabel (og `$isLocalD2` for flytt-dialog) med eksplisitte negasjoner. Oppdatert i 5 steder i `edit-switcher.html`.
+
+**Generell lærdom:** Lokale sider under et modul-prefix MÅ ekskluderes eksplisitt. Se `$isLocalUnderOverordnet`-mønsteret i `edit-switcher.html`.
