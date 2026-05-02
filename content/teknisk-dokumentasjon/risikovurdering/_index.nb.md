@@ -1,6 +1,6 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
-id: ""
+id: 07e39938-5a25-44e2-8df9-d869da75683b
 title: "Risikovurdering (ROS) – innebygd redigering"
 linkTitle: "Risikovurdering"
 weight: 45
