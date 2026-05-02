@@ -9,7 +9,7 @@ last_editor: Erik Hagen
 
 ---
 
-This section is a practical guide for editors and contributors working with content in SAMT-BU Docs. It goes deeper than the general [How to Contribute](/samt-bu-docs/om/hvordan-bidra/)-page and covers workflow, CMS functionality, and handling situations where multiple people edit at the same time.
+This section is a practical guide for editors and contributors working with content in SAMT-BU Docs. It goes deeper than the general [How to Contribute](/samt-bu-docs/hvordan-bidra/)-page and covers workflow, CMS functionality, and handling situations where multiple people edit at the same time.
 
 ## Who is this for?
 

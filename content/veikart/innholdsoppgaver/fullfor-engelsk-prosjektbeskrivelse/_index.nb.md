@@ -16,7 +16,7 @@ Engelsk oversettelse av prosjektbeskrivelsen er påbegynt, men ikke fullstendig.
 
 - Norsk Word-dokument (`Prosjektbeskrivelse SAMT Barn og unge.docx`) oversatt maskinelt til engelsk via pandoc + Claude
 - Engelsk fil publisert i `samt-bu-files/drafts/Project description SAMT Children and Young People.docx`
-- Lenket opp under [Se også / See also](/samt-bu-docs/om/om-samt-bu/) på den engelske siden
+- Lenket opp under [Se også / See also](/samt-bu-docs/om/) på den engelske siden
 
 ## Hva gjenstår
 

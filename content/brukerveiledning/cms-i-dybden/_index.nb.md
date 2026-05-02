@@ -9,7 +9,7 @@ last_editor: Erik Hagen
 
 ---
 
-Denne siden utdyper det innebygde redigeringsverktøyet i SAMT-BU Docs. Den forutsetter at du kjenner grunnprinsippene fra [Innebygd redigering](/samt-bu-docs/om/hvordan-bidra/innebygd-redigering/) og dekker emner du møter etter hvert som du bruker verktøyet mer.
+Denne siden utdyper det innebygde redigeringsverktøyet i SAMT-BU Docs. Den forutsetter at du kjenner grunnprinsippene fra [Innebygd redigering](/samt-bu-docs/hvordan-bidra/innebygd-redigering/) og dekker emner du møter etter hvert som du bruker verktøyet mer.
 
 ## Forslagsflyt for brukere uten skrivetilgang
 

@@ -16,7 +16,7 @@ The English translation of the project description has been started but is not y
 
 - Norwegian Word document translated to English using pandoc + Claude
 - English file published: `samt-bu-files/drafts/Project description SAMT Children and Young People.docx`
-- Linked from [See also](/samt-bu-docs/en/om/om-samt-bu/) on the English page
+- Linked from [See also](/samt-bu-docs/en/om/) on the English page
 
 ## What remains
 

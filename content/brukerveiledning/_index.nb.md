@@ -9,7 +9,7 @@ last_editor: Erik Hagen
 
 ---
 
-Denne seksjonen er en praktisk veiledning for redaktører og bidragsytere som arbeider med innhold i SAMT-BU Docs. Her går vi dypere enn den generelle [Hvordan bidra](/samt-bu-docs/om/hvordan-bidra/)-siden og dekker arbeidsflyt, avansert bruk av det innebygde redigeringsverktøyet og håndtering av situasjoner der flere redigerer samtidig.
+Denne seksjonen er en praktisk veiledning for redaktører og bidragsytere som arbeider med innhold i SAMT-BU Docs. Her går vi dypere enn den generelle [Hvordan bidra](/samt-bu-docs/hvordan-bidra/)-siden og dekker arbeidsflyt, avansert bruk av det innebygde redigeringsverktøyet og håndtering av situasjoner der flere redigerer samtidig.
 
 ## Hvem er dette for?
 
