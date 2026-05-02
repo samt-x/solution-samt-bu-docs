@@ -1,9 +1,9 @@
----
+﻿---
 # id: auto-generated – copied values are overwritten automatically on push
 id: 9080238f-b1aa-4a19-bc88-f27718fb6222
 title: "CMS in Depth"
 linkTitle: "CMS in Depth"
-weight: 10
+weight: 40
 lastmod: 2026-03-28T10:12:28+01:00
 last_editor: Erik Hagen
 
