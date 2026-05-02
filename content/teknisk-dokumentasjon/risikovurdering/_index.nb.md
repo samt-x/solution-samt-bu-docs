@@ -4,7 +4,7 @@ id: 07e39938-5a25-44e2-8df9-d869da75683b
 title: "Risikovurdering (ROS) – innebygd redigering"
 linkTitle: "Risikovurdering"
 weight: 45
-lastmod: 2026-05-02T18:30:00+02:00
+lastmod: 2026-05-02T17:55:45+02:00
 last_editor: Erik Hagen
 
 ---
