@@ -1,5 +1,8 @@
 ---
 id: 1c7d6ef7-2553-449f-9158-81252ad7f24d
+lastmod: 2026-05-02T21:17:24+02:00
+last_editor: Erik Hagen
+
 ---
 ﻿---
 # id: auto-generated – copied values are overwritten automatically on push
