@@ -6,7 +6,7 @@ linkTitle: "Pull request-flyt"
 weight: 95
 status: "Godkjent"
 # Gyldige verdier: Ny | Tidlig utkast | Pågår | Til QA | Godkjent | Avbrutt
-lastmod: 2026-05-04T17:44:46+02:00
+lastmod: 2026-05-04T17:55:23+02:00
 last_editor: Erik Hagen
 
 ---
