@@ -78,19 +78,25 @@ PR-beskrivelsen inkluderer brukerens GitHub-brukernavn og kilden.
 
 Undersøkt 2026-05-04: Decap CMS, TinaCMS og Keystatic.
 
-| Verktøy | Ekstern bidragsflyt | Metode |
-|---------|--------------------|----|
-| **Decap CMS** | ✅ Open Authoring | Forker repoet til brukerens *egen* GitHub-konto; PR fra fork → origin |
-| **Keystatic** | ❌ Ingen | Krever `write`-tilgang – ingen støtte for eksterne bidragsytere |
-| **TinaCMS / Tina Cloud** | ✅ Via service account | Tina Cloud-tjenesten oppretter branch+PR på vegne av bruker |
+| | Decap CMS | Keystatic | TinaCMS / Tina Cloud | SAMT-BU Docs (nå) |
+|--|--|--|--|--|
+| Ekstern bidragsflyt | ✅ Via brukerfork | ❌ Ingen | ✅ Via service account | ✅ Via Cloudflare Worker |
+| Metode | Fork til brukers konto | – | Tina Cloud-tjeneste | `samt-x-bot` + PAT |
+| Hugo-støtte | ✅ | ✅ | ✅ (ekstra oppsett) | ✅ native |
+| UI innebygd i siden | ❌ Separat admin | ❌ Separat admin | ❌ Separat admin | ✅ |
+| Flerspråklig UI | ❌ Engelsk | ❌ Engelsk | ❌ Engelsk | ✅ Norsk + engelsk |
+| Pris | Gratis | Gratis | $49+/mnd (editorial workflow) | Gratis |
+| Vendor lock-in | Netlify-økosystem | – | Tina Cloud / MongoDB | Cloudflare (lett å bytte) |
 
 ### Vurdering
 
 **Vår Worker + bot-PAT-arkitektur er identisk med Tina Clouds produksjonsmodell** og er det rette valget for SAMT-BU Docs.
 
-Decaps fork-per-bruker-tilnærming gir merarbeid for ikke-tekniske brukere: de mottar fork-varsler, eier plutselig et repo og må forholde seg til GitHub-konsepter de ikke kjenner. Det er feil friksjonsnivå for SAMT-BU Docs' målgruppe (kommuneansatte, helsepersonell).
+Decaps fork-per-bruker-tilnærming gir merarbeid for ikke-tekniske brukere: de mottar fork-varsler, eier plutselig et repo og må forholde seg til GitHub-konsepter de ikke kjenner. Det er feil friksjonsnivå for SAMT-BU Docs' målgruppe.
 
-Keystatic er ikke aktuelt – det støtter ikke ekstern bidragsflyt i det hele tatt.
+Tina Cloud hadde løst ekstern-bidragsproblemet, men til $49+/mnd, med engelsk-kun UI og som et separat admin-grensesnitt adskilt fra selve nettstedet.
+
+Et særlig fortrinn for SAMT-BU Docs er **tospråklig redaktørgrensesnitt (norsk og engelsk)**. Ingen av de etablerte verktøyene støtter dette. Det blir viktig ved internasjonalt samarbeid – f.eks. om Skills Dataspace i EU – der bidragsytere fra andre land skal kunne bruke grensesnittet på engelsk mens norske brukere jobber på norsk.
 
 ### Konklusjon
 
