@@ -73,3 +73,25 @@ PR-beskrivelsen inkluderer brukerens GitHub-brukernavn og kilden.
 - `cloudflare-worker/oauth-worker.js` – `handleSuggest()`, Worker-endepunkt
 - `themes/hugo-theme-samt-bu/layouts/partials/custom-footer.html` – `checkCollaboratorPermission()`, `makePrBranch()`, `suggestViaWorker()`
 - `themes/hugo-theme-samt-bu/layouts/partials/edit-switcher.html` – meny-tilpasnings-JS
+
+## Bransjebenchmark – sammenligning med etablerte git-CMS-verktøy
+
+Undersøkt 2026-05-04: Decap CMS, TinaCMS og Keystatic.
+
+| Verktøy | Ekstern bidragsflyt | Metode |
+|---------|--------------------|----|
+| **Decap CMS** | ✅ Open Authoring | Forker repoet til brukerens *egen* GitHub-konto; PR fra fork → origin |
+| **Keystatic** | ❌ Ingen | Krever `write`-tilgang – ingen støtte for eksterne bidragsytere |
+| **TinaCMS / Tina Cloud** | ✅ Via service account | Tina Cloud-tjenesten oppretter branch+PR på vegne av bruker |
+
+### Vurdering
+
+**Vår Worker + bot-PAT-arkitektur er identisk med Tina Clouds produksjonsmodell** og er det rette valget for SAMT-BU Docs.
+
+Decaps fork-per-bruker-tilnærming gir merarbeid for ikke-tekniske brukere: de mottar fork-varsler, eier plutselig et repo og må forholde seg til GitHub-konsepter de ikke kjenner. Det er feil friksjonsnivå for SAMT-BU Docs' målgruppe (kommuneansatte, helsepersonell).
+
+Keystatic er ikke aktuelt – det støtter ikke ekstern bidragsflyt i det hele tatt.
+
+### Konklusjon
+
+Behold nåværende arkitektur. `public_repo`-scope på `WORKER_PAT` er riktig og minimalt nødvendig. Ingen endringer anbefales på bakgrunn av denne benchmarken.
