@@ -23,11 +23,11 @@ SAMT-BU is a cross-agency, cross-tier collaboration involving municipalities, di
 
 We evaluated three established tools in the category of *git-based CMS solutions*:
 
-| Alternative | External contribution flow | Norwegian/English UI | Assessment |
+| Tool | External contribution flow | Norwegian/English UI | Assessment |
 |--|--|--|--|
-| **Alternative A** – fork-based CMS | ✅ Via users' own GitHub forks | ❌ English only | Tested in practice. Non-technical users are confused by fork notifications and unexpected repositories appearing in their GitHub account. Too high a barrier. |
-| **Alternative B** – hosted CMS services | ✅ Via the vendor's service account | ❌ English only | Solves the contribution problem, but is a paid SaaS service with a closed editor interface available only in English and no option to embed it in the site. |
-| **Alternative C** – CMS requiring write access | ❌ Not supported | ❌ English only | Does not support external contribution at all. |
+| **Decap CMS** | ✅ Via users' own GitHub forks | ❌ English only | Tested in practice. Non-technical users are confused by fork notifications and unexpected repositories appearing in their GitHub account. Too high a barrier. |
+| **TinaCMS / Tina Cloud** | ✅ Via the vendor's service account | ❌ English only | Solves the contribution problem, but is a paid SaaS service ($49+/month for editorial workflow) with a closed editor interface available only in English and no option to embed it in the site. |
+| **Keystatic** | ❌ Not supported | ❌ English only | Does not support external contribution at all – requires write access for all users. |
 
 None of the alternatives covered all requirements simultaneously.
 

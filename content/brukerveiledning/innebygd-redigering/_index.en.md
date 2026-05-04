@@ -1,10 +1,4 @@
 ---
-id: c95d738e-1fe5-43ac-94a8-80202e0a2faa
-lastmod: 2026-05-02T21:17:24+02:00
-last_editor: Erik Hagen
-
----
-﻿---
 # id: auto-generated – copied values are overwritten automatically on push
 id: "c95d738e-1fe5-43ac-94a8-80202e0a2faa"
 title: "Built-in Editing in the Browser"
@@ -38,8 +32,6 @@ You can revoke access at any time:
 4. Click the **Authorized GitHub Apps** tab
 5. Find **SAMT-BU Docs** in the list and click **Revoke**
 
-After revoking, you will be asked to log in again the next time you use the editing features.
-
 ## Editing an Existing Page
 
 1. Go to the page you wish to edit
@@ -49,11 +41,11 @@ After revoking, you will be asked to log in again the next time you use the edit
 5. Make your changes in the visual editor
 6. Click **"Save"**
 
-**Tip:** Images can be pasted directly into the editor (Ctrl+V or right-click → Paste).
+**Tip:** Images can be pasted directly into the editor (Ctrl+V).
 
 If you have write access, the change is published directly. Without write access, a pull request is created automatically – you will receive a link to it after saving.
 
-The website updates automatically after saving. A status indicator at the bottom left of the screen keeps you informed throughout.
+The website updates automatically after saving. A status indicator at the bottom left of the screen keeps you informed.
 
 ## Creating a New Page
 
@@ -70,9 +62,9 @@ The website updates automatically after saving. A status indicator at the bottom
 2. Click the **"Edit"** menu in the top-right corner
 3. Select **"Move this chapter"** – a dialog opens and the Edit menu is greyed out
 4. Navigate in the menu to the desired location
-5. Click **"Move here (before)"** to place it before the selected page, or **"Move here (after)"** to place it after
+5. Click **"Move here (before)"** or **"Move here (after)"**
 
-Click **"Cancel"** in the dialog to abort without making changes. The website updates automatically once the move is complete.
+> **Note:** The Move function requires write access and does not support the suggestion flow.
 
 ## Deleting a Page
 
@@ -81,46 +73,100 @@ Click **"Cancel"** in the dialog to abort without making changes. The website up
 3. Select **"Delete this page"**
 4. Confirm in the dialog
 
-Both language versions of the page (Norwegian and English) are deleted in a single step. The website updates automatically after deletion.
+Both language versions are deleted in a single step.
 
 > **Note:** Deletion cannot be immediately reversed through the interface. Contact an administrator if you have accidentally deleted a page.
 
 ## Give Feedback
 
-If you have a comment, a correction to report, or a question about a page's content – without wanting to edit directly – you can use the **"Give feedback"** feature:
-
-1. Go to the page in question
-2. Click the **"Edit"** menu and select **"Give feedback"**
-3. Log in with your GitHub account if you are not already logged in
-4. Fill in the title (pre-filled with the page name) and write your comment
-5. Optionally add a link to a specific section in the "Specific section" field
-6. Click **"Send"**
-
-Your comment is registered as a GitHub Issue linked to the page. You will receive a link to the issue after submitting, and can follow it there.
-
-**Alternatively**, use the **"Comments"** button in the bottom bar to view existing comments on the page and open a new comment dialog from there.
+Use **"Give feedback"** in the Edit menu to submit a comment without editing directly. The comment is registered as a GitHub Issue linked to the page.
 
 ## Status Indicator and Build History
 
-**The indicator at the bottom left** is always visible and shows the current state:
+The indicator at the bottom left shows build status. A build normally takes **about 1 minute**.
 
-| State | Text | Meaning |
-|-------|------|---------|
-| No active job | «Build history» | Click to see previous build jobs |
-| Saved, waiting for build | «N changes being built…» | Change sent – build is running or queued |
-| Done | «Changes published – click to reload» | Click to view the updated page |
+| State | Text |
+|-------|------|
+| No active job | «Build history» |
+| Waiting for build | «N changes being built…» |
+| Done | «Changes published – click to reload» |
 
-Clicking the indicator opens a **build history dialog** showing recent build jobs with status, timestamp, and a link to GitHub Actions. Here you can see:
-- 🔄 Running job – with the number of seconds since it started
-- 🕐 Job in queue – waiting its turn
-- ✅ Completed
-- ✅ (grey) Superseded by a newer build – see explanation below
+> If you see «Superseded» in the build history, your change has not been lost – it was published by a newer job.
 
-### About Build Times and Queues
+## Suggestion Flow for Users Without Write Access
 
-The site is built by GitHub Actions. A build normally takes **about 1 minute**. If you or others save several pages in quick succession, the wait time may be longer because build jobs run one at a time:
+Users with a GitHub account but without direct write access can contribute through exactly the same interface. The system detects permission level automatically when the Edit menu is opened:
 
-- **2 saves in a row:** the second job waits until the first is done – total time approx. 2 min
-- **3 or more rapid saves:** GitHub may *supersede* older queued jobs with the newest one. This means a job in the history may appear as «Superseded» rather than completed – this is normal and does not mean anything went wrong. All saved changes are recorded in Git and will be published by the last job that runs.
+| With write access | Without write access |
+|-------------------|----------------------|
+| Edit this page | Suggest change to this chapter |
+| New chapter after this | Suggest new chapter after this |
+| New sub-chapter | Suggest new sub-chapter |
+| Delete this page | Suggest deletion of this page |
 
-> **In short:** If you see a grey tick and the text «Superseded» in the build history, your change has not been lost – it was published by a newer job.
+Instead of committing directly to `main`, the system automatically creates a branch and a pull request. After saving, the user sees «✓ Pull request sent» and a link to the PR.
+
+> **Note:** The Move function does not support the suggestion flow.
+
+**For editors – handling incoming suggestions:** Suggestions appear as open pull requests in the relevant repository on GitHub. Approve and merge the PR – the site builds automatically and the change is published within approximately 1 minute.
+
+## Bilingual Editing
+
+The site is bilingual (Norwegian and English). Each page exists in two versions linked via a shared UUID field. When you create or edit a page, you change only one language version at a time.
+
+**Recommended workflow for a new page:**
+
+1. Create the page in Norwegian
+2. Add Norwegian content and save
+3. Switch to English via the language selector in the header
+4. Open the corresponding English page and edit it
+
+The Move function and deletion operate on both language versions simultaneously.
+
+## Status Field – Use Cases Only
+
+Use-case pages (under «Behov») have a status field that controls the symbol shown in the menu. All other pages should have an empty status field.
+
+| Symbol | Norwegian value | English value |
+|--------|-----------------|---------------|
+| ◍ | Ny | New |
+| ◔ | Tidlig utkast | Early draft |
+| ◐ | Pågår | In progress |
+| ◕ | Til QA | For QA |
+| ⏺ | Godkjent | Approved |
+| ⨂ | Avbrutt | Cancelled |
+
+## The UUID Field – Do Not Touch It
+
+All pages have a hidden `id` field set automatically. It is invisible in the editing dialog and links the Norwegian and English versions of the same page permanently.
+
+## Sort Order (`weight`)
+
+`weight` determines the order in the sidebar menu. Lower number = higher up. Use steps of ten (10, 20, 30 …) to leave room for later insertions.
+
+## Images
+
+Images can be pasted directly into the text field (Ctrl+V). They are uploaded automatically. Use PNG for screenshots and diagrams, JPEG for photographs.
+
+## Markdown in the Text Field
+
+The editor (TipTap) displays content visually but saves it as Markdown. You can use the toolbar or type Markdown syntax directly:
+
+| Markdown | Result |
+|----------|--------|
+| `**text**` | **bold** |
+| `*text*` | *italic* |
+| `# Heading` | Heading level 1 |
+| `## Heading` | Heading level 2 |
+| `` `code` `` | `code` |
+| `[link text](url)` | Clickable link |
+
+## Pitfalls
+
+**Change not published:** Closing the dialog without clicking «Save» discards your changes. There is no autosave.
+
+**Build fails:** The status indicator shows a warning icon. The change is in Git but not yet published – it is not lost. Contact an administrator.
+
+**Page deleted by mistake:** Contact an administrator – the page exists in the Git history and can be restored.
+
+**Sort order does not change:** The browser may cache the sidebar. A hard reload (Ctrl+Shift+R) usually resolves this.

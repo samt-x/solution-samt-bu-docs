@@ -173,4 +173,77 @@ GitHub Actions builds and publishes automatically after 1–2 minutes.
 | `tools/hugo-local.sh --drafts` | Include pages marked with `draft: true` |
 | `hugo server` | Start local server (fetches modules from GitHub) |
 | `hugo` | Build to the `public/` folder (check for errors) |
-| `git pull` | Fetch the latest changes from GitHub |
+| `git pull --rebase` | Fetch and rebase latest changes |
+
+---
+
+## Synchronisation and Conflict Handling
+
+When several contributors work at the same time – or when someone saves a change via the browser interface while you have a local copy – the repositories can fall out of sync.
+
+### The Helper Scripts
+
+| Script | Function |
+|--------|----------|
+| `pull-all.sh` / `.bat` | Fetches the latest changes from GitHub for all repositories |
+| `push-all.sh` / `.bat` | Pushes unpushed local commits to GitHub |
+| `sync-all.sh` / `.bat` | Combined: fetches, merges, and pushes in the correct order |
+
+**Recommended workflow:**
+
+```
+Before you start:   sync-all
+While working:      commit frequently  →  push-all
+When you are done:  sync-all
+```
+
+### What `sync-all` Does
+
+| Situation | Action |
+|-----------|--------|
+| Same locally and on GitHub | Nothing |
+| Only GitHub ahead | `git pull` (fast-forward) |
+| Only you ahead | `git push` |
+| Both have new commits | Rebase |
+| Uncommitted changes | Stash → sync → stash pop |
+| Unresolvable conflict | Stop, report, no data lost |
+
+### Manual Conflict Resolution
+
+```bash
+cd "<path to repo>"
+git pull --rebase
+# Open the file and look for conflict markers:
+#   <<<<<<< HEAD  ← your version
+#   =======
+#   >>>>>>> abc1234  ← remote
+# Delete the markers, keep the correct content.
+git add <filename>
+git rebase --continue
+git push
+```
+
+### `go.mod` / `go.sum` Conflicts
+
+```bash
+git pull --rebase
+git checkout --theirs go.mod go.sum
+hugo mod tidy
+git add go.mod go.sum
+git rebase --continue
+git push
+```
+
+### UUID Workflow and Rejected Pushes
+
+GitHub Actions automatically commits UUID fields after pushing new files. If you push twice in quick succession:
+
+```bash
+git pull --rebase && git push
+```
+
+**Prevention:**
+
+```bash
+git add <files> && git commit -m "..." && git pull --rebase && git push
+```

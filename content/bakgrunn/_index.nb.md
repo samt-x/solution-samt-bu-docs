@@ -23,11 +23,11 @@ SAMT-BU er et samarbeidsprosjekt på tvers av etater, forvaltningsnivåer og kom
 
 Vi evaluerte tre etablerte verktøy i kategorien *git-baserte CMS-løsninger*:
 
-| Alternativ | Ekstern bidragsflyt | Norsk/engelsk UI | Vurdering |
+| Verktøy | Ekstern bidragsflyt | Norsk/engelsk UI | Vurdering |
 |--|--|--|--|
-| **Alternativ A** – forkbasert CMS | ✅ Via brukernes egne GitHub-forks | ❌ Engelsk | Testet i praksis. Ikke-tekniske brukere forvirres av fork-varsler og uventede repoer i sin GitHub-konto. For høy terskel. |
-| **Alternativ B** – hostede CMS-tjenester | ✅ Via leverandørens service account | ❌ Engelsk | Løser bidragsproblemet, men er en betalt SaaS-tjeneste med lukket redaktørgrensesnitt kun på engelsk og uten mulighet for innbygging i nettstedet. |
-| **Alternativ C** – CMS med påkrevd skrivetilgang | ❌ Ikke støttet | ❌ Engelsk | Støtter ikke ekstern bidragsflyt i det hele tatt. |
+| **Decap CMS** | ✅ Via brukernes egne GitHub-forks | ❌ Engelsk | Testet i praksis. Ikke-tekniske brukere forvirres av fork-varsler og uventede repoer i sin GitHub-konto. For høy terskel. |
+| **TinaCMS / Tina Cloud** | ✅ Via leverandørens service account | ❌ Engelsk | Løser bidragsproblemet, men er en betalt SaaS-tjeneste ($49+/mnd for editorial workflow) med lukket redaktørgrensesnitt kun på engelsk og uten mulighet for innbygging i nettstedet. |
+| **Keystatic** | ❌ Ikke støttet | ❌ Engelsk | Støtter ikke ekstern bidragsflyt – krever skrivetilgang for alle brukere. |
 
 Ingen av alternativene dekket alle kravene samtidig.
 

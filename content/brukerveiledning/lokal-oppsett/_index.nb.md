@@ -157,3 +157,78 @@ GitHub Actions bygger og publiserer automatisk etter 1–2 minutter.
 | `hugo server` | Start lokal server (henter moduler fra GitHub) |
 | `hugo` | Bygg til `public/` (sjekk for feil) |
 | `git pull --rebase` | Hent siste endringer og rebase |
+
+---
+
+## Synkronisering og konflikthåndtering
+
+Når flere bidragsytere jobber samtidig – eller når noen lagrer via nettlesergrensesnittet mens du har en lokal kopi – kan repoene komme ut av synk.
+
+### Hjelpeskriptene
+
+I rotmappen for dine lokale kloner ligger tre skript:
+
+| Skript | Funksjon |
+|--------|----------|
+| `pull-all.sh` / `.bat` | Henter siste endringer fra GitHub for alle repoer |
+| `push-all.sh` / `.bat` | Pusher upushede lokale commits til GitHub |
+| `sync-all.sh` / `.bat` | Kombinert: henter, fletter og pusher i riktig rekkefølge |
+
+**Anbefalt arbeidsflyt:**
+
+```
+Før du begynner:    sync-all
+Underveis:          commit hyppig  →  push-all
+Når du er ferdig:   sync-all
+```
+
+### Hva `sync-all` gjør
+
+| Situasjon | Handling |
+|-----------|----------|
+| Likt lokalt og på GitHub | Ingenting |
+| Kun GitHub foran | `git pull` (fast-forward) |
+| Kun du foran | `git push` |
+| Begge har nye commits | Rebase |
+| Ucommittede endringer | Stash → sync → stash pop |
+| Uløsbar konflikt | Stopp, rapport, ingen data tapes |
+
+### Manuell konfliktløsning
+
+```bash
+cd "<sti til repo>"
+git pull --rebase
+# Åpne filen og se etter markørene:
+#   <<<<<<< HEAD  ← din versjon
+#   =======
+#   >>>>>>> abc1234  ← remote
+# Slett markørene, behold riktig innhold.
+git add <filnavn>
+git rebase --continue
+git push
+```
+
+### `go.mod` / `go.sum`-konflikter
+
+```bash
+git pull --rebase
+git checkout --theirs go.mod go.sum
+hugo mod tidy
+git add go.mod go.sum
+git rebase --continue
+git push
+```
+
+### UUID-workflow og avviste pushes
+
+GitHub Actions committer UUID-felt automatisk etter push av nye filer. Hvis du pusher to ganger raskt:
+
+```bash
+git pull --rebase && git push
+```
+
+**Forebygging:**
+
+```bash
+git add <filer> && git commit -m "..." && git pull --rebase && git push
+```
