@@ -45,11 +45,15 @@ Etter at du har tilbakekalt tilgangen, vil du bli bedt om å logge inn på nytt 
 5. Gjør endringene dine i det visuelle tekstverktøyet
 6. Klikk **«Lagre»**
 
-**Tips:** Bilder kan limes direkte inn i tekstfeltet (Ctrl+V eller høyreklikk → Lim inn).
-
 **Skrivetilgang:** Endringen publiseres direkte. **Uten skrivetilgang:** Det opprettes automatisk et endringsforslag (pull request). Du ser «Foreslå endring av dette kapitlet» i stedet for «Rediger denne siden» i menyen, og etter lagring vises en lenke til forslaget. En redaktør ser over og godkjenner.
 
 Nettstedet oppdateres automatisk etter lagring. En statusindikator nede til venstre i skjermen holder deg oppdatert underveis.
+
+## Bilder
+
+Bilder limes direkte inn i tekstfeltet (Ctrl+V). De lastes automatisk opp og kobles inn i siden.
+
+PNG anbefales for skjermbilder og diagrammer, JPEG for fotografier.
 
 ## Opprette en ny side
 
@@ -152,29 +156,8 @@ Alle sider har et skjult `id`-felt (UUID). Det er usynlig i redigeringsdialogen 
 
 `weight`-feltet bestemmer rekkefølgen i sidebarmenyen. Lavere tall = høyere opp. Bruk tioer-trinn (10, 20, 30 …) for å gi rom til seinere innskudd.
 
-## Bilder
+## Rapporter feil
 
-Bilder kan limes direkte inn i tekstfeltet (Ctrl+V). De lastes automatisk opp og kobles inn i siden. PNG anbefales for skjermbilder og diagrammer, JPEG for fotografier.
+Opplever du noe som ikke fungerer som det skal? Bruk **«Gi kommentar»** i Endre-menyen og beskriv hva som skjedde. Rapporten registreres som en sak og følges opp av teamet.
 
-## Markdown i tekstfeltet
-
-Tekstverktøyet (TipTap) viser innholdet visuelt, men lagrer det som Markdown. Du kan bruke verktøylinjens knapper eller skrive syntaks direkte:
-
-| Markdown | Resultat |
-|----------|----------|
-| `**tekst**` | **fet tekst** |
-| `*tekst*` | *kursiv tekst* |
-| `# Overskrift` | Overskrift nivå 1 |
-| `## Overskrift` | Overskrift nivå 2 |
-| `` `kode` `` | `kode` |
-| `[lenketekst](url)` | Klikkbar lenke |
-
-## Fallgruver
-
-**Endring publiseres ikke:** Lukker du redigeringsdialogen uten å klikke «Lagre», forkastes endringene. Det finnes ingen autosave.
-
-**Bygget feiler:** Statusindikatoren viser advarselikon. Endringen er registrert i Git men ikke publisert – den er ikke tapt og kan publiseres på nytt. Kontakt en administrator.
-
-**Siden ble slettet ved en feil:** Kontakt en administrator – siden finnes i Git-historikken og kan gjenopprettes.
-
-**Sortering endrer seg ikke:** Nettleseren kan cache sidemenyen. Hard-reload (Ctrl+Shift+R) løser det som regel.
+> Et dedikert «Rapporter feil»-menyvalg er under planlegging.

@@ -43,11 +43,15 @@ You can revoke access at any time:
 5. Make your changes in the visual editor
 6. Click **"Save"**
 
-**Tip:** Images can be pasted directly into the editor (Ctrl+V).
-
 If you have write access, the change is published directly. Without write access, a pull request is created automatically – you will receive a link to it after saving.
 
 The website updates automatically after saving. A status indicator at the bottom left of the screen keeps you informed.
+
+## Images
+
+Paste images directly into the text field (Ctrl+V). They are uploaded automatically and embedded in the page.
+
+Use PNG for screenshots and diagrams, JPEG for photographs.
 
 ## Creating a New Page
 
@@ -146,29 +150,8 @@ All pages have a hidden `id` field set automatically. It is invisible in the edi
 
 `weight` determines the order in the sidebar menu. Lower number = higher up. Use steps of ten (10, 20, 30 …) to leave room for later insertions.
 
-## Images
+## Report a Bug
 
-Images can be pasted directly into the text field (Ctrl+V). They are uploaded automatically. Use PNG for screenshots and diagrams, JPEG for photographs.
+If something does not work as expected, use **"Give feedback"** in the Edit menu and describe what happened. The report is registered as an issue and followed up by the team.
 
-## Markdown in the Text Field
-
-The editor (TipTap) displays content visually but saves it as Markdown. You can use the toolbar or type Markdown syntax directly:
-
-| Markdown | Result |
-|----------|--------|
-| `**text**` | **bold** |
-| `*text*` | *italic* |
-| `# Heading` | Heading level 1 |
-| `## Heading` | Heading level 2 |
-| `` `code` `` | `code` |
-| `[link text](url)` | Clickable link |
-
-## Pitfalls
-
-**Change not published:** Closing the dialog without clicking «Save» discards your changes. There is no autosave.
-
-**Build fails:** The status indicator shows a warning icon. The change is in Git but not yet published – it is not lost. Contact an administrator.
-
-**Page deleted by mistake:** Contact an administrator – the page exists in the Git history and can be restored.
-
-**Sort order does not change:** The browser may cache the sidebar. A hard reload (Ctrl+Shift+R) usually resolves this.
+> A dedicated "Report a bug" menu option is being planned.
