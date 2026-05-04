@@ -6,6 +6,8 @@ weight: 30
 aliases:
   - /om/hvordan-bidra/lokal-oppsett/
   - /hvordan-bidra/lokal-oppsett/
+lastmod: 2026-05-04T22:59:22+02:00
+last_editor: Erik Hagen
 
 ---
 

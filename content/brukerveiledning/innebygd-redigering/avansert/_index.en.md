@@ -4,6 +4,8 @@ id: 9080238f-b1aa-4a19-bc88-f27718fb6222
 title: "Built-in Editor – Advanced Use"
 linkTitle: "Advanced Use"
 weight: 10
+lastmod: 2026-05-04T22:59:22+02:00
+last_editor: Erik Hagen
 
 ---
 
