@@ -1,10 +1,4 @@
 ---
-id: ac278ba4-c014-4b70-9abf-d6067eb89f36
-lastmod: 2026-05-02T21:17:24+02:00
-last_editor: Erik Hagen
-
----
-﻿---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: "829524a1-0b5d-4396-97b3-f28262ca1eb3"
 title: "Redigering direkte på GitHub"

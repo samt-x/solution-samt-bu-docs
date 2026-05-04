@@ -85,6 +85,10 @@ Uten skrivetilgang vises «Foreslå sletting av denne siden» i stedet.
 
 > **Merk:** Sletting er ikke umiddelbart reverserbart via grensesnittet. Kontakt en administrator ved feilsletting.
 
+## Videre lesing
+
+For mer avanserte emner – forslagsflyt, tospråklig redigering, bilder og fallgruver – se [Avansert bruk](avansert/).
+
 ## Gi tilbakemelding
 
 Bruk **«Gi kommentar»** i Endre-menyen for å sende et innspill uten å redigere direkte. Kommentaren registreres som en GitHub Issue knyttet til siden.
