@@ -7,6 +7,12 @@ Skips bot commits when determining lastmod and last_editor.
 import subprocess
 import os
 import re
+from datetime import datetime
+try:
+    from zoneinfo import ZoneInfo
+    _OSLO_TZ = ZoneInfo("Europe/Oslo")
+except ImportError:
+    _OSLO_TZ = None
 
 
 def get_lastmod(rel_path):
@@ -20,7 +26,13 @@ def get_lastmod(rel_path):
             continue
         timestamp, _, email = line.partition('|')
         if '[bot]' not in email:
-            return timestamp.strip()
+            ts = timestamp.strip()
+            if _OSLO_TZ:
+                try:
+                    return datetime.fromisoformat(ts).astimezone(_OSLO_TZ).isoformat()
+                except Exception:
+                    pass
+            return ts
     return ''
 
 
