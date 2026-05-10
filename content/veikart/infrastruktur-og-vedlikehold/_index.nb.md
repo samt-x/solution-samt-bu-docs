@@ -4,7 +4,7 @@ id: aecf5f72-7d50-44b3-868c-5140d914560a
 title: "Infrastruktur og vedlikehold"
 linkTitle: "Infrastruktur og vedlikehold"
 weight: 25
-lastmod: 2026-05-10T00:00:00+02:00
+lastmod: 2026-05-10T22:17:21+02:00
 last_editor: Erik Hagen
 
 ---

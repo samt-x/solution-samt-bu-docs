@@ -4,7 +4,7 @@ id: 02b7db95-4847-4228-a121-b5973c25cdaa
 title: "Plattform – dokumentasjon"
 linkTitle: "Dokumentasjon"
 weight: 15
-lastmod: 2026-03-28T10:01:46+01:00
+lastmod: 2026-05-10T22:17:21+02:00
 last_editor: Erik Hagen
 
 ---
