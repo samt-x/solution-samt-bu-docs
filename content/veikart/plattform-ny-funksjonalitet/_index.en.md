@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Planned and completed features that extend the SAMT-BU Docs platform with new capabilities.
+Features that extend the SAMT-BU Docs platform with new capabilities — from editing tools and authentication to advanced user-facing functionality.
+
+[View all items – Platform: new functionality](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/1)

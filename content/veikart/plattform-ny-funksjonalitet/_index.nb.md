@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Planlagte og gjennomførte funksjoner som utvider SAMT-BU Docs-plattformen med ny kapasitet.
+Funksjoner som utvider SAMT-BU Docs-plattformen med ny kapasitet – fra redigeringsverktøy og autentisering til avanserte brukerfunksjoner.
+
+[Se alle saker – Plattform: ny funksjonalitet](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/1)

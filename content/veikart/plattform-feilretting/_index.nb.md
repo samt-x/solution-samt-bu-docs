@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Kjente feil og mangler i plattformen som er utbedret eller planlagt utbedret.
+Kjente feil og mangler i plattformen – fra brukergrensesnitt og bygg-feedback til CI/CD-logikk.
+
+[Se alle saker – Plattform: feilretting](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/2)

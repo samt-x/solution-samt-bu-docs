@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Known bugs and deficiencies in the platform that have been or are planned to be fixed.
+Known bugs and deficiencies in the platform — from UI and build feedback to CI/CD logic.
+
+[View all items – Platform: bug fixes](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/2)

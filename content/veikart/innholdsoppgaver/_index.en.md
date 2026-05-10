@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Tasks related to content, structure, and administration of the documentation – not platform development.
+Tasks related to the documentation content itself — text, structure, translations, and administration of files and folders.
+
+[View all items – Content tasks](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/4)

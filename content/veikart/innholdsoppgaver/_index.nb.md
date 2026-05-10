@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Oppgaver knyttet til innhold, struktur og administrasjon av dokumentasjonen – ikke plattformutvikling.
+Oppgaver knyttet til selve innholdet i dokumentasjonen – tekst, struktur, oversettelser og administrasjon av filer og mapper.
+
+[Se alle saker – Innholdsoppgaver](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/4)

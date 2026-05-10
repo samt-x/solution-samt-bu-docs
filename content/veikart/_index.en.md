@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Planned improvements and extensions to the SAMT-BU Docs platform. Each sub-chapter describes one roadmap item with need, proposed solution, and remaining work.
+All planned, ongoing, and completed items for the SAMT-BU Docs platform are tracked as [GitHub Issues in solution-samt-bu-docs](https://github.com/SAMT-X/solution-samt-bu-docs/issues). Items are organized into five categories — see the sub-chapters below.
+
+Detailed descriptions, discussions, and status updates are found directly in the individual issue on GitHub.

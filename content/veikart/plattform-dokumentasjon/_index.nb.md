@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Dokumentasjonsoppgaver knyttet til plattformen: utredninger, strategidokumenter og veiledninger som må opprettes eller oppdateres.
+Prosess- og dokumentasjonsoppgaver for plattformen – utviklingsstrategier, veiledninger for administratorer og teknisk referansedokumentasjon.
+
+[Se alle saker – Plattform: dokumentasjon](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/3)

@@ -9,4 +9,6 @@ last_editor: Erik Hagen
 
 ---
 
-Documentation tasks related to the platform: analyses, strategy documents, and guides that need to be created or updated.
+Process and documentation tasks for the platform — development strategies, administrator guides, and technical reference documentation.
+
+[View all items – Platform: documentation](https://github.com/SAMT-X/solution-samt-bu-docs/milestone/3)
