@@ -21,7 +21,42 @@ SAMT-BU er et samarbeidsprosjekt på tvers av etater, forvaltningsnivåer og kom
 
 ## Vurderte alternativer
 
-Vi evaluerte tre etablerte verktøy i kategorien *git-baserte CMS-løsninger*:
+Vi evaluerte to kategorier av løsninger: wiki-plattformer og git-baserte CMS-løsninger.
+
+### Wiki-plattformer
+
+Wiki-plattformer er en naturlig kandidat for dokumentasjon med mange bidragsytere. Vi vurderte to varianter:
+
+**MediaWiki** er programvaren bak Wikipedia. Den er moden, veldokumentert og åpen kildekode. **Semantic MediaWiki (SMW)** er en utvidelse som legger strukturerte, maskinlesbare egenskaper på wiki-sider – tenk RDF-lignende relasjoner og spørringer på tvers av sider. Gitt at SAMT-BU jobber med sammenhengende tjenester med rike metadatabehov, og har et eget team-semantics, er dette særlig relevant å vurdere.
+
+**Funksjonell sammenligning:**
+
+| Funksjon | Hugo + Git (valgt) | MediaWiki | Semantic MediaWiki |
+|---|---|---|---|
+| Hierarkisk navigasjon | ✅ | ✅ | ✅ |
+| Flerspråklig innhold | ✅ | ✅ (Translate-utvidelse) | ✅ |
+| Web-basert redigering for ikke-tekniske | ✅ (TipTap) | ✅ (VisualEditor) | ✅ |
+| Bidragsflyt uten direkte tilgang | ✅ (PR-basert) | ⚠️ (diskusjon + godkjenning) | ⚠️ |
+| Versjonskontroll og historikk | ⚠️ (git, ikke eksponert for brukere) | ✅ (innebygd, brukervenlig) | ✅ |
+| Stabile lenker som overlever omdøping | ⚠️ (må bygges) | ✅ (page ID-redirects, automatisk) | ✅ |
+| Permalenker til spesifikke versjoner | ⚠️ (må bygges) | ✅ (oldid-lenker, innebygd) | ✅ |
+| Diff-visning mellom versjoner | ❌ | ✅ | ✅ |
+| Diskusjon og kommentarer per side | ❌ (planlagt) | ✅ (diskusjonssider) | ✅ |
+| Søk | ✅ (Lunr.js) | ✅ | ✅ + semantisk spørring |
+| Semantiske metadata og strukturert informasjon | ⚠️ (frontmatter, manuelt) | ⚠️ (maler og kategorier) | ✅ (RDF-egenskaper, #ask) |
+| Innhold fra flere repoer og team | ✅ (Hugo Modules) | ⚠️ (interwiki, ikke sømløst) | ⚠️ |
+| Tilpasset visuell profil | ✅ | ⚠️ (mulig, men krevende) | ⚠️ |
+| Automatisk publisering og CI/CD | ✅ | ⚠️ (ikke native) | ⚠️ |
+| Tilgangskontroll per seksjon | ⚠️ (GitHub-nivå) | ✅ (granulær, innebygd) | ✅ |
+| Tospråklig redaktørgrensesnitt | ✅ | ⚠️ (mulig, men krever tilpasning) | ⚠️ |
+
+Det er verdt å merke seg at flere av funksjonene vi planlegger å bygge (stabile lenker, versjonslenker, diskusjon per side) finnes ferdig i MediaWiki og SMW.
+
+*Ikke-funksjonelle egenskaper:* MediaWiki/SMW krever PHP-server og database (MySQL/MariaDB), mens Hugo genererer statiske filer. Dette er ikke i seg selv avgjørende, men påvirker driftsmodell, vertsvalg og integrasjon med øvrig verktøybruk i prosjektet.
+
+### Git-baserte CMS-løsninger
+
+Innenfor git-baserte løsninger evaluerte vi tre etablerte verktøy:
 
 | Verktøy | Ekstern bidragsflyt | Norsk/engelsk UI | Vurdering |
 |--|--|--|--|
@@ -31,18 +66,23 @@ Vi evaluerte tre etablerte verktøy i kategorien *git-baserte CMS-løsninger*:
 
 Ingen av alternativene dekket alle kravene samtidig.
 
-## Valgt tilnærming
+## Valgt tilnærming og avveininger
 
-Vi bygde en egentilpasset løsning basert på mønsteret fra de beste delene av alternativene over:
+Vi bygde en egentilpasset løsning basert på git og Hugo:
 
 - **Innebygd editor** direkte i nettstedets sider – ingen ekstern portal, ingen omplanting til annet grensesnitt
 - **Worker-basert bidragsflyt** – en Cloudflare Worker oppretter branch, commit og pull request på vegne av bidragsyteren, via en dedikert bot-konto. Bidragsyteren trenger ikke skrivetilgang til repoet
 - **Tospråklig redaktørgrensesnitt** – alt tekst i editordialogene finnes på norsk og engelsk, styrt av nettstedets aktive språk
+- **Innhold fra flere repoer** – Hugo Modules-systemet henter innhold fra team-architecture, team-semantics og andre repoer inn i ett samlet nettsted
 - **Åpen kildekode, ingen leverandøravhengighet** – løsningen eier vi selv og kan videreutvikle fritt
+
+Det viktigste argumentet mot MediaWiki/SMW var ikke teknisk, men organisatorisk: prosjektets øvrige arbeidsflyt er allerede git- og GitHub-basert, og en wiki-plattform ville innebåret et parallelt system med en annen brukermodell og en annen eierskapsstruktur. Sammenkoblingen av innhold fra flere repoer via Hugo Modules – som gjenspeiler teamstrukturen i prosjektet – har heller ingen god tilsvarende i MediaWiki.
+
+Funksjonene der MediaWiki/SMW er sterkere (versjonskontroll eksponert for brukere, stabile lenker, diskusjon per side) er identifisert som mangler og planlagt bygd inn i løsningen over tid.
 
 ## Særlig fortrinn: tospråklighet
 
-Ingen av de etablerte verktøyene vi evaluerte tilbyr flerspråklig redaktørgrensesnitt. For SAMT-BU Docs er dette et vesentlig fortrinn: norske brukere jobber på norsk, mens internasjonale samarbeidspartnere – f.eks. ved deltakelse i initiativ som Skills Dataspace i EU – kan bruke det samme grensesnittet på engelsk.
+Ingen av de etablerte verktøyene vi evaluerte tilbyr fullt flerspråklig redaktørgrensesnitt. For SAMT-BU Docs er dette et vesentlig fortrinn: norske brukere jobber på norsk, mens internasjonale samarbeidspartnere – f.eks. ved deltakelse i initiativ som Skills Dataspace i EU – kan bruke det samme grensesnittet på engelsk.
 
 ## Mer informasjon
 
