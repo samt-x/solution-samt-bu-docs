@@ -1,6 +1,6 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
-id: placeholder
+id: aecf5f72-7d50-44b3-868c-5140d914560a
 title: "Infrastruktur og vedlikehold"
 linkTitle: "Infrastruktur og vedlikehold"
 weight: 25
