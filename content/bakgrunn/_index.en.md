@@ -4,7 +4,7 @@ id: 4fe26ad6-aa99-46b9-b522-b5f8bfa09bf7
 title: "Background and rationale"
 linkTitle: "Background"
 weight: 5
-lastmod: 2026-05-05T00:41:49+02:00
+lastmod: 2026-05-10T13:19:43+02:00
 last_editor: Erik Hagen
 
 ---
