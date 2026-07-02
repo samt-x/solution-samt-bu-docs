@@ -1,8 +1,8 @@
 ---
 # id: auto-generert – kopierte verdier overskrives automatisk ved push
 id: "c95d738e-1fe5-43ac-94a8-80202e0a2faa"
-title: "Innebygd redigering i nettleseren"
-linkTitle: "Innebygd redigering"
+title: Innebygd redigering i nettleseren
+linkTitle: Innebygd redigering
 weight: 5
 aliases:
   - /om/hvordan-bidra/innebygd-redigering/
@@ -11,7 +11,6 @@ lastmod: 2026-05-05T00:59:16+02:00
 last_editor: Erik Hagen
 
 ---
-
 Du redigerer innhold direkte i nettleseren i et visuelt tekstverktøy – ingen Markdown- eller Git-kunnskap nødvendig. Alle vanlige redaktøroppgaver er tilgjengelige fra **«Endre»**-menyen øverst til høyre i headeren.
 
 ## Hva du trenger
@@ -98,7 +97,7 @@ Bruk **«Gi kommentar»** i Endre-menyen for å sende et innspill uten å redige
 Indikatoren nede til venstre viser byggstatus. Normalt tar et bygg **ca. 1 minutt**.
 
 | Tilstand | Tekst |
-|----------|-------|
+| --- | --- |
 | Ingen pågående jobb | «Byggehistorikk» |
 | Venter på bygg | «N endringer bygges…» |
 | Ferdig | «Endringer publisert – klikk for å laste inn» |
@@ -110,7 +109,7 @@ Indikatoren nede til venstre viser byggstatus. Normalt tar et bygg **ca. 1 minut
 Brukere med GitHub-konto men uten direkte skrivetilgang til repoet kan bidra gjennom nøyaktig samme grensesnitt. Systemet oppdager rettighetsnivået automatisk når Endre-menyen åpnes, og tilpasser menynavnene:
 
 | Med skrivetilgang | Uten skrivetilgang |
-|-------------------|--------------------|
+| --- | --- |
 | Rediger denne siden | Foreslå endring av dette kapitlet |
 | Nytt kapittel etter dette | Foreslå nytt kapittel etter dette |
 | Nytt underkapittel | Foreslå nytt underkapittel |
@@ -140,7 +139,7 @@ Flytt-funksjonen og sletting opererer på begge språkversjoner samtidig – én
 Use case-sider (under «Behov») har et statusfelt som styrer symbolet i menyen. Øvrige sider skal ha tomt statusfelt.
 
 | Symbol | Norsk verdi | Engelsk verdi |
-|--------|-------------|---------------|
+| --- | --- | --- |
 | ◍ | Ny | New |
 | ◔ | Tidlig utkast | Early draft |
 | ◐ | Pågår | In progress |
