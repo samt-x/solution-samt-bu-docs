@@ -28,8 +28,8 @@ Første gang du bruker redigeringsfunksjonene, ber SAMT-BU Docs om tilgang til G
 Du kan når som helst trekke tilbake tilgangen:
 
 1. Logg inn på [github.com](https://github.com)
-2. Gå til **Innstillinger** (klikk på profilbildet øverst til høyre → *Settings*)
-3. Velg **Applications** i venstremenyen
+2. Gå til  **Innstillinger** (klikk på profilbildet øverst til høyre → *Settings*)
+3. Velg  **Applications** i venstremenyen
 4. Klikk på fanen **Authorized GitHub Apps**
 5. Finn **SAMT-BU Docs** i listen og klikk **Revoke**
 
