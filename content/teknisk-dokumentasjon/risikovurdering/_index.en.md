@@ -22,7 +22,7 @@ When an external contributor without write access uses the "Suggest change" feat
 | Token type | Classic GitHub PAT, `repo` scope |
 | Account | `samt-x-bot` – dedicated bot account |
 | Org membership | SAMT-X org only – no other orgs or private repositories |
-| Write access | 9 SAMT-X content repositories via team `content-bots` |
+| Write access | 10 SAMT-X content repositories via team `content-bots` |
 | Storage | Encrypted Cloudflare Worker secret – never exposed in code |
 
 ## Risk Assessment

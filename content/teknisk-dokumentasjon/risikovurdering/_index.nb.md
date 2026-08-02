@@ -22,7 +22,7 @@ Når en ekstern bidragsyter uten skrivetilgang bruker «Foreslå endring»-funks
 | Token-type | Klassisk GitHub PAT, `repo`-scope |
 | Konto | `samt-x-bot` – dedikert bot-konto |
 | Org-tilknytning | Kun `SAMT-X`-org, ingen andre org-er eller private repoer |
-| Skrivetilgang | 9 SAMT-X-innholdsrepoer via team `content-bots` |
+| Skrivetilgang | 10 SAMT-X-innholdsrepoer via team `content-bots` |
 | Lagring | Kryptert Cloudflare Worker secret – aldri eksponert i kode |
 
 ## Risikovurdering
