@@ -7,7 +7,7 @@ weight: 5
 aliases:
   - /en/om/hvordan-bidra/innebygd-redigering/
   - /en/hvordan-bidra/innebygd-redigering/
-lastmod: 2026-05-05T00:59:16+02:00
+lastmod: 2026-08-04T01:11:46+02:00
 last_editor: Erik Hagen
 
 ---
