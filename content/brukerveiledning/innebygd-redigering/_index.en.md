@@ -105,16 +105,34 @@ Users with a GitHub account but without direct write access can contribute throu
 
 | With write access | Without write access |
 |-------------------|----------------------|
-| Edit this page | Suggest change to this chapter |
+| Edit this page | Suggest edit to this page |
 | New chapter after this | Suggest new chapter after this |
 | New sub-chapter | Suggest new sub-chapter |
 | Delete this page | Suggest deletion of this page |
 
-Instead of committing directly to `main`, the system automatically creates a branch and a pull request. After saving, the user sees «✓ Pull request sent» and a link to the PR.
+Instead of committing directly to `main`, the system automatically creates a branch and a suggestion. After saving, a confirmation with a link to the suggestion is shown.
 
 > **Note:** The Move function does not support the suggestion flow.
 
-**For editors – handling incoming suggestions:** Suggestions appear as open pull requests in the relevant repository on GitHub. Approve and merge the PR – the site builds automatically and the change is published within approximately 1 minute.
+**You are not notified when you submit.** A single email arrives, and only once the suggestion has been handled – approved or set aside. No action is needed on your part; everything has already been done.
+
+## For editors – handling incoming suggestions
+
+Select **"Handle suggestions"** under Project in the Edit menu. The item is only shown to users with write access.
+
+The dialog lists all open suggestions across every content repository, with who submitted them and when. Each can be approved or declined, both with a two-step confirmation.
+
+There is no need to go to GitHub to handle suggestions.
+
+Once you choose, three things happen automatically:
+
+1. The suggestion is given an explanatory title, so the contributor's email has a subject line that makes sense
+2. The change is included, and the site rebuilds
+3. A friendly message is left for the contributor – **a couple of minutes later**, not immediately
+
+The delay is deliberate: posted immediately, the contributor receives two emails instead of one. You do not have to wait or keep the tab open – the message is queued and sent even if you close the browser.
+
+**If the suggestion conflicts** with content changed in the meantime, it cannot be merged automatically. For now, such cases have to be resolved in GitHub.
 
 ## Bilingual Editing
 

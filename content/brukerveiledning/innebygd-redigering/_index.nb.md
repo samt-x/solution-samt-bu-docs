@@ -110,16 +110,34 @@ Brukere med GitHub-konto men uten direkte skrivetilgang til repoet kan bidra gje
 
 | Med skrivetilgang | Uten skrivetilgang |
 | --- | --- |
-| Rediger denne siden | Foreslå endring av dette kapitlet |
+| Rediger denne siden | Foreslå endring av denne siden |
 | Nytt kapittel etter dette | Foreslå nytt kapittel etter dette |
 | Nytt underkapittel | Foreslå nytt underkapittel |
 | Slett denne siden | Foreslå sletting av denne siden |
 
-I stedet for å committe direkte til `main` oppretter systemet automatisk en branch og en pull request. Etter lagring vises «✓ Pull request sendt» og en klikkbar lenke til PR-en. En redaktør med skrivetilgang ser over og godkjenner eller avviser på GitHub.
+I stedet for å committe direkte til `main` oppretter systemet automatisk en branch og et forslag. Etter lagring vises en bekreftelse med lenke til forslaget.
 
 > **Merk:** «Flytt dette kapitlet» støtter ikke forslagsflyt og er kun tilgjengelig for brukere med skrivetilgang.
 
-**For redaktører – håndtere innkomne forslag:** Forslag vises som åpne pull requests i det aktuelle repoet på GitHub. Godkjenn og merge PR-en – nettstedet bygges automatisk og endringen publiseres innen ca. 1 minutt.
+**Du blir ikke varslet når du sender inn.** Det kommer én e-post, og den kommer først når forslaget er behandlet – enten godkjent eller lagt bort. Du trenger ikke gjøre noe med den; alt er allerede gjort.
+
+## For redaktører – behandle innkomne forslag
+
+Velg **«Behandle forslag»** under Prosjekt i Endre-menyen. Punktet vises kun for brukere med skrivetilgang.
+
+Dialogen viser alle åpne forslag på tvers av alle innholdsrepoene, med hvem som har sendt inn og når. For hvert forslag kan du godkjenne eller avslå, begge deler med en bekreftelse i to trinn.
+
+Du trenger altså ikke gå til GitHub for å behandle forslag.
+
+Når du har valgt, skjer tre ting automatisk:
+
+1. Forslaget får en forklarende tittel, slik at e-posten til bidragsyteren har et emnefelt som gir mening
+2. Endringen tas inn, og nettstedet bygges på nytt
+3. En vennlig melding legges igjen til bidragsyteren – **et par minutter senere**, ikke med det samme
+
+Forsinkelsen er med vilje: legges meldingen ut umiddelbart, får bidragsyteren to e-poster i stedet for én. Du trenger ikke vente eller holde fanen åpen – meldingen ligger i kø og sendes selv om du lukker nettleseren.
+
+**Er forslaget i konflikt** med innhold som er endret i mellomtiden, kan det ikke slås sammen automatisk. Da må det foreløpig løses i GitHub.
 
 ## Tospråklig redigering
 
