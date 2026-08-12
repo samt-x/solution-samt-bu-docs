@@ -81,9 +81,53 @@ Content repos were created in `samt-x` early in the project. They work fine wher
 
 ---
 
+## Access model
+
+Established 12 August 2026. Background and rationale in
+[issue #69](https://github.com/SAMT-X/solution-samt-bu-docs/issues/69).
+
+Access is granted to **teams**, never to individuals:
+
+| Team | Members | Write on |
+|------|---------|----------|
+| `samt-bu-core-team` | Core participants | All repos except the four frozen ones |
+| `samt-bu-alle` | All organisation members | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` |
+| Subject teams (`samt-bu-pilot-1…4`, `-architecture`, `-semantics`, `-market`) | Participants in that work | Their own repo |
+
+**Four frozen repos** have no editorial team access, only personal grants:
+`hugo-theme-samt-bu`, `samt-x.github.io`, `information-models`,
+`demo-repository`. They are not intended for editing in a documentation
+context.
+
+**Pilot teams do not grant access to the shared documentation.** `samt-bu-docs`
+was previously attached to the `samt-bu-pilot-1` team, which gave pilot 1
+participants write access the other pilots lacked. That link has been removed.
+
+### Maintenance
+
+- New person on the project → add to `samt-bu-alle` (and `samt-bu-core-team` if
+  they are a core participant)
+- New module repo → add it to `samt-bu-core-team`
+
+### Why not an org-level base permission
+
+The org-level base permission is a **floor**, not a starting point. Setting it
+to `write` gives everyone write access to everything – and it cannot be lowered
+per repo. As long as the four repos are to be kept out, this is ruled out.
+
+### Note
+
+- **Organisation owners have admin everywhere**, regardless of teams. That is
+  an access path not visible in the team structure.
+- **`erikhag1test` has a direct grant on `samt-bu-docs`** and is not an
+  organisation member. The grant is that account's only access path, and it is
+  used for testing. It **must not be removed** in a cleanup of direct grants.
+
+---
+
 ## Open questions
 
 - **Shared team repos:** Can e.g. `team-architecture` belong to one org but be mounted by sites in `samt-x`? Yes, technically – but ownership and access control should be clarified. Should the content be owned by the project or by the team across projects?
 - **Naming conventions for shared repos:** If a team repo is to serve multiple projects, it should not carry a project-specific prefix.
 - **Migration of existing repos:** Is it worth moving `team-architecture` etc. to a `samt-bu` org? This affects CI secrets, CMS config, and Hugo Module pointers.
-- **Access control across orgs:** GitHub permissions are managed per org. How do we handle contributors from the `samt-bu` project needing write access to repos in `samt-x`?
+- **Access control across orgs:** GitHub permissions are managed per org. Within `samt-x` this is now solved by the team model above. The question only returns once content repos are actually moved to a dedicated `samt-bu` org – the team structure would then have to be mirrored in both orgs.

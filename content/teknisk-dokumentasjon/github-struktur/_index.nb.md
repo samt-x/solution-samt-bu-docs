@@ -81,12 +81,55 @@ Innholdsrepoene ble opprettet i `samt-x` tidlig i prosjektet. De fungerer der de
 
 ---
 
+## Tilgangsmodell
+
+Etablert 12. august 2026. Bakgrunn og begrunnelse i
+[issue #69](https://github.com/SAMT-X/solution-samt-bu-docs/issues/69).
+
+Tilgang gis til **team**, aldri til enkeltpersoner:
+
+| Team | Medlemmer | Write på |
+|------|-----------|----------|
+| `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de fire fredede |
+| `samt-bu-alle` | Alle organisasjonsmedlemmer | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` |
+| Fagteam (`samt-bu-pilot-1…4`, `-architecture`, `-semantics`, `-market`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
+
+**Fire fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
+granter: `hugo-theme-samt-bu`, `samt-x.github.io`, `information-models`,
+`demo-repository`. De er ikke ment å redigeres i dokumentasjonssammenheng.
+
+**Pilotteam gir ikke tilgang til fellesdokumentasjonen.** `samt-bu-docs` var
+tidligere knyttet til `samt-bu-pilot-1`-teamet, noe som ga pilot 1-deltakere
+skrivetilgang de andre pilotene manglet. Koblingen er fjernet.
+
+### Vedlikehold
+
+- Ny person i prosjektet → inn i `samt-bu-alle` (og `samt-bu-core-team` hvis
+  vedkommende er kjernedeltaker)
+- Nytt modulrepo → legg det til `samt-bu-core-team`
+
+### Hvorfor ikke org-nivå grunnrettighet
+
+Grunnrettigheten på org-nivå er et **gulv**, ikke et utgangspunkt. Settes den
+til `write`, får alle skrivetilgang til alt – og den kan ikke senkes per repo.
+Så lenge de fire repoene skal holdes utenfor, er dette utelukket.
+
+### Merk
+
+- **Organisasjonseiere har admin overalt**, uavhengig av team. Det er en
+  tilgangsvei som ikke synes i teamstrukturen.
+- **`erikhag1test` har en direkte grant på `samt-bu-docs`** og er ikke
+  organisasjonsmedlem. Granten er kontoens eneste tilgangsvei, og den brukes
+  til testing. **Skal ikke fjernes** i en opprydding av direkte granter.
+
+---
+
 ## Åpne spørsmål
 
 - **Delte team-repoer:** Kan f.eks. `team-architecture` tilhøre én org men monteres av sites i `samt-x`? Ja, teknisk sett – men eierskap og tilgangsstyring bør avklares. Skal innholdet eies av prosjektet eller av teamet på tvers av prosjekter?
 - **Navnekonvensjon for delte repoer:** Hvis et team-repo skal tjene flere prosjekter, bør det ikke ha prosjektspesifikt prefiks.
 - **Migrasjon av eksisterende repoer:** Er det verdt å flytte `team-architecture` o.l. til en `samt-bu`-org? Påvirker CI-secrets, CMS-config og Hugo Module-pekere.
-- **Tilgangsstyring på tvers av orger:** GitHub-rettigheter styres per org. Hvordan håndterer vi at bidragsytere fra `samt-bu`-prosjektet trenger skrivetilgang til repoer i `samt-x`?
+- **Tilgangsstyring på tvers av orger:** GitHub-rettigheter styres per org. Innenfor `samt-x` er dette nå løst med teammodellen over. Spørsmålet gjenstår først når innholdsrepoer faktisk flyttes til en egen `samt-bu`-org – da må teamstrukturen speiles i begge orger.
 
 ---
 
