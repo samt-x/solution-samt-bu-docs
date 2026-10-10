@@ -86,5 +86,5 @@ Ingen av de etablerte verktøyene vi evaluerte tilbyr fullt flerspråklig redakt
 
 ## Mer informasjon
 
-- [Teknisk arkitektur og nøkkelfiler](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/teknisk-dokumentasjon/) – detaljer om komponenter, CI/CD og oppsett
-- [Veikart](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/) – planlagte forbedringer, inkludert fullstendig bransjebenchmark
+- [Teknisk arkitektur og nøkkelfiler](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/) – detaljer om komponenter, CI/CD og oppsett
+- [Veikart](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/veikart/) – planlagte forbedringer, inkludert fullstendig bransjebenchmark

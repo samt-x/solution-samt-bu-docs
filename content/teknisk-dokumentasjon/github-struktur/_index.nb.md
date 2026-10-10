@@ -135,7 +135,7 @@ Så lenge de fire repoene skal holdes utenfor, er dette utelukket.
 
 ## Plattformvalg: GitHub vs. GitLab
 
-> **Se [Plattformvalg: GitHub](/prosjektleveranser/loesninger/plattformvalg/)** for prosjektets samlede begrunnelse, avveiningene med digital suverenitet og hva som skal til for å bytte. Denne seksjonen beskriver hvordan valget påvirket teknikken bak docs.samt-bu.no, og skal krympes til det.
+> **Se [Plattformvalg: GitHub](/prosjektleveranser/loesninger/samhandlingsplattform/plattformvalg/)** for prosjektets samlede begrunnelse, avveiningene med digital suverenitet og hva som skal til for å bytte. Denne seksjonen beskriver hvordan valget påvirket teknikken bak docs.samt-bu.no, og skal krympes til det.
 
 GitHub ble valgt fordi det er mest utbredt i Digdir og blant samarbeidspartnere (Altinn, Felles datakatalog og de fleste synlige open source-prosjekter i norsk offentlig sektor er der). Det er et pragmatisk valg – men ikke nødvendigvis det arkitektonisk sterkeste.
 

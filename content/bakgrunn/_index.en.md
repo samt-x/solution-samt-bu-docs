@@ -86,5 +86,5 @@ None of the tools we evaluated offer a fully multilingual editor interface. For 
 
 ## Further reading
 
-- [Technical architecture and key files](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/teknisk-dokumentasjon/) – component details, CI/CD and setup
-- [Roadmap](/prosjektleveranser/loesninger/cms-loesninger/samt-bu-docs/veikart/) – planned improvements, including full benchmark comparison
+- [Technical architecture and key files](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/) – component details, CI/CD and setup
+- [Roadmap](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/veikart/) – planned improvements, including full benchmark comparison
