@@ -68,7 +68,7 @@ SAMT-BU Docs uses **content modules**: content from different teams and pilots l
 | `samt-bu-pilot-2` | Pilot 2 | `pilotering/pilot-2/` |
 | `samt-bu-pilot-3` | Pilot 3 | `pilotering/pilot-3/` |
 | `samt-bu-pilot-4` | Pilot 4 | `pilotering/pilot-4/` |
-| `team-architecture` | Overall architecture | `arkitektur/overordnet-arkitektur/` |
+| `team-architecture` | High-level architecture | `arkitektur/overordnet-arkitektur/` |
 | `team-semantics` | Information architecture | `arkitektur/informasjonsarkitektur/` |
 | `samt-bu-drafts` | Drafts and inputs | `utkast/` |
 | `solution-samt-bu-docs` | Technical documentation | `prosjektleveranser/…` |
