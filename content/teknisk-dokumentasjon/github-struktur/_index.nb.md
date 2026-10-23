@@ -92,6 +92,7 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 |------|-----------|----------|
 | `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de tre fredede |
 | `samt-bu-alle` | Alle deltakere i SAMT-BU | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read på `samt-bu-archi-models`) |
+| `samt-bu-archimate` | ArchiMate-modellerere | `samt-bu-archi-models`, `kode-archiscripts` |
 | Fagteam (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
 
 **Teamene for SAMT-BU er nøstet under `samt-bu-alle`** (fra 23. oktober 2026). Kjerneteamet og

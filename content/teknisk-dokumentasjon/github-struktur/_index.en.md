@@ -92,6 +92,7 @@ Access is granted to **teams**, never to individuals:
 |------|---------|----------|
 | `samt-bu-core-team` | Core participants | All repos except the three frozen ones |
 | `samt-bu-alle` | All SAMT-BU participants | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-archi-models`) |
+| `samt-bu-archimate` | ArchiMate modellers | `samt-bu-archi-models`, `kode-archiscripts` |
 | Subject teams (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo |
 
 **The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team and
