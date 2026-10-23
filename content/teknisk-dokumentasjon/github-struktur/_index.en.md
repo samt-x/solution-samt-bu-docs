@@ -90,14 +90,14 @@ Access is granted to **teams**, never to individuals:
 
 | Team | Members | Write on |
 |------|---------|----------|
-| `samt-bu-core-team` | Core participants | All repos except the four frozen ones |
+| `samt-bu-core-team` | Core participants | All repos except the three frozen ones |
 | `samt-bu-alle` | All organisation members | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` |
 | Subject teams (`samt-bu-pilot-1…4`, `-architecture`, `-semantics`, `-market`) | Participants in that work | Their own repo |
 
-**Four frozen repos** have no editorial team access, only personal grants:
-`hugo-theme-samt-bu`, `samt-x.github.io`, `information-models`,
-`demo-repository`. They are not intended for editing in a documentation
-context.
+**Three frozen repos** have no editorial team access, only personal grants:
+`hugo-theme-samt-bu`, `samt-x.github.io` and `information-models`.
+They are not intended for editing in a documentation context. (`demo-repository`
+was the fourth, and was deleted on 2026-10-23.)
 
 **Pilot teams do not grant access to the shared documentation.** `samt-bu-docs`
 was previously attached to the `samt-bu-pilot-1` team, which gave pilot 1
@@ -113,7 +113,7 @@ participants write access the other pilots lacked. That link has been removed.
 
 The org-level base permission is a **floor**, not a starting point. Setting it
 to `write` gives everyone write access to everything – and it cannot be lowered
-per repo. As long as the four repos are to be kept out, this is ruled out.
+per repo. As long as the three repos are to be kept out, this is ruled out.
 
 ### Note
 

@@ -90,13 +90,14 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 
 | Team | Medlemmer | Write på |
 |------|-----------|----------|
-| `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de fire fredede |
+| `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de tre fredede |
 | `samt-bu-alle` | Alle organisasjonsmedlemmer | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` |
 | Fagteam (`samt-bu-pilot-1…4`, `-architecture`, `-semantics`, `-market`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
 
-**Fire fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
-granter: `hugo-theme-samt-bu`, `samt-x.github.io`, `information-models`,
-`demo-repository`. De er ikke ment å redigeres i dokumentasjonssammenheng.
+**Tre fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
+granter: `hugo-theme-samt-bu`, `samt-x.github.io` og `information-models`.
+De er ikke ment å redigeres i dokumentasjonssammenheng. (`demo-repository` var
+den fjerde, og ble slettet 2026-10-23.)
 
 **Pilotteam gir ikke tilgang til fellesdokumentasjonen.** `samt-bu-docs` var
 tidligere knyttet til `samt-bu-pilot-1`-teamet, noe som ga pilot 1-deltakere
@@ -112,7 +113,7 @@ skrivetilgang de andre pilotene manglet. Koblingen er fjernet.
 
 Grunnrettigheten på org-nivå er et **gulv**, ikke et utgangspunkt. Settes den
 til `write`, får alle skrivetilgang til alt – og den kan ikke senkes per repo.
-Så lenge de fire repoene skal holdes utenfor, er dette utelukket.
+Så lenge de tre repoene skal holdes utenfor, er dette utelukket.
 
 ### Merk
 
