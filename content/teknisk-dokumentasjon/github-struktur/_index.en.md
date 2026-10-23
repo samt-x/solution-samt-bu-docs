@@ -91,8 +91,16 @@ Access is granted to **teams**, never to individuals:
 | Team | Members | Write on |
 |------|---------|----------|
 | `samt-bu-core-team` | Core participants | All repos except the three frozen ones |
-| `samt-bu-alle` | All organisation members | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` |
-| Subject teams (`samt-bu-pilot-1…4`, `-architecture`, `-semantics`, `-market`) | Participants in that work | Their own repo |
+| `samt-bu-alle` | All SAMT-BU participants | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-archi-models`) |
+| Subject teams (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo |
+
+**The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team and
+all subject teams have `samt-bu-alle` as their parent, and `samt-bu-core-team-rotating` sits under
+the core team. Child teams inherit the parent's access. Anyone in a SAMT-BU team is therefore
+automatically part of "alle", however they joined. Teams for the platform and other purposes
+(`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`, `samt-bu-external-contributors`)
+are kept outside. Background in
+[issue #80](https://github.com/SAMT-X/solution-samt-bu-docs/issues/80).
 
 **Three frozen repos** have no editorial team access, only personal grants:
 `hugo-theme-samt-bu`, `samt-x.github.io` and `information-models`.
@@ -105,8 +113,10 @@ participants write access the other pilots lacked. That link has been removed.
 
 ### Maintenance
 
-- New person on the project → add to `samt-bu-alle` (and `samt-bu-core-team` if
-  they are a core participant)
+- New person on the project → add to their subject team or the core team. Membership of
+  `samt-bu-alle` follows from the nesting. Anyone not in a subject team is added to
+  `samt-bu-alle` directly
+- New SAMT-BU team → set `samt-bu-alle` as parent (Settings → Parent team)
 - New module repo → add it to `samt-bu-core-team`
 
 ### Why not an org-level base permission
@@ -114,6 +124,12 @@ participants write access the other pilots lacked. That link has been removed.
 The org-level base permission is a **floor**, not a starting point. Setting it
 to `write` gives everyone write access to everything – and it cannot be lowered
 per repo. As long as the three repos are to be kept out, this is ruled out.
+
+**The base permission is "No permission"** (from 23 October 2026). It only affects
+private repos, since anyone can read the public ones. Private repos can therefore
+only be read by teams they are assigned to, and by the owners. With Read, every member
+could read private repos such as `samt-bu-intern-admin`, which is for the core team only.
+Background in [issue #72](https://github.com/SAMT-X/solution-samt-bu-docs/issues/72).
 
 ### Note
 

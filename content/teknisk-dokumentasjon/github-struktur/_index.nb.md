@@ -91,8 +91,16 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 | Team | Medlemmer | Write på |
 |------|-----------|----------|
 | `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de tre fredede |
-| `samt-bu-alle` | Alle organisasjonsmedlemmer | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` |
-| Fagteam (`samt-bu-pilot-1…4`, `-architecture`, `-semantics`, `-market`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
+| `samt-bu-alle` | Alle deltakere i SAMT-BU | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read på `samt-bu-archi-models`) |
+| Fagteam (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
+
+**Teamene for SAMT-BU er nøstet under `samt-bu-alle`** (fra 23. oktober 2026). Kjerneteamet og
+alle fagteamene har `samt-bu-alle` som forelder, og `samt-bu-core-team-rotating` ligger under
+kjerneteamet. Undertemaene arver forelderens tilgang. Den som er med i et SAMT-BU-team, er
+derfor automatisk med i «alle», uansett hvordan vedkommende kom inn. Teamene for plattformen
+og andre formål (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`,
+`samt-bu-external-contributors`) ligger utenfor. Bakgrunn i
+[issue #80](https://github.com/SAMT-X/solution-samt-bu-docs/issues/80).
 
 **Tre fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
 granter: `hugo-theme-samt-bu`, `samt-x.github.io` og `information-models`.
@@ -105,8 +113,9 @@ skrivetilgang de andre pilotene manglet. Koblingen er fjernet.
 
 ### Vedlikehold
 
-- Ny person i prosjektet → inn i `samt-bu-alle` (og `samt-bu-core-team` hvis
-  vedkommende er kjernedeltaker)
+- Ny person i prosjektet → inn i fagteamet eller kjerneteamet. Da følger `samt-bu-alle`
+  av nøstingen. Den som ikke hører til noe fagteam, legges direkte i `samt-bu-alle`
+- Nytt SAMT-BU-team → sett `samt-bu-alle` som forelder (Settings → Parent team)
 - Nytt modulrepo → legg det til `samt-bu-core-team`
 
 ### Hvorfor ikke org-nivå grunnrettighet
@@ -114,6 +123,12 @@ skrivetilgang de andre pilotene manglet. Koblingen er fjernet.
 Grunnrettigheten på org-nivå er et **gulv**, ikke et utgangspunkt. Settes den
 til `write`, får alle skrivetilgang til alt – og den kan ikke senkes per repo.
 Så lenge de tre repoene skal holdes utenfor, er dette utelukket.
+
+**Grunnrettigheten er «No permission»** (fra 23. oktober 2026). Den har bare
+virkning for private repoer, siden alle kan lese de offentlige. Private repoer kan
+derfor bare leses av team som har fått dem tildelt, og av eierne. Med Read fikk alle
+medlemmer lese private repoer som `samt-bu-intern-admin`, som bare er for kjerneteamet.
+Bakgrunn i [issue #72](https://github.com/SAMT-X/solution-samt-bu-docs/issues/72).
 
 ### Merk
 
