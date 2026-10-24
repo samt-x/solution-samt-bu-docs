@@ -1,4 +1,5 @@
 ---
+id: 6c9a0913-f680-4da8-9455-aef2996197e4
 title: "Administrere medlemmer og tilgang – steg for steg"
 linkTitle: "Medlemmer og tilgang"
 weight: 22

@@ -1,4 +1,5 @@
 ---
+id: 6c9a0913-f680-4da8-9455-aef2996197e4
 title: "Managing members and access – step by step"
 linkTitle: "Members and access"
 weight: 22
