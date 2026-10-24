@@ -3,6 +3,9 @@ id: 6c9a0913-f680-4da8-9455-aef2996197e4
 title: "Managing members and access – step by step"
 linkTitle: "Members and access"
 weight: 22
+lastmod: 2026-10-24T14:49:07+02:00
+last_editor: Erik Hagen
+
 ---
 
 A guide for the core team: how to bring new participants into the GitHub organisation samt-x, keep track of them and remove them again. How the teams and permissions fit together is described in [Concept for GitHub organisations and repositories](../github-struktur/#access-model).

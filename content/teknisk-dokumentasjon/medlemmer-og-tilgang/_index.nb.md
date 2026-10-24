@@ -3,6 +3,9 @@ id: 6c9a0913-f680-4da8-9455-aef2996197e4
 title: "Administrere medlemmer og tilgang – steg for steg"
 linkTitle: "Medlemmer og tilgang"
 weight: 22
+lastmod: 2026-10-24T14:49:07+02:00
+last_editor: Erik Hagen
+
 ---
 
 Veiledning for kjerneteamet: slik tar du inn nye deltakere i GitHub-organisasjonen samt-x, følger dem opp og tar dem ut igjen. Hvordan teamene og tilgangene henger sammen, står i [Konsept for GitHub-organisasjoner og repoer](../github-struktur/#tilgangsmodell).
