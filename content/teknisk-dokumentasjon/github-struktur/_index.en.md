@@ -120,6 +120,17 @@ participants write access the other pilots lacked. That link has been removed.
 - New SAMT-BU team → set `samt-bu-alle` as parent (Settings → Parent team)
 - New module repo → add it to `samt-bu-core-team`
 
+### Member list
+
+GitHub knows who has access, but not who the person is or what role they have in the project.
+That is kept in a member list in the private repository samt-bu-intern-admin, which only the core
+team can access. The list is maintained manually, preferably via Claude, and holds name, email,
+company, status and role in SAMT-BU. Personal data is kept only there.
+
+Organisation role, teams and permissions are not recorded by hand. A check script in the same
+repository fetches them from GitHub, writes them to a separate file and reports discrepancies
+against the list. The procedure is described in [Managing members and access](../medlemmer-og-tilgang/).
+
 ### Why not an org-level base permission
 
 The org-level base permission is a **floor**, not a starting point. Setting it

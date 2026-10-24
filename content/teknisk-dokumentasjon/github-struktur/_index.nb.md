@@ -119,6 +119,17 @@ skrivetilgang de andre pilotene manglet. Koblingen er fjernet.
 - Nytt SAMT-BU-team → sett `samt-bu-alle` som forelder (Settings → Parent team)
 - Nytt modulrepo → legg det til `samt-bu-core-team`
 
+### Medlemsoversikt
+
+GitHub vet hvem som har tilgang, men ikke hvem personen er eller hvilken rolle den har i prosjektet.
+Det står i en medlemsoversikt i det private repoet samt-bu-intern-admin, som bare kjerneteamet har
+tilgang til. Oversikten vedlikeholdes manuelt, gjerne via Claude, og har navn, e-post, firma, status og
+rolle i SAMT-BU. Personopplysninger står bare der.
+
+Org-rolle, team og tilganger føres ikke for hånd. Et sjekkskript i samme repo henter dem fra GitHub,
+skriver dem til en egen fil og melder avvik mot oversikten. Fremgangsmåten står i
+[Administrere medlemmer og tilgang](../medlemmer-og-tilgang/).
+
 ### Hvorfor ikke org-nivå grunnrettighet
 
 Grunnrettigheten på org-nivå er et **gulv**, ikke et utgangspunkt. Settes den
