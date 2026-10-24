@@ -34,7 +34,7 @@ Statusene i oversikten er: **potensiell** (ikke invitert ennå), **invitert**, *
 ## Ny deltaker
 
 1. **Finn GitHub-brukernavnet.** Personen må ha en GitHub-konto. Be om brukernavnet, ikke e-postadressen
-2. **Legg personen i riktig team**, i GitHub under Organization → Teams. Velg fagteamet (for eksempel samt-bu-pilot-3) eller kjerneteamet. Er personen ikke med i noe fagteam, bruk samt-bu-alle. Tilgang til samt-bu-alle følger av at fagteamene ligger under det. Er personen ikke medlem av orgen fra før, sender GitHub en invitasjon automatisk
+2. **Legg personen i riktig team**, i GitHub under Organization → Teams. Velg fagteamet (for eksempel samt-bu-pilot-3) eller kjerneteamet. Er personen ikke med i noe fagteam, bruk samt-bu-alle. Tilgang til samt-bu-alle følger av at fagteamene ligger under det. Er personen ikke medlem av orgen fra før, sender GitHub en invitasjon automatisk. Den som skal være med i kjernearbeidet en periode, legges i kjerneteamet som alle andre der, og tas ut igjen etter fremgangsmåten for deltakere som slutter. Merk at kjerneteamet også ser medlemsoversikten
 3. **Før personen inn i medlemsoversikten** med status «invitert» og dagens dato i «Fra» og «Endret»
 4. **Si fra til personen** at invitasjonen ligger i e-posten, og på GitHub under profilbildet → Settings → Organizations. Den kan også åpnes direkte på github.com/orgs/samt-x/invitation. **Invitasjonen utløper etter sju dager**, og må da sendes på nytt
 
@@ -63,7 +63,6 @@ Skriptet skriver tilgang.md og lister avvik, for eksempel en person som er med i
 
 ## Fallgruver
 
-- **Rotasjonsteamet gir tilgang til internrepoet.** samt-bu-core-team-rotating ligger under kjerneteamet. Den som legges inn der, får også lese og skrive i samt-bu-intern-admin, med personopplysningene
 - **Eiere har admin overalt**, uavhengig av team. Det synes ikke i teamstrukturen
 - **Testkontoen erikhag1test** er en utenforstående med egen tilgang til samt-bu-docs, og skal ikke ryddes bort
 - **Bot-kontoen samt-x-bot** eier nøklene som nettstedet bruker for å bygge og ta imot forslag. Den skal ikke fjernes

@@ -96,12 +96,15 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 | Fagteam (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
 
 **Teamene for SAMT-BU er nøstet under `samt-bu-alle`** (fra 23. oktober 2026). Kjerneteamet og
-alle fagteamene har `samt-bu-alle` som forelder, og `samt-bu-core-team-rotating` ligger under
-kjerneteamet. Undertemaene arver forelderens tilgang. Den som er med i et SAMT-BU-team, er
+alle fagteamene har `samt-bu-alle` som forelder. Undertemaene arver forelderens tilgang. Den som er med i et SAMT-BU-team, er
 derfor automatisk med i «alle», uansett hvordan vedkommende kom inn. Teamene for plattformen
 og andre formål (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`,
 `samt-bu-external-contributors`) ligger utenfor. Bakgrunn i
 [issue #80](https://github.com/SAMT-X/solution-samt-bu-docs/issues/80).
+
+**Ingen midlertidige kjernemedlemmer i eget team.** Den som skal være med i kjernearbeidet, kort
+eller lenge, legges i kjerneteamet på lik linje med de andre, og tas ut igjen når perioden er over.
+Rotasjonsteamet `samt-bu-core-team-rotating`, som var tenkt for dette, ble slettet 24. oktober 2026.
 
 **Tre fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
 granter: `hugo-theme-samt-bu`, `samt-x.github.io` og `information-models`.

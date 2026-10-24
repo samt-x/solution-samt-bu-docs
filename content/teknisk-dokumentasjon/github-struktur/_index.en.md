@@ -96,12 +96,16 @@ Access is granted to **teams**, never to individuals:
 | Subject teams (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo |
 
 **The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team and
-all subject teams have `samt-bu-alle` as their parent, and `samt-bu-core-team-rotating` sits under
-the core team. Child teams inherit the parent's access. Anyone in a SAMT-BU team is therefore
+all subject teams have `samt-bu-alle` as their parent. Child teams inherit the parent's access. Anyone in a SAMT-BU team is therefore
 automatically part of "alle", however they joined. Teams for the platform and other purposes
 (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`, `samt-bu-external-contributors`)
 are kept outside. Background in
 [issue #80](https://github.com/SAMT-X/solution-samt-bu-docs/issues/80).
+
+**No separate team for temporary core members.** Anyone taking part in the core work, for a short
+or long period, is added to the core team on equal terms with the others, and removed again when
+the period is over. The rotating team `samt-bu-core-team-rotating`, intended for this, was deleted
+on 24 October 2026.
 
 **Three frozen repos** have no editorial team access, only personal grants:
 `hugo-theme-samt-bu`, `samt-x.github.io` and `information-models`.

@@ -34,7 +34,7 @@ The statuses in the list are: **potensiell** (potential, not yet invited), **inv
 ## New participant
 
 1. **Get the GitHub username.** The person needs a GitHub account. Ask for the username, not the email address
-2. **Add the person to the right team**, in GitHub under Organization → Teams. Choose the subject team (for example samt-bu-pilot-3) or the core team. If the person is not in any subject team, use samt-bu-alle. Access to samt-bu-alle follows from the subject teams being nested under it. If the person is not already an organisation member, GitHub sends an invitation automatically
+2. **Add the person to the right team**, in GitHub under Organization → Teams. Choose the subject team (for example samt-bu-pilot-3) or the core team. If the person is not in any subject team, use samt-bu-alle. Access to samt-bu-alle follows from the subject teams being nested under it. If the person is not already an organisation member, GitHub sends an invitation automatically. Anyone taking part in the core work for a period is added to the core team like everyone else there, and removed again following the procedure for participants who leave. Note that the core team can also see the member list
 3. **Add the person to the member list** with status "invitert" and today's date in "Fra" and "Endret"
 4. **Tell the person** that the invitation is in their email, and on GitHub under the profile picture → Settings → Organizations. It can also be opened directly at github.com/orgs/samt-x/invitation. **The invitation expires after seven days** and must then be sent again
 
@@ -63,7 +63,6 @@ The script writes tilgang.md and lists discrepancies, for example a person who i
 
 ## Pitfalls
 
-- **The rotating team gives access to the internal repository.** samt-bu-core-team-rotating is nested under the core team. Anyone added there can also read and write in samt-bu-intern-admin, including the personal data
 - **Owners have admin everywhere**, regardless of teams. This does not show in the team structure
 - **The test account erikhag1test** is an outside collaborator with its own access to samt-bu-docs, and must not be cleaned up
 - **The bot account samt-x-bot** owns the keys the site uses to build and to receive suggestions. It must not be removed
