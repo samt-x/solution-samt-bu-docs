@@ -21,7 +21,6 @@ Arbeidet gjøres i tre repoer: det nye modulrepoet, `samt-bu-docs` og temaet `hu
 
 - Admin i GitHub-organisasjonen `samt-x`, for å opprette repoet og legge inn en secret
 - Hugo (0.155.3 extended) og Go installert lokalt, og `gh` innlogget
-- Tokenen for `DOCS_REBUILD_TOKEN` fra Bitwarden
 
 Navn: `samt-bu-` for publisert innhold (for eksempel `samt-bu-pilot-6`), `team-` for team, `solution-` for dokumentasjon av en løsning.
 
@@ -57,7 +56,7 @@ Bytt reponavnet i `--arg source '…'` i workflowen. Ikke skriv workflowen av fr
 
 ### Steg 5 – Secret og tilgang
 
-- Legg inn secreten `DOCS_REBUILD_TOKEN` i repoets *Settings → Secrets and variables → Actions*, med tokenen fra Bitwarden. Uten den bygges ikke nettstedet på nytt når noen lagrer i modulen.
+- Huk av repoet i org-secreten `DOCS_REBUILD_TOKEN`: orgens *Settings → Secrets and variables → Actions* → `DOCS_REBUILD_TOKEN` → *Repository access* → tannhjulet. Du trenger ikke tokenen selv. Uten avhukingen bygges ikke nettstedet på nytt når noen lagrer i modulen, og dispatch-steget i workflowen blir rødt. Ikke legg secreten inn i repoet, for en repo-secret går foran org-secreten.
 - Gi teamene samme tilgang som til de andre modulrepoene (*Settings → Collaborators and teams*).
 
 ### Steg 6 – Commit og push

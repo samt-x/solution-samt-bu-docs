@@ -21,7 +21,6 @@ The work is done in three repos: the new module repo, `samt-bu-docs` and the the
 
 - Admin in the GitHub organization `samt-x`, to create the repo and add a secret
 - Hugo (0.155.3 extended) and Go installed locally, and `gh` signed in
-- The token for `DOCS_REBUILD_TOKEN` from Bitwarden
 
 Names: `samt-bu-` for published content (for example `samt-bu-pilot-6`), `team-` for teams, `solution-` for documentation of a solution.
 
@@ -57,7 +56,7 @@ Change the repo name in `--arg source '…'` in the workflow. Do not copy the wo
 
 ### Step 5 – Secret and access
 
-- Add the secret `DOCS_REBUILD_TOKEN` in the repo's *Settings → Secrets and variables → Actions*, with the token from Bitwarden. Without it the site is not rebuilt when someone saves in the module.
+- Tick the repo in the organization secret `DOCS_REBUILD_TOKEN`: the organization's *Settings → Secrets and variables → Actions* → `DOCS_REBUILD_TOKEN` → *Repository access* → the gear. You do not need the token itself. Without it the site is not rebuilt when someone saves in the module, and the dispatch step in the workflow turns red. Do not add the secret to the repo, since a repo secret takes precedence over the organization secret.
 - Give the teams the same access as to the other module repos (*Settings → Collaborators and teams*).
 
 ### Step 6 – Commit and push

@@ -147,11 +147,11 @@ Hugo modules are fetched without git history, so Hugo cannot find the date of th
 
 | Secret | Where | What | Expires |
 |---|---|---|---|
-| `DOCS_REBUILD_TOKEN` | Each module repo | Classic PAT on `samt-x-bot` with the scope `public_repo`, which sends `repository_dispatch` to `samt-bu-docs`. If it is missing, only this step fails (401), and the change goes out with the next build. | Never. To be replaced by a fine-grained token with an expiry date (#84) |
+| `DOCS_REBUILD_TOKEN` | **Organization secret** in `samt-x`, shared with the twelve module repos (*Selected repositories*) | Fine-grained token on `samt-x-bot`, only *Contents: Read and write* on `samt-bu-docs`, which is what `repository_dispatch` requires. If a repo lacks it, the dispatch step fails (red), and the change goes out with the next build. | 2027-10-25 |
 | `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token on `samt-x-bot`, only *Issues: Read and write* on `solution-samt-bu-docs`. Used for the report on #83. | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy to Cloudflare Pages | See Cloudflare |
 
-The tokens are kept in Bitwarden. Set or replace a secret in the repo's *Settings → Secrets and variables → Actions*. This requires admin on the repo.
+The tokens are kept in Bitwarden. `DOCS_REBUILD_TOKEN` is replaced in the organization's *Settings → Secrets and variables → Actions*, the others in the repo's. This requires admin. Do not add `DOCS_REBUILD_TOKEN` to a single repo: a repo secret takes precedence over the organization secret with the same name.
 
 ---
 
@@ -159,7 +159,7 @@ The tokens are kept in Bitwarden. Set or replace a secret in the repo's *Setting
 
 In short:
 
-1. **The module repo:** `hugo mod init github.com/SAMT-X/<repo>`, `content/_index.nb.md` and `_index.en.md`. Copy `.github/` (workflow and scripts) from an existing module repo, and change the repo name in the workflow. Add the secret `DOCS_REBUILD_TOKEN`, and give the teams access as for the other module repos.
+1. **The module repo:** `hugo mod init github.com/SAMT-X/<repo>`, `content/_index.nb.md` and `_index.en.md`. Copy `.github/` (workflow and scripts) from an existing module repo, and change the repo name in the workflow. Tick the repo in the organization secret `DOCS_REBUILD_TOKEN`, and give the teams access as for the other module repos.
 2. **`hugo.toml`** in `samt-bu-docs`: a new `[[module.imports]]` block with `source = "content"` and `target = "content/<path>/"`.
 3. **`go.mod`/`go.sum`:** `hugo mod get github.com/SAMT-X/<repo>@latest`.
 4. **`hugo.yml`:** a new line `hent github.com/SAMT-X/<repo>@latest` in the step that fetches modules.
