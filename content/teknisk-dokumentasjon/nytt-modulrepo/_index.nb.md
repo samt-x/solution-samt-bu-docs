@@ -9,229 +9,131 @@ last_editor: Erik Hagen
 
 ---
 
-Fullstendig veiledning for å opprette et nytt Hugo-modulrepo fra bunnen og koble det til SAMT-BU Docs – fra tomt GitHub-repo til publisert innhold under `/teams/<repo-navn>/` (eller annen valgfri sti).
+Veiledning for å opprette et nytt innholdsrepo og montere det i nettstedet som Hugo-modul, fra tomt repo til publisert innhold.
 
-Prosessen krever endringer i to repoer: selve modulrepoet og `samt-bu-docs`.
+*Oppdatert 2026-10-25 ([solution-samt-bu-docs#84](https://github.com/samt-x/solution-samt-bu-docs/issues/84)). Hvordan byggingen henger sammen, står på siden [CI/CD-pipeline](../ci-cd-pipeline/).*
+
+Arbeidet gjøres i tre repoer: det nye modulrepoet, `samt-bu-docs` og temaet `hugo-theme-samt-bu`.
 
 ---
 
 ## Forutsetninger
 
-- Tilgang til GitHub-org `samt-x` (eller aktuell org)
-- Hugo installert lokalt
-- `gh` CLI autentisert
-- PAT med `workflow`-scope (samme token som brukes i `DOCS_REBUILD_TOKEN` i eksisterende repoer)
+- Admin i GitHub-organisasjonen `samt-x`, for å opprette repoet og legge inn en secret
+- Hugo (0.155.3 extended) og Go installert lokalt, og `gh` innlogget
+- Tokenen for `DOCS_REBUILD_TOKEN` fra Bitwarden
+
+Navn: `samt-bu-` for publisert innhold (for eksempel `samt-bu-pilot-6`), `team-` for team, `solution-` for dokumentasjon av en løsning.
 
 ---
 
-## Del 1 – Sett opp modulrepoet
+## Del 1 – Modulrepoet
 
-### Steg 1 – Opprett repo på GitHub
+### Steg 1 – Opprett og klon repoet
 
-Opprett et nytt tomt repo under `samt-x`-orgen (eller aktuell org). Legg til en enkel `README.md` så repoet ikke er helt tomt.
+Opprett repoet i `samt-x` med en `README.md`, og klon det inn i arbeidsmappen ved siden av de andre repoene.
 
-Navnekonvensjon:
-- `team-`-prefiks for interne arbeidsrepoer for team
-- `samt-bu-`-prefiks for publisert innhold/produkt
-
-### Steg 2 – Klon repoet lokalt
+### Steg 2 – Gjør det til en Hugo-modul
 
 ```bash
-cd "S:/app-data/github/samt-x-repos"
-git clone https://github.com/samt-x/<repo-navn>.git
-cd <repo-navn>
+hugo mod init github.com/SAMT-X/<repo>
 ```
 
-### Steg 3 – Initialiser som Hugo-modul
+Modulstien skrives med store bokstaver (`SAMT-X`), som for de andre modulene.
 
-```bash
-hugo mod init github.com/SAMT-X/<repo-navn>
-```
+### Steg 3 – Lag startsidene
 
-Dette oppretter `go.mod` i rotmappen.
+Lag `content/_index.nb.md` og `content/_index.en.md` med `title`, `linkTitle` og `weight`. Ikke sett `id`, det gjør CI.
 
-### Steg 4 – Opprett innholdsfiler
+### Steg 4 – Kopier `.github/` fra et eksisterende modulrepo
 
-```bash
-mkdir content
-```
+Kopier hele `.github/` fra et modulrepo med samme oppsett, for eksempel `samt-bu-pilot-6`:
 
-Opprett `content/_index.nb.md`:
+- `.github/workflows/trigger-docs-rebuild.yml`
+- `.github/scripts/ensure-uuids.py`
+- `.github/scripts/inject-lastmod.py`
 
-```yaml
----
-title: "<Tittel på norsk>"
-linkTitle: "<Kort tittel>"
-weight: 30
-status: ""
-draft: false
----
+Bytt reponavnet i `--arg source '…'` i workflowen. Ikke skriv workflowen av fra dokumentasjonen, så du får siste versjon.
 
-Kort beskrivelse av innholdet i dette repoet.
-```
+### Steg 5 – Secret og tilgang
 
-Opprett `content/_index.en.md`:
+- Legg inn secreten `DOCS_REBUILD_TOKEN` i repoets *Settings → Secrets and variables → Actions*, med tokenen fra Bitwarden. Uten den bygges ikke nettstedet på nytt når noen lagrer i modulen.
+- Gi teamene samme tilgang som til de andre modulrepoene (*Settings → Collaborators and teams*).
 
-```yaml
----
-title: "<Title in English>"
-linkTitle: "<Short title>"
-weight: 10
-status: ""
-draft: false
----
+### Steg 6 – Commit og push
 
-Short description of the content in this repo.
-```
-
-**Merk:** `id`-feltet (UUID) skal **ikke** settes manuelt – det legges til automatisk av `ensure-uuids.py` i CI ved første push.
-
-### Steg 5 – Legg til `ensure-uuids.py`
-
-Kopier skriptet fra et eksisterende modulrepo:
-
-```bash
-mkdir -p .github/scripts
-cp ../team-architecture/.github/scripts/ensure-uuids.py .github/scripts/
-```
-
-### Steg 6 – Legg til `trigger-docs-rebuild.yml`
-
-Opprett `.github/workflows/trigger-docs-rebuild.yml`:
-
-```yaml
-name: Trigger rebuild av samt-bu-docs
-
-on:
-  push:
-    branches: [main]
-
-permissions:
-  contents: write
-
-jobs:
-  trigger:
-    if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Sikre UUID-er i frontmatter
-        run: |
-          python3 .github/scripts/ensure-uuids.py
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/
-          if git diff --staged --quiet; then
-            echo "Ingen endringer – alle UUID-er var på plass"
-          else
-            git commit -m "Auto: legg til manglende UUID-er i frontmatter [skip ci]"
-            for i in 1 2 3; do
-              git pull --rebase origin main && git push && break
-              sleep 3
-            done
-          fi
-
-      - name: Send repository_dispatch til samt-bu-docs
-        run: |
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.DOCS_REBUILD_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/SAMT-X/samt-bu-docs/dispatches \
-            -d '{"event_type":"module-updated","client_payload":{"source":"<repo-navn>"}}'
-```
-
-Husk å bytte ut `<repo-navn>` med faktisk reponavn i siste linje.
-
-### Steg 7 – Commit og push modulrepoet
-
-```bash
-git add go.mod content/ .github/
-git commit -m "Hugo-modul init: <repo-navn> med innholdssider (nb+en)"
-git push
-```
-
-### Steg 8 – Legg til `DOCS_REBUILD_TOKEN` secret
-
-```bash
-"/c/Program Files/GitHub CLI/gh.exe" secret set DOCS_REBUILD_TOKEN --repo SAMT-X/<repo-navn>
-# Lim inn PAT-verdien (samme som i de andre modulrepoene) når du blir bedt om det
-```
+Push til `main`. Workflowen legger inn `id`, `lastmod` og `last_editor` med automatiske commits, så hent dem (`git pull`) før du endrer mer.
 
 ---
 
-## Del 2 – Koble modulen til `samt-bu-docs`
+## Del 2 – `samt-bu-docs`
 
-Alle disse endringene gjøres i `S:/app-data/github/samt-x-repos/samt-bu-docs/`.
-
-### Steg 9 – Legg til modulen i `hugo.toml`
-
-Legg til en ny blokk under `[module]`:
+### Steg 7 – Monter modulen i `hugo.toml`
 
 ```toml
 [[module.imports]]
-  path = "github.com/SAMT-X/<repo-navn>"
+  path = "github.com/SAMT-X/<repo>"
   [[module.imports.mounts]]
     source = "content"
-    target = "content/teams/<repo-navn>"
+    target = "content/<sti-i-nettstedet>"
 ```
 
-Juster `target` til ønsket sti i nettstedet (f.eks. `content/teams/<repo-navn>/` for team-repoer).
+Stien bestemmer hvor innholdet havner, for eksempel `content/pilotering/pilot-6`. Ikke legg lokale filer under samme sti i `samt-bu-docs`. Lokale filer vinner over modulinnhold og skjuler det.
 
-### Steg 10 – Oppdater `go.mod`/`go.sum`
+### Steg 8 – Hent modulen
 
 ```bash
-cd "S:/app-data/github/samt-x-repos/samt-bu-docs"
-GONOSUMDB=* GOPROXY=direct hugo mod get github.com/SAMT-X/<repo-navn>@latest
+hugo mod get github.com/SAMT-X/<repo>@latest
 ```
 
-### Steg 11 – Legg til checkout-steg i `hugo.yml`
+Dette oppdaterer `go.mod` og `go.sum`.
 
-I `.github/workflows/hugo.yml`, legg til en ny checkout-blokk etter de eksisterende modulrepo-checkout-stegene:
+### Steg 9 – Legg modulen inn i `hugo.yml`
 
-```yaml
-- name: Checkout <repo-navn> module
-  uses: actions/checkout@v4
-  with:
-    repository: SAMT-X/<repo-navn>
-    path: .hugo-modules/<repo-navn>
-    fetch-depth: 0
-```
-
-### Steg 12 – Legg til i `HUGO_MODULE_REPLACEMENTS`
-
-I samme fil, under `HUGO_MODULE_REPLACEMENTS`, legg til på slutten (husk komma etter forrige linje):
-
-```yaml
-github.com/SAMT-X/<repo-navn> ->
-${{ github.workspace }}/.hugo-modules/<repo-navn>
-```
-
-### Steg 13 – Legg til i `inject-lastmod.py`
-
-I `.github/scripts/inject-lastmod.py`, legg til stien i `MODULE_PATHS`-listen:
-
-```python
-'.hugo-modules/<repo-navn>',
-```
-
-### Steg 14 – Verifiser lokalt og push
+Legg til en linje i steget som henter modulene:
 
 ```bash
-hugo  # Sjekk at det bygger uten feil
-git add hugo.toml go.mod go.sum .github/workflows/hugo.yml .github/scripts/inject-lastmod.py
-git commit -m "Ny Hugo-modul: <repo-navn> montert under teams/<repo-navn>"
-git push
+hent github.com/SAMT-X/<repo>@latest
 ```
+
+Uten den bygger CI med versjonen i `go.mod`, ikke med siste versjon.
 
 ---
 
-## Resultat
+## Del 3 – Temaet
 
-Etter neste CI-bygg vil innholdet fra modulrepoet være tilgjengelig på nettstedet. Videre push til modulrepoet vil automatisk trigge nybygg via `repository_dispatch`.
+### Steg 10 – Koble stien til repoet
 
-For å verifisere at alt er koblet riktig:
-1. Gå til `https://github.com/SAMT-X/samt-bu-docs/actions` – se at et bygg startes
-2. Åpne nettstedet og naviger til den nye seksjonen
-3. Gjør en testendring i modulrepoet og sjekk at nettstedet oppdateres automatisk (~2 min)
+Temaet har sammenhengen mellom sti og repo skrevet inn direkte, på sju steder i fire filer i `themes/hugo-theme-samt-bu/layouts/partials/`:
+
+| Fil | Hva |
+|---|---|
+| `edit-switcher.html` | «Endre»-menyen (fire steder) |
+| `header.html` | Kildelenken øverst på siden |
+| `menu.html` | Ny side fra menyen |
+| `custom-footer.html` | `SAMTBU_REPOS` og forslagslisten |
+
+Kopier blokken for en eksisterende modul med samme type sti, for eksempel `pilot-4`. **Glemmes dette, peker «Endre» og kildelenken til `samt-bu-docs`**, og redigering i nettleseren virker ikke for modulen.
+
+### Steg 11 – Sjekk lokalt
+
+```bash
+hugo
+```
+
+Sjekk at sidene i modulen har `data-repo="<repo>"` og lenker til riktig repo.
+
+### Steg 12 – Commit og push i riktig rekkefølge
+
+1. Commit og push temaet.
+2. Oppdater submodule-pekeren i `samt-bu-docs` (`git add themes/hugo-theme-samt-bu`).
+3. Commit `hugo.toml`, `go.mod`, `go.sum`, `hugo.yml` og submodule-pekeren, og push.
+
+---
+
+## Sjekk at alt virker
+
+1. Bygget i `samt-bu-docs` går grønt (*Actions*).
+2. Den nye seksjonen vises på nettstedet, med «Sist endret».
+3. Lagre en liten endring i modulrepoet. Nettstedet skal bygges på nytt av seg selv, og kjøringen i `samt-bu-docs` får commitmeldingen som navn.
+4. «Endre denne siden» på en side i modulen åpner riktig repo.

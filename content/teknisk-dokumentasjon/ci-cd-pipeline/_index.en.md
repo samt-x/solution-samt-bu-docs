@@ -120,7 +120,7 @@ Without this mechanism, a save in a module repo would not start a rebuild, and t
 
 **With the mechanism:** push to a module repo → `trigger-docs-rebuild.yml` in the module repo → signal to `samt-bu-docs` → `hugo.yml` builds again.
 
-All the module repos have `.github/workflows/trigger-docs-rebuild.yml` with these steps. `team-semantics` still lacks steps 1 and 3 (#84).
+All the module repos have `.github/workflows/trigger-docs-rebuild.yml` with these steps:
 
 1. **Checks out** the repo with full history (`fetch-depth: 0`), which `inject-lastmod.py` needs.
 2. **Ensures UUIDs** in front matter (`ensure-uuids.py`). Changes are committed as «Auto: legg til manglende UUID-er i frontmatter [skip ci]».
@@ -140,8 +140,6 @@ Hugo modules are fetched without git history, so Hugo cannot find the date of th
 1. `inject-lastmod.py` finds the latest commit for each `.md` file that was not made by a bot.
 2. `lastmod` (Norwegian time) and `last_editor` (GitHub user name and name) are written into the front matter. An existing `last_editor` that is not a bot is kept.
 3. The change is committed in the module repo.
-
-Exception: `team-semantics` does not have the script yet (#84).
 
 ---
 
@@ -168,7 +166,7 @@ In short:
 5. **The theme:** the link between path and repo is written into `edit-switcher.html`, `header.html`, `menu.html` and `custom-footer.html`. If this is forgotten, «Edit» and the source link point to the wrong repo.
 6. **Check** with a local `hugo` build that the pages in the module link to the right repo. Commit the theme, update the submodule pointer, and commit `hugo.toml`, `go.mod`, `go.sum` and `hugo.yml`.
 
-The detailed recipe is in `CLAUDE.md` in `samt-bu-docs`, under «Legge til ny modul». The page [Create a new module repo](../nytt-modulrepo/) has not been updated yet (#84).
+The detailed recipe is on the page [Create a new module repo](../nytt-modulrepo/).
 
 ---
 

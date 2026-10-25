@@ -120,7 +120,7 @@ Uten denne mekanismen ville en lagring i et modulrepo ikke ført til noe nybygg,
 
 **Med mekanismen:** push til et modulrepo → `trigger-docs-rebuild.yml` i modulrepoet → signal til `samt-bu-docs` → `hugo.yml` bygger på nytt.
 
-Alle modulrepoene har `.github/workflows/trigger-docs-rebuild.yml` med disse stegene. `team-semantics` mangler foreløpig steg 1 og 3 (#84).
+Alle modulrepoene har `.github/workflows/trigger-docs-rebuild.yml` med disse stegene:
 
 1. **Sjekker ut** repoet med full historikk (`fetch-depth: 0`), som `inject-lastmod.py` trenger.
 2. **Sikrer UUID-er** i frontmatter (`ensure-uuids.py`). Endringer committes som «Auto: legg til manglende UUID-er i frontmatter [skip ci]».
@@ -140,8 +140,6 @@ Hugo-moduler hentes uten git-historikk, så Hugo kan ikke selv finne datoen for 
 1. `inject-lastmod.py` finner siste commit for hver `.md`-fil som ikke er gjort av en bot.
 2. `lastmod` (norsk tid) og `last_editor` (GitHub-brukernavn og navn) skrives inn i frontmatter. En eksisterende `last_editor` som ikke er en bot, beholdes.
 3. Endringen committes i modulrepoet.
-
-Unntak: `team-semantics` har ikke skriptet ennå (#84).
 
 ---
 
@@ -168,7 +166,7 @@ Kort fortalt:
 5. **Temaet:** sammenhengen mellom sti og repo er skrevet inn i `edit-switcher.html`, `header.html`, `menu.html` og `custom-footer.html`. Glemmes dette, peker «Endre» og kildelenken til feil repo.
 6. **Sjekk** med et lokalt `hugo`-bygg at sidene i modulen lenker til riktig repo. Commit temaet, oppdater submodule-pekeren, og commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml`.
 
-Den detaljerte oppskriften står i `CLAUDE.md` i `samt-bu-docs`, under «Legge til ny modul». Siden [Opprette nytt modulrepo](../nytt-modulrepo/) er ikke oppdatert ennå (#84).
+Den detaljerte oppskriften står på siden [Opprette nytt modulrepo](../nytt-modulrepo/).
 
 ---
 
