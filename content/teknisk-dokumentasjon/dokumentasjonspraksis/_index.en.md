@@ -5,7 +5,7 @@ title: "Documentation practice"
 linkTitle: "Documentation practice"
 weight: 30
 status: "Early draft"
-lastmod: 2026-03-28T10:12:28+01:00
+lastmod: 2026-10-25T22:01:18+01:00
 last_editor: Erik Hagen
 
 ---

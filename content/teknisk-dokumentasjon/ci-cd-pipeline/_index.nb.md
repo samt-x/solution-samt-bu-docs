@@ -4,7 +4,7 @@ id: 9641ada5-80e0-4700-a6c6-0929fd961409
 title: "CI/CD-pipeline"
 linkTitle: "CI/CD-pipeline"
 weight: 10
-lastmod: 2026-10-11T01:18:56+02:00
+lastmod: 2026-10-25T22:01:18+01:00
 last_editor: Erik Hagen
 
 ---
