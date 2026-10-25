@@ -10,6 +10,22 @@ last_editor: Erik Hagen
 ---
 Vi utvikler beste praksis for dokumentasjon gjennom gode eksempler – ikke ved å låse oss til en rigid mal fra start. Denne siden samler erfaringer og mønstre etter hvert som de trer frem.
 
+## Dokumentasjon følger endringen
+
+Fast regel fra 2026-10-25: **Hver endring i funksjonalitet skal vurderes mot dokumentasjonen**, enten den løser et issue eller ikke. Det gjelder også endringer i tema, bygg (CI), skript, oppgavestyring og oppsett i GitHub-organisasjonen.
+
+Vurder og oppdater i samme arbeidsøkt som endringen:
+
+| Hva | Hvor |
+| --- | --- |
+| **Løsningsdokumentasjonen** – hvordan det virker | Teknisk dokumentasjon for løsningen, for eksempel denne seksjonen eller [Oppgavestyring](/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/) |
+| **Brukerveiledningen** – hva brukeren ser og gjør | [Brukerveiledning](../../brukerveiledning/) |
+| **Annet som berøres** | Veikart, README, instruksjoner for Claude (`CLAUDE.md`) |
+
+Sidene på nettstedet oppdateres **på norsk og engelsk**.
+
+**Kontrollen skrives ned.** Når et issue lukkes, har sluttkommentaren en linje som begynner med **«Dokumentasjon:»**. Den lenker til det som er oppdatert, eller sier hvorfor ingenting måtte endres. Uten den linjen er issuet ikke ferdig.
+
 ## Tilnærming
 
 Strukturen på en dokumentasjonsside bør gjenspeile innholdstypen. For beslutningsdokumentasjon (som veikart-elementer) har vi latt oss inspirere av [ADR-formatet (Architecture Decision Records)](https://adr.github.io/), tilpasset vårt behov.

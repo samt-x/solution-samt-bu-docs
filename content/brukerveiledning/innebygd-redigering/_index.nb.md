@@ -102,6 +102,7 @@ Indikatoren nede til venstre viser byggstatus. Normalt tar et bygg **ca. 1 minut
 | Venter på bygg | «N endringer bygges…» |
 | Ferdig | «Endringer publisert – klikk for å laste inn» |
 | Bygget feilet | «⚠ Bygget feilet», med en forklaring nede til høyre |
+| Din fil ble holdt tilbake | «Endringen din kunne ikke publiseres», med filnavnet nede til høyre |
 
 > Ser du «Avløst» i jobbhistorikken, er ikke endringen tapt – den ble publisert av en nyere jobb.
 
@@ -115,7 +116,13 @@ Nettstedet regner endringen som publisert når den står i byggkvitteringen (`/b
 | Alle endringene dine er publisert | Fanfare og «Your updated documentation is now online» – én gang, også når du har lagret flere ganger |
 | Bygget feilet | Fallende toner og «Build job failed» |
 
-**Bygget feilet:** Et bygg tar med alle endringer som er lagret, også andres. Feilen kan derfor skyldes en annen endring enn din, og da publiseres endringen din når feilen er rettet. Dette er et kjent, sjeldent problem. Bruk **«Meld fra her»** i meldingen for å si fra.
+**Når en fil har en feil:** Et bygg tar med alle endringer som er lagret, også andres. Har én fil en feil som ville stoppet bygget, holdes bare den fila tilbake. Siden viser da forrige versjon, eller vises ikke hvis den er ny, og resten av nettstedet publiseres som normalt. Endringer fra andre stopper altså ikke din.
+
+Er det din fil som ble holdt tilbake, ser du meldingen **«Endringen din kunne ikke publiseres»** med filnavnet, i stedet for «publisert». Feilen meldes automatisk til dem som følger opp, så du trenger ikke gjøre noe. Retter du feilen og lagrer på nytt, publiseres siden med neste bygg.
+
+**Bygget feilet:** Noen feil kan ikke holdes tilbake på denne måten, for eksempel feil i utseendet eller oppsettet av nettstedet. Da vises «⚠ Bygget feilet», og ingen endringer publiseres før feilen er rettet. Dette er sjeldent.
+
+I begge tilfeller kan du bruke **«Meld fra her»** i meldingen. Du får et automatisk svar med en gang, med status for bygget, og noen i prosjektet følger opp.
 
 ## Forslagsflyt for brukere uten skrivetilgang
 

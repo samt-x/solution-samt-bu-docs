@@ -15,7 +15,7 @@ Denne siden dokumenterer byggepipelinen som holder `samt-bu-docs`-nettstedet opp
 
 ## Oversikt
 
-Nettstedet er bygget med Hugo og publisert til GitHub Pages via GitHub Actions. Innhold hentes fra flere repoer:
+Nettstedet er bygget med Hugo og publisert til Cloudflare Pages via GitHub Actions. Innhold hentes fra flere repoer:
 
 | Repo | Type | Trigget av endringer? |
 |------|------|-----------------------|
@@ -33,18 +33,18 @@ Nettstedet er bygget med Hugo og publisert til GitHub Pages via GitHub Actions. 
 
 Filen `.github/workflows/hugo.yml` i `samt-bu-docs` gjør følgende ved triggering:
 
-1. **Installerer Hugo** (versjon 0.155.3 extended)
-2. **Sjekker ut** `samt-bu-docs` med full historikk og submoduler
-3. **Sjekker ut modulrepoer** direkte (ikke via Go-modulcache):
-   - `SAMT-X/team-architecture` → `.hugo-modules/team-architecture/`
-   - `SAMT-X/team-pilot-1` → `.hugo-modules/team-pilot-1/`
-   - `SAMT-X/samt-bu-drafts` → `.hugo-modules/samt-bu-drafts/`
-   - `SAMT-X/solution-samt-bu-docs` → `.hugo-modules/solution-samt-bu-docs/`
-4. **Injiserer `lastmod`** i modulinnhold via `inject-lastmod.py` (Git-historikk → frontmatter)
-5. **Bygger med Hugo** med `HUGO_MODULE_REPLACEMENTS` som peker til lokale kloner
-6. **Deployer** til GitHub Pages
+*Stegene er oppdatert 2026-10-25 etter solution-samt-bu-docs#83. Resten av siden er eldre og delvis utdatert.*
 
-Fordi modulrepoene sjekkes ut fresh ved hvert bygg, bruker CI alltid **siste HEAD** fra `main` – uavhengig av pinnet versjon i `go.mod`.
+1. **Installerer Hugo** (versjon 0.155.3 extended), med tre forsøk
+2. **Sjekker ut** `samt-bu-docs` med full historikk og submoduler (temaet)
+3. **Sikrer UUID-er** i frontmatter (bare ved push til `samt-bu-docs`)
+4. **Henter siste versjon av hver modul** med `hugo mod get …@latest`, med tre forsøk per modul
+5. **Bygger med Hugo** via `.github/scripts/build-with-fallback.py`. Feiler bygget på én innholdsfil, settes fila til side og resten bygges (se [Når et bygg feiler](#når-et-bygg-feiler))
+6. **Skriver byggkvitteringen** `/build.json` (`write-build-info.py`)
+7. **Deployer** til Cloudflare Pages med `wrangler`, med tre forsøk
+8. **Melder fra** på solution-samt-bu-docs#83 hvis en fil ble satt til side
+
+Fordi modulene hentes med `@latest` ved hvert bygg, bruker CI alltid **siste versjon** fra `main`, uavhengig av versjonen i `go.mod`.
 
 ### Triggere
 
@@ -56,6 +56,58 @@ on:
   repository_dispatch:
     types: [module-updated]  # Signal fra modulrepoer (se under)
 ```
+
+---
+
+## Når et bygg feiler
+
+Laget i [solution-samt-bu-docs#83](https://github.com/samt-x/solution-samt-bu-docs/issues/83). Før dette stoppet én ødelagt fil alle endringer, også andres, til noen rettet den. Hvordan brukeren opplever det, står i [brukerveiledningen for innebygd redigering](../../brukerveiledning/innebygd-redigering/#statusindikator-og-jobbhistorikk).
+
+### Fila med feilen settes til side
+
+Hugo stopper ved første feil og oppgir som regel fil, linje og kolonne. `build-with-fallback.py` kjører Hugo og leser feilmeldingen. Peker den på en innholdsfil (`content/…` i `samt-bu-docs` eller i en modul), skjer dette:
+
+1. Skriptet finner **forrige publiserte versjon** av fila: commiten for repoet i den publiserte `/build.json`. Var fila satt til side allerede i forrige bygg, brukes `published_sha` derfra. Ellers ville neste bygg hentet den ødelagte versjonen.
+2. Versjonen hentes med `git show` (`samt-bu-docs`) eller med GitHub-API-et (moduler), og skrives over fila **bare i dette bygget**. Ingenting committes.
+3. Fantes ikke fila i forrige bygg, holdes den utenfor.
+4. Bygget kjøres på nytt.
+
+Det settes til side høyst tre filer per bygg. Feiler samme fil igjen, eller peker feilen på en mal, temaet eller konfigurasjonen, stopper bygget som før. Slike feil skal fanges før de kommer til `main` ([solution-samt-bu-docs#27](https://github.com/samt-x/solution-samt-bu-docs/issues/27)).
+
+### Feil som ikke lenger stopper bygget
+
+- **Ødelagte `relref`-lenker** gir en advarsel, ikke en feil (`refLinksErrorLevel = "WARNING"` i `hugo.toml`). Hugo oppgir bare sidestien for slike feil, ikke fila, så de kan ikke settes til side. Siden bygges med en død lenke.
+- **`hugo mod get`** prøver tre ganger per modul, så en forbigående nettverksfeil ikke stopper bygget.
+
+### Byggkvitteringen
+
+`/build.json` har feltet `set_aside`, med én oppføring per fil som er satt til side:
+
+```json
+"set_aside": [
+  {"repo": "samt-bu-docs", "path": "content/…/_index.nb.md", "published_sha": "002c5fb…"}
+]
+```
+
+Nettleseren bruker feltet. Står brukerens commit i kvitteringen, men commiten endret en fil som er satt til side, vises «Endringen din kunne ikke publiseres» i stedet for «publisert» (`samtbuSetAsideFor` i temaets `custom-footer.html`).
+
+### Melding på #83
+
+Steget «Meld fra om filer satt til side» i `hugo.yml` skriver en kommentar på solution-samt-bu-docs#83 med fila, feilmeldingen og lenke til kjøringen. Hver fil meldes én gang. En skjult markør (`repo:sti@commit`) i kommentaren gjør at senere bygg ikke melder den samme feilen igjen.
+
+| Secret | Repo | Hva |
+|---|---|---|
+| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Utløper 2027-10-25. Ligger i Bitwarden. |
+
+Mangler tokenen, hoppes steget over, og rapporten står bare i jobbsammendraget.
+
+### Kvittering når noen melder fra
+
+Knappen «Meld fra her» i nettleseren lenker til #83. `build-report-receipt.yml` i `solution-samt-bu-docs` svarer med en gang på nye kommentarer der. Svaret har takk, status for siste bygg, om et bygg pågår, og hvilke filer som er satt til side. Kommentarer fra boter og fra dem som følger opp, får ikke svar. De som følger opp, står i en liste i workflowen. Svaret postes med `GITHUB_TOKEN`, så det trengs ingen egen secret.
+
+### Teste endringer i dette
+
+Test på en egen gren der deploy-steget er fjernet, med en fil som er ødelagt med vilje, og kjør `gh workflow run hugo.yml --ref <gren>`. Merk at kommentarsteget skriver en ekte kommentar på #83. Slett grenen etterpå. Kvitteringen testes med en kommentar på #83 fra en konto som ikke står i lista i workflowen.
 
 ---
 

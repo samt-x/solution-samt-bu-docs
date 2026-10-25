@@ -97,6 +97,7 @@ The indicator at the bottom left shows build status. A build normally takes **ab
 | Waiting for build | «N changes being built…» |
 | Done | «Changes published – click to reload» |
 | Build failed | «⚠ Build failed», with an explanation at the bottom right |
+| Your file was held back | «Your change could not be published», with the file name at the bottom right |
 
 > If you see «Superseded» in the build history, your change has not been lost – it was published by a newer job.
 
@@ -110,7 +111,13 @@ The site counts a change as published when it appears in the build receipt (`/bu
 | All your changes are published | Fanfare and «Your updated documentation is now online» – once, also when you have saved several times |
 | Build failed | Falling tones and «Build job failed» |
 
-**Build failed:** A build includes every change that has been saved, including other people's. The failure may therefore be caused by a change other than yours, and if so, your change will be published once that is fixed. This is a known, rare problem. Use **«Report it here»** in the message to let us know.
+**When a file has an error:** A build includes every change that has been saved, including other people's. If one file has an error that would stop the build, only that file is held back. The page then shows its previous version, or is left out if it is new, and the rest of the site is published as normal. Changes made by others therefore do not stop yours.
+
+If your file was held back, you see the message **«Your change could not be published»** with the file name, instead of «published». The error is reported automatically to the people who follow up, so you do not need to do anything. If you fix the error and save again, the page is published with the next build.
+
+**Build failed:** Some errors cannot be held back this way, for example errors in the look or the setup of the site. You then see «⚠ Build failed», and no changes are published until the error is fixed. This is rare.
+
+In both cases you can use **«Report it here»** in the message. You get an automatic reply right away with the status of the build, and someone in the project follows up.
 
 ## Suggestion Flow for Users Without Write Access
 
