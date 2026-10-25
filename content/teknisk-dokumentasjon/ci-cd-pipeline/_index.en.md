@@ -147,7 +147,7 @@ Hugo modules are fetched without git history, so Hugo cannot find the date of th
 
 | Secret | Where | What | Expires |
 |---|---|---|---|
-| `DOCS_REBUILD_TOKEN` | Each module repo | PAT on `samt-x-bot` that sends `repository_dispatch` to `samt-bu-docs`. If it is missing, only this step fails (401), and the change goes out with the next build. | See Bitwarden |
+| `DOCS_REBUILD_TOKEN` | Each module repo | Classic PAT on `samt-x-bot` with the scope `public_repo`, which sends `repository_dispatch` to `samt-bu-docs`. If it is missing, only this step fails (401), and the change goes out with the next build. | Never. To be replaced by a fine-grained token with an expiry date (#84) |
 | `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token on `samt-x-bot`, only *Issues: Read and write* on `solution-samt-bu-docs`. Used for the report on #83. | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy to Cloudflare Pages | See Cloudflare |
 

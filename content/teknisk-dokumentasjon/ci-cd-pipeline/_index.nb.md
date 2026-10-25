@@ -147,7 +147,7 @@ Hugo-moduler hentes uten git-historikk, så Hugo kan ikke selv finne datoen for 
 
 | Secret | Hvor | Hva | Utløper |
 |---|---|---|---|
-| `DOCS_REBUILD_TOKEN` | Hvert modulrepo | PAT på `samt-x-bot` som sender `repository_dispatch` til `samt-bu-docs`. Mangler den, feiler bare dette steget (401), og endringen kommer ut ved neste bygg. | Se Bitwarden |
+| `DOCS_REBUILD_TOKEN` | Hvert modulrepo | Klassisk PAT på `samt-x-bot` med scopet `public_repo`, som sender `repository_dispatch` til `samt-bu-docs`. Mangler den, feiler bare dette steget (401), og endringen kommer ut ved neste bygg. | Aldri. Skal byttes til en fine-grained token med utløp (#84) |
 | `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Brukes til meldingen på #83. | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy til Cloudflare Pages | Se Cloudflare |
 
