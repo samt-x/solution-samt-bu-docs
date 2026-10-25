@@ -96,8 +96,21 @@ The indicator at the bottom left shows build status. A build normally takes **ab
 | No active job | «Build history» |
 | Waiting for build | «N changes being built…» |
 | Done | «Changes published – click to reload» |
+| Build failed | «⚠ Build failed», with an explanation at the bottom right |
 
 > If you see «Superseded» in the build history, your change has not been lost – it was published by a newer job.
+
+The site counts a change as published when it appears in the build receipt (`/build.json`), which is published together with the pages. It follows your own saves from this browser, also when you move to other pages while the build is running.
+
+**Sound signals:**
+
+| When | Sound |
+| --- | --- |
+| Build starts | Two short beeps |
+| All your changes are published | Fanfare and «Your updated documentation is now online» – once, also when you have saved several times |
+| Build failed | Falling tones and «Build job failed» |
+
+**Build failed:** A build includes every change that has been saved, including other people's. The failure may therefore be caused by a change other than yours, and if so, your change will be published once that is fixed. This is a known, rare problem. Use **«Report it here»** in the message to let us know.
 
 ## Suggestion Flow for Users Without Write Access
 

@@ -101,8 +101,21 @@ Indikatoren nede til venstre viser byggstatus. Normalt tar et bygg **ca. 1 minut
 | Ingen pågående jobb | «Byggehistorikk» |
 | Venter på bygg | «N endringer bygges…» |
 | Ferdig | «Endringer publisert – klikk for å laste inn» |
+| Bygget feilet | «⚠ Bygget feilet», med en forklaring nede til høyre |
 
 > Ser du «Avløst» i jobbhistorikken, er ikke endringen tapt – den ble publisert av en nyere jobb.
+
+Nettstedet regner endringen som publisert når den står i byggkvitteringen (`/build.json`), som publiseres sammen med sidene. Det følger dine egne lagringer fra denne nettleseren, også når du går til andre sider mens bygget pågår.
+
+**Lydsignaler:**
+
+| Når | Lyd |
+| --- | --- |
+| Bygget starter | To korte pip |
+| Alle endringene dine er publisert | Fanfare og «Your updated documentation is now online» – én gang, også når du har lagret flere ganger |
+| Bygget feilet | Fallende toner og «Build job failed» |
+
+**Bygget feilet:** Et bygg tar med alle endringer som er lagret, også andres. Feilen kan derfor skyldes en annen endring enn din, og da publiseres endringen din når feilen er rettet. Dette er et kjent, sjeldent problem. Bruk **«Meld fra her»** i meldingen for å si fra.
 
 ## Forslagsflyt for brukere uten skrivetilgang
 
