@@ -9,36 +9,37 @@ last_editor: Erik Hagen
 
 ---
 
-Denne siden dokumenterer byggepipelinen som holder `samt-bu-docs`-nettstedet oppdatert – inkludert automatisk gjenbygging når innhold i eksterne modulrepoer endres.
+Denne siden dokumenterer byggepipelinen som holder nettstedet oppdatert, også når innhold i modulrepoene endres.
+
+*Gjennomgått og oppdatert 2026-10-25 ([solution-samt-bu-docs#84](https://github.com/samt-x/solution-samt-bu-docs/issues/84)).*
 
 ---
 
 ## Oversikt
 
-Nettstedet er bygget med Hugo og publisert til Cloudflare Pages via GitHub Actions. Innhold hentes fra flere repoer:
+Nettstedet bygges med Hugo i GitHub Actions og publiseres til Cloudflare Pages på `https://docs.samt-bu.no/`. Innholdet kommer fra flere repoer:
 
-| Repo | Type | Trigget av endringer? |
-|------|------|-----------------------|
-| `samt-bu-docs` | Hoved-repo – konfigurasjon, lokalt innhold, CI/CD | ✅ Ja – direkte push |
-| `samt-bu-drafts` | Hugo-modul – utkast og innspill | ✅ Ja – via `repository_dispatch` |
-| `team-architecture` | Hugo-modul – arkitektur-teamets innhold | ✅ Ja – via `repository_dispatch` |
-| `team-semantics` | Hugo-modul – semantikk-teamets innhold | ⚠ Ikke koblet (ingen trigger-workflow) |
-| `team-pilot-1` | Hugo-modul – pilot 1-teamets innhold | ✅ Ja – via `repository_dispatch` |
-| `solution-samt-bu-docs` | Hugo-modul – teknisk dokumentasjon for SAMT-BU Docs | ✅ Ja – via `repository_dispatch` |
-| `hugo-theme-samt-bu` | Git submodule – tema og layout | Nei – oppdateres manuelt via submodule-peker |
+| Repo | Type | Starter nybygg? |
+|------|------|-----------------|
+| `samt-bu-docs` | Hovedrepo: konfigurasjon, lokalt innhold, CI | Ja, ved push |
+| `team-architecture`, `team-semantics` | Hugo-moduler under Arkitektur | Ja, via `repository_dispatch` |
+| `samt-bu-pilot-1` … `samt-bu-pilot-6` | Hugo-moduler, én per pilot | Ja, via `repository_dispatch` |
+| `samt-bu-drafts`, `samt-bu-market-engagement` | Hugo-moduler: utkast og ekstern markedsdialog | Ja, via `repository_dispatch` |
+| `solution-samt-bu-docs`, `solution-task-management` | Hugo-moduler: dokumentasjon av løsningene | Ja, via `repository_dispatch` |
+| `hugo-theme-samt-bu` | Git submodule: tema og layout | Nei. Oppdateres via submodule-pekeren i `samt-bu-docs` |
+
+Hvor hver modul monteres, står i `[[module.imports]]` i `hugo.toml`.
 
 ---
 
 ## Byggeworkflow (`hugo.yml`)
 
-Filen `.github/workflows/hugo.yml` i `samt-bu-docs` gjør følgende ved triggering:
-
-*Stegene er oppdatert 2026-10-25 etter solution-samt-bu-docs#83. Resten av siden er eldre og delvis utdatert.*
+Filen `.github/workflows/hugo.yml` i `samt-bu-docs`:
 
 1. **Installerer Hugo** (versjon 0.155.3 extended), med tre forsøk
 2. **Sjekker ut** `samt-bu-docs` med full historikk og submoduler (temaet)
 3. **Sikrer UUID-er** i frontmatter (bare ved push til `samt-bu-docs`)
-4. **Henter siste versjon av hver modul** med `hugo mod get …@latest`, med tre forsøk per modul
+4. **Henter siste versjon av hver modul** med `hugo mod get …@latest`, med tre forsøk per modul (funksjonen `hent`)
 5. **Bygger med Hugo** via `.github/scripts/build-with-fallback.py`. Feiler bygget på én innholdsfil, settes fila til side og resten bygges (se [Når et bygg feiler](#når-et-bygg-feiler))
 6. **Skriver byggkvitteringen** `/build.json` (`write-build-info.py`)
 7. **Deployer** til Cloudflare Pages med `wrangler`, med tre forsøk
@@ -46,16 +47,24 @@ Filen `.github/workflows/hugo.yml` i `samt-bu-docs` gjør følgende ved triggeri
 
 Fordi modulene hentes med `@latest` ved hvert bygg, bruker CI alltid **siste versjon** fra `main`, uavhengig av versjonen i `go.mod`.
 
+«Sist endret» for lokalt innhold kommer fra git-historikken (`enableGitInfo = true`). For modulinnhold står datoen i frontmatter (se [`inject-lastmod.py`](#inject-lastmodpy--sist-endret-for-modulinnhold)).
+
 ### Triggere
 
 ```yaml
 on:
   push:
     branches: ["main"]       # Push til samt-bu-docs
-  workflow_dispatch:          # Manuell kjøring fra GitHub UI
+  workflow_dispatch:          # Manuell kjøring fra GitHub
   repository_dispatch:
-    types: [module-updated]  # Signal fra modulrepoer (se under)
+    types: [module-updated]  # Signal fra modulrepoene (se under)
 ```
+
+Bare ett bygg kjører om gangen (`concurrency: pages`), og et bygg som kjører, avbrytes ikke. Venter flere, kjøres bare det siste. De andre vises som avløst, men endringene deres er med i det siste bygget.
+
+### Byggkvitteringen (`/build.json`)
+
+`write-build-info.py` skriver hvilke commits som er med i bygget, per repo. Nettleseren bruker den for å se når en lagret endring er publisert, og for å oppdage endringer som er satt til side (se under).
 
 ---
 
@@ -93,13 +102,7 @@ Nettleseren bruker feltet. Står brukerens commit i kvitteringen, men commiten e
 
 ### Melding på #83
 
-Steget «Meld fra om filer satt til side» i `hugo.yml` skriver en kommentar på solution-samt-bu-docs#83 med fila, feilmeldingen og lenke til kjøringen. Hver fil meldes én gang. En skjult markør (`repo:sti@commit`) i kommentaren gjør at senere bygg ikke melder den samme feilen igjen.
-
-| Secret | Repo | Hva |
-|---|---|---|
-| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Utløper 2027-10-25. Ligger i Bitwarden. |
-
-Mangler tokenen, hoppes steget over, og rapporten står bare i jobbsammendraget.
+Steget «Meld fra om filer satt til side» i `hugo.yml` skriver en kommentar på solution-samt-bu-docs#83 med fila, feilmeldingen og lenke til kjøringen. Hver fil meldes én gang. En skjult markør (`repo:sti@commit`) i kommentaren gjør at senere bygg ikke melder den samme feilen igjen. Mangler tokenen `BUILD_REPORT_TOKEN` (se [Secrets](#secrets)), hoppes steget over, og rapporten står bare i jobbsammendraget.
 
 ### Kvittering når noen melder fra
 
@@ -113,193 +116,105 @@ Test på en egen gren der deploy-steget er fjernet, med en fil som er ødelagt m
 
 ## Kryssrepo-triggering (`repository_dispatch`)
 
-Uten denne mekanismen: en redaktør lagrer en side → commit til modulrepoet → ingenting skjer i `samt-bu-docs` → nettsiden oppdateres ikke.
+Uten denne mekanismen ville en lagring i et modulrepo ikke ført til noe nybygg, og nettstedet ville ikke blitt oppdatert.
 
-**Med mekanismen:** push til et modulrepo → trigger-workflow sender signal → `samt-bu-docs` starter nybygg automatisk.
+**Med mekanismen:** push til et modulrepo → `trigger-docs-rebuild.yml` i modulrepoet → signal til `samt-bu-docs` → `hugo.yml` bygger på nytt.
 
-### Slik fungerer det
+Alle modulrepoene har `.github/workflows/trigger-docs-rebuild.yml` med disse stegene. `team-semantics` mangler foreløpig steg 1 og 3 (#84).
 
-**Steg 1 – Push til modulrepo** (f.eks. via innebygd editor):
+1. **Sjekker ut** repoet med full historikk (`fetch-depth: 0`), som `inject-lastmod.py` trenger.
+2. **Sikrer UUID-er** i frontmatter (`ensure-uuids.py`). Endringer committes som «Auto: legg til manglende UUID-er i frontmatter [skip ci]».
+3. **Setter «Sist endret»** (`inject-lastmod.py`, se under). Endringer committes som «Auto: oppdater lastmod i frontmatter [skip ci]».
+4. **Sender `repository_dispatch`** til `samt-bu-docs` med typen `module-updated`. `client_payload` har reponavnet (`source`) og commitmeldingen (`message`), som vises som navn på kjøringen i `samt-bu-docs`.
 
-```
-Redaktør lagrer siden
-  → commit til modulrepo/main
-  → ensure-uuids i trigger-docs-rebuild.yml kjøres (sikrer id-felt i frontmatter)
-  → repository_dispatch sendes til samt-bu-docs
-```
+Jobben hopper over push fra `github-actions[bot]`, så de automatiske commitene ikke starter nye runder. Hent workflowen fra et eksisterende modulrepo og bytt reponavnet i `source`. Ikke skriv den av fra denne siden.
 
-**Steg 2 – `trigger-docs-rebuild.yml`** (finnes i hvert modulrepo som er koblet):
-
-```yaml
-name: Trigger rebuild av samt-bu-docs
-
-on:
-  push:
-    branches: [main]
-
-permissions:
-  contents: write
-
-jobs:
-  trigger:
-    if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Sikre UUID-er i frontmatter
-        run: |
-          python3 .github/scripts/ensure-uuids.py
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/
-          if git diff --staged --quiet; then
-            echo "Ingen endringer – alle UUID-er var på plass"
-          else
-            git commit -m "Auto: legg til manglende UUID-er i frontmatter [skip ci]"
-            for i in 1 2 3; do
-              git pull --rebase origin main && git push && break
-              sleep 3
-            done
-          fi
-
-      - name: Send repository_dispatch til samt-bu-docs
-        run: |
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.DOCS_REBUILD_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/SAMT-X/samt-bu-docs/dispatches \
-            -d '{"event_type":"module-updated","client_payload":{"source":"<repo-navn>"}}'
-```
-
-**Steg 3 – `hugo.yml`** i `samt-bu-docs` trigges av `repository_dispatch` med type `module-updated` → fullt nybygg og deploy.
-
-### Secret: `DOCS_REBUILD_TOKEN`
-
-Workflowen bruker et GitHub Personal Access Token (Classic) med **`workflow`-scope**, lagret som Actions Secret i hvert modulrepo.
-
-| Repo | Secretnavn | Verdi |
-|------|------------|-------|
-| `samt-bu-drafts` | `DOCS_REBUILD_TOKEN` | PAT med `workflow`-scope |
-| `team-architecture` | `DOCS_REBUILD_TOKEN` | Samme PAT |
-| `team-pilot-1` | `DOCS_REBUILD_TOKEN` | Samme PAT |
-| `solution-samt-bu-docs` | `DOCS_REBUILD_TOKEN` | Samme PAT |
-
-**Administrere tokenet:**
-- Opprett/forny på: `https://github.com/settings/tokens`
-- Sett secret: `gh secret set DOCS_REBUILD_TOKEN --repo SAMT-X/<repo>`
-- Tokenet trenger **ikke** lagres etter at det er satt som secret
+Fordi modulrepoene får automatiske commits, må du alltid hente siste versjon (`git pull`) før du endrer noe lokalt.
 
 ---
 
-## Legge til et nytt modulrepo i pipelinen
+## `inject-lastmod.py` – «Sist endret» for modulinnhold
 
-Se den fullstendige veiledningen: [Opprette nytt modulrepo – steg-for-steg](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/veikart/nytt-modulrepo/).
+Hugo-moduler hentes uten git-historikk, så Hugo kan ikke selv finne datoen for siste endring. Derfor skriver hvert modulrepo datoen inn i fila:
 
-Kortversjon – hva som må gjøres i `samt-bu-docs` når modulrepoet er klart:
+1. `inject-lastmod.py` finner siste commit for hver `.md`-fil som ikke er gjort av en bot.
+2. `lastmod` (norsk tid) og `last_editor` (GitHub-brukernavn og navn) skrives inn i frontmatter. En eksisterende `last_editor` som ikke er en bot, beholdes.
+3. Endringen committes i modulrepoet.
 
-### 1. I `hugo.toml` – registrer modulen
-
-```toml
-[[module.imports]]
-  path = "github.com/SAMT-X/<repo-navn>"
-  [[module.imports.mounts]]
-    source = "content"
-    target = "content/<sti-i-nettstedet>/"
-```
-
-### 2. Oppdater `go.mod`/`go.sum`
-
-```bash
-GONOSUMDB=* GOPROXY=direct hugo mod get github.com/SAMT-X/<repo-navn>@latest
-```
-
-### 3. I `hugo.yml` – legg til checkout-steg
-
-```yaml
-- name: Checkout <repo-navn> module
-  uses: actions/checkout@v4
-  with:
-    repository: SAMT-X/<repo-navn>
-    path: .hugo-modules/<repo-navn>
-    fetch-depth: 0
-```
-
-### 4. I `hugo.yml` – legg til i `HUGO_MODULE_REPLACEMENTS`
-
-Legg til på slutten av den eksisterende listen (husk komma etter forrige linje):
-
-```yaml
-github.com/SAMT-X/<repo-navn> ->
-${{ github.workspace }}/.hugo-modules/<repo-navn>
-```
-
-### 5. I `inject-lastmod.py` – legg til modulstien
-
-```python
-'.hugo-modules/<repo-navn>',
-```
+Unntak: `team-semantics` har ikke skriptet ennå (#84).
 
 ---
 
-## `inject-lastmod.py` – tidsstempler for modulinnhold
+## Secrets
 
-Hugo-moduler leveres som zip-arkiv uten Git-historikk, og `Sist endret`-datoen ville aldri vises. CI løser dette:
+| Secret | Hvor | Hva | Utløper |
+|---|---|---|---|
+| `DOCS_REBUILD_TOKEN` | Hvert modulrepo | PAT på `samt-x-bot` som sender `repository_dispatch` til `samt-bu-docs`. Mangler den, feiler bare dette steget (401), og endringen kommer ut ved neste bygg. | Se Bitwarden |
+| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Brukes til meldingen på #83. | 2027-10-25 |
+| `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy til Cloudflare Pages | Se Cloudflare |
 
-1. Modulrepoene sjekkes ut med `fetch-depth: 0` (full historikk)
-2. `inject-lastmod.py` leser `git log -1 --format=%cI` for hver `.md`-fil
-3. `lastmod: <ISO-tidsstempel>` skrives inn i frontmatter i CI-workspace
-4. Endringen commites **ikke** – kun midlertidig før bygg
-
-Gjelder per nå: `team-architecture`, `team-pilot-1`, `samt-bu-drafts` og `solution-samt-bu-docs`.
+Tokenene ligger i Bitwarden. Sett eller bytt en secret i repoets *Settings → Secrets and variables → Actions*. Det krever admin på repoet.
 
 ---
 
-## Tilbakerulling – GUI vs. innhold
+## Legge til et nytt modulrepo
+
+Kort fortalt:
+
+1. **Modulrepoet:** `hugo mod init github.com/SAMT-X/<repo>`, `content/_index.nb.md` og `_index.en.md`. Kopier `.github/` (workflow og skript) fra et eksisterende modulrepo, og bytt reponavnet i workflowen. Legg inn secreten `DOCS_REBUILD_TOKEN`, og gi teamene tilgang som for de andre modulrepoene.
+2. **`hugo.toml`** i `samt-bu-docs`: ny `[[module.imports]]`-blokk med `source = "content"` og `target = "content/<sti>/"`.
+3. **`go.mod`/`go.sum`:** `hugo mod get github.com/SAMT-X/<repo>@latest`.
+4. **`hugo.yml`:** ny linje `hent github.com/SAMT-X/<repo>@latest` i steget som henter moduler.
+5. **Temaet:** sammenhengen mellom sti og repo er skrevet inn i `edit-switcher.html`, `header.html`, `menu.html` og `custom-footer.html`. Glemmes dette, peker «Endre» og kildelenken til feil repo.
+6. **Sjekk** med et lokalt `hugo`-bygg at sidene i modulen lenker til riktig repo. Commit temaet, oppdater submodule-pekeren, og commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml`.
+
+Den detaljerte oppskriften står i `CLAUDE.md` i `samt-bu-docs`, under «Legge til ny modul». Siden [Opprette nytt modulrepo](../nytt-modulrepo/) er ikke oppdatert ennå (#84).
+
+---
+
+## Tilbakerulling – tema eller innhold
 
 ### Hvorfor temaendringer er trygge å rulle tilbake
 
-Arkitekturen har en skarp separasjon mellom to uavhengige git-repoer:
+Tema og innhold ligger i hvert sitt repo:
 
 | Hva | Repo | Inneholder |
 |-----|------|------------|
-| **GUI og logikk** | `hugo-theme-samt-bu` (submodule) | `custom-footer.html` (JS), `edit-switcher.html`, `custom-head.html` (CSS) |
-| **Dokumentasjonsinnhold** | `samt-bu-docs`, `team-architecture`, `team-pilot-1`, `samt-bu-drafts`, `solution-samt-bu-docs` | Alle `.md`-filer |
+| **Utseende og logikk** | `hugo-theme-samt-bu` (submodule) | `custom-footer.html` (JavaScript), `edit-switcher.html`, `custom-head.html` (CSS) med flere |
+| **Innhold** | `samt-bu-docs` og modulrepoene | Alle `.md`-filer |
 
-Disse repoene deler ingen git-historikk. En `git revert` i temaet berører aldri innholdsrepoene – og omvendt. Det betyr at feilaktige GUI-endringer kan rulles tilbake på ~2 minutter uten at én linje innhold røres.
+Repoene deler ingen git-historikk. En `git revert` i temaet rører aldri innholdet, og omvendt. En feil i temaet kan derfor rulles tilbake på et par minutter uten at en eneste linje innhold endres.
 
-### Tilbakerullingsoppskrift (GUI/tema)
+### Slik ruller du tilbake temaet
 
 ```bash
 # 1. Reverter siste commit i temaet
-cd "S:/app-data/github/samt-x-repos/samt-bu-docs/themes/hugo-theme-samt-bu"
-git revert HEAD
-git push
+git -C samt-bu-docs/themes/hugo-theme-samt-bu revert HEAD
+git -C samt-bu-docs/themes/hugo-theme-samt-bu push
 
 # 2. Oppdater submodule-pekeren i samt-bu-docs
-cd "S:/app-data/github/samt-x-repos/samt-bu-docs"
-git add themes/hugo-theme-samt-bu
-git commit -m "Tema: tilbakestilt til forrige versjon"
-git push
+git -C samt-bu-docs add themes/hugo-theme-samt-bu
+git -C samt-bu-docs commit -m "Tema: tilbakestilt til forrige versjon"
+git -C samt-bu-docs push
 ```
 
-CI bygger og deployer → nettstedet er tilbake til forrige GUI-tilstand innen ~2 minutter.
+CI bygger og deployer, og nettstedet har forrige utseende igjen innen et par minutter.
 
 ### Den eneste reelle risikoen
 
-At man ved en feil committer til en innholdsfil (`content/`) i stedet for en temafil. Dette er en menneskelig feil, ikke en arkitektonisk svakhet – og unngås ved å sjekke `git diff` og `git status` før commit.
+At man ved en feil committer en innholdsfil (`content/`) i stedet for en temafil. Det unngås ved å sjekke `git status` og `git diff` før commit.
 
 ---
 
 ## Manuelt nybygg
 
-Hvis noe er galt og du vil tvinge et nybygg uten å pushe kode:
+Slik starter du et nybygg uten å pushe noe:
 
-1. Gå til: `https://github.com/SAMT-X/samt-bu-docs/actions/workflows/hugo.yml`
+1. Gå til `https://github.com/samt-x/samt-bu-docs/actions/workflows/hugo.yml`
 2. Klikk **Run workflow** → **Run workflow**
 
-Eller via CLI:
+Eller med `gh`:
+
 ```bash
-"/c/Program Files/GitHub CLI/gh.exe" workflow run hugo.yml --repo SAMT-X/samt-bu-docs
+gh workflow run hugo.yml --repo samt-x/samt-bu-docs
 ```
