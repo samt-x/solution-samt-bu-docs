@@ -24,6 +24,10 @@ Vurder og oppdater i samme arbeidsøkt som endringen:
 
 Sidene på nettstedet oppdateres **på norsk og engelsk**.
 
+**Fortløpende, ikke samlet opp.** Dokumentasjonen skrives når endringen er **i bruk**, ikke etter hvert mellomsteg og ikke samlet til slutten av arbeidsøkta. En endring er live med en gang, og detaljene er lettest å få riktig mens de er ferske. Mens en utforming fortsatt diskuteres, venter dokumentasjonen.
+
+**Når noe får nytt navn** (en type, et felt, en side, et repo …), søk etter det gamle navnet i innholdet i **alle** innholdsrepoene, ikke bare der det er kjent at det står.
+
 **Kontrollen skrives ned.** Når et issue lukkes, har sluttkommentaren en linje som begynner med **«Dokumentasjon:»**. Den lenker til det som er oppdatert, eller sier hvorfor ingenting måtte endres. Uten den linjen er issuet ikke ferdig.
 
 ## Tilnærming

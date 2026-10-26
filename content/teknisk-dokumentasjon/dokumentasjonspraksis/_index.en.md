@@ -26,6 +26,10 @@ Check and update in the same working session as the change:
 
 Pages on the site are updated **in Norwegian and English**.
 
+**Continuously, not saved up.** The documentation is written when the change is **in use**, not after every intermediate step, and not saved for the end of the working session. A change is live at once, and the details are easiest to get right while they are fresh. While a design is still being discussed, the documentation waits.
+
+**When something is renamed** (a type, a field, a page, a repository …), search for the old name in the content of **all** content repositories, not only where it is known to appear.
+
 **The check is written down.** When an issue is closed, the closing comment has a line that starts with **«Documentation:»** (or «Dokumentasjon:»). It links to what was updated, or says why nothing had to change. Without that line the issue is not done.
 
 ## Approach
