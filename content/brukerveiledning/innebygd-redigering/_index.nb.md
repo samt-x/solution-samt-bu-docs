@@ -197,4 +197,6 @@ Alle sider har et skjult `id`-felt (UUID). Det er usynlig i redigeringsdialogen 
 
 Opplever du noe som ikke fungerer som det skal? Bruk **«Gi kommentar»** i Endre-menyen og beskriv hva som skjedde. Rapporten registreres som en sak og følges opp av teamet.
 
+Har du GitHub-bruker, kan du også melde fra direkte med skjemaet **Problem** i [solution-samt-bu-docs](https://github.com/samt-x/solution-samt-bu-docs/issues/new?template=6-problem.yml). Velg «Programvare eller verktøy virker ikke» i lista over hva slags problem det er. Se [Brukerveiledning for oppgavestyring](https://docs.samt-bu.no/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/brukerveiledning/).
+
 > Et dedikert «Rapporter feil»-menyvalg er under planlegging.

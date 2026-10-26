@@ -192,4 +192,6 @@ All pages have a hidden `id` field set automatically. It is invisible in the edi
 
 If something does not work as expected, use **"Give feedback"** in the Edit menu and describe what happened. The report is registered as an issue and followed up by the team.
 
+If you have a GitHub user, you can also report it directly with the form **Problem** in [solution-samt-bu-docs](https://github.com/samt-x/solution-samt-bu-docs/issues/new?template=6-problem.yml). Choose «Programvare eller verktøy virker ikke» (software or tool does not work) in the list of kinds of problem. See the [User guide for task management](https://docs.samt-bu.no/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/brukerveiledning/).
+
 > A dedicated "Report a bug" menu option is being planned.
