@@ -22,7 +22,7 @@ A guide for the core team: how to bring new participants into the GitHub organis
 
 The check script compares the two and writes the result to tilgang.md in the same repository, with a list of discrepancies. Personal data is kept only in the member list, never in issues, commits or on this site.
 
-The statuses in the list are: **potensiell** (potential, not yet invited), **invitert** (invited), **aktiv** (active), **inaktiv** (inactive: a member, but no longer part of the work) and **fjernet** (removed).
+The statuses in the list are: **potensiell** (potential, not yet invited), **invitert** (invited), **aktiv** (active), **inaktiv** (inactive: a member, but no longer part of the work), **fjernet** (removed) and **?** (a member, but it is unclear who the account belongs to; the note says what needs to be clarified).
 
 ## Prerequisites
 

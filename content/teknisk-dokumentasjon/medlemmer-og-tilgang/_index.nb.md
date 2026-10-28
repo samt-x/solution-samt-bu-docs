@@ -22,7 +22,7 @@ Veiledning for kjerneteamet: slik tar du inn nye deltakere i GitHub-organisasjon
 
 Sjekkskriptet sammenligner de to og skriver resultatet til tilgang.md i samme repo, med en liste over avvik. Personopplysninger står bare i medlemsoversikten, aldri i issues, commits eller på dette nettstedet.
 
-Statusene i oversikten er: **potensiell** (ikke invitert ennå), **invitert**, **aktiv**, **inaktiv** (medlem, men ikke lenger med i arbeidet) og **fjernet**.
+Statusene i oversikten er: **potensiell** (ikke invitert ennå), **invitert**, **aktiv**, **inaktiv** (medlem, men ikke lenger med i arbeidet), **fjernet** og **?** (medlem, men uklart hvem kontoen tilhører; merknaden sier hva som skal avklares).
 
 ## Forutsetninger
 
