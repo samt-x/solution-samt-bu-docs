@@ -16,7 +16,7 @@ Veiledning for kjerneteamet: slik tar du inn nye deltakere i GitHub-organisasjon
 
 | Kilde | Hva den inneholder | Hvem vedlikeholder |
 |---|---|---|
-| **Medlemsoversikten** (medlemmer.md i det private repoet samt-bu-intern-admin) | Navn, e-post, firma, status og rolle i SAMT-BU | Kjerneteamet, manuelt, gjerne ved å be Claude |
+| **Medlemsoversikten** (medlemmer.md i det private repoet samt-bu-intern-admin) | Navn, e-post, firma, LinkedIn, telefon, status og rolle i SAMT-BU | Kjerneteamet, manuelt, gjerne ved å be Claude |
 | **GitHub** | Hvem som er med i orgen, org-rolle, team og tilganger | Settes i GitHub, leses av sjekkskriptet |
 | **GitHub-profilen** | Navn og firma | Medlemmet selv, under profilbildet → Settings → Public profile. Leses av sjekkskriptet |
 

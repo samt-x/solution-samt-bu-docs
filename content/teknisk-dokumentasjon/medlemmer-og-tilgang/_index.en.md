@@ -16,7 +16,7 @@ A guide for the core team: how to bring new participants into the GitHub organis
 
 | Source | What it holds | Maintained by |
 |---|---|---|
-| **The member list** (medlemmer.md in the private repository samt-bu-intern-admin) | Name, email, company, status and role in SAMT-BU | The core team, manually, preferably by asking Claude |
+| **The member list** (medlemmer.md in the private repository samt-bu-intern-admin) | Name, email, company, LinkedIn, phone, status and role in SAMT-BU | The core team, manually, preferably by asking Claude |
 | **GitHub** | Who is in the organisation, organisation role, teams and permissions | Set in GitHub, read by the check script |
 | **The GitHub profile** | Name and company | The member, under the profile picture → Settings → Public profile. Read by the check script |
 
