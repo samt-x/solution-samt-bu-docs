@@ -18,6 +18,7 @@ Veiledning for kjerneteamet: slik tar du inn nye deltakere i GitHub-organisasjon
 |---|---|---|
 | **Medlemsoversikten** (medlemmer.md i det private repoet samt-bu-intern-admin) | Navn, e-post, firma, status og rolle i SAMT-BU | Kjerneteamet, manuelt, gjerne ved å be Claude |
 | **GitHub** | Hvem som er med i orgen, org-rolle, team og tilganger | Settes i GitHub, leses av sjekkskriptet |
+| **GitHub-profilen** | Navn og firma | Medlemmet selv, under profilbildet → Settings → Public profile. Leses av sjekkskriptet |
 
 Sjekkskriptet sammenligner de to og skriver resultatet til tilgang.md i samme repo, med en liste over avvik. Personopplysninger står bare i medlemsoversikten, aldri i issues, commits eller på dette nettstedet.
 
@@ -58,6 +59,8 @@ bash sjekk-medlemmer.sh
 ```
 
 Skriptet skriver tilgang.md og lister avvik, for eksempel en person som er med i orgen, men mangler i oversikten. Rett avvikene, og commit medlemmer.md og tilgang.md sammen.
+
+tilgang.md viser også navn og firma fra GitHub-profilen, og lister hvem som mangler dem. Be de som står på den lista, om å fylle ut profilen.
 
 ---
 

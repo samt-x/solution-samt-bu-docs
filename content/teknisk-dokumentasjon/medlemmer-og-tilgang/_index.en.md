@@ -18,6 +18,7 @@ A guide for the core team: how to bring new participants into the GitHub organis
 |---|---|---|
 | **The member list** (medlemmer.md in the private repository samt-bu-intern-admin) | Name, email, company, status and role in SAMT-BU | The core team, manually, preferably by asking Claude |
 | **GitHub** | Who is in the organisation, organisation role, teams and permissions | Set in GitHub, read by the check script |
+| **The GitHub profile** | Name and company | The member, under the profile picture → Settings → Public profile. Read by the check script |
 
 The check script compares the two and writes the result to tilgang.md in the same repository, with a list of discrepancies. Personal data is kept only in the member list, never in issues, commits or on this site.
 
@@ -58,6 +59,8 @@ bash sjekk-medlemmer.sh
 ```
 
 The script writes tilgang.md and lists discrepancies, for example a person who is in the organisation but missing from the list. Fix them, and commit medlemmer.md and tilgang.md together.
+
+tilgang.md also shows the name and company from each member's GitHub profile, and lists who is missing them. Ask the people on that list to fill in their profile.
 
 ---
 
