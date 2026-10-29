@@ -23,7 +23,7 @@ The site is built with Hugo in GitHub Actions and published to Cloudflare Pages 
 |------|------|-------------------|
 | `samt-bu-docs` | Main repo: configuration, local content, CI | Yes, on push |
 | `team-architecture`, `team-semantics` | Hugo modules under Architecture | Yes, through `repository_dispatch` |
-| `samt-bu-pilot-1` … `samt-bu-pilot-6` | Hugo modules, one per pilot | Yes, through `repository_dispatch` |
+| `samt-bu-pilot-1` … `samt-bu-pilot-7` | Hugo modules, one per pilot | Yes, through `repository_dispatch` |
 | `samt-bu-drafts`, `samt-bu-market-engagement` | Hugo modules: drafts and external market dialogue | Yes, through `repository_dispatch` |
 | `solution-samt-bu-docs`, `solution-task-management` | Hugo modules: documentation of the solutions | Yes, through `repository_dispatch` |
 | `hugo-theme-samt-bu` | Git submodule: theme and layout | No. Updated through the submodule pointer in `samt-bu-docs` |

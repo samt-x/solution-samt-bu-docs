@@ -23,7 +23,7 @@ Nettstedet bygges med Hugo i GitHub Actions og publiseres til Cloudflare Pages p
 |------|------|-----------------|
 | `samt-bu-docs` | Hovedrepo: konfigurasjon, lokalt innhold, CI | Ja, ved push |
 | `team-architecture`, `team-semantics` | Hugo-moduler under Arkitektur | Ja, via `repository_dispatch` |
-| `samt-bu-pilot-1` … `samt-bu-pilot-6` | Hugo-moduler, én per pilot | Ja, via `repository_dispatch` |
+| `samt-bu-pilot-1` … `samt-bu-pilot-7` | Hugo-moduler, én per pilot | Ja, via `repository_dispatch` |
 | `samt-bu-drafts`, `samt-bu-market-engagement` | Hugo-moduler: utkast og ekstern markedsdialog | Ja, via `repository_dispatch` |
 | `solution-samt-bu-docs`, `solution-task-management` | Hugo-moduler: dokumentasjon av løsningene | Ja, via `repository_dispatch` |
 | `hugo-theme-samt-bu` | Git submodule: tema og layout | Nei. Oppdateres via submodule-pekeren i `samt-bu-docs` |
