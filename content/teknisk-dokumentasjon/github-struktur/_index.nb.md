@@ -90,10 +90,10 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 
 | Team | Medlemmer | Write på |
 |------|-----------|----------|
-| `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de tre fredede |
+| `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de to fredede og `information-models` |
 | `samt-bu-alle` | Alle deltakere i SAMT-BU | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read på `samt-bu-archi-models`) |
 | `samt-bu-archimate` | ArchiMate-modellerere | `samt-bu-archi-models`, `kode-archiscripts` |
-| Fagteam (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo |
+| Fagteam (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-editorial`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo. `samt-bu-information-models` har både `information-models` og `team-semantics`. |
 
 **Teamene for SAMT-BU er nøstet under `samt-bu-alle`** (fra 23. oktober 2026). Kjerneteamet og
 alle fagteamene har `samt-bu-alle` som forelder. Undertemaene arver forelderens tilgang. Den som er med i et SAMT-BU-team, er
@@ -106,10 +106,14 @@ og andre formål (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`,
 eller lenge, legges i kjerneteamet på lik linje med de andre, og tas ut igjen når perioden er over.
 Rotasjonsteamet `samt-bu-core-team-rotating`, som var tenkt for dette, ble slettet 24. oktober 2026.
 
-**Tre fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
-granter: `hugo-theme-samt-bu`, `samt-x.github.io` og `information-models`.
+**To fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
+granter: `hugo-theme-samt-bu` og `samt-x.github.io`.
 De er ikke ment å redigeres i dokumentasjonssammenheng. (`demo-repository` var
-den fjerde, og ble slettet 2026-10-23.)
+også fredet, og ble slettet 2026-10-23. `information-models` var fredet til oktober 2026, og har nå
+Write for fagteamet `samt-bu-information-models`.)
+
+Fagteamet `samt-bu-semantics` ble slått sammen med `samt-bu-information-models` 31. oktober 2026
+([team-semantics#1](https://github.com/samt-x/team-semantics/issues/1)).
 
 **Pilotteam gir ikke tilgang til fellesdokumentasjonen.** `samt-bu-docs` var
 tidligere knyttet til `samt-bu-pilot-1`-teamet, noe som ga pilot 1-deltakere

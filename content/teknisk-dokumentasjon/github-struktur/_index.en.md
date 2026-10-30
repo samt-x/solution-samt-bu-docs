@@ -90,10 +90,10 @@ Access is granted to **teams**, never to individuals:
 
 | Team | Members | Write on |
 |------|---------|----------|
-| `samt-bu-core-team` | Core participants | All repos except the three frozen ones |
+| `samt-bu-core-team` | Core participants | All repos except the two frozen ones and `information-models` |
 | `samt-bu-alle` | All SAMT-BU participants | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-archi-models`) |
 | `samt-bu-archimate` | ArchiMate modellers | `samt-bu-archi-models`, `kode-archiscripts` |
-| Subject teams (`samt-bu-pilot-1…6`, `-architecture`, `-semantics`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo |
+| Subject teams (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo. `samt-bu-information-models` has both `information-models` and `team-semantics`. |
 
 **The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team and
 all subject teams have `samt-bu-alle` as their parent. Child teams inherit the parent's access. Anyone in a SAMT-BU team is therefore
@@ -107,10 +107,14 @@ or long period, is added to the core team on equal terms with the others, and re
 the period is over. The rotating team `samt-bu-core-team-rotating`, intended for this, was deleted
 on 24 October 2026.
 
-**Three frozen repos** have no editorial team access, only personal grants:
-`hugo-theme-samt-bu`, `samt-x.github.io` and `information-models`.
+**Two frozen repos** have no editorial team access, only personal grants:
+`hugo-theme-samt-bu` and `samt-x.github.io`.
 They are not intended for editing in a documentation context. (`demo-repository`
-was the fourth, and was deleted on 2026-10-23.)
+was also frozen, and was deleted on 2026-10-23. `information-models` was frozen until October 2026,
+and now has Write for the subject team `samt-bu-information-models`.)
+
+The subject team `samt-bu-semantics` was merged into `samt-bu-information-models` on 31 October 2026
+([team-semantics#1](https://github.com/samt-x/team-semantics/issues/1)).
 
 **Pilot teams do not grant access to the shared documentation.** `samt-bu-docs`
 was previously attached to the `samt-bu-pilot-1` team, which gave pilot 1
