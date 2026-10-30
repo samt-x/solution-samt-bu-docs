@@ -93,7 +93,7 @@ Access is granted to **teams**, never to individuals:
 | `samt-bu-core-team` | Core participants | All repos except the two frozen ones and `information-models` |
 | `samt-bu-alle` | All SAMT-BU participants | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-archi-models`) |
 | `samt-bu-archimate` | ArchiMate modellers | `samt-bu-archi-models`, `kode-archiscripts` |
-| Subject teams (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo. `samt-bu-information-models` has both `information-models` and `team-semantics`. |
+| Subject teams (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo. `samt-bu-information-models` has both `information-models` and `team-semantics`, and `samt-bu-architecture` also has `team-semantics`. |
 
 **The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team and
 all subject teams have `samt-bu-alle` as their parent. Child teams inherit the parent's access. Anyone in a SAMT-BU team is therefore
