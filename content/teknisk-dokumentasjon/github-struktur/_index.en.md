@@ -127,6 +127,7 @@ participants write access the other pilots lacked. That link has been removed.
   `samt-bu-alle` directly
 - New SAMT-BU team → set `samt-bu-alle` as parent (Settings → Parent team)
 - New module repo → add it to `samt-bu-core-team`
+- New repo → give it topics, see [Conventions](/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#repository-names-and-topics)
 
 ### Member list
 

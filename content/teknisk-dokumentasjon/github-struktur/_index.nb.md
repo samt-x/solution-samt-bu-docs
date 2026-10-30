@@ -125,6 +125,7 @@ skrivetilgang de andre pilotene manglet. Koblingen er fjernet.
   av nøstingen. Den som ikke hører til noe fagteam, legges direkte i `samt-bu-alle`
 - Nytt SAMT-BU-team → sett `samt-bu-alle` som forelder (Settings → Parent team)
 - Nytt modulrepo → legg det til `samt-bu-core-team`
+- Nytt repo → gi det topics, se [Konvensjoner](/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#navn-og-topics-på-repoer)
 
 ### Medlemsoversikt
 

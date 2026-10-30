@@ -32,6 +32,8 @@ Names: `samt-bu-` for published content (for example `samt-bu-pilot-6`), `team-`
 
 Create the repo in `samt-x` with a `README.md`, and clone it into the working folder next to the other repos.
 
+Give the repo topics following [Conventions](/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#repository-names-and-topics), for example for a pilot: `gh repo edit samt-x/<repo> --add-topic project-samt-bu,scope-project,content,tasks,pilot`.
+
 ### Step 2 – Make it a Hugo module
 
 ```bash
