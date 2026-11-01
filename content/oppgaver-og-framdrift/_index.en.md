@@ -3,6 +3,9 @@ id: 3b4fa34f-49e6-4534-b0f7-14acd378cbe7
 title: "Tasks and progress"
 linkTitle: "Tasks and progress"
 weight: 90
+lastmod: 2026-11-02T00:12:58+01:00
+last_editor: Erik Hagen
+
 ---
 
 The tasks for the docs platform itself are issues in [solution-samt-bu-docs](https://github.com/samt-x/solution-samt-bu-docs/issues) and on the board [SAMT-BU Docs platform](https://github.com/orgs/samt-x/projects/17) (Project 17). Where the platform is heading is described in the [Roadmap](../veikart/). This page shows where the work stands.
