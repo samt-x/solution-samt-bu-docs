@@ -4,7 +4,7 @@ id: e0e03dc4-b617-44cb-b829-a47ac7313a9d
 title: "Concept for GitHub Organizations and Repositories"
 linkTitle: "GitHub structure"
 weight: 20
-status: "Early draft"
+status: null
 lastmod: 2026-10-31T00:20:35+01:00
 last_editor: Erik Hagen
 
@@ -168,3 +168,38 @@ Background in [issue #72](https://github.com/SAMT-X/solution-samt-bu-docs/issues
 - **Naming conventions for shared repos:** If a team repo is to serve multiple projects, it should not carry a project-specific prefix.
 - **Migration of existing repos:** Is it worth moving `team-architecture` etc. to a `samt-bu` org? This affects CI secrets, CMS config, and Hugo Module pointers.
 - **Access control across orgs:** GitHub permissions are managed per org. Within `samt-x` this is now solved by the team model above. The question only returns once content repos are actually moved to a dedicated `samt-bu` org – the team structure would then have to be mirrored in both orgs.
+
+---
+
+## Platform choice: GitHub vs. GitLab
+
+> **See [Introduction → Choice of git and git platform](/en/prosjektleveranser/loesninger/samhandlingsplattform/introduksjon/#choice-of-git-and-git-platform)** for the project's overall rationale, the trade-offs with digital sovereignty and what it would take to switch. This section describes how the choice affected the technology behind docs.samt-bu.no, and is to be reduced to that.
+
+GitHub was chosen because it is the most widely used platform in Digdir and among partners (Altinn, the National Data Catalogue (Felles datakatalog) and most visible open source projects in the Norwegian public sector are there). It is a pragmatic choice – but not necessarily the strongest one architecturally.
+
+### Where GitLab would have been stronger
+
+| Parameter | GitHub | GitLab |
+|-----------|--------|--------|
+| Digital sovereignty | ❌ Microsoft/USA, CLOUD Act | ✅ Irish company, fully self-hostable (CE) |
+| Open source | ❌ Proprietary | ✅ Community Edition is open source |
+| Hierarchical access control | ⚠ Org → Teams (two levels, manual) | ✅ Groups → Subgroups → Repos with inheritance |
+| Server location | USA (primarily) | Europe – better response times from Norway |
+
+GitLab's group hierarchy would have fitted the SAMT-BU structure naturally: platform group → project subgroup → content repos, with inherited permissions at each level.
+
+### Consequence for the Cloudflare dependency
+
+Cloudflare was introduced for two reasons:
+
+1. **OAuth proxy (Cloudflare Worker):** GitHub OAuth requires a server-side callback – Workers solve this without a server of our own. With GitLab this would probably have been unnecessary: GitLab has a built-in OAuth provider with finer token scoping, and the OAuth flow is easier to implement without a proxy.
+
+2. **Cloudflare Pages (CDN/hosting):** Chosen for better response times than GitHub Pages. With GitLab.com (European servers) the base response times from Norway would have been better, and GitLab Pages + GitLab CI/CD is a fully adequate alternative.
+
+### What GitLab does not solve
+
+**The parallel push problem** («not a fast-forward» with simultaneous commits) is independent of platform – it is a fundamental git problem. The solution is commit batching at application level, not a change of platform.
+
+### Conclusion
+
+GitLab would have given better sovereignty, better access control and probably eliminated the need for the Cloudflare Worker. For future, similar projects in the public sector, GitLab (preferably self-hosted) should be considered as the first choice. For SAMT-BU, migration is not relevant in the short term – but the lesson has been noted.

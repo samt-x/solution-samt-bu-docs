@@ -16,6 +16,3 @@ This page documents what is "under the bonnet" of the SAMT-BU platform. The inte
 - **Known issues and solutions** – bug log with symptom, root cause, and fix
 - **CI/CD pipeline** – GitHub Actions workflow, inject-lastmod, cross-repo triggering
 - **GitHub structure** – concept for organising GitHub organisations and repos (`samt-x` as platform org, project orgs for content)
-- **Developer notes and Claude context** – architectural decisions, conventions, theme.css pitfalls, and context for new developers and AI assistants
-
-Topics covered in Developer notes: Hugo architecture, theme (submodule), 3-column layout, Hugo Modules, CI/CD pipeline, Cloudflare Worker OAuth proxy, search system.

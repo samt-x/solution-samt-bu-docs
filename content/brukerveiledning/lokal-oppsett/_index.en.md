@@ -1,7 +1,7 @@
 ---
 # id: auto-generated – copied values are overwritten automatically on push
 id: "e26cb201-0841-46b2-8ac7-2ba3708edde6"
-title: "Local Setup (for Developers)"
+title: "Local setup"
 linkTitle: "Local setup"
 weight: 30
 aliases:
@@ -17,7 +17,7 @@ This option gives you a full local working environment in which you can preview 
 ## What You Need
 
 | Tool | Version | Purpose |
-|------|---------|---------|
+| --- | --- | --- |
 | [Git](https://git-scm.com/) | Latest stable | Version control |
 | [Hugo Extended](https://gohugo.io/) | 0.155.3 or later | Site generator |
 | [Go](https://go.dev/) | 1.21 or later | Required by Hugo Modules |
@@ -59,10 +59,10 @@ sudo dpkg -i hugo_extended_0.155.3_linux-amd64.deb
 
 ## Content structure – multiple repositories
 
-SAMT-BU Docs uses **content modules**: content from different teams and pilots lives in separate GitHub repositories and is mounted automatically into the site at publication time. You do not need to clone all repositories to see the full site – Hugo fetches any missing modules from GitHub automatically.
+SAMT-BU Docs uses **content modules**: content from different teams and pilots lives in separate GitHub repositories and is mounted automatically into the site at publication time.
 
 | Repository | Content | Mounted under |
-|------------|---------|---------------|
+| --- | --- | --- |
 | `samt-bu-docs` | Main documentation, configuration | *(root)* |
 | `samt-bu-pilot-1` | Pilot 1 | `pilotering/pilot-1/` |
 | `samt-bu-pilot-2` | Pilot 2 | `pilotering/pilot-2/` |
@@ -75,19 +75,15 @@ SAMT-BU Docs uses **content modules**: content from different teams and pilots l
 
 ## Scenario A – Preview the full site only
 
-Clone `samt-bu-docs` and start the server. Hugo fetches content from all module repositories automatically.
-
 ```bash
 git clone --recurse-submodules https://github.com/SAMT-X/samt-bu-docs.git
 cd samt-bu-docs
 hugo server
 ```
 
-Open [http://localhost:1313/](http://localhost:1313/) in the browser.
+Open <http://localhost:1313/> in the browser.
 
 ## Scenario B – Edit content in one specific repository
-
-If you only want to edit content in, for example, `samt-bu-pilot-2`, you only need to clone that repository:
 
 ```bash
 git clone https://github.com/SAMT-X/samt-bu-pilot-2.git
@@ -98,30 +94,24 @@ git commit -m "Description of the change"
 git push
 ```
 
-The site updates automatically at [docs.samt-bu.no](https://docs.samt-bu.no/) within about one minute. No local Hugo server is required.
+The site updates automatically within about one minute.
 
 ## Scenario C – Full local development across all repositories
 
-If you want to edit content in several modules and see the changes live locally, clone all repositories as sibling folders and use the included helper script:
-
 ```bash
-# Clone all repositories side by side
 git clone --recurse-submodules https://github.com/SAMT-X/samt-bu-docs.git
 git clone https://github.com/SAMT-X/samt-bu-pilot-1.git
-git clone https://github.com/SAMT-X/samt-bu-pilot-2.git
 # ... and so on for the modules you want to work with
 
-# Start the local server (the script finds local clones automatically)
 cd samt-bu-docs
 tools/hugo-local.sh
 ```
 
-The script reads `hugo.toml`, detects which modules you have cloned locally, and starts Hugo with those pointing to your local files. Modules you have not cloned are still fetched from GitHub.
+The script finds local clones automatically and starts Hugo with them. Modules you have not cloned are fetched from GitHub.
 
 ```
 samt-bu-docs/            ← always clone this one
 samt-bu-pilot-1/         ← clone the ones you want to edit
-samt-bu-pilot-2/
 ...
 ```
 
@@ -133,8 +123,6 @@ tools/hugo-local.sh --drafts
 
 ## Writing Content
 
-Content files are standard Markdown files with a small header at the top (frontmatter):
-
 ```markdown
 ---
 title: "Page title"
@@ -142,38 +130,34 @@ weight: 30
 ---
 
 Your content begins here in standard Markdown.
-
-## Heading
-
-A paragraph with **bold text** and *italic text*.
 ```
 
 - `title` – page title displayed in the menu and at the top of the page
 - `weight` – sort order (lower number = higher in the menu)
-- `draft: true` – add this to hide the page from publication until it is ready
+- `draft: true` – hides the page from publication until it is ready
 
 ## Saving and Publishing Changes
 
 ```bash
 git add content/path/to/file/_index.en.md
 git commit -m "Brief description of what you changed"
+git pull --rebase
 git push
 ```
 
 GitHub Actions builds and publishes automatically after 1–2 minutes.
 
-> **No write access to the repository?** Create a *pull request* instead:
-> `git checkout -b my-contribution` → make changes → `git push origin my-contribution` → open a PR on GitHub.
+> **No write access?** Create a branch and pull request: `git checkout -b my-contribution` → make changes → `git push origin my-contribution` → open a PR on GitHub.
 
 ## Useful Commands
 
 | Command | Description |
-|---------|-------------|
+| --- | --- |
 | `tools/hugo-local.sh` | Start local server with automatic module substitution |
-| `tools/hugo-local.sh --drafts` | Include pages marked with `draft: true` |
+| `tools/hugo-local.sh --drafts` | Include drafts as well |
 | `hugo server` | Start local server (fetches modules from GitHub) |
-| `hugo` | Build to the `public/` folder (check for errors) |
-| `git pull --rebase` | Fetch and rebase latest changes |
+| `hugo` | Build to `public/` (check for errors) |
+| `git pull --rebase` | Fetch latest changes and rebase |
 
 ---
 
@@ -182,6 +166,8 @@ GitHub Actions builds and publishes automatically after 1–2 minutes.
 When several contributors work at the same time – or when someone saves a change via the browser interface while you have a local copy – the repositories can fall out of sync.
 
 ### The Helper Scripts
+
+There are three scripts in the root folder for your local clones:
 
 | Script | Function |
 |--------|----------|
