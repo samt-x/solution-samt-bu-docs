@@ -5,7 +5,7 @@ title: "Concept for GitHub Organizations and Repositories"
 linkTitle: "GitHub structure"
 weight: 20
 status: null
-lastmod: 2026-10-31T00:20:35+01:00
+lastmod: 2026-11-02T21:35:59+01:00
 last_editor: Erik Hagen
 
 ---
