@@ -4,7 +4,7 @@ id: 39ea7bd9-ccd9-42ee-b60c-36a3d86c4ab6
 title: Oversettelse
 linkTitle: Oversettelse
 weight: 35
-lastmod: 2026-11-03T18:20:32+01:00
+lastmod: 2026-11-03T19:56:10+01:00
 last_editor: Erik Hagen
 
 ---
