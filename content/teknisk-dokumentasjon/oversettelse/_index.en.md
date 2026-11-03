@@ -38,7 +38,7 @@ When someone creates a new page in the browser, the theme adds the placeholder i
 
 English to Norwegian is only checked for changes from 12:00 on 3 November 2026. Before that, Norwegian was always the original.
 
-**Exceptions** are listed in `.github/translation-ignore.txt` in `samt-bu-docs`, with the reason on the line above. An exception for a page applies until one of the files changes again. An exception for a folder applies to everything under it, for example the test pages.
+**Exceptions** are listed in `.github/translation-ignore.txt` in `samt-bu-docs`, with the reason on the line above. An exception for a page applies until one of the files changes again. An exception for a folder applies to everything under it. The test pages under `test-samt-bu-docs/` are checked like other pages, so they can also be used to test the translation.
 
 ## When Claude translates
 

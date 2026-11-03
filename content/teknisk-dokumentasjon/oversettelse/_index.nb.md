@@ -38,7 +38,7 @@ Når noen lager en ny side i nettleseren, legger temaet inn plassholderen på en
 
 Engelsk til norsk sjekkes bare for endringer fra 3. november 2026 kl. 12. Før det var norsk alltid originalen.
 
-**Unntak** står i `.github/translation-ignore.txt` i `samt-bu-docs`, med grunnen på linja over. Et unntak for en side gjelder til en av filene endres igjen. Et unntak for en mappe gjelder alt under den, for eksempel testsidene.
+**Unntak** står i `.github/translation-ignore.txt` i `samt-bu-docs`, med grunnen på linja over. Et unntak for en side gjelder til en av filene endres igjen. Et unntak for en mappe gjelder alt under den. Testsidene under `test-samt-bu-docs/` sjekkes som andre sider, så de også kan brukes til å teste oversettelsen.
 
 ## Når Claude oversetter
 
