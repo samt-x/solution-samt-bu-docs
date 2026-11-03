@@ -99,6 +99,8 @@ hent github.com/SAMT-X/<repo>@latest
 
 Uten den bygger CI med versjonen i `go.mod`, ikke med siste versjon.
 
+Legg også reponavnet inn i lista i steget «Hent innholdsrepoene» i `translations.yml`. Ellers blir modulen ikke sjekket for [oversettelse](../oversettelse/).
+
 ---
 
 ## Del 3 – Temaet

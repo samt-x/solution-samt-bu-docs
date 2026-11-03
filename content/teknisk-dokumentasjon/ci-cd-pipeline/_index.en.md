@@ -148,7 +148,7 @@ Hugo modules are fetched without git history, so Hugo cannot find the date of th
 | Secret | Where | What | Expires |
 |---|---|---|---|
 | `DOCS_REBUILD_TOKEN` | **Organization secret** in `samt-x`, shared with the twelve module repos (*Selected repositories*) | Fine-grained token on `samt-x-bot`, only *Contents: Read and write* on `samt-bu-docs`, which is what `repository_dispatch` requires. If a repo lacks it, the dispatch step fails (red), and the change goes out with the next build. | 2027-10-25 |
-| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token on `samt-x-bot`, only *Issues: Read and write* on `solution-samt-bu-docs`. Used for the report on #83. | 2027-10-25 |
+| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token on `samt-x-bot`, only *Issues: Read and write* on `solution-samt-bu-docs`. Used for the report on #83 and for the list of [pages to be translated](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/oversettelse/) (#91, `translations.yml`). | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy to Cloudflare Pages | See Cloudflare |
 
 The tokens are kept in Bitwarden. `DOCS_REBUILD_TOKEN` is replaced in the organization's *Settings → Secrets and variables → Actions*, the others in the repo's. This requires admin. Do not add `DOCS_REBUILD_TOKEN` to a single repo: a repo secret takes precedence over the organization secret with the same name.
@@ -162,7 +162,7 @@ In short:
 1. **The module repo:** `hugo mod init github.com/SAMT-X/<repo>`, `content/_index.nb.md` and `_index.en.md`. Copy `.github/` (workflow and scripts) from an existing module repo, and change the repo name in the workflow. Tick the repo in the organization secret `DOCS_REBUILD_TOKEN`, and give the teams access as for the other module repos.
 2. **`hugo.toml`** in `samt-bu-docs`: a new `[[module.imports]]` block with `source = "content"` and `target = "content/<path>/"`.
 3. **`go.mod`/`go.sum`:** `hugo mod get github.com/SAMT-X/<repo>@latest`.
-4. **`hugo.yml`:** a new line `hent github.com/SAMT-X/<repo>@latest` in the step that fetches modules.
+4. **`hugo.yml`:** a new line `hent github.com/SAMT-X/<repo>@latest` in the step that fetches modules. Also add the repository to the list in the step «Hent innholdsrepoene» in `translations.yml`, otherwise the module is not checked for [translation](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/oversettelse/).
 5. **The theme:** the link between path and repo is written into `edit-switcher.html`, `header.html`, `menu.html` and `custom-footer.html`. If this is forgotten, «Edit» and the source link point to the wrong repo.
 6. **Check** with a local `hugo` build that the pages in the module link to the right repo. Commit the theme, update the submodule pointer, and commit `hugo.toml`, `go.mod`, `go.sum` and `hugo.yml`.
 

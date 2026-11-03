@@ -148,7 +148,7 @@ Hugo-moduler hentes uten git-historikk, så Hugo kan ikke selv finne datoen for 
 | Secret | Hvor | Hva | Utløper |
 |---|---|---|---|
 | `DOCS_REBUILD_TOKEN` | **Org-secret** i `samt-x`, delt med de tolv modulrepoene (*Selected repositories*) | Fine-grained token på `samt-x-bot`, bare *Contents: Read and write* på `samt-bu-docs`, som er det `repository_dispatch` krever. Mangler den i et repo, feiler dispatch-steget (rødt), og endringen kommer ut ved neste bygg. | 2027-10-25 |
-| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Brukes til meldingen på #83. | 2027-10-25 |
+| `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Brukes til meldingen på #83 og til lista over [sider som må oversettes](../oversettelse/) (#91, `translations.yml`). | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy til Cloudflare Pages | Se Cloudflare |
 
 Tokenene ligger i Bitwarden. `DOCS_REBUILD_TOKEN` byttes i orgens *Settings → Secrets and variables → Actions*, de andre i repoets. Det krever admin. Ikke legg `DOCS_REBUILD_TOKEN` inn i et enkelt repo: en repo-secret går foran org-secreten med samme navn.
@@ -162,7 +162,7 @@ Kort fortalt:
 1. **Modulrepoet:** `hugo mod init github.com/SAMT-X/<repo>`, `content/_index.nb.md` og `_index.en.md`. Kopier `.github/` (workflow og skript) fra et eksisterende modulrepo, og bytt reponavnet i workflowen. Huk av repoet i org-secreten `DOCS_REBUILD_TOKEN`, og gi teamene tilgang som for de andre modulrepoene.
 2. **`hugo.toml`** i `samt-bu-docs`: ny `[[module.imports]]`-blokk med `source = "content"` og `target = "content/<sti>/"`.
 3. **`go.mod`/`go.sum`:** `hugo mod get github.com/SAMT-X/<repo>@latest`.
-4. **`hugo.yml`:** ny linje `hent github.com/SAMT-X/<repo>@latest` i steget som henter moduler.
+4. **`hugo.yml`:** ny linje `hent github.com/SAMT-X/<repo>@latest` i steget som henter moduler. Legg også repoet inn i lista i steget «Hent innholdsrepoene» i `translations.yml`, ellers blir modulen ikke sjekket for [oversettelse](../oversettelse/).
 5. **Temaet:** sammenhengen mellom sti og repo er skrevet inn i `edit-switcher.html`, `header.html`, `menu.html` og `custom-footer.html`. Glemmes dette, peker «Endre» og kildelenken til feil repo.
 6. **Sjekk** med et lokalt `hugo`-bygg at sidene i modulen lenker til riktig repo. Commit temaet, oppdater submodule-pekeren, og commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml`.
 

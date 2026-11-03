@@ -163,7 +163,9 @@ Forsinkelsen er med vilje: legges meldingen ut umiddelbart, får bidragsyteren t
 
 Nettstedet er tospråklig (norsk og engelsk). Hver side finnes i to versjoner – én norsk og én engelsk – koblet via et felles UUID-felt. Når du oppretter eller redigerer en side, endrer du kun én språkversjon om gangen.
 
-**Anbefalt arbeidsflyt for ny side:**
+**Du trenger bare skrive på ett språk.** Når du lager eller endrer en side på norsk eller engelsk, kommer den på lista over [sider som må oversettes](https://github.com/samt-x/solution-samt-bu-docs/issues/91). Den andre språkversjonen oppdateres derfra, inntil videre med Claude (KI), og vanligvis innen noen dager. En ny side får teksten «*English translation TBD.*» på engelsk fram til den er oversatt. Se [Oversettelse](../../teknisk-dokumentasjon/oversettelse/).
+
+Vil du skrive begge språkene selv:
 
 1. Opprett siden på norsk (via «Nytt kapittel» eller «Nytt underkapittel»)
 2. Legg til norsk innhold og lagre

@@ -158,7 +158,9 @@ The delay is deliberate: posted immediately, the contributor receives two emails
 
 The site is bilingual (Norwegian and English). Each page exists in two versions linked via a shared UUID field. When you create or edit a page, you change only one language version at a time.
 
-**Recommended workflow for a new page:**
+**You only need to write in one language.** When you create or change a page in Norwegian or English, it is added to the list of [pages to be translated](https://github.com/samt-x/solution-samt-bu-docs/issues/91). The other language version is updated from there, for the time being with Claude (AI), and usually within a few days. A new page shows the text «*English translation TBD.*» in English until it has been translated. See [Translation](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/oversettelse/).
+
+If you want to write both languages yourself:
 
 1. Create the page in Norwegian
 2. Add Norwegian content and save
