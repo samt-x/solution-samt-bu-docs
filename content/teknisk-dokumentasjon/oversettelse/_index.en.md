@@ -25,7 +25,7 @@ The check is done by the script `.github/scripts/check-translations.sh` in `samt
 
 | Group | When |
 | --- | --- |
-| **To English** | The English file is missing, has the placeholder "English translation TBD", or the Norwegian file has changed since the last commit on the English one. |
+| **To English** | The English file is missing, has the placeholder "English translation TBD" on a line of its own, or the Norwegian file has changed since the last commit on the English one. |
 | **To Norwegian** | The same the other way round. The placeholder is "Norsk oversettelse TBD". |
 | **Check the structure** | A different number of headings, or one text is under 60 % of the length of the other. Catches a commit that touched both files without the other being translated. |
 
@@ -36,7 +36,7 @@ When someone creates a new page in the browser, the theme adds the placeholder i
 - **Automatic commits** from `github-actions[bot]` (`lastmod` and UUIDs). They touch both files.
 - **Translations.** The commit message has the line `Oversatt-fra: nb` (or `en`). Otherwise the translation itself would make the original look out of date.
 
-English to Norwegian is only checked for changes from 3 November 2026. Before that, Norwegian was always the original.
+English to Norwegian is only checked for changes from 12:00 on 3 November 2026. Before that, Norwegian was always the original.
 
 **Exceptions** are listed in `.github/translation-ignore.txt` in `samt-bu-docs`, with the reason on the line above. An exception for a page applies until one of the files changes again. An exception for a folder applies to everything under it, for example the test pages.
 

@@ -25,7 +25,7 @@ Sjekken gjøres av skriptet `.github/scripts/check-translations.sh` i `samt-bu-d
 
 | Gruppe | Når |
 | --- | --- |
-| **Til engelsk** | Den engelske fila mangler, har plassholderen «English translation TBD», eller den norske er endret etter siste commit på den engelske. |
+| **Til engelsk** | Den engelske fila mangler, har plassholderen «English translation TBD» alene på en linje, eller den norske er endret etter siste commit på den engelske. |
 | **Til norsk** | Det samme motsatt vei. Plassholderen er «Norsk oversettelse TBD». |
 | **Sjekk strukturen** | Ulikt antall overskrifter, eller den ene teksten er under 60 % av den andres lengde. Fanger en commit som rørte begge filene, uten at den andre ble oversatt. |
 
@@ -36,7 +36,7 @@ Når noen lager en ny side i nettleseren, legger temaet inn plassholderen på en
 - **Automatiske commits** fra `github-actions[bot]` (`lastmod` og UUID-er). De rører begge filene.
 - **Oversettelser.** Commit-meldingen har linjen `Oversatt-fra: nb` (eller `en`). Ellers ville selve oversettelsen få originalen til å se utdatert ut.
 
-Engelsk til norsk sjekkes bare for endringer fra 3. november 2026. Før det var norsk alltid originalen.
+Engelsk til norsk sjekkes bare for endringer fra 3. november 2026 kl. 12. Før det var norsk alltid originalen.
 
 **Unntak** står i `.github/translation-ignore.txt` i `samt-bu-docs`, med grunnen på linja over. Et unntak for en side gjelder til en av filene endres igjen. Et unntak for en mappe gjelder alt under den, for eksempel testsidene.
 
