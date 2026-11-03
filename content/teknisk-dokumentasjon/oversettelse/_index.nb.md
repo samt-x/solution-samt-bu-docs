@@ -4,6 +4,8 @@ id: 39ea7bd9-ccd9-42ee-b60c-36a3d86c4ab6
 title: Oversettelse
 linkTitle: Oversettelse
 weight: 35
+lastmod: 2026-11-03T18:11:05+01:00
+last_editor: Erik Hagen
 
 ---
 Nettstedet er på norsk og engelsk. Hver side har en norsk fil (`_index.nb.md`) og en engelsk fil (`_index.en.md`). Den som skriver, trenger bare skrive på ett språk. Den andre språkversjonen oppdateres etterpå.

@@ -4,6 +4,8 @@ id: 39ea7bd9-ccd9-42ee-b60c-36a3d86c4ab6
 title: Translation
 linkTitle: Translation
 weight: 35
+lastmod: 2026-11-03T18:11:05+01:00
+last_editor: Erik Hagen
 
 ---
 The site is in Norwegian and English. Each page has a Norwegian file (`_index.nb.md`) and an English file (`_index.en.md`). Writers only need to write in one language. The other language version is updated afterwards.
