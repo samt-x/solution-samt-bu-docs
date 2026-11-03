@@ -16,7 +16,7 @@ Inntil videre gjøres oversettelsen av Claude Code, i Erik Hagens arbeidsøkter.
 
 1. Noen lager eller endrer en side, i nettleseren eller i git.
 2. Workflowen `translations.yml` i `samt-bu-docs` kjører. Den kjører når en side endres i et av innholdsrepoene, og ellers én gang i døgnet. Den sjekker alle repoene og skriver lista inn i [solution-samt-bu-docs#91](https://github.com/samt-x/solution-samt-bu-docs/issues/91), «Sider som må oversettes». Tallet i tittelen er antall sider på lista.
-3. Ved starten av hver arbeidsøkt leser Claude issuet. Står det sider der, spør Claude om de skal oversettes nå. Standardsvaret er ja. Ved slutten av arbeidsøkta kjører Claude sjekken på nytt, slik at også endringene fra økta kommer med, og spør på samme måte.
+3. Ved starten og slutten av hver arbeidsøkt kjører Claude sjekken selv, på de oppdaterte repoene (den tar noen sekunder), og viser resultatet. Da kommer også endringer med som ennå ikke står i issuet. Er det sider på lista, spør Claude om de skal oversettes med en gang. Standardsvaret er ja.
 4. Claude oversetter, pusher og kjører sjekken på nytt. Ved neste kjøring er sidene borte fra lista.
 
 ## Hva sjekken ser etter
