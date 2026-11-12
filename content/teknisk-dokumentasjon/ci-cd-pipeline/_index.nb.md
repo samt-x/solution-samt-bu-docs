@@ -148,7 +148,7 @@ Hugo-moduler hentes uten git-historikk, så Hugo kan ikke selv finne datoen for 
 
 | Secret | Hvor | Hva | Utløper |
 |---|---|---|---|
-| `DOCS_REBUILD_TOKEN` | **Org-secret** i `samt-x`, delt med de tolv modulrepoene (*Selected repositories*) | Fine-grained token på `samt-x-bot`, bare *Contents: Read and write* på `samt-bu-docs`, som er det `repository_dispatch` krever. Mangler den i et repo, feiler dispatch-steget (rødt), og endringen kommer ut ved neste bygg. | 2027-10-25 |
+| `DOCS_REBUILD_TOKEN` | **Org-secret** i `samt-x`, delt med de 14 modulrepoene (*Selected repositories*) | Fine-grained token på `samt-x-bot`, bare *Contents: Read and write* på `samt-bu-docs`, som er det `repository_dispatch` krever. Mangler den i et repo, feiler dispatch-steget (rødt), og endringen kommer ut ved neste bygg. | 2027-10-25 |
 | `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token på `samt-x-bot`, bare *Issues: Read and write* på `solution-samt-bu-docs`. Brukes til meldingen på #83 og til lista over [sider som må oversettes](../oversettelse/) (#91, `translations.yml`). | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy til Cloudflare Pages | Se Cloudflare |
 

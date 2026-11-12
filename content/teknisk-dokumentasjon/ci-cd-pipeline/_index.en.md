@@ -148,7 +148,7 @@ Hugo modules are fetched without git history, so Hugo cannot find the date of th
 
 | Secret | Where | What | Expires |
 |---|---|---|---|
-| `DOCS_REBUILD_TOKEN` | **Organization secret** in `samt-x`, shared with the twelve module repos (*Selected repositories*) | Fine-grained token on `samt-x-bot`, only *Contents: Read and write* on `samt-bu-docs`, which is what `repository_dispatch` requires. If a repo lacks it, the dispatch step fails (red), and the change goes out with the next build. | 2027-10-25 |
+| `DOCS_REBUILD_TOKEN` | **Organization secret** in `samt-x`, shared with the 14 module repos (*Selected repositories*) | Fine-grained token on `samt-x-bot`, only *Contents: Read and write* on `samt-bu-docs`, which is what `repository_dispatch` requires. If a repo lacks it, the dispatch step fails (red), and the change goes out with the next build. | 2027-10-25 |
 | `BUILD_REPORT_TOKEN` | `samt-bu-docs` | Fine-grained token on `samt-x-bot`, only *Issues: Read and write* on `solution-samt-bu-docs`. Used for the report on #83 and for the list of [pages to be translated](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/oversettelse/) (#91, `translations.yml`). | 2027-10-25 |
 | `CF_API_TOKEN`, `CF_ACCOUNT_ID` | `samt-bu-docs` | Deploy to Cloudflare Pages | See Cloudflare |
 
