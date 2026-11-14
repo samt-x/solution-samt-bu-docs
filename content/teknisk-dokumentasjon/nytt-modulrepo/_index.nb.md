@@ -4,7 +4,7 @@ id: ed2ee794-3c97-4e2d-959d-90b235a4f3d6
 title: "Opprette nytt modulrepo – steg-for-steg"
 linkTitle: "Nytt modulrepo"
 weight: 25
-lastmod: 2026-11-14T23:29:56+01:00
+lastmod: 2026-11-14T23:30:24+01:00
 last_editor: Erik Hagen
 
 ---
