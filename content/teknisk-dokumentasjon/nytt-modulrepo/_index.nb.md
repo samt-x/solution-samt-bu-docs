@@ -121,6 +121,8 @@ hugo
 
 Sjekk at sidene i modulen har `"repo":"<repo>"` i `_samtbuThisPage` og kildelenke til riktig repo.
 
+Push modulrepoet og kjør `hugo mod get` før du bygger lokalt. Lokal test med `HUGO_MODULE_REPLACEMENTS` har ikke virket på Windows, verken for nye eller eksisterende moduler.
+
 ### Steg 12 – Commit og push
 
 Commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml` i `samt-bu-docs`, og push.
