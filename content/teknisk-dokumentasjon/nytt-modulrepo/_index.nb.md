@@ -13,7 +13,7 @@ Veiledning for å opprette et nytt innholdsrepo og montere det i nettstedet som 
 
 *Oppdatert 2026-10-25 ([solution-samt-bu-docs#84](https://github.com/samt-x/solution-samt-bu-docs/issues/84)). Hvordan byggingen henger sammen, står på siden [CI/CD-pipeline](../ci-cd-pipeline/).*
 
-Arbeidet gjøres i tre repoer: det nye modulrepoet, `samt-bu-docs` og temaet `hugo-theme-samt-bu`.
+Arbeidet gjøres i to repoer: det nye modulrepoet og `samt-bu-docs`. Temaet `hugo-theme-samt-bu` trenger ingen endring (del 3).
 
 ---
 
@@ -105,18 +105,13 @@ Legg også reponavnet inn i lista i steget «Hent innholdsrepoene» i `translati
 
 ## Del 3 – Temaet
 
-### Steg 10 – Koble stien til repoet
+### Steg 10 – Ingenting å gjøre i temaet
 
-Temaet har sammenhengen mellom sti og repo skrevet inn direkte, på sju steder i fire filer i `themes/hugo-theme-samt-bu/layouts/partials/`:
+Fra 14.11.2026 finner temaet repoet selv ([solution-samt-bu-docs#82](https://github.com/samt-x/solution-samt-bu-docs/issues/82)). Partialen `page-repo.html` leser stien til fila Hugo brukte. Moduler ligger i modulcachen som `…/<repo>@<versjon>/content/…`, lokale sider som `…/samt-bu-docs/content/…`. Resultatet brukes av «Endre»-menyen, kildelenken øverst på siden og modulmerket i menyen. Lista over repoer for forslagsbehandling (`SAMTBU_REPOS`) bygges fra modulene i `hugo.toml`.
 
-| Fil | Hva |
-|---|---|
-| `edit-switcher.html` | «Endre»-menyen (fire steder) |
-| `header.html` | Kildelenken øverst på siden |
-| `menu.html` | Ny side fra menyen |
-| `custom-footer.html` | `SAMTBU_REPOS` og forslagslisten |
+Før dette måtte en ny modul legges inn på sju steder i fire filer i temaet. Ble det glemt, pekte «Endre» og kildelenken på feil repo.
 
-Kopier blokken for en eksisterende modul med samme type sti, for eksempel `pilot-4`. **Glemmes dette, peker «Endre» og kildelenken til `samt-bu-docs`**, og redigering i nettleseren virker ikke for modulen.
+En lokal fil under en modulsti (som `arkitektur/overordnet-arkitektur/maalbildet/`) får `samt-bu-docs` av seg selv, fordi lokal fil vinner i Hugo, og det er den fila som leses. Finner temaet ikke mønsteret i stien, stopper bygget med en feilmelding i stedet for å rute til feil repo.
 
 ### Steg 11 – Sjekk lokalt
 
@@ -124,13 +119,11 @@ Kopier blokken for en eksisterende modul med samme type sti, for eksempel `pilot
 hugo
 ```
 
-Sjekk at sidene i modulen har `data-repo="<repo>"` og lenker til riktig repo.
+Sjekk at sidene i modulen har `"repo":"<repo>"` i `_samtbuThisPage` og kildelenke til riktig repo.
 
-### Steg 12 – Commit og push i riktig rekkefølge
+### Steg 12 – Commit og push
 
-1. Commit og push temaet.
-2. Oppdater submodule-pekeren i `samt-bu-docs` (`git add themes/hugo-theme-samt-bu`).
-3. Commit `hugo.toml`, `go.mod`, `go.sum`, `hugo.yml` og submodule-pekeren, og push.
+Commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml` i `samt-bu-docs`, og push.
 
 ---
 

@@ -164,8 +164,8 @@ In short:
 2. **`hugo.toml`** in `samt-bu-docs`: a new `[[module.imports]]` block with `source = "content"` and `target = "content/<path>/"`.
 3. **`go.mod`/`go.sum`:** `hugo mod get github.com/SAMT-X/<repo>@latest`.
 4. **`hugo.yml`:** a new line `hent github.com/SAMT-X/<repo>@latest` in the step that fetches modules. Also add the repository to the list in the step «Hent innholdsrepoene» in `translations.yml`, otherwise the module is not checked for [translation](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/oversettelse/).
-5. **The theme:** the link between path and repo is written into `edit-switcher.html`, `header.html`, `menu.html` and `custom-footer.html`. If this is forgotten, «Edit» and the source link point to the wrong repo.
-6. **Check** with a local `hugo` build that the pages in the module link to the right repo. Commit the theme, update the submodule pointer, and commit `hugo.toml`, `go.mod`, `go.sum` and `hugo.yml`.
+5. **The theme:** nothing to do. `page-repo.html` finds the repo from the path of the file Hugo used, and the list of repos comes from the modules in `hugo.toml` (from 14 November 2026, [solution-samt-bu-docs#82](https://github.com/samt-x/solution-samt-bu-docs/issues/82)).
+6. **Check** with a local `hugo` build that the pages in the module link to the right repo. Commit `hugo.toml`, `go.mod`, `go.sum` and `hugo.yml`.
 
 The detailed recipe is on the page [Create a new module repo](../nytt-modulrepo/).
 

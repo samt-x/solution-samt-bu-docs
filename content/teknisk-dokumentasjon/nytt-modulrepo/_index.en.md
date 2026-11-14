@@ -13,7 +13,7 @@ Guide for creating a new content repo and mounting it in the site as a Hugo modu
 
 *Updated 2026-10-25 ([solution-samt-bu-docs#84](https://github.com/samt-x/solution-samt-bu-docs/issues/84)). How the build fits together is described on the page [CI/CD pipeline](../ci-cd-pipeline/).*
 
-The work is done in three repos: the new module repo, `samt-bu-docs` and the theme `hugo-theme-samt-bu`.
+The work is done in two repos: the new module repo and `samt-bu-docs`. The theme `hugo-theme-samt-bu` needs no change (part 3).
 
 ---
 
@@ -105,18 +105,13 @@ Also add the repository name to the list in the step «Hent innholdsrepoene» in
 
 ## Part 3 – The theme
 
-### Step 10 – Link the path to the repo
+### Step 10 – Nothing to do in the theme
 
-The theme has the link between path and repo written in directly, in seven places in four files in `themes/hugo-theme-samt-bu/layouts/partials/`:
+From 14 November 2026 the theme finds the repo by itself ([solution-samt-bu-docs#82](https://github.com/samt-x/solution-samt-bu-docs/issues/82)). The partial `page-repo.html` reads the path of the file Hugo used. Modules live in the module cache as `…/<repo>@<version>/content/…`, local pages as `…/samt-bu-docs/content/…`. The result is used by the «Edit» menu, the source link at the top of the page and the module marker in the menu. The list of repos for handling suggestions (`SAMTBU_REPOS`) is built from the modules in `hugo.toml`.
 
-| File | What |
-|---|---|
-| `edit-switcher.html` | The «Edit» menu (four places) |
-| `header.html` | The source link at the top of the page |
-| `menu.html` | New page from the menu |
-| `custom-footer.html` | `SAMTBU_REPOS` and the suggestion list |
+Before this, a new module had to be added in seven places in four files in the theme. If that was forgotten, «Edit» and the source link pointed to the wrong repo.
 
-Copy the block for an existing module with the same kind of path, for example `pilot-4`. **If this is forgotten, «Edit» and the source link point to `samt-bu-docs`**, and editing in the browser does not work for the module.
+A local file under a module path (such as `arkitektur/overordnet-arkitektur/maalbildet/`) gets `samt-bu-docs` by itself, because a local file wins in Hugo, and that is the file that is read. If the theme does not find the pattern in the path, the build stops with an error message instead of routing to the wrong repo.
 
 ### Step 11 – Check locally
 
@@ -124,13 +119,11 @@ Copy the block for an existing module with the same kind of path, for example `p
 hugo
 ```
 
-Check that the pages in the module have `data-repo="<repo>"` and link to the right repo.
+Check that the pages in the module have `"repo":"<repo>"` in `_samtbuThisPage` and a source link to the right repo.
 
-### Step 12 – Commit and push in the right order
+### Step 12 – Commit and push
 
-1. Commit and push the theme.
-2. Update the submodule pointer in `samt-bu-docs` (`git add themes/hugo-theme-samt-bu`).
-3. Commit `hugo.toml`, `go.mod`, `go.sum`, `hugo.yml` and the submodule pointer, and push.
+Commit `hugo.toml`, `go.mod`, `go.sum` and `hugo.yml` in `samt-bu-docs`, and push.
 
 ---
 

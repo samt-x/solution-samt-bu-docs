@@ -164,8 +164,8 @@ Kort fortalt:
 2. **`hugo.toml`** i `samt-bu-docs`: ny `[[module.imports]]`-blokk med `source = "content"` og `target = "content/<sti>/"`.
 3. **`go.mod`/`go.sum`:** `hugo mod get github.com/SAMT-X/<repo>@latest`.
 4. **`hugo.yml`:** ny linje `hent github.com/SAMT-X/<repo>@latest` i steget som henter moduler. Legg også repoet inn i lista i steget «Hent innholdsrepoene» i `translations.yml`, ellers blir modulen ikke sjekket for [oversettelse](../oversettelse/).
-5. **Temaet:** sammenhengen mellom sti og repo er skrevet inn i `edit-switcher.html`, `header.html`, `menu.html` og `custom-footer.html`. Glemmes dette, peker «Endre» og kildelenken til feil repo.
-6. **Sjekk** med et lokalt `hugo`-bygg at sidene i modulen lenker til riktig repo. Commit temaet, oppdater submodule-pekeren, og commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml`.
+5. **Temaet:** ingenting å gjøre. `page-repo.html` finner repoet fra stien til fila Hugo brukte, og lista over repoer kommer fra modulene i `hugo.toml` (fra 14.11.2026, [solution-samt-bu-docs#82](https://github.com/samt-x/solution-samt-bu-docs/issues/82)).
+6. **Sjekk** med et lokalt `hugo`-bygg at sidene i modulen lenker til riktig repo. Commit `hugo.toml`, `go.mod`, `go.sum` og `hugo.yml`.
 
 Den detaljerte oppskriften står på siden [Opprette nytt modulrepo](../nytt-modulrepo/).
 
