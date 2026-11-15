@@ -91,11 +91,12 @@ Access is granted to **teams**, never to individuals:
 | Team | Members | Write on |
 |------|---------|----------|
 | `samt-bu-core-team` | Core participants | All repos except the two frozen ones and `information-models` |
-| `samt-bu-alle` | All SAMT-BU participants | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-archi-models`) |
+| `samt-bu-alle` | All SAMT-BU participants | `samt-bu-needs` (Needs), `content-insight` (Insight), `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-docs` and `samt-bu-archi-models`) |
+| `samt-bu-editorial` | The editorial team | `samt-bu-docs` (the frame: front page, About, How to contribute, section front pages), `samt-bu-drafts` and `team-architecture` |
 | `samt-bu-archimate` | ArchiMate modellers | `samt-bu-archi-models`, `kode-archiscripts` |
-| Subject teams (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-editorial`, `-information-models`) | Participants in that work | Their own repo. `samt-bu-information-models` has both `information-models` and `team-semantics`, and `samt-bu-architecture` also has `team-semantics`. |
+| Subject teams (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-information-models`) | Participants in that work | Their own repo. `samt-bu-information-models` has both `information-models` and `team-semantics`, and `samt-bu-architecture` also has `team-semantics`. |
 
-**The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team and
+**The SAMT-BU teams are nested under `samt-bu-alle`** (from 23 October 2026). The core team, the editorial team and
 all subject teams have `samt-bu-alle` as their parent. Child teams inherit the parent's access. Anyone in a SAMT-BU team is therefore
 automatically part of "alle", however they joined. Teams for the platform and other purposes
 (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`, `samt-bu-external-contributors`)
@@ -115,6 +116,11 @@ and now has Write for the subject team `samt-bu-information-models`.)
 
 The subject team `samt-bu-semantics` was merged into `samt-bu-information-models` on 31 October 2026
 ([team-semantics#1](https://github.com/samt-x/team-semantics/issues/1)).
+
+**`samt-bu-docs` is the platform and editorial frame** (from 15 November 2026,
+[issue #82](https://github.com/SAMT-X/solution-samt-bu-docs/issues/82)). Content with its own owner lives in
+modules, where `samt-bu-alle` has Write. In `samt-bu-docs` itself only the core team and the editorial team have
+Write. Other participants see "Suggest edit to this page" instead of "Edit this page" on the pages that live there.
 
 **Pilot teams do not grant access to the shared documentation.** `samt-bu-docs`
 was previously attached to the `samt-bu-pilot-1` team, which gave pilot 1

@@ -91,11 +91,12 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 | Team | Medlemmer | Write på |
 |------|-----------|----------|
 | `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de to fredede og `information-models` |
-| `samt-bu-alle` | Alle deltakere i SAMT-BU | `samt-bu-docs`, `samt-bu-drafts`, `samt-bu-files` (+ Read på `samt-bu-archi-models`) |
+| `samt-bu-alle` | Alle deltakere i SAMT-BU | `samt-bu-needs` (Behov), `content-insight` (Innsikt), `samt-bu-drafts`, `samt-bu-files` (+ Read på `samt-bu-docs` og `samt-bu-archi-models`) |
+| `samt-bu-editorial` | Redaksjonen | `samt-bu-docs` (rammen: forsiden, Om, Hvordan bidra, seksjonsforsidene), `samt-bu-drafts` og `team-architecture` |
 | `samt-bu-archimate` | ArchiMate-modellerere | `samt-bu-archi-models`, `kode-archiscripts` |
-| Fagteam (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-editorial`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo. `samt-bu-information-models` har både `information-models` og `team-semantics`, og `samt-bu-architecture` har også `team-semantics`. |
+| Fagteam (`samt-bu-pilot-1…7`, `-architecture`, `-market`, `-information-models`) | Deltakere i det aktuelle arbeidet | Sitt eget repo. `samt-bu-information-models` har både `information-models` og `team-semantics`, og `samt-bu-architecture` har også `team-semantics`. |
 
-**Teamene for SAMT-BU er nøstet under `samt-bu-alle`** (fra 23. oktober 2026). Kjerneteamet og
+**Teamene for SAMT-BU er nøstet under `samt-bu-alle`** (fra 23. oktober 2026). Kjerneteamet, redaksjonen og
 alle fagteamene har `samt-bu-alle` som forelder. Undertemaene arver forelderens tilgang. Den som er med i et SAMT-BU-team, er
 derfor automatisk med i «alle», uansett hvordan vedkommende kom inn. Teamene for plattformen
 og andre formål (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`,
@@ -114,6 +115,11 @@ Write for fagteamet `samt-bu-information-models`.)
 
 Fagteamet `samt-bu-semantics` ble slått sammen med `samt-bu-information-models` 31. oktober 2026
 ([team-semantics#1](https://github.com/samt-x/team-semantics/issues/1)).
+
+**`samt-bu-docs` er plattform og redaksjonell ramme** (fra 15. november 2026,
+[issue #82](https://github.com/SAMT-X/solution-samt-bu-docs/issues/82)). Innhold med egen ansvarlig ligger i
+moduler, og `samt-bu-alle` har Write der. I selve `samt-bu-docs` har bare kjerneteamet og redaksjonen Write. Andre
+deltakere får «Foreslå endring av denne siden» i stedet for «Rediger denne siden» på sidene som ligger der.
 
 **Pilotteam gir ikke tilgang til fellesdokumentasjonen.** `samt-bu-docs` var
 tidligere knyttet til `samt-bu-pilot-1`-teamet, noe som ga pilot 1-deltakere
