@@ -90,7 +90,7 @@ Access is granted to **teams**, never to individuals:
 
 | Team | Members | Write on |
 |------|---------|----------|
-| `samt-bu-core-team` | Core participants | All repos except the two frozen ones and `information-models` |
+| `samt-bu-core-team` | Core participants | Most project repos, including `samt-bu-portfolio` (from 15 November 2026). Not `information-models` or the legal, ArchiMate and organisation repos, which have their own owners. |
 | `samt-bu-alle` | All SAMT-BU participants | `samt-bu-needs` (Needs), `content-insight` (Insight), `samt-bu-drafts`, `samt-bu-files` (+ Read on `samt-bu-docs` and `samt-bu-archi-models`) |
 | `samt-bu-editorial` | The editorial team | `samt-bu-docs` (the frame: front page, About, How to contribute, section front pages), `samt-bu-drafts` and `team-architecture` |
 | `samt-bu-archimate` | ArchiMate modellers | `samt-bu-archi-models`, `kode-archiscripts` |
@@ -108,9 +108,11 @@ or long period, is added to the core team on equal terms with the others, and re
 the period is over. The rotating team `samt-bu-core-team-rotating`, intended for this, was deleted
 on 24 October 2026.
 
-**Two frozen repos** have no editorial team access, only personal grants:
-`hugo-theme-samt-bu` and `samt-x.github.io`.
-They are not intended for editing in a documentation context. (`demo-repository`
+**One frozen repo**, `samt-x.github.io`, has no team access, only personal grants. It is not
+intended for editing in a documentation context. (`hugo-theme-samt-bu` was also frozen, and from
+15 November 2026 has Write for the solution team `solution-samt-bu-docs`, which owns its PRs.)
+Who handles pull requests in each repo is set out in
+[Conventions](/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#who-handles-pull-requests). (`demo-repository`
 was also frozen, and was deleted on 2026-10-23. `information-models` was frozen until October 2026,
 and now has Write for the subject team `samt-bu-information-models`.)
 

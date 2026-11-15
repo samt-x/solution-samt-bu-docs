@@ -90,7 +90,7 @@ Tilgang gis til **team**, aldri til enkeltpersoner:
 
 | Team | Medlemmer | Write på |
 |------|-----------|----------|
-| `samt-bu-core-team` | Kjernedeltakere | Alle repoer unntatt de to fredede og `information-models` |
+| `samt-bu-core-team` | Kjernedeltakere | De fleste prosjektrepoene, også `samt-bu-portfolio` (fra 15. november 2026). Ikke `information-models`, juss-, ArchiMate- og orgrepoene, som har egne eiere. |
 | `samt-bu-alle` | Alle deltakere i SAMT-BU | `samt-bu-needs` (Behov), `content-insight` (Innsikt), `samt-bu-drafts`, `samt-bu-files` (+ Read på `samt-bu-docs` og `samt-bu-archi-models`) |
 | `samt-bu-editorial` | Redaksjonen | `samt-bu-docs` (rammen: forsiden, Om, Hvordan bidra, seksjonsforsidene), `samt-bu-drafts` og `team-architecture` |
 | `samt-bu-archimate` | ArchiMate-modellerere | `samt-bu-archi-models`, `kode-archiscripts` |
@@ -107,9 +107,11 @@ og andre formål (`solution-*`, `content-bots`, `samt-x`, `samt-bu-partners`,
 eller lenge, legges i kjerneteamet på lik linje med de andre, og tas ut igjen når perioden er over.
 Rotasjonsteamet `samt-bu-core-team-rotating`, som var tenkt for dette, ble slettet 24. oktober 2026.
 
-**To fredede repoer** har ingen redaksjonell teamtilgang, kun personlige
-granter: `hugo-theme-samt-bu` og `samt-x.github.io`.
-De er ikke ment å redigeres i dokumentasjonssammenheng. (`demo-repository` var
+**Ett fredet repo**, `samt-x.github.io`, har ingen teamtilgang, kun personlige granter. Det er
+ikke ment å redigeres i dokumentasjonssammenheng. (`hugo-theme-samt-bu` var også fredet, og har fra
+15. november 2026 Write for løsningsteamet `solution-samt-bu-docs`, som eier PR-ene der.)
+Hvem som behandler pull requests i hvert repo, står i
+[Konvensjoner](/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#hvem-behandler-pull-requests). (`demo-repository` var
 også fredet, og ble slettet 2026-10-23. `information-models` var fredet til oktober 2026, og har nå
 Write for fagteamet `samt-bu-information-models`.)
 
