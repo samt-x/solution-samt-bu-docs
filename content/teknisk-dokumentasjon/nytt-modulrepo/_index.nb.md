@@ -111,7 +111,7 @@ Fra 14.11.2026 finner temaet repoet selv ([solution-samt-bu-docs#82](https://git
 
 Før dette måtte en ny modul legges inn på sju steder i fire filer i temaet. Ble det glemt, pekte «Endre» og kildelenken på feil repo.
 
-En lokal fil under en modulsti (som `arkitektur/overordnet-arkitektur/maalbildet/`) får `samt-bu-docs` av seg selv, fordi lokal fil vinner i Hugo, og det er den fila som leses. Finner temaet ikke mønsteret i stien, stopper bygget med en feilmelding i stedet for å rute til feil repo.
+En lokal fil under en modulsti får `samt-bu-docs` av seg selv, fordi lokal fil vinner i Hugo, og det er den fila som leses. Det skal likevel ikke finnes slike filer (se steg 7). Det siste tilfellet, Målbildet og Veikart under `arkitektur/overordnet-arkitektur/`, ble flyttet inn i `team-architecture` 15.11.2026. Finner temaet ikke mønsteret i stien, stopper bygget med en feilmelding i stedet for å rute til feil repo.
 
 ### Steg 11 – Sjekk lokalt
 

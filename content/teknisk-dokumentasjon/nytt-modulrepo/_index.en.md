@@ -111,7 +111,7 @@ From 14 November 2026 the theme finds the repo by itself ([solution-samt-bu-docs
 
 Before this, a new module had to be added in seven places in four files in the theme. If that was forgotten, «Edit» and the source link pointed to the wrong repo.
 
-A local file under a module path (such as `arkitektur/overordnet-arkitektur/maalbildet/`) gets `samt-bu-docs` by itself, because a local file wins in Hugo, and that is the file that is read. If the theme does not find the pattern in the path, the build stops with an error message instead of routing to the wrong repo.
+A local file under a module path gets `samt-bu-docs` by itself, because a local file wins in Hugo, and that is the file that is read. There should still be no such files (see step 7). The last case, Target Architecture and Roadmap under `arkitektur/overordnet-arkitektur/`, was moved into `team-architecture` on 15 November 2026. If the theme does not find the pattern in the path, the build stops with an error message instead of routing to the wrong repo.
 
 ### Step 11 – Check locally
 
