@@ -25,6 +25,7 @@ Nettstedet bygges med Hugo i GitHub Actions og publiseres til Cloudflare Pages p
 | `team-architecture`, `team-semantics` | Hugo-moduler under Arkitektur | Ja, via `repository_dispatch` |
 | `content-legal` | Hugo-modul: Juss under Arkitektur | Ja, via `repository_dispatch` |
 | `samt-bu-governance` | Hugo-modul: Styring (`/styring/`), fra 15.11.2026 | Ja, via `repository_dispatch` |
+| `samt-bu-needs` | Hugo-modul: Behov (`/behov/`), fra 15.11.2026 | Ja, via `repository_dispatch` |
 | `samt-bu-pilot-1` … `samt-bu-pilot-7` | Hugo-moduler, én per pilot | Ja, via `repository_dispatch` |
 | `samt-bu-drafts`, `samt-bu-market-engagement` | Hugo-moduler: utkast og ekstern markedsdialog | Ja, via `repository_dispatch` |
 | `solution-samt-bu-docs`, `solution-task-management` | Hugo-moduler: dokumentasjon av løsningene | Ja, via `repository_dispatch` |

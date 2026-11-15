@@ -25,6 +25,7 @@ The site is built with Hugo in GitHub Actions and published to Cloudflare Pages 
 | `team-architecture`, `team-semantics` | Hugo modules under Architecture | Yes, through `repository_dispatch` |
 | `content-legal` | Hugo module: Legal under Architecture | Yes, through `repository_dispatch` |
 | `samt-bu-governance` | Hugo module: Governance (`/styring/`), from 15 November 2026 | Yes, through `repository_dispatch` |
+| `samt-bu-needs` | Hugo module: Needs (`/behov/`), from 15 November 2026 | Yes, through `repository_dispatch` |
 | `samt-bu-pilot-1` … `samt-bu-pilot-7` | Hugo modules, one per pilot | Yes, through `repository_dispatch` |
 | `samt-bu-drafts`, `samt-bu-market-engagement` | Hugo modules: drafts and external market dialogue | Yes, through `repository_dispatch` |
 | `solution-samt-bu-docs`, `solution-task-management` | Hugo modules: documentation of the solutions | Yes, through `repository_dispatch` |
