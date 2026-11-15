@@ -144,6 +144,8 @@ The dialog lists all open suggestions across every content repository, with who 
 
 There is no need to go to GitHub to handle suggestions.
 
+**Who is notified.** Each repository has a responsible team. When a suggestion comes in, GitHub requests a review from that team, and everyone in the team gets an email. For pages in Needs, Insight and the frame of the site it is the editorial team, for a pilot the pilot team, and so on. The full list is in [Conventions](/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#who-handles-pull-requests).
+
 Once you choose, three things happen automatically:
 
 1. The suggestion is given an explanatory title, so the contributor's email has a subject line that makes sense

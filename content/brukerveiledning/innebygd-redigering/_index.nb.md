@@ -149,6 +149,8 @@ Dialogen viser alle åpne forslag på tvers av alle innholdsrepoene, med hvem so
 
 Du trenger altså ikke gå til GitHub for å behandle forslag.
 
+**Hvem får beskjed.** Hvert repo har et ansvarlig team. Når et forslag kommer inn, ber GitHub teamet om review, og alle i teamet får e-post. For sider i Behov, Innsikt og rammen av nettstedet er det redaksjonen, for en pilot pilotteamet, og så videre. Hele lista står i [Konvensjoner](/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/konvensjoner/#hvem-behandler-pull-requests).
+
 Når du har valgt, skjer tre ting automatisk:
 
 1. Forslaget får en forklarende tittel, slik at e-posten til bidragsyteren har et emnefelt som gir mening
