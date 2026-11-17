@@ -3,6 +3,9 @@ id: 5ca83efe-276a-4600-bd19-a2ff92deae32
 title: "Graphic cards"
 linkTitle: "Graphic cards"
 weight: 40
+lastmod: 2026-11-17T01:11:22+01:00
+last_editor: Erik Hagen
+
 ---
 
 Graphic cards show a few options or parts side by side, with an icon, a short text and a link. Cards are a good fit when a page should guide the reader on to two to six subpages. For comparing many properties, a table is still better.

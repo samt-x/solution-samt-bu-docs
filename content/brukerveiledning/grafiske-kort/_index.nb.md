@@ -3,6 +3,9 @@ id: 5ca83efe-276a-4600-bd19-a2ff92deae32
 title: "Grafiske kort"
 linkTitle: "Grafiske kort"
 weight: 40
+lastmod: 2026-11-17T01:11:22+01:00
+last_editor: Erik Hagen
+
 ---
 
 Grafiske kort viser noen få valg eller deler side om side, med ikon, kort tekst og lenke. Kortene passer når en side skal vise leseren videre til to–seks undersider. For sammenligning av mange egenskaper er en tabell fortsatt bedre.
