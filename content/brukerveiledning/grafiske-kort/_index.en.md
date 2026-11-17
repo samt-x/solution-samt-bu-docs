@@ -1,4 +1,5 @@
 ---
+id: 5ca83efe-276a-4600-bd19-a2ff92deae32
 title: "Graphic cards"
 linkTitle: "Graphic cards"
 weight: 40
