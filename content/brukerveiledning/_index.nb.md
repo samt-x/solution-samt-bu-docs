@@ -16,5 +16,6 @@ Praktisk veiledning for redaktører og bidragsytere i SAMT-BU Docs. Velg metoden
 | Redigere direkte i nettleseren | [Innebygd redigering](innebygd-redigering/) |
 | Gjøre enkle rettelser via GitHub.com | [Redigering på GitHub](github-redigering/) |
 | Jobbe lokalt med klon av repoene | [Lokalt oppsett](lokal-oppsett/) |
+| Vise valg eller deler som grafiske kort | [Grafiske kort](grafiske-kort/) |
 
 Endringer publiseres automatisk ca. 1 minutt etter lagring – uavhengig av hvilken metode du bruker.

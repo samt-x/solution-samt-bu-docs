@@ -16,5 +16,6 @@ A practical guide for editors and contributors in SAMT-BU Docs. Choose the metho
 | Edit directly in the browser | [Built-in editor](innebygd-redigering/) |
 | Make small corrections via GitHub.com | [Editing on GitHub](github-redigering/) |
 | Work locally with a clone of the repositories | [Local setup](lokal-oppsett/) |
+| Show options or parts as graphic cards | [Graphic cards](grafiske-kort/) |
 
 Changes are published automatically approximately 1 minute after saving – regardless of which method you use.
