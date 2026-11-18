@@ -3,7 +3,7 @@ id: 5ca83efe-276a-4600-bd19-a2ff92deae32
 title: "Grafiske kort"
 linkTitle: "Grafiske kort"
 weight: 40
-lastmod: 2026-11-17T01:11:22+01:00
+lastmod: 2026-11-18T21:07:28+01:00
 last_editor: Erik Hagen
 
 ---
