@@ -1,4 +1,5 @@
 ---
+id: 3326656d-f862-4309-a590-ee44ee42c43a
 title: "I arbeid-skilt"
 linkTitle: "I arbeid-skilt"
 weight: 45
