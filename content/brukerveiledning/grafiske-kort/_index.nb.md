@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 Grafiske kort viser noen få valg eller deler side om side, med ikon, kort tekst og lenke. Kortene passer når en side skal vise leseren videre til to–seks undersider. For sammenligning av mange egenskaper er en tabell fortsatt bedre.
 
-Eksempel i bruk: [SIMPL](/innsikt/eu-relatert/data-spaces/loesninger/simpl/), med de tre delene av programmet.
+Eksempel i bruk: [Om Simpl](/innsikt/eu-relatert/data-spaces/loesninger/simpl/om-simpl/), med de tre delene av programmet.
 
 ### Slik ser det ut
 

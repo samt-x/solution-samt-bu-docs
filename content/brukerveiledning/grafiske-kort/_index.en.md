@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 Graphic cards show a few options or parts side by side, with an icon, a short text and a link. Cards are a good fit when a page should guide the reader on to two to six subpages. For comparing many properties, a table is still better.
 
-Example in use: [SIMPL](/en/innsikt/eu-relatert/data-spaces/loesninger/simpl/), with the three parts of the programme.
+Example in use: [About Simpl](/en/innsikt/eu-relatert/data-spaces/loesninger/simpl/om-simpl/), with the three parts of the programme.
 
 ### What it looks like
 
