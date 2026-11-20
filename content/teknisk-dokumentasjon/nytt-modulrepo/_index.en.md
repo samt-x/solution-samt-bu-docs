@@ -19,7 +19,7 @@ The work is done in two repos: the new module repo and `samt-bu-docs`. The theme
 
 ## Prerequisites
 
-- Admin in the GitHub organization `samt-x`, to create the repo and add a secret
+- Admin in the GitHub organisation `samt-x`, to create the repo and add a secret
 - Hugo (0.155.3 extended) and Go installed locally, and `gh` signed in
 
 Names: `samt-bu-` for published content (for example `samt-bu-pilot-6`), `team-` for teams, `solution-` for documentation of a solution.

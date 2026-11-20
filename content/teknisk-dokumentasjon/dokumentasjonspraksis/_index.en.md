@@ -4,7 +4,6 @@ id: b8bf5c67-7a5f-4de5-a3f4-232e7e60e725
 title: "Documentation practice"
 linkTitle: "Documentation practice"
 weight: 30
-status: "Early draft"
 lastmod: 2026-10-26T23:41:02+01:00
 last_editor: Erik Hagen
 
@@ -14,7 +13,7 @@ We develop best practice for documentation through good examples – not by lock
 
 ## Documentation follows the change
 
-Standing rule from 2026-10-25: **Every change in functionality is checked against the documentation**, whether it resolves an issue or not. This also applies to changes in the theme, the build (CI), scripts, task management and the setup of the GitHub organization.
+Standing rule from 2026-10-25: **Every change in functionality is checked against the documentation**, whether it resolves an issue or not. This also applies to changes in the theme, the build (CI), scripts, task management and the setup of the GitHub organisation.
 
 Check and update in the same working session as the change:
 

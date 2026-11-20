@@ -13,7 +13,7 @@ This section explains the needs that motivated the development of SAMT-BU Docs, 
 
 ## The need
 
-SAMT-BU is a cross-agency, cross-tier collaboration involving municipalities, directorates and county authorities. The documentation platform is intended to actively support this collaboration:
+SAMT-BU is a collaborative project across agencies, levels of government and municipalities. The documentation platform is intended to support this collaboration in concrete ways:
 
 - **Non-technical subject-matter experts** – lawyers, information architects, service designers and municipal staff – must be able to read, comment and contribute content without knowing Git or command-line tools
 - **External contribution** – people without direct repository access must be able to suggest changes that are then reviewed and approved by the project group
@@ -86,5 +86,5 @@ None of the tools we evaluated offer a fully multilingual editor interface. For 
 
 ## Further reading
 
-- [Technical architecture and key files](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/) – component details, CI/CD and setup
-- [Roadmap](/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/veikart/) – planned improvements, including full benchmark comparison
+- [Technical architecture and key files](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/teknisk-dokumentasjon/) – component details, CI/CD and setup
+- [Roadmap](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/veikart/) – planned improvements, including full benchmark comparison

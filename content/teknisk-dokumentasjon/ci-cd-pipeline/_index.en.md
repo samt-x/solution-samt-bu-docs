@@ -74,7 +74,7 @@ Only one build runs at a time (`concurrency: pages`), and a running build is not
 
 ## When a build fails
 
-Built in [solution-samt-bu-docs#83](https://github.com/samt-x/solution-samt-bu-docs/issues/83). Before this, one broken file stopped every change, including other people's, until someone fixed it. What the user sees is described in the [user guide for inline editing](../../brukerveiledning/innebygd-redigering/#status-indicator-and-build-history).
+Built in [solution-samt-bu-docs#83](https://github.com/samt-x/solution-samt-bu-docs/issues/83). Before this, one broken file stopped every change, including other people's, until someone fixed it. What the user sees is described in the [user guide for built-in editing](../../brukerveiledning/innebygd-redigering/#status-indicator-and-build-history).
 
 ### The failing file is set aside
 
@@ -90,7 +90,7 @@ At most three files are set aside per build. If the same file fails again, or th
 ### Errors that no longer stop the build
 
 - **Broken `relref` links** give a warning, not an error (`refLinksErrorLevel = "WARNING"` in `hugo.toml`). Hugo only gives the page path for these errors, not the file, so they cannot be set aside. The page is built with a dead link.
-- **`hugo mod get`** tries three times per module, so a passing network error does not stop the build.
+- **`hugo mod get`** tries three times per module, so a temporary network error does not stop the build.
 
 ### The build receipt
 

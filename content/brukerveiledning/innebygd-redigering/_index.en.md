@@ -34,6 +34,8 @@ You can revoke access at any time:
 4. Click the **Authorized GitHub Apps** tab
 5. Find **SAMT-BU Docs** in the list and click **Revoke**
 
+Once you have revoked access, you will be asked to log in again the next time you use the editing features.
+
 ## Editing an Existing Page
 
 1. Go to the page you wish to edit
@@ -43,9 +45,9 @@ You can revoke access at any time:
 5. Make your changes in the visual editor
 6. Click **"Save"**
 
-If you have write access, the change is published directly. Without write access, a pull request is created automatically – you will receive a link to it after saving.
+**With write access:** The change is published directly. **Without write access:** A suggestion (pull request) is created automatically. The menu shows «Suggest edit to this page» instead of «Edit this page», and a link to the suggestion is shown after saving. An editor reviews and approves it.
 
-The website updates automatically after saving. A status indicator at the bottom left of the screen keeps you informed.
+The website updates automatically after saving. A status indicator at the bottom left of the screen keeps you informed along the way.
 
 ## Images
 
@@ -62,15 +64,17 @@ Use PNG for screenshots and diagrams, JPEG for photographs.
 3. Fill in the title and any content in the dialog
 4. Click **"Save"**
 
+Without write access, «Suggest new chapter after this» / «Suggest new sub-chapter» is shown instead. The suggestion is sent as a pull request, and a link is shown after you click «Save».
+
 ## Moving a Chapter
 
 1. Go to the page you want to move
 2. Click the **"Edit"** menu in the top-right corner
 3. Select **"Move this chapter"** – a dialog opens and the Edit menu is greyed out
 4. Navigate in the menu to the desired location
-5. Click **"Move here (before)"** or **"Move here (after)"**
+5. Click **"Move here (before)"** to place it before the selected page, or **"Move here (after)"** to place it after
 
-> **Note:** The Move function requires write access and does not support the suggestion flow.
+> **Note:** The Move function requires write access and does not support the suggestion flow (pull request).
 
 ## Deleting a Page
 
@@ -79,7 +83,9 @@ Use PNG for screenshots and diagrams, JPEG for photographs.
 3. Select **"Delete this page"**
 4. Confirm in the dialog
 
-Both language versions are deleted in a single step.
+The page and both language versions (Norwegian and English) are deleted in a single step.
+
+Without write access, «Suggest deletion of this page» is shown instead.
 
 > **Note:** Deletion cannot be immediately reversed through the interface. Contact an administrator if you have accidentally deleted a page.
 
@@ -132,7 +138,7 @@ Users with a GitHub account but without direct write access can contribute throu
 
 Instead of committing directly to `main`, the system automatically creates a branch and a suggestion. After saving, a confirmation with a link to the suggestion is shown.
 
-> **Note:** The Move function does not support the suggestion flow.
+> **Note:** «Move this chapter» does not support the suggestion flow and is only available to users with write access.
 
 **You are not notified when you submit.** A single email arrives, and only once the suggestion has been handled – approved or set aside. No action is needed on your part; everything has already been done.
 
@@ -164,16 +170,16 @@ The site is bilingual (Norwegian and English). Each page exists in two versions 
 
 If you want to write both languages yourself:
 
-1. Create the page in Norwegian
+1. Create the page in Norwegian (via «New chapter after this» or «New sub-chapter»)
 2. Add Norwegian content and save
 3. Switch to English via the language selector in the header
-4. Open the corresponding English page and edit it
+4. Open the corresponding English page and edit it in the same way
 
-The Move function and deletion operate on both language versions simultaneously.
+The Move function and deletion operate on both language versions simultaneously – one action covers both.
 
 ## Status Field – Use Cases Only
 
-Use-case pages (under «Behov») have a status field that controls the symbol shown in the menu. All other pages should have an empty status field.
+Use-case pages (under «Needs») have a status field that controls the symbol shown in the menu. All other pages should have an empty status field.
 
 | Symbol | Norwegian value | English value |
 |--------|-----------------|---------------|
@@ -186,7 +192,7 @@ Use-case pages (under «Behov») have a status field that controls the symbol sh
 
 ## The UUID Field – Do Not Touch It
 
-All pages have a hidden `id` field set automatically. It is invisible in the editing dialog and links the Norwegian and English versions of the same page permanently.
+All pages have a hidden `id` field (UUID). It is invisible in the editing dialog and is set automatically. The UUID is permanent and links the Norwegian and English versions of the same page. You never need to think about it.
 
 ## Sort Order (`weight`)
 
@@ -196,6 +202,6 @@ All pages have a hidden `id` field set automatically. It is invisible in the edi
 
 If something does not work as expected, use **"Give feedback"** in the Edit menu and describe what happened. The report is registered as an issue and followed up by the team.
 
-If you have a GitHub user, you can also report it directly with the form **Problem** in [solution-samt-bu-docs](https://github.com/samt-x/solution-samt-bu-docs/issues/new?template=6-problem.yml). Choose «Programvare eller verktøy virker ikke» (software or tool does not work) in the list of kinds of problem. See the [User guide for task management](https://docs.samt-bu.no/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/brukerveiledning/).
+If you have a GitHub account, you can also report it directly using the **Problem** form in [solution-samt-bu-docs](https://github.com/samt-x/solution-samt-bu-docs/issues/new?template=6-problem.yml). Choose «Programvare eller verktøy virker ikke» (software or tool does not work) in the list of kinds of problem. See the [User guide for task management](https://docs.samt-bu.no/en/prosjektleveranser/loesninger/samhandlingsplattform/oppgavestyring/brukerveiledning/).
 
 > A dedicated "Report a bug" menu option is being planned.

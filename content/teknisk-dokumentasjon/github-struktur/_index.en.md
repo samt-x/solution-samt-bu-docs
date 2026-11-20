@@ -1,7 +1,7 @@
 ---
 # id: auto-generated – copied values are overwritten automatically on push
 id: e0e03dc4-b617-44cb-b829-a47ac7313a9d
-title: "Concept for GitHub Organizations and Repositories"
+title: "Concept for GitHub organisations and repositories"
 linkTitle: "GitHub structure"
 weight: 20
 status: null
@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 ---
 
-This page documents the principles for how we organize GitHub organizations (orgs) and repositories in the SAMT-BU platform – and lays the groundwork for the structure to scale to multiple projects under the SAMT umbrella.
+This page documents the principles for how we organise GitHub organisations (orgs) and repositories in the SAMT-BU platform – and lays the groundwork for the structure to scale to multiple projects under the SAMT umbrella.
 
 > **Status:** Early draft. The concept is partially implemented but not fully thought through for the scenario of multiple parallel projects. This page is updated continuously.
 
@@ -25,7 +25,7 @@ We distinguish between two roles:
 | **Platform org** | Publishes websites, owns theme and infrastructure | `github.com/samt-x` |
 | **Project org** | Owns content for one specific project | `github.com/samt-bu`, `github.com/samt-pb` |
 
-`samt-x` is the platform organization – this is where published GitHub Pages sites live, and where the shared theme and CI/CD framework are managed. Project orgs are the content owners.
+`samt-x` is the platform organisation – this is where published GitHub Pages sites live, and where the shared theme and CI/CD framework are managed. Project orgs are the content owners.
 
 ---
 
@@ -51,7 +51,7 @@ Content repos (modules) can reside in **any org** – the Hugo Module system is 
 path = "github.com/samt-pb/team-architecture"
 ```
 
-This means content repos can be freely organized in project-specific orgs without affecting the publishing structure.
+This means content repos can be freely organised in project-specific orgs without affecting the publishing structure.
 
 ---
 
