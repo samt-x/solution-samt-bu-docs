@@ -7,7 +7,7 @@ weight: 20
 aliases:
   - /om/hvordan-bidra/github-redigering/
   - /hvordan-bidra/github-redigering/
-lastmod: 2026-05-04T22:59:22+02:00
+lastmod: 2026-11-21T00:29:01+01:00
 last_editor: Erik Hagen
 
 ---
