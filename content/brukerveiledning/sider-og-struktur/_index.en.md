@@ -3,6 +3,9 @@ id: 4a92bf24-774e-4490-94f0-00af2184712f
 title: "Pages and structure"
 linkTitle: "Pages and structure"
 weight: 10
+lastmod: 2026-11-20T01:09:43+01:00
+last_editor: Erik Hagen
+
 ---
 The conventions below apply to all pages on the site. They mean readers find their way the same way everywhere, and that we do not have to discuss the structure again for each section.
 

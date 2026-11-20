@@ -3,6 +3,9 @@ id: 4a92bf24-774e-4490-94f0-00af2184712f
 title: "Sider og struktur"
 linkTitle: "Sider og struktur"
 weight: 10
+lastmod: 2026-11-20T01:09:43+01:00
+last_editor: Erik Hagen
+
 ---
 Konvensjonene under gjelder alle sider på nettstedet. De gjør at leseren finner fram på samme måte overalt, og at vi slipper å diskutere strukturen på nytt for hver seksjon.
 
