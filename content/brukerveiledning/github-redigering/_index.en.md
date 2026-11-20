@@ -5,8 +5,8 @@ title: "Editing Directly on GitHub"
 linkTitle: "GitHub editing"
 weight: 20
 aliases:
-  - /en/om/hvordan-bidra/github-redigering/
-  - /en/hvordan-bidra/github-redigering/
+  - /om/hvordan-bidra/github-redigering/
+  - /hvordan-bidra/github-redigering/
 lastmod: 2026-05-04T22:59:22+02:00
 last_editor: Erik Hagen
 

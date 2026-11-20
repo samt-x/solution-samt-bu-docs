@@ -5,8 +5,8 @@ title: "Built-in Editing in the Browser"
 linkTitle: "Built-in editing"
 weight: 5
 aliases:
-  - /en/om/hvordan-bidra/innebygd-redigering/
-  - /en/hvordan-bidra/innebygd-redigering/
+  - /om/hvordan-bidra/innebygd-redigering/
+  - /hvordan-bidra/innebygd-redigering/
 lastmod: 2026-11-20T02:44:50+01:00
 last_editor: Erik Hagen
 

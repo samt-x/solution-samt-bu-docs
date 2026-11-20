@@ -5,8 +5,8 @@ title: "Local setup"
 linkTitle: "Local setup"
 weight: 30
 aliases:
-  - /en/om/hvordan-bidra/lokal-oppsett/
-  - /en/hvordan-bidra/lokal-oppsett/
+  - /om/hvordan-bidra/lokal-oppsett/
+  - /hvordan-bidra/lokal-oppsett/
 lastmod: 2026-11-02T21:35:59+01:00
 last_editor: Erik Hagen
 

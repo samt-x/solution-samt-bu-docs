@@ -43,7 +43,7 @@ Engelsk til norsk sjekkes bare for endringer fra 3. november 2026 kl. 12. Før d
 ## Når Claude oversetter
 
 - Norsk og engelsk er likeverdige. Originalen er den fila som er endret sist.
-- `id` endres aldri. `weight` og `aliases` følger originalen. `status` får verdien på målspråket (Pågår ↔ In progress, se [statussymbolene](../../brukerveiledning/innebygd-redigering/)).
+- `id` endres aldri. `weight` og `aliases` følger originalen. Aliasene skal stå uten `/en/` foran: Hugo legger til språkprefikset selv, så `/en/…` ville blitt `/en/en/…`. `status` får verdien på målspråket (Pågår ↔ In progress, se [statussymbolene](../../brukerveiledning/innebygd-redigering/)).
 - Lenker internt på nettstedet får `/en/` foran på engelsk. Lenker til Office-dokumenter bruker `ui=en-US` eller `ui=nb-NO`.
 - Innhold endres ikke i oversettelsen. Feil i originalen meldes til Erik i stedet for å rettes i stillhet.
 - Commit-meldingen får linjen `Oversatt-fra: nb` eller `Oversatt-fra: en`.

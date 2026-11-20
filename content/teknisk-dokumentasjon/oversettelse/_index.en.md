@@ -43,7 +43,7 @@ English to Norwegian is only checked for changes from 12:00 on 3 November 2026. 
 ## When Claude translates
 
 - Norwegian and English are equal. The original is the file that was changed last.
-- `id` is never changed. `weight` and `aliases` follow the original. `status` gets the value in the target language (Pågår ↔ In progress, see the [status symbols](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/brukerveiledning/innebygd-redigering/)).
+- `id` is never changed. `weight` and `aliases` follow the original. Aliases must not start with `/en/`: Hugo adds the language prefix itself, so `/en/…` would become `/en/en/…`. `status` gets the value in the target language (Pågår ↔ In progress, see the [status symbols](/en/prosjektleveranser/loesninger/samhandlingsplattform/samt-bu-docs/brukerveiledning/innebygd-redigering/)).
 - Internal links on the site get `/en/` in front in English. Links to Office documents use `ui=en-US` or `ui=nb-NO`.
 - Content is not changed in the translation. Errors in the original are reported to Erik instead of being silently corrected.
 - The commit message gets the line `Oversatt-fra: nb` or `Oversatt-fra: en`.
