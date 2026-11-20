@@ -1,4 +1,5 @@
 ---
+id: 4a92bf24-774e-4490-94f0-00af2184712f
 title: "Pages and structure"
 linkTitle: "Pages and structure"
 weight: 10
