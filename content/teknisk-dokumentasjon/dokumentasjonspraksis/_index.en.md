@@ -4,7 +4,7 @@ id: b8bf5c67-7a5f-4de5-a3f4-232e7e60e725
 title: "Documentation practice"
 linkTitle: "Documentation practice"
 weight: 30
-lastmod: 2026-10-26T23:41:02+01:00
+lastmod: 2026-11-20T02:44:50+01:00
 last_editor: Erik Hagen
 
 ---
