@@ -35,6 +35,10 @@ Headings are not numbered («Technical target architecture», not «9. Technical
 
 Hover over a heading or the page title and a link icon appears. Click it to copy the link to the heading (or the page) to the clipboard.
 
+## Tasks and progress
+
+Sub-projects and solutions with tasks in GitHub have the page «Tasks and progress». It comes right after «About …» (or «Background and rationale»), and first where there is no such page.
+
 ## Conventions for specific sections
 
 - Pilots: see [Documentation of pilots](/en/styring/arbeidsmodell/#documentation-of-pilots) in Working model.

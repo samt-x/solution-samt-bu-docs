@@ -35,6 +35,10 @@ Overskrifter har ikke nummer («Teknisk målarkitektur», ikke «9. Teknisk mål
 
 Hold musepekeren over en overskrift eller sidetittelen, så vises et lenkeikon. Klikk på det for å kopiere lenken til overskriften (eller siden) til utklippstavlen.
 
+## Oppgaver og framdrift
+
+Delprosjekter og løsninger med oppgaver i GitHub har siden «Oppgaver og framdrift». Den står rett etter «Om …» (eller «Bakgrunn og begrunnelse»), og først der det ikke finnes en slik side.
+
 ## Konvensjoner for bestemte seksjoner
 
 - Piloter: se [Dokumentasjon av piloter](/styring/arbeidsmodell/#dokumentasjon-av-piloter) i Arbeidsmodell.
