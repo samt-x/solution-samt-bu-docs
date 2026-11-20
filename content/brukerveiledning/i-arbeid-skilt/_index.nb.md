@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 Et «I arbeid»-skilt (veiarbeidsskilt) viser leseren at et kapittel ikke er ferdig. Sett det rett under overskriften på kapitler som bare har stikkord eller ikke er vurdert ennå, og fjern det når kapitlet er ferdig.
 
-Eksempel i bruk: [Relevans for Norge](/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/) under Simpl.
+Eksempel i bruk: [Relevans for norske aktører](/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/) under Simpl.
 
 ### Slik ser det ut
 
