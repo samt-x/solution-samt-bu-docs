@@ -31,6 +31,15 @@ Overskrifter har ikke nummer («Teknisk målarkitektur», ikke «9. Teknisk mål
 - Trengs en eksakt referanse til en side, bruk sidens ID (vises under tittelen) og datoen den sist ble endret. Versjonshistorikken ligger i GitHub.
 - Nummerering som tilhører kilden, beholdes: kildelister [1], [2], lovparagrafer, nummererte prinsipper og figurnumre.
 
+## Tekst som tåler andre kanaler
+
+Innholdet skal også kunne brukes utenfor nettstedet, for eksempel som PDF eller Word-dokument. Skriv derfor uten å vise til nettsiden som kanal.
+
+- Ikke presenter siden («Denne siden beskriver …»). La ingressen si hva saken gjelder, gjerne som et spørsmål. Eksempel: [Relevans av Simpl for norsk digital infrastruktur](/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/).
+- Vis til innhold med navn eller lenke («se Felles standarder kommer uansett», «figuren under»), ikke «på denne siden».
+- Unntak: tekst som beskriver funksjoner i nettleseren, for eksempel «Denne siden» i Endre-menyen eller «Gi kommentar».
+- Skill fakta og vurderinger der det betyr noe: fakta med kilde i teksten, vurderinger merket *Vår vurdering:*. En generell forklaring øverst på siden trengs ikke.
+
 ## Lenke til en overskrift
 
 Hold musepekeren over en overskrift eller sidetittelen, så vises et lenkeikon. Klikk på det for å kopiere lenken til overskriften (eller siden) til utklippstavlen.

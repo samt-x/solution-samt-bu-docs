@@ -31,6 +31,15 @@ Headings are not numbered («Technical target architecture», not «9. Technical
 - If an exact reference to a page is needed, use the page's ID (shown below the title) and the date it was last changed. The version history is in GitHub.
 - Numbering that belongs to the source is kept: reference lists [1], [2], sections of acts, numbered principles and figure numbers.
 
+## Text that works in other channels
+
+The content should also be usable outside the website, for example as a PDF or Word document. So write without referring to the web page as a channel.
+
+- Do not introduce the page ("This page describes …"). Let the introduction say what the matter is about, preferably as a question. Example: [Relevance of Simpl for Norwegian digital infrastructure](/en/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/).
+- Refer to content by name or link ("see Common standards are coming anyway", "the figure below"), not "on this page".
+- Exception: text that describes functions in the browser, for example "This page" in the Edit menu or "Give feedback".
+- Separate facts and assessments where it matters: facts with a source in the text, assessments marked *Our assessment:*. A general explanation at the top of the page is not needed.
+
 ## Link to a heading
 
 Hover over a heading or the page title and a link icon appears. Click it to copy the link to the heading (or the page) to the clipboard.
