@@ -3,7 +3,7 @@ id: 3326656d-f862-4309-a590-ee44ee42c43a
 title: "I arbeid-skilt"
 linkTitle: "I arbeid-skilt"
 weight: 45
-lastmod: 2026-11-20T02:16:33+01:00
+lastmod: 2026-11-24T23:58:33+01:00
 last_editor: Erik Hagen
 
 ---
