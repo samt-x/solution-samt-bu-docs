@@ -40,6 +40,14 @@ Innholdet skal også kunne brukes utenfor nettstedet, for eksempel som PDF eller
 - Unntak: tekst som beskriver funksjoner i nettleseren, for eksempel «Denne siden» i Endre-menyen eller «Gi kommentar».
 - Skill fakta og vurderinger der det betyr noe: fakta med kilde i teksten, vurderinger merket *Vår vurdering:*. En generell forklaring øverst på siden trengs ikke.
 
+## Akronymer og fagbegreper
+
+Mange lesere kjenner ikke forkortelser og fagbegreper fra EU-arbeid, arkitektur eller teknologi. Bruk dem bare når de er viktige der de står.
+
+- Forklar begrepet første gang det brukes på siden, kort og med vanlige ord, for eksempel «EOSC EU Node, EUs felles plattform for åpen forskning». Alternativt lenker du til en side som forklarer det.
+- Står ikke begrepet for noe leseren trenger å vite, beskriv det med vanlige ord i stedet («maskinlesbare vilkår for bruk av data», ikke «ODRL-policyer»).
+- Sammendrag som «Kort fortalt» skal kunne leses uten forkunnskaper. Der skal ingen begreper stå uforklart.
+
 ## Lenke til en overskrift
 
 Hold musepekeren over en overskrift eller sidetittelen, så vises et lenkeikon. Klikk på det for å kopiere lenken til overskriften (eller siden) til utklippstavlen.

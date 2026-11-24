@@ -40,6 +40,14 @@ The content should also be usable outside the website, for example as a PDF or W
 - Exception: text that describes functions in the browser, for example "This page" in the Edit menu or "Give feedback".
 - Separate facts and assessments where it matters: facts with a source in the text, assessments marked *Our assessment:*. A general explanation at the top of the page is not needed.
 
+## Acronyms and technical terms
+
+Many readers do not know abbreviations and technical terms from EU work, architecture or technology. Use them only when they matter where they are used.
+
+- Explain the term the first time it is used on the page, briefly and in plain words, for example "the EOSC EU Node, the EU's common platform for open research". Alternatively, link to a page that explains it.
+- If the term does not stand for something the reader needs to know, describe it in plain words instead ("machine-readable terms for the use of data", not "ODRL policies").
+- Summaries such as "In brief" should be readable without prior knowledge. No term should be left unexplained there.
+
 ## Link to a heading
 
 Hover over a heading or the page title and a link icon appears. Click it to copy the link to the heading (or the page) to the clipboard.
