@@ -3,7 +3,7 @@ id: 4a92bf24-774e-4490-94f0-00af2184712f
 title: "Pages and structure"
 linkTitle: "Pages and structure"
 weight: 10
-lastmod: 2026-11-20T01:51:33+01:00
+lastmod: 2026-11-25T00:32:33+01:00
 last_editor: Erik Hagen
 
 ---
