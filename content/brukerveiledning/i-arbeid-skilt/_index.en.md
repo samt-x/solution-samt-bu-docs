@@ -10,7 +10,7 @@ last_editor: Erik Hagen
 
 A "work in progress" sign (road works sign) tells readers that a chapter is not finished. Put it directly below the heading of chapters that only contain keywords or have not been assessed yet, and remove it when the chapter is finished.
 
-Example in use: [Relevance for Norwegian actors](/en/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/) under Simpl.
+Example in use: [Target picture](/en/pilotering/pilot-6/maalbilde/) in Pilot 6.
 
 ### What it looks like
 
