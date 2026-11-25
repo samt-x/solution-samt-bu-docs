@@ -38,7 +38,7 @@ Innholdet skal også kunne brukes utenfor nettstedet, for eksempel som PDF eller
 - Ikke presenter siden («Denne siden beskriver …»). La ingressen si hva saken gjelder, gjerne som et spørsmål. Eksempel: [Relevans av Simpl for norsk digital infrastruktur](/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/).
 - Vis til innhold med navn eller lenke («se Felles standarder kommer uansett», «figuren under»), ikke «på denne siden».
 - Unntak: tekst som beskriver funksjoner i nettleseren, for eksempel «Denne siden» i Endre-menyen eller «Gi kommentar».
-- Skill fakta og vurderinger der det betyr noe: fakta med kilde i teksten, vurderinger merket *Vår vurdering:*. En generell forklaring øverst på siden trengs ikke.
+- Skill fakta og vurderinger der det betyr noe: fakta med kilde i teksten, vurderinger merket *Vurdering:*. Unngå «vår» og «vi» der det er uklart hvem det er. En generell forklaring øverst på siden trengs ikke.
 
 ## Akronymer og fagbegreper
 

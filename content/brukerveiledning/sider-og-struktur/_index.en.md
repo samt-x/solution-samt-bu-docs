@@ -38,7 +38,7 @@ The content should also be usable outside the website, for example as a PDF or W
 - Do not introduce the page ("This page describes …"). Let the introduction say what the matter is about, preferably as a question. Example: [Relevance of Simpl for Norwegian digital infrastructure](/en/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/).
 - Refer to content by name or link ("see Common standards are coming anyway", "the figure below"), not "on this page".
 - Exception: text that describes functions in the browser, for example "This page" in the Edit menu or "Give feedback".
-- Separate facts and assessments where it matters: facts with a source in the text, assessments marked *Our assessment:*. A general explanation at the top of the page is not needed.
+- Separate facts and assessments where it matters: facts with a source in the text, assessments marked *Assessment:*. Avoid "our" and "we" where it is unclear who that is. A general explanation at the top of the page is not needed.
 
 ## Acronyms and technical terms
 
