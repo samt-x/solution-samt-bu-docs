@@ -36,7 +36,7 @@ Overskrifter har ikke nummer («Teknisk målarkitektur», ikke «9. Teknisk mål
 Innholdet skal også kunne brukes utenfor nettstedet, for eksempel som PDF eller Word-dokument. Skriv derfor uten å vise til nettsiden som kanal.
 
 - Ikke presenter siden («Denne siden beskriver …»). La ingressen si hva saken gjelder, gjerne som et spørsmål. Eksempel: [Relevans av Simpl for norsk digital infrastruktur](/innsikt/eu-relatert/data-spaces/loesninger/simpl/relevans-for-norge/).
-- Vis til innhold med navn eller lenke («se Felles standarder kommer uansett», «figuren under»), ikke «på denne siden».
+- Vis til innhold med navn eller lenke («se Et komplisert landskap av standarder og krav», «figuren under»), ikke «på denne siden».
 - Unntak: tekst som beskriver funksjoner i nettleseren, for eksempel «Denne siden» i Endre-menyen eller «Gi kommentar».
 - Skill fakta og vurderinger der det betyr noe: fakta med kilde i teksten, vurderinger merket *Vurdering:*. Unngå «vår» og «vi» der det er uklart hvem det er. En generell forklaring øverst på siden trengs ikke.
 
