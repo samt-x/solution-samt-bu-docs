@@ -3,7 +3,7 @@ id: 4a92bf24-774e-4490-94f0-00af2184712f
 title: "Sider og struktur"
 linkTitle: "Sider og struktur"
 weight: 10
-lastmod: 2026-11-25T01:05:18+01:00
+lastmod: 2026-11-28T00:36:32+01:00
 last_editor: Erik Hagen
 
 ---
